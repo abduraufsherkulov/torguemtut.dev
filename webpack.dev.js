@@ -9,12 +9,16 @@ module.exports = merge(common, {
     contentBase: path.join(__dirname, "public/"),
     port: 3000,
     publicPath: "http://localhost:3000/dist/",
+    historyApiFallback: true,
     hot: true
   },
   output: {
     path: path.resolve(__dirname, "dist/"),
     publicPath: "/dist/",
     filename: "bundle.js"
+  },
+  optimization: {
+    sideEffects: false
   },
 //   devtool: "eval",
   plugins: [new webpack.HotModuleReplacementPlugin()]

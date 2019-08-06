@@ -1,5 +1,6 @@
 {
   "name": "torguemtut",
+  "sideEffects": false,
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -37,6 +38,7 @@
     "antd": "^3.21.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-router-dom": "^5.0.1"
+    "react-router-dom": "^5.0.1",
+    "styled-components": "^4.3.2"
   }
 }

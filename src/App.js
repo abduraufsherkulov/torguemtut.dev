@@ -1,24 +1,34 @@
 import React, { Suspense, useState } from "react";
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import ErrorBoundry from './ErrorBoundry';
 import "./css/App.css";
-import { Button } from 'antd';
-// import Button from 'antd/es/button';
-// import 'antd/es/button/style';
+import Postnavigator from "./components/header/Navigator";
+import Navigator from "./components/header/Postnavigator";
+import Home from "./components/home/Home";
+import Other from "./components/home/Other";
+import Foot from "./components/footer/Foot";
+import { Layout } from 'antd';
 
 const Test = React.lazy(() => import('./Test'));
 
 
 function App() {
   return (
-    <div className="App">
+    <Router>
       <ErrorBoundry>
-      <Suspense fallback={<div>Loading...</div>}>
-      <Button type="primary">Button</Button>
-        <h1> Hello, World!!!!</h1>
-        <Test />
-      </Suspense>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Layout className="layout">
+            <Navigator />
+            <Postnavigator />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/other" component={Other} />
+            </Switch>
+            <Foot />
+          </Layout>
+        </Suspense>
       </ErrorBoundry>
-    </div>
+    </Router>
   )
 }
 
