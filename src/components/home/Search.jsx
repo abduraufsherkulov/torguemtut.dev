@@ -3,7 +3,7 @@ import Bg from "../../images/longback.png";
 
 function Search(){
     return (
-        <img src={Bg} />
+        <img style={{width: "100%"}} src={Bg} />
     )
 }
 

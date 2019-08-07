@@ -1,3 +1,5 @@
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 module.exports = {
     entry: "./src/index.js",
     module: {
@@ -31,6 +33,7 @@ module.exports = {
                             'default-color': '#ebebeb',
                             'link-color': '#1DA57A',
                             'border-radius-base': '2px',
+                            'heading-1-size': 'calc(16px + (28 - 16) * ((100vw - 300px) / (1600 - 300)))'
                             // or
                             // 'hack': `true; @import "your-less-file-path.less";`, // Override with less file
                         },
@@ -40,9 +43,8 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: [{
-                    loader: 'style-loader',
-                }, {
+                use: [
+                {
                     loader: 'css-loader', 
                 }]
             },

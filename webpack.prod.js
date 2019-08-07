@@ -4,6 +4,9 @@ const common = require('./webpack.common.js');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const devMode = process.env.NODE_ENV !== 'production';
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = merge(common, {
     mode: "production",
@@ -23,14 +26,8 @@ module.exports = merge(common, {
                     beautify: false,
                 }
             }
-        })],
-    },
-    output: {
-        path: path.resolve(__dirname, "dist/"),
-        publicPath: "./",
-        filename: '[name].[contenthash].bundle.js',
-    },
-    optimization: {
+        }), new OptimizeCSSAssetsPlugin({})
+        ],
         runtimeChunk: 'single',
         splitChunks: {
             cacheGroups: {
@@ -38,9 +35,19 @@ module.exports = merge(common, {
                     test: /[\\/]node_modules[\\/]/,
                     name: 'vendors',
                     chunks: 'all'
+                },
+                App: {
+                    test: /\.css$/,
+                    name: 'App',
+                    chunks: 'all'
                 }
             }
         }
+    },
+    output: {
+        path: path.resolve(__dirname, "dist/"),
+        publicPath: "./",
+        filename: '[name].[contenthash].bundle.js',
     },
     plugins: [
         new CleanWebpackPlugin(),
@@ -48,6 +55,13 @@ module.exports = merge(common, {
             template: "./src/index.html",
             title: 'Output Management',
             favicon: "./src/images/favicon.png"
-        })
+        }),
+        new MiniCssExtractPlugin({
+            // Options similar to the same options in webpackOptions.output
+            // all options are optional
+            filename: '[name].css',
+            chunkFilename: '[id].css',
+            ignoreOrder: false, // Enable to remove warnings about conflicting order
+        }),
     ],
 });

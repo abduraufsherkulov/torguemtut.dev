@@ -13,13 +13,10 @@ class Home extends Component {
     render() {
         return (
                 <Content>
-                    {/* <Breadcrumb style={{ margin: '16px 0' }}>
-                        <Breadcrumb.Item>Home</Breadcrumb.Item>
-                        <Breadcrumb.Item>List</Breadcrumb.Item>
-                        <Breadcrumb.Item>App</Breadcrumb.Item>
-                    </Breadcrumb> */}
-                        <Search/>
+                <Search/>
+                    <div className="container">
                         <Categories/>
+                    </div>
                 </Content>
         );
     }

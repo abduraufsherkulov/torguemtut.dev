@@ -2,6 +2,7 @@ const path = require('path');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 const webpack = require("webpack");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = merge(common, {
   mode: "development",
@@ -17,9 +18,14 @@ module.exports = merge(common, {
     publicPath: "/dist/",
     filename: "bundle.js"
   },
-  optimization: {
-    sideEffects: false
-  },
 //   devtool: "eval",
-  plugins: [new webpack.HotModuleReplacementPlugin()]
+  plugins: [
+    new MiniCssExtractPlugin({
+        // Options similar to the same options in webpackOptions.output
+        // all options are optional
+        filename: '[name].[contenthash].css',
+        chunkFilename: '[name].[contenthash].css',
+        ignoreOrder: false, // Enable to remove warnings about conflicting order
+    }),
+    new webpack.HotModuleReplacementPlugin()]
 });
