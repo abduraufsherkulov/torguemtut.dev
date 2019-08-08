@@ -1,7 +1,8 @@
 import React, { Suspense, useState } from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import ErrorBoundry from './ErrorBoundry';
-import "./css/App.css";
+import "./sass/App.scss";
+import "./sass/Fonts.scss";
 import Postnavigator from "./components/header/Navigator";
 import Navigator from "./components/header/Postnavigator";
 import Home from "./components/home/Home";

@@ -35,11 +35,6 @@ module.exports = merge(common, {
                     test: /[\\/]node_modules[\\/]/,
                     name: 'vendors',
                     chunks: 'all'
-                },
-                App: {
-                    test: /\.css$/,
-                    name: 'App',
-                    chunks: 'all'
                 }
             }
         }
@@ -59,8 +54,8 @@ module.exports = merge(common, {
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // all options are optional
-            filename: '[name].css',
-            chunkFilename: '[id].css',
+            filename: '[contenthash].[name].css',
+            chunkFilename: '[contenthash].[id].css',
             ignoreOrder: false, // Enable to remove warnings about conflicting order
         }),
     ],

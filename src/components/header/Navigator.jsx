@@ -8,6 +8,7 @@ const { Header } = Layout;
 function Navigator() {
     return (
         <Header style={{ background: "white" }}>
+        <div className="container">
             <img style={logo} src={Logo} className="logo" />
             <Menu
                 theme="light"
@@ -27,7 +28,7 @@ function Navigator() {
             >
                 <Menu.Item key="1"><Link to="/" > <Button type="primary">Добавить объявление</Button> </Link></Menu.Item>
                 <Menu.Item key="2"><Link to="/" > <Button style={{backgroundColor: "#ebebeb"}}>Войти</Button> </Link></Menu.Item>
-            </Menu>
+            </Menu></div>
         </Header>
     )
 }

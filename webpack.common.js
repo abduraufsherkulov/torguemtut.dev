@@ -13,7 +13,7 @@ module.exports = {
                     plugins: [
                         ['import', {
                             libraryName: "antd",
-                            libraryDirectory: 'es', 
+                            libraryDirectory: 'es',
                             style: true
                         }]
                     ]
@@ -22,7 +22,7 @@ module.exports = {
             {
                 test: /\.less$/,
                 use: [{
-                    loader: 'style-loader',
+                    loader: process.env.NODE_ENV === 'development' ? 'style-loader' : MiniCssExtractPlugin.loader,
                 }, {
                     loader: 'css-loader', // translates CSS into CommonJS
                 }, {
@@ -33,7 +33,8 @@ module.exports = {
                             'default-color': '#ebebeb',
                             'link-color': '#1DA57A',
                             'border-radius-base': '2px',
-                            'heading-1-size': 'calc(16px + (28 - 16) * ((100vw - 300px) / (1600 - 300)))'
+                            'heading-1-size': 'calc(16px + (20 - 16) * ((100vw - 300px) / (1600 - 300)))',
+                            'heading-2-size': 'calc(14px + (18 - 14) * ((100vw - 300px) / (1600 - 300)))'
                             // or
                             // 'hack': `true; @import "your-less-file-path.less";`, // Override with less file
                         },
@@ -42,16 +43,34 @@ module.exports = {
                 }]
             },
             {
-                test: /\.css$/,
+                test: /\.scss$/,
                 use: [
-                {
-                    loader: 'css-loader', 
-                }]
+                    {
+                        loader: process.env.NODE_ENV === 'development' ? 'style-loader' : MiniCssExtractPlugin.loader,
+                    },
+                    {
+                        loader: 'css-loader',
+                    },
+                    {
+                        loader: 'sass-loader',
+                    }]
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,
                 use: [
                     'file-loader'
+                ]
+            },
+            {
+                test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'fonts/'
+                        }
+                    }
                 ]
             }
         ]

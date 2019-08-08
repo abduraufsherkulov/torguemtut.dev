@@ -20,12 +20,5 @@ module.exports = merge(common, {
   },
 //   devtool: "eval",
   plugins: [
-    new MiniCssExtractPlugin({
-        // Options similar to the same options in webpackOptions.output
-        // all options are optional
-        filename: '[name].[contenthash].css',
-        chunkFilename: '[name].[contenthash].css',
-        ignoreOrder: false, // Enable to remove warnings about conflicting order
-    }),
     new webpack.HotModuleReplacementPlugin()]
 });

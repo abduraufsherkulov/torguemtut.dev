@@ -26,47 +26,49 @@ const menu = (
 
 function Postnavigator() {
     return (
-        <Header style={{ background: "white" }}>
-            <Menu
-                theme="light"
-                mode="horizontal"
-                style={{ lineHeight: '64px', float: "left" }}
-            >
-                <Menu.Item key="2" disabled>
-                    Местоположение:
+            <Header style={{ background: "white" }}>
+            <div className="container">
+                <Menu
+                    theme="light"
+                    mode="horizontal"
+                    style={{ lineHeight: '64px', float: "left" }}
+                >
+                    <Menu.Item key="2" disabled style={{paddingLeft: "0px"}}>
+                        Местоположение:
                 </Menu.Item>
-                <Menu.Item key="3">
-                    <Link to="/other" >
-                        <IconFont type="icon-NAVIGATION" />
-                        Выбрать регион
+                    <Menu.Item key="3">
+                        <Link to="/other" >
+                            <IconFont type="icon-NAVIGATION" />
+                            Выбрать регион
                     </Link>
-                </Menu.Item>
-            </Menu>
-            <Menu
-                theme="light"
-                mode="horizontal"
-                style={{ lineHeight: '64px', float: "right" }}
-            >
-                <Menu.Item key="1">
-                    <Dropdown overlay={menu}>
-                        <a className="ant-dropdown-link" href="#">
-                            RU <Icon type="down" />
-                        </a>
-                    </Dropdown>
-                </Menu.Item>
-                <Menu.Item key="2">
-                    <Link to="/other" >
-                        <Icon type="mail" />
-                        Сообщения
+                    </Menu.Item>
+                </Menu>
+                <Menu
+                    theme="light"
+                    mode="horizontal"
+                    style={{ lineHeight: '64px', float: "right" }}
+                >
+                    <Menu.Item key="1">
+                        <Dropdown overlay={menu}>
+                            <a className="ant-dropdown-link" href="#">
+                                RU <Icon type="down" />
+                            </a>
+                        </Dropdown>
+                    </Menu.Item>
+                    <Menu.Item key="2">
+                        <Link to="/other" >
+                            <Icon type="mail" />
+                            Сообщения
                     </Link>
-                </Menu.Item>
-                <Menu.Item key="3">
-                    <Link to="/other" >
-                        <Icon type="heart" />
-                        Избранное </Link>
-                </Menu.Item>
-            </Menu>
-        </Header>
+                    </Menu.Item>
+                    <Menu.Item key="3">
+                        <Link to="/other" >
+                            <Icon type="heart" />
+                            Избранное </Link>
+                    </Menu.Item>
+                </Menu>
+        </div>
+            </Header>
     )
 }
 export default Postnavigator;
