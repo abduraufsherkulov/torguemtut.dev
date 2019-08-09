@@ -4,9 +4,19 @@ const common = require('./webpack.common.js');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const devMode = process.env.NODE_ENV !== 'production';
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
+
+function recursiveIssuer(m) {
+    if (m.issuer) {
+        return recursiveIssuer(m.issuer);
+    } else if (m.name) {
+        return m.name;
+    } else {
+        return false;
+    }
+}
 
 module.exports = merge(common, {
     mode: "production",
@@ -35,14 +45,28 @@ module.exports = merge(common, {
                     test: /[\\/]node_modules[\\/]/,
                     name: 'vendors',
                     chunks: 'all'
-                }
+                },
+                styles: {
+                    name: 'styles',
+                    test: (m, c, entry = 'styles') =>
+                        m.constructor.name === 'CssModule' && recursiveIssuer(m) === entry,
+                    chunks: 'all',
+                    enforce: true,
+                },
+                fonts: {
+                    name: 'fonts',
+                    test: (m, c, entry = 'fonts') =>
+                        m.constructor.name === 'CssModule' && recursiveIssuer(m) === entry,
+                    chunks: 'all',
+                    enforce: true,
+                },
             }
         }
     },
     output: {
         path: path.resolve(__dirname, "dist/"),
         publicPath: "./",
-        filename: '[name].[contenthash].bundle.js',
+        filename: '[name].[contenthash].js',
     },
     plugins: [
         new CleanWebpackPlugin(),
@@ -51,11 +75,12 @@ module.exports = merge(common, {
             title: 'Output Management',
             favicon: "./src/images/favicon.png"
         }),
+        new FixStyleOnlyEntriesPlugin(),
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // all options are optional
-            filename: '[contenthash].[name].css',
-            chunkFilename: '[contenthash].[id].css',
+            filename: '[name].css',
+            chunkFilename: '[name].[contenthash].css',
             ignoreOrder: false, // Enable to remove warnings about conflicting order
         }),
     ],

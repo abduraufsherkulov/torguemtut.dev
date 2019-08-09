@@ -1,0 +1,135 @@
+@mixin demiitalic {
+  font: {
+    family: "Avenir Next Cyr";
+    weight: bold;
+    style: italic;
+  }
+}
+
+@mixin thin {
+  font: {
+    family: "Avenir Next Cyr";
+    weight: 100;
+    style: normal;
+  }
+}
+
+@mixin demiitalic {
+  font: {
+    family: "Avenir Next Cyr";
+    weight: bold;
+    style: italic;
+  }
+}
+
+@mixin mediumitalic {
+  font: {
+    family: "Avenir Next Cyr";
+    weight: 500;
+    style: italic;
+  }
+}
+
+@mixin ultralight {
+  font: {
+    family: "Avenir Next Cyr";
+    weight: 200;
+    style: normal;
+  }
+}
+
+@mixin light {
+  font: {
+    family: "Avenir Next Cyr";
+    weight: 300;
+    style: normal;
+  }
+}
+
+@mixin bold {
+  font: {
+    family: "Avenir Next Cyr";
+    weight: bold;
+    style: normal;
+  }
+}
+
+@mixin lightitalic {
+  font: {
+    family: "Avenir Next Cyr";
+    weight: 300;
+    style: italic;
+  }
+}
+
+@mixin bolditalic {
+  font: {
+    family: "Avenir Next Cyr";
+    weight: bold;
+    style: italic;
+  }
+}
+
+@mixin ultralightit {
+  font: {
+    family: "Avenir Next Cyr";
+    weight: 200;
+    style: italic;
+  }
+}
+
+@mixin heavy {
+  font: {
+    family: "Avenir Next Cyr";
+    weight: 900;
+    style: normal;
+  }
+}
+
+@mixin demi {
+  font: {
+    family: "Avenir Next Cyr";
+    weight: bold;
+    style: normal;
+  }
+}
+
+@mixin regular {
+  font: {
+    family: "Avenir Next Cyr";
+    weight: normal;
+    style: normal;
+  }
+}
+
+@mixin medium {
+  font: {
+    family: "Avenir Next Cyr";
+    weight: 500;
+    style: normal;
+  }
+}
+
+@mixin heavyitalic {
+  font: {
+    family: "Avenir Next Cyr";
+    weight: 900;
+    style: italic;
+  }
+}
+
+@mixin italic {
+  font: {
+    family: "Avenir Next Cyr";
+    weight: normal;
+    style: italic;
+  }
+}
+
+@mixin thinitalic {
+  font: {
+    family: "Avenir Next Cyr";
+    weight: 100;
+    style: italic;
+  }
+}

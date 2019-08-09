@@ -1,0 +1,3 @@
+@function dynamicfont($min, $max){
+    @return calc(#{$min + "px"} + (#{$max} - #{$min}) * ((100vw - 320px) / (1920 - 320)));
+  }

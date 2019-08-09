@@ -26,14 +26,14 @@ const menu = (
 
 function Postnavigator() {
     return (
-            <Header style={{ background: "white" }}>
+        <Header style={{ background: "white", padding: "0px" }}>
             <div className="container">
                 <Menu
                     theme="light"
                     mode="horizontal"
                     style={{ lineHeight: '64px', float: "left" }}
                 >
-                    <Menu.Item key="2" disabled style={{paddingLeft: "0px"}}>
+                    <Menu.Item key="2" disabled style={{ paddingLeft: "0px" }}>
                         Местоположение:
                 </Menu.Item>
                     <Menu.Item key="3">
@@ -67,8 +67,8 @@ function Postnavigator() {
                             Избранное </Link>
                     </Menu.Item>
                 </Menu>
-        </div>
-            </Header>
+            </div>
+        </Header>
     )
 }
 export default Postnavigator;
