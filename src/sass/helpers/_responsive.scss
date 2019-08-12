@@ -1,3 +1,26 @@
 @function dynamicfont($min, $max){
     @return calc(#{$min + "px"} + (#{$max} - #{$min}) * ((100vw - 320px) / (1920 - 320)));
   }
+  
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+
+.d-inline-block {
+  display: inline-block;
+}
+.d-flex-horizontal {
+  display: flex;
+  justify-content: center;
+}
+.d-flex-vertical {
+  display: flex;
+  align-items: center;
+}
+.d-flex-centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

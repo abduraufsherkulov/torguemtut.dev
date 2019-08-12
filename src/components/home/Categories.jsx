@@ -1,34 +1,105 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Row, Col, Typography, Card } from 'antd';
 import Img from "../../images/property.png";
+import Subcategories from './Subcategories';
 
 const { Title } = Typography;
 
 function Categories() {
+    const subref = useRef(null);
+    const [active, setActive] = useState(false);
+    const [category, setCategory] = useState([]);
+
+    function _togle() {
+        setActive(!active);
+    }
+
+
+    useEffect(() => {
+        var promise1 = new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                resolve([{
+                    category: "Недвижимость",
+                    subcategory: [{
+                        title: "Квартиры",
+                        count: "12 123",
+                        subsubcategory: [{
+                            title: "Продажа",
+                            count: "12 233"
+                        }, {
+                            title: "Продажа",
+                            count: "12 233"
+                        }, {
+                            title: "Продажа",
+                            count: "12 233"
+                        }],
+                    },{
+                        title: "Квартиры",
+                        count: "12 123",
+                        subsubcategory: [{
+                            title: "Продажа",
+                            count: "12 233"
+                        }, {
+                            title: "Продажа",
+                            count: "12 233"
+                        }, {
+                            title: "Продажа",
+                            count: "12 233"
+                        }],
+                    }]
+                },
+                {
+                    category: "Недвижимость",
+                    subcategory: [{
+                        title: "Квартиры",
+                        count: "12 123",
+                        subsubcategory: [{
+                            title: "Продажа",
+                            count: "12 233"
+                        }, {
+                            title: "Продажа",
+                            count: "12 233"
+                        }, {
+                            title: "Продажа",
+                            count: "12 233"
+                        }],
+                    }]
+                }]);
+            }, 1000);
+        });
+
+        promise1.then(function (value) {
+            console.log(value);
+            setCategory(value);
+            // expected output: "foo"
+        });
+
+    }, []);
+
+    
+
     return (
         <div id="categories">
-            <Row>
-                <Col span={6} className="padding-bottom">
-                    <div className="d-flex-vertical">
-                        <div className="d-inline-block"><img src={Img} /></div>
-                        <Title className="d-inline-block"><a>Недвижимость</a></Title>
-                    </div>
-                    <div className="sub-categories">
-                        <ul>
-                            <li>
-                                <Title level={2}><a>Квартиры</a><span>32 216</span></Title>
-                                <ul>
-                                    <li><Title level={2}><a>Аренда долгосрочная</a><span>12 233</span></Title></li>
-                                    <li><Title level={2}><a>Аренда долгосрочная</a><span>12 233</span></Title></li>
-                                    <li><Title level={2}><a>Аренда долгосрочная</a><span>12 233</span></Title></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </Col>
+            <Row gutter={8}>
+                {category.map((cat, index) => (
+                    <Col key={index} span={6} className="padding-bottom">
+                        <div className="d-flex-vertical parent-category">
+                            <div className="d-inline-block"><img src={Img} /></div>
+                            <a>{cat.category}</a>
+                        </div>
+                        <div className="sub-categories">
+                            <ul>
+                                {cat.subcategory.map((subcat, index) => (
+                                    <Subcategories subcat={subcat} key={index} />
+                                ))}
+                            </ul>
+                        </div>
+                    </Col>
+                ))}
             </Row>
         </div>
     )
 }
+
 
 export default Categories;
