@@ -6,13 +6,8 @@ import Subcategories from './Subcategories';
 const { Title } = Typography;
 
 function Categories() {
-    const subref = useRef(null);
-    const [active, setActive] = useState(false);
     const [category, setCategory] = useState([]);
 
-    function _togle() {
-        setActive(!active);
-    }
 
 
     useEffect(() => {

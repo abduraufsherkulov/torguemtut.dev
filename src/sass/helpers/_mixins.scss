@@ -133,3 +133,55 @@
     style: italic;
   }
 }
+
+@mixin coverFaceWithSpan {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.3));
+    &:hover {
+      background-color: rgba(121, 37, 142, 0.8);
+    }
+    span {
+      border-radius: 32px;
+      position: absolute;
+      @include bold;
+      font-size: dynamicfont(13, 15);
+      color: white;
+      background: linear-gradient(to right, #543f92, #8f2b9f);
+      margin: 14px;
+      padding: 1px 12px;
+    }
+    i {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      margin: 15px;
+      font-size: dynamicfont(15, 17);
+      color: white;
+      &:hover {
+        color: #ff1d1d;
+      }
+    }
+}
+@mixin coverFace {
+  
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.3));
+  &:hover {
+    background-color: rgba(121, 37, 142, 0.8);
+  }
+  i {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 15px;
+    font-size: dynamicfont(15, 17);
+    color: white;
+    &:hover {
+      color: #ff1d1d;
+    }
+  }
+}

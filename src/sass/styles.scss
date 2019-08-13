@@ -2,6 +2,10 @@
 @import "helpers/responsive.scss";
 @import "helpers/variables.scss";
 
+body {
+  background: white;
+}
+
 // CATEGORIES
 #categories {
   padding-top: 70px;
@@ -25,7 +29,7 @@
       padding: 0px;
       list-style: none;
       li {
-        &:first-child{
+        &:first-child {
           padding-top: 0px;
         }
         padding-top: 10px;
@@ -92,15 +96,202 @@
 
 // VIP
 #vip {
-  background: url("../images/strap.png");
-  background-size: cover;
-  .vip-title {
-    h1 {
-      font-size: dynamicfont(24, 28);
+  #vip-top {
+    background: url("../images/strap.png");
+    background-size: cover;
+    .vip-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      h1 {
+        font-size: dynamicfont(24, 28);
+        margin: 0px;
+        padding: 20px;
+        color: white;
+        text-align: center;
+        @include bold;
+      }
+      img {
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        top: -19px;
+      }
+      a {
+        color: #e3b8ee;
+        font-size: dynamicfont(13, 15);
+        @include regular;
+      }
+    }
+  }
+  .vip-grid {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    .each {
+      border: 1px solid $bordercolor;
+      margin-bottom: 30px;
+      .img-part {
+        position: relative;
+        .vip-face {
+          @include coverFaceWithSpan;
+        }
+      }
+      h1 {
+        margin: 0px;
+        @include bold;
+        font-size: dynamicfont(18, 20);
+        color: $parentcolor;
+      }
+      p {
+        margin: 0px;
+        @include regular;
+        font-size: dynamicfont(15, 17);
+        color: $parentcolor;
+      }
+      .info-part {
+        padding: 18px;
+      }
+    }
+    button {
+      color: $showmore;
+      border-color: $showmore;
+      padding: {
+        left: 53px;
+        right: 53px;
+      }
+      @include demi;
+      font-size: dynamicfont(14, 16);
     }
   }
 }
 
-/* body {
-  font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
-} */
+//TOP-VENDORS
+
+#top-vendors {
+  .top-vendor-top {
+    background: url("../images/yellow.png");
+    background-size: cover;
+    .top-vendor-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      h1 {
+        font-size: dynamicfont(24, 28);
+        margin: 0px;
+        padding: 20px;
+        color: white;
+        text-align: center;
+        @include bold;
+      }
+      a {
+        color: #e3b8ee;
+        font-size: dynamicfont(13, 15);
+        @include regular;
+      }
+    }
+  }
+
+  .top-vendor-grid {
+    margin-top: 50px;
+    margin-bottom: 150px;
+    .each {
+      border: 1px solid $bordercolor;
+      margin-bottom: 30px;
+      .img-part {
+        position: relative;
+        .vip-face {
+          @include coverFace;
+        }
+      }
+      h1 {
+        margin: 0px;
+        @include bold;
+        font-size: dynamicfont(18, 20);
+        color: $parentcolor;
+      }
+      p {
+        margin: 0px;
+        @include regular;
+        font-size: dynamicfont(15, 17);
+        color: $parentcolor;
+      }
+      .info-part {
+        padding: 18px;
+      }
+    }
+    button {
+      color: $showmore;
+      border-color: $showmore;
+      padding: {
+        left: 53px;
+        right: 53px;
+      }
+      @include demi;
+      font-size: dynamicfont(14, 16);
+    }
+  }
+}
+
+#infosection {
+  text-align: center;
+  margin-bottom: 110px;
+  .img-container {
+    height: 85px;
+  }
+  h1 {
+    margin-bottom: 18px;
+    font-size: dynamicfont(16, 18);
+    @include demi;
+    color: $parentcolor;
+  }
+  p {
+    font-size: dynamicfont(13, 15);
+    @include regular;
+    color: $parentcolor;
+  }
+}
+
+#getphone{
+  h1{
+    font-size: dynamicfont(18, 20);
+    color: $parentcolor;
+    @include bold;
+  }
+}
+
+footer {
+  padding-top: 42px!important;
+  padding-bottom: 60px!important;
+  background: $footerbg!important;
+  p{
+    color: #7e7f88;
+    font-size: dynamicfont(14, 16);
+    @include regular;
+    
+    &:nth-of-type(1){
+      margin-top: 24px;
+    }
+    margin-bottom: 0px;
+  }
+  h5 {
+    font-size: dynamicfont(14, 16);
+    @include bold;
+    color: #7e7f88;
+    margin-bottom: 30px;
+  }
+  ul {
+    padding: 0px;
+    list-style: none;
+    li {
+      a {
+        font-size: dynamicfont(13, 15);
+        @include regular;
+        color: #7e7f88;
+      }
+      margin-bottom: 12px;
+    }
+  }
+}

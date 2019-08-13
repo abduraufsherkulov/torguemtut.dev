@@ -1,15 +1,9 @@
 import React from 'react';
 
 
-function Subsubcategories() {
+function Subsubcategories(props) {
     return (
-        <React.Fragment>
-            {
-                subcat.subsubcategory.map((subsubcat, index) => (
-                    <li key={index}><a>{subsubcat.title}</a><span>{subsubcat.count}</span></li>
-                ))
-            }
-        </React.Fragment>
+        <li><a>{props.subsubcat.title}</a><span>{props.subsubcat.count}</span></li>
     )
 }
 
