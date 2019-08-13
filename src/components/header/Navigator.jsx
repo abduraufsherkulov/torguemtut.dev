@@ -16,7 +16,7 @@ function Navigator() {
                     // defaultSelectedKeys={['1']}
                     style={{ lineHeight: '62px', float: "left" }}
                 >
-                    <Menu.Item key="1"><Link to="/" > Тарифы </Link></Menu.Item>
+                    <Menu.Item key="1"><Link to="/tariff" > Тарифы </Link></Menu.Item>
                     <Menu.Item key="2"><Link to="/other" > Мобильное приложение </Link></Menu.Item>
                     <Menu.Item key="3">О проекте</Menu.Item>
                 </Menu>

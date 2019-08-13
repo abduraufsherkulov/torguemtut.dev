@@ -4,7 +4,7 @@ import ErrorBoundry from './ErrorBoundry';
 import Postnavigator from "./components/header/Navigator";
 import Navigator from "./components/header/Postnavigator";
 import Home from "./components/home/Home";
-import Other from "./components/home/Other";
+import Tariff from "./components/tariffs/Tariff";
 import Foot from "./components/footer/Foot";
 import { Layout } from 'antd';
 if (process.env.NODE_ENV === 'development') {
@@ -26,7 +26,7 @@ function App() {
             <Postnavigator />
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route path="/other" component={Other} />
+              <Route path="/tariff" component={Tariff} />
             </Switch>
             <Foot />
           </Layout>

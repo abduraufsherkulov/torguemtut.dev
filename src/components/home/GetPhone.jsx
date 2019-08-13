@@ -12,28 +12,28 @@ function GetPhone() {
     return (
         <div id="getphone">
             <div className="container">
-                <Row gutter={48}>
-                    <Col span={6}>
+                <Row className="d-flex-centered" gutter={48}>
+                    <Col span={5}>
                         <img src={Phone} alt="" />
                     </Col>
                     <Col span={11}>
                         <h1>Получите ссылку для скачивания приложения</h1>
                         <Form>
                             <Form.Item>
-                                <InputGroup size="large">
+                                <InputGroup>
                                     <Search
+                                    style={{width: "65%"}}
                                         addonBefore="+998"
                                         placeholder="xx-xxx-xx-xx"
                                         enterButton="Отправить"
-                                        size="large"
                                         onSearch={value => console.log(value)}
                                     />
                                 </InputGroup>
                             </Form.Item>
                         </Form>
                     </Col>
-                    <Col span={7}>
-                        <div>
+                    <Col span={8}>
+                        <div className="d-flex-space-around">
                             <img src={Googleplay} alt="" />
                             <img src={Appstore} alt="" />
                         </div>

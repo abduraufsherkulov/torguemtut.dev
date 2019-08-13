@@ -24,3 +24,13 @@
   align-items: center;
   justify-content: center;
 }
+.d-flex-space-between{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.d-flex-space-around{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
