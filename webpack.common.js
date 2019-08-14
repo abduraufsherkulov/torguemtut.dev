@@ -33,7 +33,7 @@ module.exports = {
                     loader: 'less-loader', // compiles Less to CSS
                     options: {
                         modifyVars: {
-                            'primary-color': '#1DA57A',
+                            'primary-color': '#03a7dc',
                             'default-color': '#ebebeb',
                             'link-color': '#1DA57A',
                             'border-radius-base': '2px',

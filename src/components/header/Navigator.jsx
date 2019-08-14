@@ -9,7 +9,8 @@ function Navigator() {
     return (
         <Header style={{ background: "white", padding: "0px" }}>
             <div className="container">
-                <img style={logo} src={Logo} className="logo" />
+
+                <Link to="/"><img style={logo} src={Logo} className="logo" alt="torguemtut.uz logo" /></Link>
                 <Menu
                     theme="light"
                     mode="horizontal"

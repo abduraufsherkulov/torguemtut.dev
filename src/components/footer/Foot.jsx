@@ -1,6 +1,7 @@
 import React from 'react';
 import { Layout, Row, Col } from 'antd';
 import Logo from "../../images/mainlogo.png";
+import {Link} from "react-router-dom";
 
 const { Footer } = Layout;
 
@@ -10,7 +11,7 @@ function Foot() {
             <div className="container">
                 <Row justify="space-between" type="flex">
                     <Col>
-                        <img src={Logo} alt="" />
+                        <Link to="/"><img src={Logo} alt="" /></Link>
                         <p>© {new Date().getFullYear()} torguemtut.uz.</p>
                         <p>Все права защищены.</p>
                     </Col>
