@@ -59,6 +59,40 @@ function Categories() {
                             count: "12 233"
                         }],
                     }]
+                },
+                {
+                    category: "Недвижимость",
+                    subcategory: [{
+                        title: "Квартиры",
+                        count: "12 123",
+                        subsubcategory: [{
+                            title: "Продажа",
+                            count: "12 233"
+                        }, {
+                            title: "Продажа",
+                            count: "12 233"
+                        }, {
+                            title: "Продажа",
+                            count: "12 233"
+                        }],
+                    }]
+                },
+                {
+                    category: "Недвижимость",
+                    subcategory: [{
+                        title: "Квартиры",
+                        count: "12 123",
+                        subsubcategory: [{
+                            title: "Продажа",
+                            count: "12 233"
+                        }, {
+                            title: "Продажа",
+                            count: "12 233"
+                        }, {
+                            title: "Продажа",
+                            count: "12 233"
+                        }],
+                    }]
                 }]);
             }, 1000);
         });
@@ -75,7 +109,7 @@ function Categories() {
 
     return (
         <div id="categories">
-            <Row gutter={8}>
+            <Row>
                 {category.map((cat, index) => (
                     <Col key={index} span={6} className="padding-bottom">
                         <div className="d-flex-vertical parent-category">

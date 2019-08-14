@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const { Header } = Layout;
 
 const IconFont = Icon.createFromIconfontCN({
-    scriptUrl: '//at.alicdn.com/t/font_1336473_o9j4z07c5lo.js',
+    scriptUrl: '//at.alicdn.com/t/font_1336473_wci8yuw8ubp.js',
 });
 
 const menu = (

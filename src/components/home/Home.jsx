@@ -1,6 +1,6 @@
 import React, { Component, useEffect, useState } from 'react';
 import { Layout, Breadcrumb } from 'antd';
-import Search from './Search';
+import MainSearch from './MainSearch';
 import Categories from './Categories';
 import Vip from './Vip';
 import TopVendors from './TopVendors';
@@ -12,7 +12,7 @@ const { Content } = Layout;
 function Home() {
     return (
         <Content style={{ background: "white" }}>
-            <Search />
+            <MainSearch />
             <div className="container">
                 <Categories />
             </div>

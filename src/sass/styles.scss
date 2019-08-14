@@ -264,7 +264,7 @@ body {
     @include bold;
   }
 }
-
+//FOOTER
 footer {
   padding-top: 42px !important;
   padding-bottom: 60px !important;
@@ -298,6 +298,7 @@ footer {
     }
   }
 }
+
 #tariffs {
   #contentbanner {
     background: url("../images/banner_tariffs.png");
@@ -447,5 +448,34 @@ footer {
       background: #f0f9fd;
       margin-bottom: 160px;
     }
+  }
+}
+
+#search{
+  
+  background: url("../images/longback.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  .search-part{
+    padding-top: 135px;
+  }
+  .bottom-part{
+    margin-top: 15px;
+    p{
+      font-size: dynamicfont(10, 12);
+      color: white;
+      @include regular;
+    }
+    h1{
+      font-size: dynamicfont(12, 15);
+      margin-bottom: 0px;
+      color: white;
+      @include regular;
+    }
+    button{
+      padding-left: 50px;
+      padding-right: 50px;
+    }
+    padding-bottom: 100px;
   }
 }
