@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Row, Col, Typography, Card } from 'antd';
 import Img from "../../images/property.png";
 import Subcategories from './Subcategories';
+import axios from 'axios';
 
 const { Title } = Typography;
 
@@ -11,97 +12,25 @@ function Categories() {
 
 
     useEffect(() => {
-        var promise1 = new Promise(function (resolve, reject) {
-            setTimeout(function () {
-                resolve([{
-                    category: "Недвижимость",
-                    subcategory: [{
-                        title: "Квартиры",
-                        count: "12 123",
-                        subsubcategory: [{
-                            title: "Продажа",
-                            count: "12 233"
-                        }, {
-                            title: "Продажа",
-                            count: "12 233"
-                        }, {
-                            title: "Продажа",
-                            count: "12 233"
-                        }],
-                    },{
-                        title: "Квартиры",
-                        count: "12 123",
-                        subsubcategory: [{
-                            title: "Продажа",
-                            count: "12 233"
-                        }, {
-                            title: "Продажа",
-                            count: "12 233"
-                        }, {
-                            title: "Продажа",
-                            count: "12 233"
-                        }],
-                    }]
-                },
-                {
-                    category: "Недвижимость",
-                    subcategory: [{
-                        title: "Квартиры",
-                        count: "12 123",
-                        subsubcategory: [{
-                            title: "Продажа",
-                            count: "12 233"
-                        }, {
-                            title: "Продажа",
-                            count: "12 233"
-                        }, {
-                            title: "Продажа",
-                            count: "12 233"
-                        }],
-                    }]
-                },
-                {
-                    category: "Недвижимость",
-                    subcategory: [{
-                        title: "Квартиры",
-                        count: "12 123",
-                        subsubcategory: [{
-                            title: "Продажа",
-                            count: "12 233"
-                        }, {
-                            title: "Продажа",
-                            count: "12 233"
-                        }, {
-                            title: "Продажа",
-                            count: "12 233"
-                        }],
-                    }]
-                },
-                {
-                    category: "Недвижимость",
-                    subcategory: [{
-                        title: "Квартиры",
-                        count: "12 123",
-                        subsubcategory: [{
-                            title: "Продажа",
-                            count: "12 233"
-                        }, {
-                            title: "Продажа",
-                            count: "12 233"
-                        }, {
-                            title: "Продажа",
-                            count: "12 233"
-                        }],
-                    }]
-                }]);
-            }, 1000);
-        });
-
-        promise1.then(function (value) {
-            console.log(value);
-            setCategory(value);
-            // expected output: "foo"
-        });
+        const endpoint = "https://ttuz.azurewebsites.net/api/category";
+        axios({
+          method: "get",
+          url: endpoint,
+        //   auth: {
+        //     username: "delivera",
+        //     password: "X19WkHHupFJBPsMRPCJwTbv09yCD50E2"
+        //   },
+        //   headers: {
+        //     "content-type": "application/json",
+        //     token: token
+        //   }
+        })
+          .then(response => {
+            console.log(response);
+          })
+          .catch(error => {
+            console.log(error, "error in orders refresh");
+          });
 
     }, []);
 
@@ -111,6 +40,7 @@ function Categories() {
         <div id="categories">
             <Row>
                 {category.map((cat, index) => (
+                    <React.Fragment>
                     <Col key={index} span={6} className="padding-bottom">
                         <div className="d-flex-vertical parent-category">
                             <div className="d-inline-block"><img src={Img} /></div>
@@ -124,6 +54,7 @@ function Categories() {
                             </ul>
                         </div>
                     </Col>
+                    </React.Fragment>
                 ))}
             </Row>
         </div>
