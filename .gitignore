@@ -1,5 +1,5 @@
 node_modules/*
-!node_modules/antd/*
+!node_modules/antd/es/
 dist
 *.psd
 *.tif
