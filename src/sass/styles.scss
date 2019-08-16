@@ -6,6 +6,11 @@ body {
   background: white;
 }
 
+.ant-input-suffix{
+  display: flex;
+  align-items: center
+}
+
 // CATEGORIES
 #categories {
   padding-top: 70px;
