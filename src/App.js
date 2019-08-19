@@ -6,6 +6,7 @@ import Navigator from "./components/header/Postnavigator";
 import Home from "./components/home/Home";
 import Tariff from "./components/tariffs/Tariff";
 import Foot from "./components/footer/Foot";
+import Login from "./components/login/Login";
 import { Layout } from 'antd';
 if (process.env.NODE_ENV === 'development') {
   import('./sass/styles.scss');
@@ -27,6 +28,7 @@ function App() {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/tariff" component={Tariff} />
+              <Route path="/login" component={Login} />
             </Switch>
             <Foot />
           </Layout>

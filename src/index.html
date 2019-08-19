@@ -4,6 +4,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- GOOGLE -->
+  <!-- <meta name="google-signin-scope" content="profile email">
+  <meta name="google-signin-client_id"
+    content="322801916216-tua83i6u7fh3i8nnpuk7rgsbupq1cqk9.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/platform.js" async defer></script> -->
+  <!-- GOOGLE -->
   <title>tt.uz</title>
 </head>
 
@@ -12,6 +18,23 @@
   <noscript>
     You need to enable JavaScript to run this app.
   </noscript>
+
+  <script>
+    function onSignIn(googleUser) {
+      // Useful data for your client-side scripts:
+      var profile = googleUser.getBasicProfile();
+      console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+      console.log('Full Name: ' + profile.getName());
+      console.log('Given Name: ' + profile.getGivenName());
+      console.log('Family Name: ' + profile.getFamilyName());
+      console.log("Image URL: " + profile.getImageUrl());
+      console.log("Email: " + profile.getEmail());
+
+      // The ID token you need to pass to your backend:
+      var id_token = googleUser.getAuthResponse().id_token;
+      console.log("ID Token: " + id_token);
+    }
+  </script>
 </body>
 
 </html>

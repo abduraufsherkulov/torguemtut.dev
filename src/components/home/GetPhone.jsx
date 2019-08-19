@@ -8,9 +8,9 @@ const { Search } = Input;
 
 const InputGroup = Input.Group;
 
-function GetPhone() {
+function GetPhone(props) {
     return (
-        <div id="getphone">
+        <div style={{background: props.color}} id="getphone">
             <div className="container">
                 <Row className="d-flex-centered" gutter={48}>
                     <Col span={5}>

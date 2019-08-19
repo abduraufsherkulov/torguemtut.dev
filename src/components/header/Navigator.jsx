@@ -28,7 +28,7 @@ function Navigator() {
                     style={{ lineHeight: '62px', float: "right" }}
                 >
                     <Menu.Item key="1"><Link to="/" > <Button type="primary">Добавить объявление</Button> </Link></Menu.Item>
-                    <Menu.Item key="2"><Link to="/" > <Button style={{ backgroundColor: "#ebebeb" }}>Войти</Button> </Link></Menu.Item>
+                    <Menu.Item key="2"><Link to="/login" > <Button style={{ backgroundColor: "#ebebeb" }}>Войти</Button> </Link></Menu.Item>
                 </Menu></div>
         </Header>
     )
