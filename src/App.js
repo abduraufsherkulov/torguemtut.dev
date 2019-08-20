@@ -1,21 +1,14 @@
 import React, { Suspense, useState } from "react";
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Link, withRouter } from 'react-router-dom';
 import ErrorBoundry from './ErrorBoundry';
 import Postnavigator from "./components/header/Navigator";
 import Navigator from "./components/header/Postnavigator";
-import Home from "./components/home/Home";
-import Tariff from "./components/tariffs/Tariff";
-import Foot from "./components/footer/Foot";
-import Login from "./components/login/Login";
 import { Layout } from 'antd';
+import Container from "./components/Container";
 if (process.env.NODE_ENV === 'development') {
   import('./sass/styles.scss');
   import("./sass/fonts.scss");
 }
-
-
-const Test = React.lazy(() => import('./Test'));
-
 
 function App() {
   return (
@@ -25,12 +18,7 @@ function App() {
           <Layout className="layout">
             <Navigator />
             <Postnavigator />
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/tariff" component={Tariff} />
-              <Route path="/login" component={Login} />
-            </Switch>
-            <Foot />
+            <Container />
           </Layout>
         </Suspense>
       </ErrorBoundry>

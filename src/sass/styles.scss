@@ -487,7 +487,9 @@ footer {
 }
 
 #login {
+  background: #edebee;
   .login-wrapper {
+    box-shadow: 0px 0px 34px 6px #e8e8e8;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -548,4 +550,103 @@ footer {
       }
     }
   }
+  .shadow-login {
+    width: 92%;
+    height: 100px;
+    background: #ffffff;
+    position: absolute;
+    z-index: -1;
+    bottom: 8%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border-radius: 6px;
+    /* box-shadow: -1px 2px black; */
+    box-shadow: 0px 0px 8px 0px #b9abab;
+}
+}
+#signin{
+  background: url("../images/signinbg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  
+  .signin-wrapper {
+    // box-shadow: 0px 0px 34px 6px #e8e8e8;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin-top: 85px;
+    margin-bottom: 85px;
+    background: white;
+    .signin-form-forgot {
+      // float: right;
+      text-decoration: underline;
+    }
+    .signin-form-button {
+      width: 100%;
+    }
+    h1 {
+      border-top-right-radius: 5px;
+      border-top-left-radius: 5px;
+      text-align: center;
+      @include bold;
+      font-size: dynamicfont(20, 22);
+      color: white;
+      padding: 25px;
+      background-image: linear-gradient(to right, #70b822, #6ca232);
+    }
+    .input-wrapper {
+      padding: 40px;
+      .policy-span{
+        @include regular;
+        color: #969696;
+        font-size: dynamicfont(10, 12);
+      }
+      .policy-href{
+        @include regular;
+        color: #969696;
+        font-size: dynamicfont(10, 12);
+        text-decoration: underline;
+      }
+      .signin-with-help{
+        margin-top: 45px;
+        @include regular;
+        font-size: dynamicfont(12, 14);
+        color: #4c4c4c;
+        text-align: center;
+      }
+      .no-account{
+        margin-top: 45px;
+        text-align: center;
+        line-height: 1.3;
+        span{
+          color: #4c4c4c;
+          font-size: dynamicfont(12, 14);
+          @include regular;
+        }
+        a{
+          font-size: dynamicfont(12, 14);
+          @include regular;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  .shadow-signin {
+    width: 92%;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    z-index: -1;
+    bottom: 8%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border-radius: 6px;
+    /* box-shadow: -1px 2px black; */
+    // box-shadow: 0px 0px 8px 0px #b9abab;
+}
+
 }
