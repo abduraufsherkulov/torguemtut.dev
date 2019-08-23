@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Form, Icon, Input, Button, Checkbox, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function LoginForm(props) {
+    const [checkUsername, setCheckUsername] = useState({message: "Пожалуйста, введите адрес электронной почты или номер телефона!"});
     const { getFieldDecorator } = props.form;
+      
     function handleSubmit(e) {
         e.preventDefault();
         props.form.validateFields((err, values) => {
@@ -12,23 +15,16 @@ function LoginForm(props) {
             }
         });
     };
-    function validateToNextPassword(rule, value, callback) {
-        const { form } = this.props;
-        if (value && this.state.confirmDirty) {
-            form.validateFields(['confirm'], { force: true });
-        }
-        callback();
-    };
     return (
         <Row type="flex" justify="center">
-            <Col xl={5} lg={10} style={{ zIndex: 1 }}>
+            <Col xl={6} xxl={5} lg={10} style={{ zIndex: 1 }}>
                 <div className="login-wrapper">
                     <h1>Вход в аккаунт</h1>
                     <div className="input-wrapper">
                         <Form onSubmit={handleSubmit} className="login-form">
-                            <Form.Item>
+                            <Form.Item hasFeedback validateStatus="">
                                 {getFieldDecorator('username', {
-                                    rules: [{ required: true, message: 'Please input your username!' }],
+                                    rules: [{ required: true, message: checkUsername.message }],
                                 })(
                                     <Input
                                         size="large"
@@ -44,9 +40,6 @@ function LoginForm(props) {
                                         {
                                             required: true,
                                             message: 'Please input your password!',
-                                        },
-                                        {
-                                            validator: validateToNextPassword,
                                         },
                                     ],
                                 })(<Input.Password size="large"

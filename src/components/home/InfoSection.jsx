@@ -8,7 +8,7 @@ function InfoSection() {
     return (
         <div id="infosection">
             <div className="container">
-                <Row gutter={48} type="flex" justify='space-around'>
+                <Row type="flex" gutter={48} type="flex" justify='space-around'>
                     <Col span={7}>
                         <div className="img-container">
                             <img src={VendorsUzb} alt="" />

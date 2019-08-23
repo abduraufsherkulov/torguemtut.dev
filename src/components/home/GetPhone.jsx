@@ -12,7 +12,7 @@ function GetPhone(props) {
     return (
         <div style={{background: props.color}} id="getphone">
             <div className="container">
-                <Row className="d-flex-centered" gutter={48}>
+                <Row type="flex" align="middle" justify="center" gutter={24}>
                     <Col span={5}>
                         <img src={Phone} alt="" />
                     </Col>
