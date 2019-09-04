@@ -7,7 +7,7 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import Home from "./home/Home";
 import Tariff from "./tariffs/Tariff";
 import Login from "./login/Login";
-import SignIn from "./signin/SignIn";
+import SignUp from "./signup/SignUp";
 import Foot from "./footer/Foot";
 
 function Container({ location }) {
@@ -24,7 +24,7 @@ function Container({ location }) {
                             <Route exact path="/" component={Home} />
                             <Route path="/tariff" component={Tariff} />
                             <Route path="/login" component={Login} />
-                            <Route path="/signin" component={SignIn} />
+                            <Route path="/signup" component={SignUp} />
                         </Switch>
 
                         <Foot />

@@ -67,7 +67,7 @@ function LoginForm(props) {
 
                                 </div>
                                 <div className="no-account">
-                                    <span>Нет аккаунта?</span><Link to="/signin">Зарегистрируйтесь!</Link>
+                                    <span>Нет аккаунта?</span><Link to="/signup">Зарегистрируйтесь!</Link>
                                 </div>
                             </Form.Item>
                         </Form>

@@ -1,18 +1,18 @@
 import React from 'react'
 import { Layout, Breadcrumb } from 'antd';
 import GetPhone from '../home/GetPhone';
-import SignInForm from './SignInForm';
+import SignUpForm from './SignUpForm';
 import InfoSection from '../home/InfoSection';
 const { Content } = Layout;
 
-function SignIn() {
+function SignUp() {
     return (
         <Content id="signin">
-            <SignInForm />
+            <SignUpForm />
             <InfoSection />
             <GetPhone color="white" />
         </Content>
     )
 }
 
-export default SignIn
+export default SignUp
