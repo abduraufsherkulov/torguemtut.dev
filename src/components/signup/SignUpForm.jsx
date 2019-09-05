@@ -6,8 +6,11 @@ import axios from 'axios';
 
 function SignUpForm(props) {
     const [confirmDirty, setconfirmDirty] = useState(false);
+    const [phone, setphone] = useState(null);
+    const [password, setpassword] = useState(null);
+    const [isMail, setisMail] = useState(false);
     const { getFieldDecorator } = props.form;
-
+    console.log(phone);
     function handleSubmit(e) {
         e.preventDefault();
         props.form.validateFieldsAndScroll((err, values) => {
@@ -37,6 +40,10 @@ function SignUpForm(props) {
                 })
                     .then(response => {
                         // console.log("done");
+
+                        setphone(values.phone);
+                        setpassword(values.password);
+                        setisMail(email);
                         console.log(response);
                     })
                     .catch(error => {
@@ -46,7 +53,7 @@ function SignUpForm(props) {
         });
     };
 
-    
+
     function handleConfirmCode(e) {
         e.preventDefault();
         props.form.validateFieldsAndScroll((err, values) => {
@@ -174,12 +181,11 @@ function SignUpForm(props) {
                 {getFieldDecorator('confirmcode', {
                     rules: [
                         {
-                            required: true,
+                            required: phone ? true : false,
+                            len: 5,
+                            
                             message: 'Please input your password!',
-                        },
-                        {
-                            validator: validateToNextPassword,
-                        },
+                        }
                     ],
                 })(<Input.Password size="large"
                     placeholder="------" />)}
@@ -202,7 +208,7 @@ function SignUpForm(props) {
                 <div className="signin-wrapper">
                     <h1>Регистрация пользователя</h1>
                     <div className="input-wrapper">
-                        {confirmCode}
+                        {phone ? confirmCode : mainForm}
                     </div>
                     <div className="shadow-signin"></div>
                 </div>
