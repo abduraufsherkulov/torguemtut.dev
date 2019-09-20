@@ -6,12 +6,14 @@ import Vip from './Vip';
 import TopVendors from './TopVendors';
 import InfoSection from './InfoSection';
 import GetPhone from './GetPhone';
+import CategoriesAndSlider from './CategoriesAndSlider';
 
 const { Content } = Layout;
 
 function Home() {
     return (
         <Content style={{ background: "white" }}>
+            <CategoriesAndSlider />
             <MainSearch />
             <div className="container">
                 <Categories />

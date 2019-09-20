@@ -18,6 +18,7 @@ function SignUpForm(props) {
                 console.log('Received values of form: ', values);
                 const email = (values.emailphone[0] === "+" || typeof values.emailphone === "number") ? false : true;
                 // let token = await AsyncStorage.getItem("access_token");
+
                 const endpoint = "https://ttuz.azurewebsites.net/api/users/register";
 
                 const data = JSON.stringify({
@@ -29,14 +30,10 @@ function SignUpForm(props) {
                 axios({
                     method: "post",
                     url: endpoint,
-                    // auth: {
-                    //     username: "delivera",
-                    //     password: "X19WkHHupFJBPsMRPCJwTbv09yCD50E2"
-                    // },
+                    data: data,
                     headers: {
-                        "content-type": "application/json"
-                    },
-                    data: data
+                        "Content-Type": "application/json"
+                    }
                 })
                     .then(response => {
                         // console.log("done");
@@ -47,7 +44,7 @@ function SignUpForm(props) {
                         console.log(response);
                     })
                     .catch(error => {
-                        console.log(error, "error on refresh");
+                        console.log(error.response, "error on refresh");
                     });
             }
         });
