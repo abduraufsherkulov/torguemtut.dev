@@ -7,11 +7,13 @@ function HomeCarousel() {
     }
     return (
         <div id="homecarousel">
-            <Carousel afterChange={onChange}>
-                <img src={SliderPng} alt="" />
-                <img src={SliderPng} alt="" />
-                <img src={SliderPng} alt="" />
-            </Carousel>
+            <div className="advertise-main">
+                <Carousel afterChange={onChange}>
+                    <img src={SliderPng} alt="" />
+                    <img src={SliderPng} alt="" />
+                    <img src={SliderPng} alt="" />
+                </Carousel>
+            </div>
         </div>
     )
 }

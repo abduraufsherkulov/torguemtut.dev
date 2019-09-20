@@ -1,6 +1,46 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 
+
+
+
+
+function EachCat(props) {
+    
+    const [unfold, setUnfold] = useState(false)
+    
+    let hoverMe = unfold ? "cl-item cl-item-unfold" : "cl-item";
+
+    function handleEnter() {
+        setUnfold(true);
+    }
+
+    function handleLeave(){
+        setUnfold(false);
+    }
+    return (
+        <dl className={hoverMe} onMouseEnter={handleEnter} onMouseLeave={handleLeave}>
+            <dt className="cate-name" >
+                <span>
+                    <a>{props.cat}</a>
+                </span>
+            </dt>
+            <dd className="sub-cate">
+                <div className="sub-cate-main">
+                    <div className="sub-cate-content">
+                        <div className="sub-cate-row">
+                            <dl className="sub-cate-items">
+                                <dt><a href="#">New Arrivals</a></dt>
+                                <dt><a href="#">WOods</a></dt>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </dd>
+        </dl>
+    )
+}
+
 function TopCategories() {
 
 
@@ -21,7 +61,7 @@ function TopCategories() {
             //   }
         })
             .then(response => {
-                // console.log(response.data);
+                console.log(response.data);
                 setCategory(response.data);
             })
             .catch(error => {
@@ -30,9 +70,22 @@ function TopCategories() {
 
     }, []);
 
+    
     return (
         <div id="topcategories">
-            asd
+            <div className="categories-main">
+                <div className="categories-content-title"><a href="#"> <span>Categories</span> <i></i> </a></div>
+
+                <div className="categories-list-box">
+                    {category.map((cat, index) => {
+                        if (cat.parentId == null && index < 72) {
+                            return (
+                                <EachCat key={index} cat={cat.name} />
+                            )
+                        }
+                    })}
+                </div>
+            </div>
         </div>
     )
 }

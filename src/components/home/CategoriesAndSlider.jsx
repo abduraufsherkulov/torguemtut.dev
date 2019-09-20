@@ -7,8 +7,10 @@ function CategoriesAndSlider() {
 
         <div id="categoriesandslider">
             <div className="container">
-                <TopCategories />
-                <HomeCarousel />
+                <div className="under-cont">
+                    <TopCategories />
+                    <HomeCarousel />
+                </div>
             </div>
         </div>
     )
