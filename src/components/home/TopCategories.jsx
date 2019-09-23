@@ -31,7 +31,62 @@ function EachCat(props) {
                         <div className="sub-cate-row">
                             <dl className="sub-cate-items">
                                 <dt><a href="#">New Arrivals</a></dt>
-                                <dt><a href="#">WOods</a></dt>
+                                <dd><a href="#">Dresses</a></dd>
+                                <dd><a href="#">Blouses & Shirts</a></dd>
+                                <dd><a href="#">Hoodies & Sweatshirts</a></dd>
+                                <dd><a href="#">Beach style</a></dd>
+                                <dd><a href="#">Suits & Sets</a></dd>
+                                <dd><a href="#">Sweaters</a></dd>
+                            </dl>
+                            <dl className="sub-cate-items">
+                                <dt><a href="#">New Arrivals</a></dt>
+                                <dd><a href="#">Dresses</a></dd>
+                                <dd><a href="#">Blouses & Shirts</a></dd>
+                                <dd><a href="#">Hoodies & Sweatshirts</a></dd>
+                                <dd><a href="#">Beach style</a></dd>
+                                <dd><a href="#">Suits & Sets</a></dd>
+                                <dd><a href="#">Sweaters</a></dd>
+                            </dl>
+                        </div>
+                        <div className="sub-cate-row">
+                            <dl className="sub-cate-items">
+                                <dt><a href="#">New Arrivals</a></dt>
+                                <dd><a href="#">Dresses</a></dd>
+                                <dd><a href="#">Blouses & Shirts</a></dd>
+                                <dd><a href="#">Hoodies & Sweatshirts</a></dd>
+                                <dd><a href="#">Beach style</a></dd>
+                                <dd><a href="#">Suits & Sets</a></dd>
+                                <dd><a href="#">Sweaters</a></dd>
+                            </dl>
+                            <dl className="sub-cate-items">
+                                <dt><a href="#">New Arrivals</a></dt>
+                                <dd><a href="#">Dresses</a></dd>
+                                <dd><a href="#">Blouses & Shirts</a></dd>
+                                <dd><a href="#">Hoodies & Sweatshirts</a></dd>
+                                <dd><a href="#">Beach style</a></dd>
+                                <dd><a href="#">Suits & Sets</a></dd>
+                                <dd><a href="#">Sweaters</a></dd>
+                            </dl>
+                        </div>
+                        
+                        <div className="sub-cate-row">
+                            <dl className="sub-cate-items">
+                                <dt><a href="#">New Arrivals</a></dt>
+                                <dd><a href="#">Dresses</a></dd>
+                                <dd><a href="#">Blouses & Shirts</a></dd>
+                                <dd><a href="#">Hoodies & Sweatshirts</a></dd>
+                                <dd><a href="#">Beach style</a></dd>
+                                <dd><a href="#">Suits & Sets</a></dd>
+                                <dd><a href="#">Sweaters</a></dd>
+                            </dl>
+                            <dl className="sub-cate-items">
+                                <dt><a href="#">New Arrivals</a></dt>
+                                <dd><a href="#">Dresses</a></dd>
+                                <dd><a href="#">Blouses & Shirts</a></dd>
+                                <dd><a href="#">Hoodies & Sweatshirts</a></dd>
+                                <dd><a href="#">Beach style</a></dd>
+                                <dd><a href="#">Suits & Sets</a></dd>
+                                <dd><a href="#">Sweaters</a></dd>
                             </dl>
                         </div>
                     </div>

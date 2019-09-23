@@ -783,17 +783,78 @@ footer {
         }
       }
       .cl-item-unfold {
+        .cate-name {
+          span {
+            border-color: #e9e9e9;
+            margin-left: -2px;
+            padding-left: 41px;
+            width: 240px;
+            z-index: 100;
+          }
+        }
         .sub-cate {
           min-height: 472px;
           display: block;
+          border-color: transparent;
+          border-radius: 8px;
+          box-shadow: 0 1px 10px rgba(0, 0, 0, 0.12);
           .sub-cate-main {
             position: relative;
             width: auto;
             padding: 5px 0 10px 20px;
             white-space: nowrap;
             overflow: hidden;
-            .sub-cate-content{
-              
+            a {
+              color: #333;
+              &:hover{
+                color: #f60;
+                text-decoration: underline;
+              }
+            }
+            .sub-cate-content {
+              display: inline-block;
+              .sub-cate-row {
+                display: inline-block;
+                vertical-align: top;
+                padding-right: 20px;
+                width: 234px;
+                .sub-cate-items {
+                  display: block;
+                  margin-bottom: 5px;
+                  vertical-align: top;
+                  padding-right: 20px;
+                  width: 234px;
+                  dt {
+                    border-bottom: 1px solid transparent;
+                    font-size: 14px;
+                    font-weight: 700;
+                    margin-bottom: 5px;
+                    line-height: 35px;
+                    height: 35px;
+                    a {
+                      max-width: 190px;
+                      display: inline-block;
+                      text-overflow: ellipsis;
+                      word-wrap: normal;
+                      white-space: nowrap;
+                      overflow: hidden;
+                      @include bold;
+                    }
+                  }
+                  dd {
+                    a {
+                      max-width: 190px;
+                      display: block;
+                      text-overflow: ellipsis;
+                      word-wrap: normal;
+                      white-space: nowrap;
+                      overflow: hidden;
+                      line-height: 26px;
+                      @include regular;
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -827,4 +888,10 @@ footer {
       @include regular;
     }
   }
+}
+.ant-menu{
+  font-size: dynamicfont(12, 14);
+}
+.ant-menu-item, .ant-menu-submenu-title{
+  padding: 0 5px;
 }
