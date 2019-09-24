@@ -26,6 +26,7 @@ function SignUpForm(props) {
                     Password: values.password,
                     IsEmail: email
                 });
+
                 console.log(data);
                 axios({
                     method: "post",
@@ -38,7 +39,7 @@ function SignUpForm(props) {
                     .then(response => {
                         // console.log("done");
 
-                        setphone(values.phone);
+                        setphone(values.emailphone);
                         setpassword(values.password);
                         setisMail(email);
                         console.log(response);
@@ -61,7 +62,7 @@ function SignUpForm(props) {
                 const endpoint = "https://ttuz.azurewebsites.net/api/users/register";
 
                 const data = JSON.stringify({
-                    Phone: values.confi,
+                    Phone: values.confirm,
                 });
                 console.log(data);
                 axios({

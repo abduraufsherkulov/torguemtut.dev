@@ -806,7 +806,7 @@ footer {
             overflow: hidden;
             a {
               color: #333;
-              &:hover{
+              &:hover {
                 color: #f60;
                 text-decoration: underline;
               }
@@ -889,9 +889,50 @@ footer {
     }
   }
 }
-.ant-menu{
+.ant-menu {
   font-size: dynamicfont(12, 14);
 }
-.ant-menu-item, .ant-menu-submenu-title{
+.ant-menu-item,
+.ant-menu-submenu-title {
   padding: 0 5px;
+}
+
+.dropdown-container {
+  background: #fff;
+  width: 261px;
+  padding: 16px;
+  h2 {
+    display: block;
+    color: #666;
+    font-size: dynamicfont(12, 14);
+    color: #000;
+    @include bold;
+  }
+  .switch-cur {
+    padding: 16px 0 0px 0;
+  }
+  .switch-btn {
+    margin-top: 15px;
+    width: 100%;
+  }
+  .log-text {
+    display: block;
+    color: #666;
+    font-size: dynamicfont(12, 14);
+    color: #000;
+    @include regular;
+  }
+  .signin-btn {
+    width: 50%;
+    button {
+      width: 49%;
+    }
+  }
+  .signup-btn {
+    width: 50%;
+    button {
+      width: 49%;
+    }
+  }
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
 }

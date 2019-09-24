@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Layout, Menu, Icon, Dropdown, Select } from 'antd';
+import { Layout, Menu, Icon, Dropdown, Select, Button } from 'antd';
 import { Link } from 'react-router-dom';
 
 const { Header } = Layout;
@@ -47,21 +47,39 @@ const curlang = (
 
 const getMenu = () => (
     <div className="dropdown-container">
-        <h2>Title of Dropdown</h2>
-        <Select placeholder="Select..." style={{ width: '100%' }}>
-            <Option value="jack">Jack</Option>
-            <Option value="lucy">Lucy</Option>
+        <h2 className="switch-lan">Language</h2>
+        <Select defaultValue="English" placeholder="Select..." style={{ width: '100%' }}>
+            <Option value="Russian">Russian</Option>
+            <Option value="Uzbek">Uzbek</Option>
+            <Option value="English">English</Option>
         </Select>
+        <h2 className="switch-cur">Currency</h2>
+        <Select defaultValue="USD" placeholder="Select..." style={{ width: '100%' }}>
+            <Option value="USD">USD</Option>
+            <Option value="UZS">UZS</Option>
+            <Option value="RUB">RUB</Option>
+        </Select>
+        <Button className="switch-btn" type="primary">Save</Button>
     </div>
 )
 
+const getAccount = () => (
+    <div className="dropdown-container">
+        <h2 className="log-text">Welcome to tt.uz</h2>
+        <Link className="signin-btn" to="/signup"><Button type="danger">Join</Button></Link>
+        <Link className="signup-btn" to="/login" > <Button style={{ backgroundColor: "#ebebeb" }}>Войти</Button> </Link>
+    </div>
+)
 
 function Postnavigator() {
     const [visible, setVisible] = useState(false);
+    const [visiblelog, setVisiblelog] = useState(false);
 
     const handleDropdownVisibility = (val) => {
-        console.log('handleDropdownVisibility called', val);
         setVisible(val);
+    }
+    const handleDropdownVisibilitylog = (val) => {
+        setVisiblelog(val);
     }
 
     return (
@@ -87,7 +105,6 @@ function Postnavigator() {
                     theme="light"
                     mode="horizontal"
                     style={{ lineHeight: '40px', float: "right" }}
-                    paddingLeft={10}
                     inlineIndent={1}
                 >
                     <Menu.Item key="1">
@@ -113,7 +130,7 @@ function Postnavigator() {
                     </Menu.Item>
 
                     <Menu.Item key="4">
-                        <Dropdown overlay={getMenu()} trigger={['click']}
+                        <Dropdown overlay={getMenu()} trigger={['click']} placement="bottomRight"
                             onVisibleChange={val => handleDropdownVisibility(val)}
                             visible={visible}
                         >
@@ -127,14 +144,16 @@ function Postnavigator() {
                             <Icon type="heart" />
                             Мои желания </Link>
                     </Menu.Item>
-                    {/* <Menu.Item key="8">
-                        <Dropdown overlay={menu}>
+                    <Menu.Item key="8">
+                        <Dropdown overlay={getAccount()} trigger={['click']} placement="bottomRight"
+                            onVisibleChange={val => handleDropdownVisibilitylog(val)}
+                            visible={visiblelog}>
                             <a className="ant-dropdown-link" href="#">
-                            <Icon type="heart" /> 
+                                <Icon type="user" />
                                 Мой профиль <Icon type="down" />
                             </a>
                         </Dropdown>
-                    </Menu.Item> */}
+                    </Menu.Item>
                 </Menu>
             </div>
         </Header>
