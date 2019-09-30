@@ -3,16 +3,20 @@ import React, { useEffect, useState } from 'react'
 import { Form, Icon, Input, Button, Checkbox, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { withRouter } from 'react-router-dom';
 
 function SignUpForm(props) {
     const [confirmDirty, setconfirmDirty] = useState(false);
     const [phone, setphone] = useState(null);
     const [password, setpassword] = useState(null);
     const [isMail, setisMail] = useState(false);
+    const [validateLoader, setvalidateLoader] = useState("");
+    const [validateConfirmCode, setvalidateConfirmCode] = useState("")
     const { getFieldDecorator } = props.form;
-    console.log(phone);
+    
     function handleSubmit(e) {
         e.preventDefault();
+        setvalidateLoader('validating');
         props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
@@ -22,9 +26,10 @@ function SignUpForm(props) {
                 const endpoint = "https://ttuz.azurewebsites.net/api/users/register";
 
                 const data = JSON.stringify({
-                    Phone: values.emailphone,
+                    Phone: email ? '' : values.emailphone,
                     Password: values.password,
-                    IsEmail: email
+                    IsEmail: email,
+                    Email: email ? values.emailphone : ""
                 });
 
                 console.log(data);
@@ -37,11 +42,22 @@ function SignUpForm(props) {
                     }
                 })
                     .then(response => {
-                        // console.log("done");
+                        if (response.data.status) {
+                            setphone(values.emailphone);
+                            setpassword(values.password);
+                            setisMail(email);
+                            setvalidateLoader('success');
+                        } else {
 
-                        setphone(values.emailphone);
-                        setpassword(values.password);
-                        setisMail(email);
+                            setvalidateLoader('error');
+                            props.form.setFields({
+                                emailphone: {
+                                    value: values.emailphone,
+                                    errors: [new Error(response.data.message)],
+                                },
+                            });
+                        }
+
                         console.log(response);
                     })
                     .catch(error => {
@@ -54,15 +70,20 @@ function SignUpForm(props) {
 
     function handleConfirmCode(e) {
         e.preventDefault();
-        props.form.validateFieldsAndScroll((err, values) => {
+        console.log('here');
+        props.form.validateFieldsAndScroll(['confirmcode'], (err, values) => {
+            console.log(err);
             if (!err) {
                 console.log('Received values of form: ', values);
 
                 // let token = await AsyncStorage.getItem("access_token");
-                const endpoint = "https://ttuz.azurewebsites.net/api/users/register";
+                const endpoint = "https://ttuz.azurewebsites.net/api/users/validate";
 
                 const data = JSON.stringify({
-                    Phone: values.confirm,
+                    Phone: isMail ? '' : phone,
+                    Code: values.confirmcode,
+                    IsEmail: isMail,
+                    Email: isMail ? phone : ''
                 });
                 console.log(data);
                 axios({
@@ -78,8 +99,18 @@ function SignUpForm(props) {
                     data: data
                 })
                     .then(response => {
-                        // console.log("done");
                         console.log(response);
+                        if(response.data.status){
+                            props.history.push('/');
+                        } else {
+                            setvalidateConfirmCode('error');
+                            props.form.setFields({
+                                confirmcode: {
+                                    value: values.confirmcode,
+                                    errors: [new Error(response.data.message)],
+                                },
+                            });
+                        }
                     })
                     .catch(error => {
                         console.log(error, "error on refresh");
@@ -95,7 +126,6 @@ function SignUpForm(props) {
         }
         callback();
     };
-
     function compareToFirstPassword(rule, value, callback) {
         if (value && value !== props.form.getFieldValue('password')) {
             callback('Two passwords that you enter is inconsistent!');
@@ -103,15 +133,36 @@ function SignUpForm(props) {
             callback();
         }
     };
+
+    function validateEmailPhone(rule, value, callback) {
+        // if (value && confirmDirty) {
+        //     props.form.validateFields(['emailphone'], { force: true });
+        // }
+        // if()
+        if(validateLoader === "error"){
+            setvalidateLoader('success');
+        } else if(validateConfirmCode === "error"){
+            setvalidateConfirmCode('success')
+        }
+        callback();
+    };
+
     function handleConfirmBlur(e) {
         const { value } = e.target;
         setconfirmDirty(confirmDirty || !!value);
     };
     const mainForm = (
         <Form onSubmit={handleSubmit} className="signin-form">
-            <Form.Item >
+            <Form.Item hasFeedback validateStatus={validateLoader}>
                 {getFieldDecorator('emailphone', {
-                    rules: [{ required: true, message: 'Please input your username!' }],
+                    rules: [
+                        {
+                            required: true,
+                            message: 'Please input your username!'
+                        },
+                        {
+                            validator: validateEmailPhone,
+                        }],
                 })(
                     <Input
                         size="large"
@@ -130,7 +181,7 @@ function SignUpForm(props) {
                         },
                         {
                             validator: validateToNextPassword,
-                        },
+                        }
                     ],
                 })(<Input.Password size="large"
                     placeholder="Придумайте пароль" />)}
@@ -175,14 +226,14 @@ function SignUpForm(props) {
     );
     const confirmCode = (
         <Form onSubmit={handleConfirmCode} className="signin-form">
-            <Form.Item label="Код для подтверждения" hasFeedback>
+            <Form.Item label="Код для подтверждения" hasFeedback validateStatus={validateConfirmCode}>
                 {getFieldDecorator('confirmcode', {
                     rules: [
                         {
                             required: phone ? true : false,
                             len: 5,
-                            
-                            message: 'Please input your password!',
+
+                            message: 'Please input your confirm code?',
                         }
                     ],
                 })(<Input.Password size="large"
@@ -190,7 +241,7 @@ function SignUpForm(props) {
             </Form.Item>
             <Form.Item style={{ marginBottom: "10px" }}>
                 <div className="d-flex-space-between">
-                    <Button style={{ marginTop: "33px" }} size="large" className="signin-form-button">
+                    <Button style={{ marginTop: "33px" }} size="large" className="signin-form-button" onClick={() => setphone("")}>
                         Назад
                     </Button>
                     <Button style={{ marginTop: "33px" }} size="large" type="primary" htmlType="submit" className="signin-form-button">
@@ -202,7 +253,7 @@ function SignUpForm(props) {
     )
     return (
         <Row type="flex" justify="center">
-            <Col xl={5} lg={10} style={{ zIndex: 1 }}>
+            <Col xl={6} xxl={5} lg={10} style={{ zIndex: 1 }}>
                 <div className="signin-wrapper">
                     <h1>Регистрация пользователя</h1>
                     <div className="input-wrapper">
@@ -216,4 +267,4 @@ function SignUpForm(props) {
 }
 
 
-export default Form.create()(SignUpForm);
+export default Form.create()(withRouter(SignUpForm));

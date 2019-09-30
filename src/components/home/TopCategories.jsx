@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
+import { withRouter } from 'react-router-dom';
 
 
 
 
 
 function EachCat(props) {
-    
+
     const [unfold, setUnfold] = useState(false)
-    
+
     let hoverMe = unfold ? "cl-item cl-item-unfold" : "cl-item";
 
     function handleEnter() {
         setUnfold(true);
     }
 
-    function handleLeave(){
+    function handleLeave() {
         setUnfold(false);
     }
     return (
@@ -68,7 +69,7 @@ function EachCat(props) {
                                 <dd><a href="#">Sweaters</a></dd>
                             </dl>
                         </div>
-                        
+
                         <div className="sub-cate-row">
                             <dl className="sub-cate-items">
                                 <dt><a href="#">New Arrivals</a></dt>
@@ -96,7 +97,7 @@ function EachCat(props) {
     )
 }
 
-function TopCategories() {
+function TopCategories(props) {
 
 
     const [category, setCategory] = useState([]);
@@ -116,7 +117,7 @@ function TopCategories() {
             //   }
         })
             .then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 setCategory(response.data);
             })
             .catch(error => {
@@ -125,7 +126,7 @@ function TopCategories() {
 
     }, []);
 
-    
+
     return (
         <div id="topcategories">
             <div className="categories-main">
@@ -145,4 +146,4 @@ function TopCategories() {
     )
 }
 
-export default TopCategories
+export default withRouter(TopCategories)
