@@ -9,6 +9,7 @@ import Tariff from "./tariffs/Tariff";
 import Login from "./login/Login";
 import SignUp from "./signup/SignUp";
 import Foot from "./footer/Foot";
+import AddNewsAd from './addnewsad/AddNewsAd';
 
 function Container({ location }) {
     return (
@@ -25,6 +26,7 @@ function Container({ location }) {
                             <Route path="/tariff" component={Tariff} />
                             <Route path="/login" component={Login} />
                             <Route path="/signup" component={SignUp} />
+                            <Route path="/add-news-ad" component={AddNewsAd} />
                         </Switch>
 
                         <Foot />

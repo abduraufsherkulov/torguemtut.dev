@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Layout, Menu, Icon, Dropdown, Select, Button } from 'antd';
+import { Layout, Menu, Icon, Dropdown, Select, Button, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
 
 const { Header } = Layout;
@@ -24,27 +24,6 @@ const menu = (
     </Menu>
 );
 
-const curlang = (
-    <Menu>
-        <Menu.Item key="1">
-            {/* <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
-                EN
-        </a> */}
-            <Select style={{ width: '100%' }}>
-                <Option value="lucy">lucy</Option>
-                <Option value="asd">asdasd</Option>
-                <Option value="dfssdf">lsfsdfsducy</Option>
-            </Select>
-        </Menu.Item>
-        <Menu.Item key="2">
-            <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
-                UZ
-        </a>
-        </Menu.Item>
-    </Menu>
-);
-
-
 const getMenu = () => (
     <div className="dropdown-container">
         <h2 className="switch-lan">Language</h2>
@@ -63,12 +42,39 @@ const getMenu = () => (
     </div>
 )
 
-const getAccount = () => (
-    <div className="dropdown-container">
+const loggedUser = (
+    <div className="log-wrapper">
+        <div className="d-flex-horizontal">
+            <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+            <h2 className="log-text">Welcome back, <br /> {localStorage.getItem('username')}</h2>
+        </div>
+        <a className="signup-btn" onClick={() => { localStorage.removeItem('username'); window.location.reload() }} > Выход </a>
+    </div>
+);
+
+const defaultText = (
+    <div className="log-wrapper">
         <h2 className="log-text">Welcome to tt.uz</h2>
         <Link className="signin-btn" to="/signup"><Button type="danger">Join</Button></Link>
         <Link className="signup-btn" to="/login" > <Button style={{ backgroundColor: "#ebebeb" }}>Войти</Button> </Link>
     </div>
+);
+
+const getAccount = () => (
+    <Menu>
+        {localStorage.getItem('username') ? loggedUser : defaultText}
+        <Menu.Divider />
+        <Menu.Item>
+            <Link to="/add-news-ad">
+                <Icon type="plus" />    Объявления
+        </Link>
+        </Menu.Item>
+        <Menu.Item>
+            <Link to="/messages">
+                <Icon type="message" />    Сообщения
+        </Link>
+        </Menu.Item>
+    </Menu>
 )
 
 function Postnavigator() {
@@ -145,9 +151,7 @@ function Postnavigator() {
                             Мои желания </Link>
                     </Menu.Item>
                     <Menu.Item key="8">
-                        <Dropdown overlay={getAccount()} trigger={['click']} placement="bottomRight"
-                            onVisibleChange={val => handleDropdownVisibilitylog(val)}
-                            visible={visiblelog}>
+                        <Dropdown overlay={getAccount()} placement="bottomRight">
                             <a className="ant-dropdown-link" href="#">
                                 <Icon type="user" />
                                 Мой профиль <Icon type="down" />

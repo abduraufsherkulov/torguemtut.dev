@@ -13,7 +13,7 @@ function SignUpForm(props) {
     const [validateLoader, setvalidateLoader] = useState("");
     const [validateConfirmCode, setvalidateConfirmCode] = useState("")
     const { getFieldDecorator } = props.form;
-    
+
     function handleSubmit(e) {
         e.preventDefault();
         setvalidateLoader('validating');
@@ -99,8 +99,12 @@ function SignUpForm(props) {
                     data: data
                 })
                     .then(response => {
-                        console.log(response);
-                        if(response.data.status){
+                        if (response.data.status) {
+                            if (isMail) {
+                                localStorage.setItem('username', phone);
+                            } else {
+                                localStorage.setItem('username', phone);
+                            }
                             props.history.push('/');
                         } else {
                             setvalidateConfirmCode('error');
@@ -139,9 +143,9 @@ function SignUpForm(props) {
         //     props.form.validateFields(['emailphone'], { force: true });
         // }
         // if()
-        if(validateLoader === "error"){
+        if (validateLoader === "error") {
             setvalidateLoader('success');
-        } else if(validateConfirmCode === "error"){
+        } else if (validateConfirmCode === "error") {
             setvalidateConfirmCode('success')
         }
         callback();
