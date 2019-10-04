@@ -9,9 +9,10 @@ module.exports = merge(common, {
   devServer: {
     contentBase: path.join(__dirname, "public/"),
     port: 3000,
-    publicPath: "http://localhost:3000/dist/",
+    publicPath: "https://localhost:3000/dist/",
     historyApiFallback: true,
-    hot: true
+    hot: true,
+    https: true
   },
   output: {
     path: path.resolve(__dirname, "dist/"),
