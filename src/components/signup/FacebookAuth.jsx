@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import { Icon, Button } from 'antd';
 
@@ -11,7 +11,15 @@ function FacebookAuth() {
     const [picture, setpicture] = useState("")
 
     const responseFacebook = (response) => {
-        console.log(response)
+        console.log(response);
+        if (response.authResponse) {
+            console.log('Welcome!  Fetching your information.... ');
+            FB.api('/me', function (response) {
+                console.log('Good to see you, ' + response.name + '.');
+            });
+        } else {
+            console.log('User cancelled login or did not fully authorize.');
+        }
         setisLoggedIn(true);
         setuserID(response.userID);
         setname(response.name);
@@ -24,8 +32,6 @@ function FacebookAuth() {
 
     const componentClicked = () => {
 
-
-        console.log('clicked');
     }
 
     function logOut(e) {
@@ -34,18 +40,25 @@ function FacebookAuth() {
             console.log(response);
         });
     }
-    
+
     function checkStatus(e) {
         e.preventDefault();
         // FB.logout(function (response) {
         //     console.log(response);
         // });
-        // FB.getLoginStatus(function (response) {
-        //     console.log(response);
-        // });
-        // FB.api("/me/permissions","DELETE",function(response){
-        //     console.log(response); //gives true on app delete success 
-        // });
+        FB.getLoginStatus(function (response) {
+            console.log(response);
+
+            FB.api(
+                `/${response.authResponse.userID}/permissions`,
+                "DELETE",
+                function (response) {
+                    if (response && !response.error) {
+                        console.log(response);
+                    }
+                }
+            );
+        });
     }
 
     let fbContent;
@@ -76,7 +89,7 @@ function FacebookAuth() {
 
     return (
         <>
-        <Button onClick={(e) => checkStatus(e)}>checkStatus</Button>
+            <Button onClick={(e) => checkStatus(e)}>checkStatus</Button>
             <Button onClick={(e) => logOut(e)}>logout</Button>
             {fbContent}
         </>

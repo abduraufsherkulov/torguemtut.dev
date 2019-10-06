@@ -946,3 +946,20 @@ footer {
     @include regular;
   }
 }
+
+#addnews{
+  .makenarrow{
+    width: 80%;
+    h2{
+      @include demi;
+      font-size: dynamicfont(13, 15);
+      padding-bottom: 40px;
+    }
+    padding-bottom: 50px;
+  }
+}
+.header-text{
+  @include bold;
+  font-size: dynamicfont(26,28);
+  padding: 30px 0 30px 0;
+}

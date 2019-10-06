@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import FacebookAuth from './FacebookAuth';
+import FacebookWith from './FacebookWith';
 
 function SignUpForm(props) {
     const [confirmDirty, setconfirmDirty] = useState(false);
@@ -219,7 +220,7 @@ function SignUpForm(props) {
             <Form.Item>
                 <p className="signin-with-help">Быстрая регистрация с помощью:</p>
                 <div className="d-flex-space-between">
-                    <div><FacebookAuth /></div>
+                    <div><FacebookWith /></div>
                     <div>google</div>
 
                 </div>

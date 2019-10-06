@@ -152,7 +152,7 @@ function Postnavigator() {
                     </Menu.Item>
                     <Menu.Item key="8">
                         <Dropdown overlay={getAccount()} placement="bottomRight">
-                            <a className="ant-dropdown-link" href="#">
+                            <a className="ant-dropdown-link">
                                 <Icon type="user" />
                                 Мой профиль <Icon type="down" />
                             </a>

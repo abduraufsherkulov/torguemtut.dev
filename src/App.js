@@ -1,5 +1,6 @@
 import React, { Suspense, useState } from "react";
 import { BrowserRouter as Router, Route, Switch, Link, withRouter } from 'react-router-dom';
+import { createBrowserHistory } from "history";
 import ErrorBoundry from './ErrorBoundry';
 import Postnavigator from "./components/header/Navigator";
 import Navigator from "./components/header/Postnavigator";
@@ -9,10 +10,10 @@ if (process.env.NODE_ENV === 'development') {
   import('./sass/styles.scss');
   import("./sass/fonts.scss");
 }
-
+const history = createBrowserHistory()
 function App() {
   return (
-    <Router>
+    <Router  keyLength={12}>
       <ErrorBoundry>
         <Suspense fallback={<div>Loading...</div>}>
           <Layout className="layout">
