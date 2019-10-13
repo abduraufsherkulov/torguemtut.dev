@@ -103,7 +103,7 @@ function TopCategories(props) {
     const [category, setCategory] = useState([]);
 
     useEffect(() => {
-        const endpoint = "https://ttuz.azurewebsites.net/api/category";
+        const endpoint = "https://ttuz.azurewebsites.net/api/category/get-all";
         axios({
             method: "get",
             url: endpoint,
