@@ -1,16 +1,19 @@
 const google = window.google;
 import React, { useEffect } from 'react'
 import { Icon, Button } from 'antd';
+import axios from 'axios';
 
 function FacebookWith() {
     function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
         console.log(response);                   // The current login status of the person.
         if (response.status === 'connected') {   // Logged into your webpage and Facebook.
+            sendToServer(response)
             testAPI();
         } else {                                 // Not logged into your webpage or we are unable to tell.
             FB.login(function (response) {
                 console.log(response);
                 if (response.authResponse) {
+                    sendToServer(response);
                     console.log('Welcome!  Fetching your information.... ');
                     FB.api('/me', function (response) {
                         console.log(response);
@@ -19,8 +22,8 @@ function FacebookWith() {
                 } else {
                     console.log('User cancelled login or did not fully authorize.');
                 }
-            });
-
+            }, { scope: 'email' });
+            // user_birthday, user_gender, user_location,
         }
     }
 
@@ -30,8 +33,32 @@ function FacebookWith() {
         });
     }
 
+    function sendToServer(response) {
+        const endpoint = "https://ttuz.azurewebsites.net/api/users/facebook";
+
+        const data = JSON.stringify({
+            access_token: response.authResponse.accessToken
+        });
+
+        axios({
+            method: "post",
+            url: endpoint,
+            data: data,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                console.log(error, "error on refresh");
+            });
+    }
+
     function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
         console.log('Welcome!  Fetching your information.... ');
+
         FB.api('/me', function (response) {
             console.log('Successful login for: ' + response.name);
             console.log('Thanks for logging in, ' + response.name + '!');
@@ -83,7 +110,7 @@ function FacebookWith() {
     return (
         <>
             <Button onClick={checkLoginState}>Facebook login</Button>
-            {/* <Button onClick={statusHandleLogOut}>Log out</Button> */}
+            <Button onClick={statusHandleLogOut}>Log out</Button>
         </>
     )
 }
