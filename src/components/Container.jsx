@@ -1,7 +1,14 @@
 import React from 'react';
 
 import styled from "styled-components";
-import { Switch, Route, withRouter } from "react-router-dom";
+import {
+  Switch,
+  Route,
+  withRouter,
+  Redirect,
+  useHistory,
+  useLocation
+} from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import Home from "./home/Home";
@@ -11,30 +18,86 @@ import SignUp from "./signup/SignUp";
 import Foot from "./footer/Foot";
 import AddNewsAd from './addnewsad/AddNewsAd';
 
-function Container({ location }) {
-    return (
-        <Wrapper>
-            <TransitionGroup className="transition-group">
-                <CSSTransition
-                    key={location.key}
-                    timeout={{ enter: 300, exit: 300 }}
-                    classNames="fade"
-                >
-                    <section className="route-section">
-                        <Switch location={location}>
-                            <Route exact path="/" component={Home} />
-                            <Route path="/tariff" component={Tariff} />
-                            <Route path="/login" component={Login} />
-                            <Route path="/signup" component={SignUp} />
-                            <Route path="/add-news-ad" component={AddNewsAd} />
-                        </Switch>
+function PrivateRoute({ children, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        localStorage.getItem('username') ? (
+          children
+        ) : (
+            <Redirect
+              to={{
+                pathname: "/login",
+                state: { from: location }
+              }}
+            />
+          )
+      }
+    />
+  );
+}
 
-                        <Foot />
-                    </section>
-                </CSSTransition>
-            </TransitionGroup>
-        </Wrapper>
-    )
+
+function AuthRoute({ children, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        localStorage.getItem('username') ? (
+          <Redirect
+            to={{
+              pathname: "/",
+              state: { from: location }
+            }}
+          />
+        ) : (
+            children
+          )
+      }
+    />
+  );
+}
+
+
+
+function Container({ location }) {
+  return (
+    <Wrapper>
+      <TransitionGroup className="transition-group">
+        <CSSTransition
+          key={location.key}
+          timeout={{ enter: 300, exit: 300 }}
+          classNames="fade"
+        >
+          <section className="route-section">
+            <Switch location={location}>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route path="/tariff">
+                <Tariff />
+              </Route>
+
+              <AuthRoute path="/login">
+                <Login />
+              </AuthRoute>
+              <AuthRoute path="/signup">
+                <SignUp />
+              </AuthRoute>
+
+              <PrivateRoute path="/add-news-ad">
+                {/* <Route path="/add-news-ad" component={AddNewsAd} /> */}
+                <AddNewsAd />
+              </PrivateRoute>
+            </Switch>
+
+            <Foot />
+          </section>
+        </CSSTransition>
+      </TransitionGroup>
+    </Wrapper>
+  )
 }
 const Wrapper = styled.div`
   .fade-enter {

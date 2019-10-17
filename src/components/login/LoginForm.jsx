@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Form, Icon, Input, Button, Checkbox, Row, Col } from 'antd';
-import { Link, withRouter } from 'react-router-dom';
+import {
+    Link, withRouter,
+    useHistory,
+    useLocation
+} from 'react-router-dom';
 import axios from 'axios';
 
 function LoginForm(props) {
@@ -11,6 +15,11 @@ function LoginForm(props) {
     // const [isMail, setisMail] = useState(false);
     const [validateLoader, setvalidateLoader] = useState("");
     const { getFieldDecorator } = props.form;
+
+    let history = useHistory();
+    let location = useLocation();
+
+    let { from } = location.state || { from: { pathname: "/" } };
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -44,10 +53,12 @@ function LoginForm(props) {
                         if (response.data.status) {
                             if (email) {
                                 localStorage.setItem('username', values.emailphone);
+                                history.replace(from);
                             } else {
                                 localStorage.setItem('username', values.emailphone);
+                                history.replace(from);
                             }
-                            window.location.replace("/");
+                            // window.location.replace("/");
                             // props.history.push('/');
                         } else {
                             setvalidateConfirmCode('error');
