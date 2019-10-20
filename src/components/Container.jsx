@@ -17,6 +17,7 @@ import Login from "./login/Login";
 import SignUp from "./signup/SignUp";
 import Foot from "./footer/Foot";
 import AddNewsAd from './addnewsad/AddNewsAd';
+import AuthContextProvider from '../contexts/AuthContext';
 
 function PrivateRoute({ children, ...rest }) {
   return (
@@ -78,25 +79,21 @@ function Container({ location }) {
               <Route path="/tariff">
                 <Tariff />
               </Route>
-
               <AuthRoute path="/login">
-                <Login />
+                  <Login />
               </AuthRoute>
               <AuthRoute path="/signup">
                 <SignUp />
               </AuthRoute>
-
               <PrivateRoute path="/add-news-ad">
-                {/* <Route path="/add-news-ad" component={AddNewsAd} /> */}
                 <AddNewsAd />
               </PrivateRoute>
             </Switch>
-
             <Foot />
           </section>
         </CSSTransition>
       </TransitionGroup>
-    </Wrapper>
+    </Wrapper >
   )
 }
 const Wrapper = styled.div`

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Layout, Menu, Icon, Dropdown, Select, Button, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const { Header } = Layout;
 const { SubMenu } = Menu;
@@ -42,16 +43,16 @@ const getMenu = () => (
     </div>
 )
 
-const loggedUser = (
+const loggedUser = (username, dispatch) => (
     <div className="log-wrapper">
         <div className="d-flex-horizontal">
             <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-            <h2 className="log-text">Welcome back, <br /> {localStorage.getItem('username')}</h2>
+            <h2 className="log-text">Welcome back, <br /> {username}</h2>
         </div>
-        <a className="signup-btn" onClick={() => { localStorage.removeItem('username'); window.location.reload() }} > Выход </a>
+        <a className="signup-btn" onClick={() => { dispatch({ type: 'SIGN_IN' }) }} > Выход </a>
     </div>
 );
-
+// localStorage.removeItem('username'); window.location.reload()
 const defaultText = (
     <div className="log-wrapper">
         <h2 className="log-text">Welcome to tt.uz</h2>
@@ -60,24 +61,29 @@ const defaultText = (
     </div>
 );
 
-const getAccount = () => (
-    <Menu>
-        {localStorage.getItem('username') ? loggedUser : defaultText}
-        <Menu.Divider />
-        <Menu.Item>
-            <Link to="/add-news-ad">
-                <Icon type="plus" />    Объявления
+const getAccount = (authContext) => {
+    const { username, dispatch } = authContext;
+    // console.log(username, 'postnav');
+    return (
+        <Menu>
+            {username ? loggedUser(username, dispatch) : defaultText}
+            <Menu.Divider />
+            <Menu.Item>
+                <Link to="/add-news-ad">
+                    <Icon type="plus" />    Объявления
         </Link>
-        </Menu.Item>
-        <Menu.Item>
-            <Link to="/messages">
-                <Icon type="message" />    Сообщения
+            </Menu.Item>
+            <Menu.Item>
+                <Link to="/messages">
+                    <Icon type="message" />    Сообщения
         </Link>
-        </Menu.Item>
-    </Menu>
-)
+            </Menu.Item>
+        </Menu>
+    )
+}
 
 function Postnavigator() {
+    const authContext = useContext(AuthContext);
     const [visible, setVisible] = useState(false);
     const [visiblelog, setVisiblelog] = useState(false);
 
@@ -87,7 +93,7 @@ function Postnavigator() {
     const handleDropdownVisibilitylog = (val) => {
         setVisiblelog(val);
     }
-
+    // console.log(authContext);
     return (
         <Header style={{ background: "white", padding: "0px", height: "40px" }}>
             <div className="container">
@@ -151,7 +157,7 @@ function Postnavigator() {
                             Мои желания </Link>
                     </Menu.Item>
                     <Menu.Item key="8">
-                        <Dropdown overlay={getAccount()} placement="bottomRight">
+                        <Dropdown overlay={getAccount(authContext)} placement="bottomRight">
                             <a className="ant-dropdown-link">
                                 <Icon type="user" />
                                 Мой профиль <Icon type="down" />

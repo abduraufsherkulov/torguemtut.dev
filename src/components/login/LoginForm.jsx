@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Form, Icon, Input, Button, Checkbox, Row, Col } from 'antd';
 import {
     Link, withRouter,
@@ -6,8 +6,10 @@ import {
     useLocation
 } from 'react-router-dom';
 import axios from 'axios';
+import { AuthContext } from '../../contexts/AuthContext';
 
 function LoginForm(props) {
+    const { dispatch, username } = useContext(AuthContext);
     const [checkUsername, setCheckUsername] = useState({ message: "Пожалуйста, введите адрес электронной почты или номер телефона!" });
 
     const [phone, setphone] = useState(null);
@@ -20,7 +22,6 @@ function LoginForm(props) {
     let location = useLocation();
 
     let { from } = location.state || { from: { pathname: "/" } };
-
     function handleSubmit(e) {
         e.preventDefault();
         setvalidateLoader('validating');
@@ -52,10 +53,13 @@ function LoginForm(props) {
                         console.log(response);
                         if (response.data.status) {
                             if (email) {
-                                localStorage.setItem('username', values.emailphone);
+                                dispatch({ type: 'SIGN_IN', username: values.emailphone })
+                                // localStorage.setItem('username', values.emailphone);
                                 history.replace(from);
                             } else {
-                                localStorage.setItem('username', values.emailphone);
+                                // localStorage.setItem('username', values.emailphone);
+
+                                dispatch({ type: 'SIGN_IN', username: values.emailphone })
                                 history.replace(from);
                             }
                             // window.location.replace("/");
@@ -83,12 +87,13 @@ function LoginForm(props) {
         //     props.form.validateFields(['emailphone'], { force: true });
         // }
         // if()
+
+        // dispatch({ type: 'SIGN_IN', username: value })
         if (validateLoader === "error") {
             setvalidateLoader('success');
         }
         callback();
     };
-
     return (
         <Row type="flex" justify="center">
             <Col xl={6} xxl={5} lg={10} style={{ zIndex: 1 }}>
