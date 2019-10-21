@@ -2,13 +2,13 @@ export const authReducer = (state, action) => {
     // console.log(state);
     switch (action.type) {
         case 'SIGN_IN':
-            if (localStorage.getItem('username') !== null) {
-                localStorage.removeItem('username');
+            if (localStorage.getItem('userData') !== null) {
+                localStorage.removeItem('userData');
                 return null;
             }
-            localStorage.setItem('username', action.username);
+            localStorage.setItem('userData', action.userData);
             // console.log(action.username, state);
-            return action.username
+            return JSON.parse(action.userData)
         case 'SIGN_UP':
             return
         case 'FB_LOGIN':

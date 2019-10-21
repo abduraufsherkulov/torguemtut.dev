@@ -13,17 +13,48 @@ const IconFont = Icon.createFromIconfontCN({
 const menu = (
     <Menu>
         <Menu.Item>
-            <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
+            <a target="_blank" rel="noopener noreferrer" href="#">
                 EN
         </a>
         </Menu.Item>
         <Menu.Item>
-            <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
+            <a target="_blank" rel="noopener noreferrer" href="#">
                 UZ
         </a>
         </Menu.Item>
     </Menu>
 );
+
+
+const sellers = (
+    <Menu>
+        <Menu.Item>
+            <a target="_blank" rel="noopener noreferrer" href="#">
+                Регистрация
+        </a>
+        </Menu.Item>
+        <Menu.Item>
+            <a target="_blank" rel="noopener noreferrer" href="#">
+                Авторизация
+        </a>
+        </Menu.Item>
+    </Menu>
+);
+const help = (
+    <Menu>
+        <Menu.Item>
+            <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
+                Служба поддержки
+        </a>
+        </Menu.Item>
+        <Menu.Item>
+            <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
+                Споры и жалобы
+        </a>
+        </Menu.Item>
+    </Menu>
+);
+
 
 const getMenu = () => (
     <div className="dropdown-container">
@@ -43,11 +74,11 @@ const getMenu = () => (
     </div>
 )
 
-const loggedUser = (username, dispatch) => (
+const loggedUser = (userData, dispatch) => (
     <div className="log-wrapper">
         <div className="d-flex-horizontal">
             <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-            <h2 className="log-text">Welcome back, <br /> {username}</h2>
+            <h2 className="log-text">Welcome back, <br /> {userData.id}</h2>
         </div>
         <a className="signup-btn" onClick={() => { dispatch({ type: 'SIGN_IN' }) }} > Выход </a>
     </div>
@@ -62,11 +93,11 @@ const defaultText = (
 );
 
 const getAccount = (authContext) => {
-    const { username, dispatch } = authContext;
-    // console.log(username, 'postnav');
+    const { userData, dispatch } = authContext;
+    // console.log(userData, 'postnav');
     return (
         <Menu>
-            {username ? loggedUser(username, dispatch) : defaultText}
+            {userData ? loggedUser(userData, dispatch) : defaultText}
             <Menu.Divider />
             <Menu.Item>
                 <Link to="/add-news-ad">
@@ -120,25 +151,23 @@ function Postnavigator() {
                     inlineIndent={1}
                 >
                     <Menu.Item key="1">
-                        <Dropdown overlay={menu}>
+                        <Dropdown overlay={sellers}>
                             <a className="ant-dropdown-link" href="#">
                                 Продавцам <Icon type="down" />
                             </a>
                         </Dropdown>
                     </Menu.Item>
                     <Menu.Item key="2">
-                        <Dropdown overlay={menu}>
+                        <Dropdown overlay={help}>
                             <a className="ant-dropdown-link" href="#">
                                 Помощь <Icon type="down" />
                             </a>
                         </Dropdown>
                     </Menu.Item>
                     <Menu.Item key="3">
-                        <Dropdown overlay={menu}>
-                            <a className="ant-dropdown-link" href="#">
-                                Приложение <Icon type="down" />
-                            </a>
-                        </Dropdown>
+                        <a className="ant-dropdown-link" href="#">
+                            Приложение <Icon type="mobile" />
+                        </a>
                     </Menu.Item>
 
                     <Menu.Item key="4">

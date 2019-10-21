@@ -8,8 +8,6 @@ import { AuthContext } from '../../contexts/AuthContext';
 const { Header } = Layout;
 
 function Navigator() {
-    // const { username } = useContext(AuthContext);
-    // console.log(username);
     return (
         <Header style={{
             background: "white", padding: "0px", paddingBottom: "40px",

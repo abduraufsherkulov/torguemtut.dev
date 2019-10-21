@@ -221,7 +221,6 @@ function SignUpForm(props) {
                 <p className="signin-with-help">Быстрая регистрация с помощью:</p>
                 <div className="d-flex-space-between">
                     <div><FacebookWith /></div>
-                    <div>google</div>
 
                 </div>
                 <div className="no-account">

@@ -9,7 +9,7 @@ import axios from 'axios';
 import { AuthContext } from '../../contexts/AuthContext';
 
 function LoginForm(props) {
-    const { dispatch, username } = useContext(AuthContext);
+    const { userData, dispatch } = useContext(AuthContext);
     const [checkUsername, setCheckUsername] = useState({ message: "Пожалуйста, введите адрес электронной почты или номер телефона!" });
 
     const [phone, setphone] = useState(null);
@@ -53,13 +53,13 @@ function LoginForm(props) {
                         console.log(response);
                         if (response.data.status) {
                             if (email) {
-                                dispatch({ type: 'SIGN_IN', username: values.emailphone })
+                                dispatch({ type: 'SIGN_IN', userData: JSON.stringify(response.data.userData) })
                                 // localStorage.setItem('username', values.emailphone);
                                 history.replace(from);
                             } else {
                                 // localStorage.setItem('username', values.emailphone);
 
-                                dispatch({ type: 'SIGN_IN', username: values.emailphone })
+                                dispatch({ type: 'SIGN_IN', userData: JSON.stringify(response.data.userData) })
                                 history.replace(from);
                             }
                             // window.location.replace("/");
@@ -149,8 +149,6 @@ function LoginForm(props) {
                                 <p className="login-with-help">Войти с помощью:</p>
                                 <div className="d-flex-space-between">
                                     <div>facebook</div>
-                                    <div>google</div>
-
                                 </div>
                                 <div className="no-account">
                                     <span>Нет аккаунта?</span><Link to="/signup">Зарегистрируйтесь!</Link>

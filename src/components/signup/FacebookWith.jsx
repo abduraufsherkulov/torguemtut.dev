@@ -1,9 +1,19 @@
-const google = window.google;
-import React, { useEffect } from 'react'
+import React, {
+    useEffect, useContext,
+} from 'react'
 import { Icon, Button } from 'antd';
 import axios from 'axios';
-
+import { AuthContext } from '../../contexts/AuthContext';
+import {
+    useHistory,
+    useLocation
+} from 'react-router-dom';
 function FacebookWith() {
+    let history = useHistory();
+    let location = useLocation();
+
+    let { from } = location.state || { from: { pathname: "/" } };
+    const { dispatch } = useContext(AuthContext);
     function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
         console.log(response);                   // The current login status of the person.
         if (response.status === 'connected') {   // Logged into your webpage and Facebook.
@@ -50,6 +60,10 @@ function FacebookWith() {
         })
             .then(response => {
                 console.log(response);
+                if (response.data.status) {
+                    dispatch({ type: 'SIGN_IN', userData: JSON.stringify(response.data.userData) })
+                    history.replace(from);
+                }
             })
             .catch(error => {
                 console.log(error, "error on refresh");
@@ -109,7 +123,7 @@ function FacebookWith() {
     }, [])
     return (
         <>
-            <Button onClick={checkLoginState}>Facebook login</Button>
+            <Button onClick={checkLoginState}>Facebook</Button>
             <Button onClick={statusHandleLogOut}>Log out</Button>
         </>
     )

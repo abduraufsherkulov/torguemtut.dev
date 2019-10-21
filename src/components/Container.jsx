@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import styled from "styled-components";
 import {
@@ -17,20 +17,19 @@ import Login from "./login/Login";
 import SignUp from "./signup/SignUp";
 import Foot from "./footer/Foot";
 import AddNewsAd from './addnewsad/AddNewsAd';
-import WishList from './personal/WishList';
 import { authReducer } from '../reducers/AuthReducer';
 import { AuthContext } from '../contexts/AuthContext';
 import SideBar from './personal/SideBar';
 
 function PrivateRoute({ children, ...rest }) {
-  
-  const { username } = useContext(AuthContext);
+
+  const { userData } = useContext(AuthContext);
   console.log('called private')
   return (
     <Route
       {...rest}
       render={({ location }) =>
-        username ? (
+        userData ? (
           children
         ) : (
             <Redirect
@@ -47,14 +46,14 @@ function PrivateRoute({ children, ...rest }) {
 
 
 function AuthRoute({ children, ...rest }) {
-  const { username } = useContext(AuthContext);
-  // console.log(username);
+  const { userData } = useContext(AuthContext);
+  // console.log(userData);
   console.log('called')
   return (
     <Route
       {...rest}
       render={({ location }) =>
-        username ? (
+        userData ? (
           <Redirect
             to={{
               pathname: "/",
@@ -100,7 +99,13 @@ function Container({ location }) {
               <PrivateRoute path="/wishlist">
                 <SideBar />
               </PrivateRoute>
-              
+              <PrivateRoute path="/myads">
+                <SideBar />
+              </PrivateRoute>
+              <PrivateRoute path="/settings">
+                <SideBar />
+              </PrivateRoute>
+
             </Switch>
             <Foot />
           </section>
