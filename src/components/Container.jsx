@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import styled from "styled-components";
 import {
@@ -17,14 +17,20 @@ import Login from "./login/Login";
 import SignUp from "./signup/SignUp";
 import Foot from "./footer/Foot";
 import AddNewsAd from './addnewsad/AddNewsAd';
-import AuthContextProvider from '../contexts/AuthContext';
+import WishList from './personal/WishList';
+import { authReducer } from '../reducers/AuthReducer';
+import { AuthContext } from '../contexts/AuthContext';
+import SideBar from './personal/SideBar';
 
 function PrivateRoute({ children, ...rest }) {
+  
+  const { username } = useContext(AuthContext);
+  console.log('called private')
   return (
     <Route
       {...rest}
       render={({ location }) =>
-        localStorage.getItem('username') ? (
+        username ? (
           children
         ) : (
             <Redirect
@@ -41,11 +47,14 @@ function PrivateRoute({ children, ...rest }) {
 
 
 function AuthRoute({ children, ...rest }) {
+  const { username } = useContext(AuthContext);
+  // console.log(username);
+  console.log('called')
   return (
     <Route
       {...rest}
       render={({ location }) =>
-        localStorage.getItem('username') ? (
+        username ? (
           <Redirect
             to={{
               pathname: "/",
@@ -80,7 +89,7 @@ function Container({ location }) {
                 <Tariff />
               </Route>
               <AuthRoute path="/login">
-                  <Login />
+                <Login />
               </AuthRoute>
               <AuthRoute path="/signup">
                 <SignUp />
@@ -88,6 +97,10 @@ function Container({ location }) {
               <PrivateRoute path="/add-news-ad">
                 <AddNewsAd />
               </PrivateRoute>
+              <PrivateRoute path="/wishlist">
+                <SideBar />
+              </PrivateRoute>
+              
             </Switch>
             <Foot />
           </section>

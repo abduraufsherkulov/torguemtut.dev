@@ -8,6 +8,7 @@ const breadcrumbNameMap = {
     '/login': 'Application1',
     '/signup': 'Application2',
     '/add-news-ad': 'Добавить объявление',
+    '/wishlist': 'Избранные',
 };
 
 const MainBreadcrumbs = withRouter(props => {

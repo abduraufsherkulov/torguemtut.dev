@@ -152,7 +152,7 @@ function Postnavigator() {
                         </Dropdown>
                     </Menu.Item>
                     <Menu.Item key="7">
-                        <Link to="/other" >
+                        <Link to="/wishlist" >
                             <Icon type="heart" />
                             Мои желания </Link>
                     </Menu.Item>

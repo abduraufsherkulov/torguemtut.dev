@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
+import { CategoryContext } from '../../contexts/CategoryContext';
 
 
 
@@ -98,33 +99,33 @@ function EachCat(props) {
 }
 
 function TopCategories(props) {
+    const { category } = useContext(CategoryContext)
 
+    // const [category, setCategory] = useState([]);
 
-    const [category, setCategory] = useState([]);
+    // useEffect(() => {
+    //     const endpoint = "https://ttuz.azurewebsites.net/api/category/get-all";
+    //     axios({
+    //         method: "get",
+    //         url: endpoint,
+    //         //   auth: {
+    //         //     username: "delivera",
+    //         //     password: "X19WkHHupFJBPsMRPCJwTbv09yCD50E2"
+    //         //   },
+    //         //   headers: {
+    //         //     "content-type": "application/json",
+    //         //     token: token
+    //         //   }
+    //     })
+    //         .then(response => {
+    //             // console.log(response.data);
+    //             setCategory(response.data);
+    //         })
+    //         .catch(error => {
+    //             console.log(error, "error in categories");
+    //         });
 
-    useEffect(() => {
-        const endpoint = "https://ttuz.azurewebsites.net/api/category/get-all";
-        axios({
-            method: "get",
-            url: endpoint,
-            //   auth: {
-            //     username: "delivera",
-            //     password: "X19WkHHupFJBPsMRPCJwTbv09yCD50E2"
-            //   },
-            //   headers: {
-            //     "content-type": "application/json",
-            //     token: token
-            //   }
-        })
-            .then(response => {
-                // console.log(response.data);
-                setCategory(response.data);
-            })
-            .catch(error => {
-                console.log(error, "error in categories");
-            });
-
-    }, []);
+    // }, []);
 
 
     return (

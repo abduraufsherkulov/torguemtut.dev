@@ -7,6 +7,7 @@ import Postnavigator from "./components/header/Postnavigator";
 import { Layout } from 'antd';
 import Container from "./components/Container";
 import AuthContextProvider from "./contexts/AuthContext";
+import CategoryContextProvider from "./contexts/CategoryContext";
 if (process.env.NODE_ENV === 'development') {
   import('./sass/styles.scss');
   import("./sass/fonts.scss");
@@ -19,9 +20,11 @@ function App() {
         <Suspense fallback={<div>Loading...</div>}>
           <Layout className="layout">
             <AuthContextProvider>
-              <Postnavigator />
-              <Navigator />
-              <Container />
+              <CategoryContextProvider>
+                <Postnavigator />
+                <Navigator />
+                <Container />
+              </CategoryContextProvider>
             </AuthContextProvider>
           </Layout>
         </Suspense>

@@ -1,5 +1,5 @@
 export const authReducer = (state, action) => {
-    console.log(state);
+    // console.log(state);
     switch (action.type) {
         case 'SIGN_IN':
             if (localStorage.getItem('username') !== null) {
