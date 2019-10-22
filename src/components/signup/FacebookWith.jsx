@@ -1,14 +1,19 @@
 import React, {
-    useEffect, useContext,
+    useEffect, useContext, useState,
 } from 'react'
 import { Icon, Button } from 'antd';
 import axios from 'axios';
 import { AuthContext } from '../../contexts/AuthContext';
+
 import {
     useHistory,
     useLocation
 } from 'react-router-dom';
+const IconFont = Icon.createFromIconfontCN({
+    scriptUrl: '//at.alicdn.com/t/font_1336473_uzl8ge6437g.js',
+});
 function FacebookWith() {
+    const [loading, setLoading] = useState(false);
     let history = useHistory();
     let location = useLocation();
 
@@ -16,6 +21,7 @@ function FacebookWith() {
     const { dispatch } = useContext(AuthContext);
     function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
         console.log(response);                   // The current login status of the person.
+
         if (response.status === 'connected') {   // Logged into your webpage and Facebook.
             sendToServer(response)
             testAPI();
@@ -44,6 +50,7 @@ function FacebookWith() {
     }
 
     function sendToServer(response) {
+        setLoading(true);
         const endpoint = "https://ttuz.azurewebsites.net/api/users/facebook";
 
         const data = JSON.stringify({
@@ -62,6 +69,7 @@ function FacebookWith() {
                 console.log(response);
                 if (response.data.status) {
                     dispatch({ type: 'SIGN_IN', userData: JSON.stringify(response.data.userData) })
+                    setLoading(false);
                     history.replace(from);
                 }
             })
@@ -122,10 +130,10 @@ function FacebookWith() {
 
     }, [])
     return (
-        <>
-            <Button onClick={checkLoginState}>Facebook</Button>
-            <Button onClick={statusHandleLogOut}>Log out</Button>
-        </>
+        <div class="facebook-button">
+            <Button size="large" loading={loading} onClick={checkLoginState}><IconFont type="icon-facebook" /> Facebook </Button>
+            {/* <Button onClick={statusHandleLogOut}>Log out</Button> */}
+        </div>
     )
 }
 

@@ -3,7 +3,6 @@ import { Layout, Menu, Button, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 import Logo from "../../images/mainlogo.png";
 import TopSearch from '../home/TopSearch';
-import { AuthContext } from '../../contexts/AuthContext';
 
 const { Header } = Layout;
 

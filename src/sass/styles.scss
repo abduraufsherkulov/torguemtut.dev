@@ -975,11 +975,20 @@ footer {
         font-size: dynamicfont(20, 22);
       }
     }
-    .edit-link{
+    .edit-link {
       @include regular;
-      font-size: dynamicfont(12,14);
+      font-size: dynamicfont(12, 14);
       color: $subcategory;
     }
+  }
+}
+.facebook-button {
+  button {
+    background: #3b5998;
+    color: white;
+    font-size: dynamicfont(16, 18);
+    text-transform: capitalize;
+    @include regular;
   }
 }
 

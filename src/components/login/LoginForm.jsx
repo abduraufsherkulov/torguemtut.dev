@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../../contexts/AuthContext';
+import FacebookWith from '../signup/FacebookWith';
 
 function LoginForm(props) {
     const { userData, dispatch } = useContext(AuthContext);
@@ -147,8 +148,8 @@ function LoginForm(props) {
                             <p className="policy-span">При входе, вы принимаете условия <a className="policy-href" href="">Пользовательского соглашения и Политики конфиденциальности</a></p>
                             <Form.Item>
                                 <p className="login-with-help">Войти с помощью:</p>
-                                <div className="d-flex-space-between">
-                                    <div>facebook</div>
+                                <div className="d-flex-centered">
+                                    <FacebookWith />
                                 </div>
                                 <div className="no-account">
                                     <span>Нет аккаунта?</span><Link to="/signup">Зарегистрируйтесь!</Link>

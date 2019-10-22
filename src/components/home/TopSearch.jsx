@@ -5,9 +5,7 @@ import { Row, Col, Form, Input, Select, Button, Icon } from 'antd';
 const { Search } = Input;
 const { Option } = Select;
 const InputGroup = Input.Group;
-const IconFont = Icon.createFromIconfontCN({
-    scriptUrl: '//at.alicdn.com/t/font_1336473_wci8yuw8ubp.js',
-});
+
 
 function TopSearch() {
     return (

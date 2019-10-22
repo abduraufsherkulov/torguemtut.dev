@@ -7,7 +7,7 @@ const { Header } = Layout;
 const { SubMenu } = Menu;
 const { Option } = Select;
 const IconFont = Icon.createFromIconfontCN({
-    scriptUrl: '//at.alicdn.com/t/font_1336473_wci8yuw8ubp.js',
+    scriptUrl: '//at.alicdn.com/t/font_1336473_uzl8ge6437g.js',
 });
 
 const menu = (
@@ -100,13 +100,28 @@ const getAccount = (authContext) => {
             {userData ? loggedUser(userData, dispatch) : defaultText}
             <Menu.Divider />
             <Menu.Item>
-                <Link to="/add-news-ad">
-                    <Icon type="plus" />    Объявления
+                <Link to="/myads">
+                    <Icon type="container" /> Мои Объявлении
         </Link>
             </Menu.Item>
             <Menu.Item>
                 <Link to="/messages">
                     <Icon type="message" />    Сообщения
+        </Link>
+            </Menu.Item>
+            <Menu.Item>
+                <Link to="/wishlist">
+                    <Icon type="heart" />    Избранное
+        </Link>
+            </Menu.Item>
+            <Menu.Item>
+                <Link to="/wallet">
+                    <Icon type="wallet" />    Кошелок
+        </Link>
+            </Menu.Item>
+            <Menu.Item>
+                <Link to="/settings">
+                    <Icon type="setting" />    Настройки
         </Link>
             </Menu.Item>
         </Menu>
@@ -165,9 +180,9 @@ function Postnavigator() {
                         </Dropdown>
                     </Menu.Item>
                     <Menu.Item key="3">
-                        <a className="ant-dropdown-link" href="#">
+                        <Link className="ant-dropdown-link" to="/application">
                             Приложение <Icon type="mobile" />
-                        </a>
+                        </Link>
                     </Menu.Item>
 
                     <Menu.Item key="4">
@@ -181,9 +196,9 @@ function Postnavigator() {
                         </Dropdown>
                     </Menu.Item>
                     <Menu.Item key="7">
-                        <Link to="/wishlist" >
-                            <Icon type="heart" />
-                            Мои желания </Link>
+                        <Link to="/add-news-ad" >
+                            <Icon type="plus" />
+                            Подать объявление </Link>
                     </Menu.Item>
                     <Menu.Item key="8">
                         <Dropdown overlay={getAccount(authContext)} placement="bottomRight">

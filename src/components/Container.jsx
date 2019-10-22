@@ -20,6 +20,7 @@ import AddNewsAd from './addnewsad/AddNewsAd';
 import { authReducer } from '../reducers/AuthReducer';
 import { AuthContext } from '../contexts/AuthContext';
 import SideBar from './personal/SideBar';
+import DownloadApplication from './application/DownloadApplication';
 
 function PrivateRoute({ children, ...rest }) {
 
@@ -87,6 +88,9 @@ function Container({ location }) {
               <Route path="/tariff">
                 <Tariff />
               </Route>
+              <Route path="/application">
+                <DownloadApplication />
+              </Route>
               <AuthRoute path="/login">
                 <Login />
               </AuthRoute>
@@ -107,7 +111,7 @@ function Container({ location }) {
               </PrivateRoute>
 
             </Switch>
-              <Foot />
+            <Foot />
           </section>
         </CSSTransition>
       </TransitionGroup>

@@ -219,7 +219,7 @@ function SignUpForm(props) {
             </Form.Item>
             <Form.Item>
                 <p className="signin-with-help">Быстрая регистрация с помощью:</p>
-                <div className="d-flex-space-between">
+                <div className="d-flex-centered">
                     <div><FacebookWith /></div>
 
                 </div>
