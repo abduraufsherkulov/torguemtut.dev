@@ -107,7 +107,7 @@ function Container({ location }) {
               </PrivateRoute>
 
             </Switch>
-            <Foot />
+              <Foot />
           </section>
         </CSSTransition>
       </TransitionGroup>

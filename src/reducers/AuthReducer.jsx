@@ -7,7 +7,6 @@ export const authReducer = (state, action) => {
                 return null;
             }
             localStorage.setItem('userData', action.userData);
-            // console.log(action.username, state);
             return JSON.parse(action.userData)
         case 'SIGN_UP':
             return

@@ -22,14 +22,14 @@ function CategoryContextProvider(props) {
             //   }
         })
             .then(response => {
-                // console.log(response.data);
+                console.log(response.data);
                 setCategory(response.data);
             })
             .catch(error => {
                 console.log(error, "error in categories");
             });
 
-    }, [category]);
+    }, []);
 
     return (
         <CategoryContext.Provider value={{ category, setCategory }}>
