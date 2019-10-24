@@ -1,8 +1,8 @@
 import React from 'react'
 import { Layout, Breadcrumb } from 'antd';
-import GetPhone from '../home/GetPhone';
+import GetPhone from '../../home/GetPhone';
 import SignUpForm from './SignUpForm';
-import InfoSection from '../home/InfoSection';
+import InfoSection from '../../home/InfoSection';
 const { Content } = Layout;
 
 function SignUp() {

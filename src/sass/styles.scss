@@ -702,7 +702,7 @@ footer {
       border-bottom: none;
       height: 40px;
       line-height: 40px;
-      padding-left: 40px;
+      padding-left: 17px;
       font-size: 14px;
       background-color: #f9f9f9;
       position: relative;
@@ -716,6 +716,7 @@ footer {
         align-items: center;
         color: #000 !important;
         span {
+          padding-left: 11px;
         }
       }
     }
@@ -729,6 +730,9 @@ footer {
             span {
               height: 43px;
               padding-top: 5px;
+              &:before{
+                top: 10px;
+              }
             }
           }
         }
@@ -763,6 +767,22 @@ footer {
             a {
               color: #333;
               text-decoration: none;
+            }
+            
+            &:before {    
+              display: block;
+              position: absolute;
+              left: 10px;
+              top: 2px;
+              top: 5px;
+              content: ' ';
+              width: 24px;
+              height: 24px;
+              vertical-align: top;
+              //overall
+              background-image: url("../images/express.png");
+              background-position: 0 -3780px;
+              background-repeat: no-repeat;
             }
           }
         }

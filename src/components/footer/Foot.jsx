@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout, Row, Col } from 'antd';
 import Logo from "../../images/mainlogo.png";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const { Footer } = Layout;
 
@@ -26,7 +26,7 @@ function Foot() {
                     <Col>
                         <h5>Продавцам</h5>
                         <ul>
-                            <li><a href="">Тарифы</a></li>
+                            <li><Link to="/tariff">Тарифы</Link></li>
                             <li><a href="">Реклама на сайте</a></li>
                             <li><a href="">Политика конфиденциальности</a></li>
                             <li><a href="">Правила пользования порталом</a></li>

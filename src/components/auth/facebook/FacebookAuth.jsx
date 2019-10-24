@@ -3,16 +3,16 @@ import React, {
 } from 'react'
 import { Icon, Button } from 'antd';
 import axios from 'axios';
-import { AuthContext } from '../../contexts/AuthContext';
 
 import {
     useHistory,
     useLocation
 } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/AuthContext';
 const IconFont = Icon.createFromIconfontCN({
     scriptUrl: '//at.alicdn.com/t/font_1336473_uzl8ge6437g.js',
 });
-function FacebookWith() {
+function FacebookAuth() {
     const [loading, setLoading] = useState(false);
     let history = useHistory();
     let location = useLocation();
@@ -68,8 +68,9 @@ function FacebookWith() {
             .then(response => {
                 console.log(response);
                 if (response.data.status) {
-                    dispatch({ type: 'SIGN_IN', userData: JSON.stringify(response.data.userData) })
+                    
                     setLoading(false);
+                    dispatch({ type: 'SIGN_IN', userData: JSON.stringify(response.data.userData) })
                     history.replace(from);
                 }
             })
@@ -105,6 +106,7 @@ function FacebookWith() {
     }
 
     useEffect(() => {
+        
         window.fbAsyncInit = function () {
             FB.init({
                 appId: '2496083423969818',
@@ -128,13 +130,21 @@ function FacebookWith() {
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
 
+        return () => {
+            // let fb_sdk = document.getElementById('facebook-jssdk');
+            
+            // document.head.removeChild(fb_sdk.previousElementSibling);
+            // document.head.removeChild(fb_sdk);
+
+            // subscription.unsubscribe();
+          };
     }, [])
     return (
-        <div class="facebook-button">
+        <div className="facebook-button">
             <Button size="large" loading={loading} onClick={checkLoginState}><IconFont type="icon-facebook" /> Facebook </Button>
             {/* <Button onClick={statusHandleLogOut}>Log out</Button> */}
         </div>
     )
 }
 
-export default FacebookWith
+export default FacebookAuth

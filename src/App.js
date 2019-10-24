@@ -1,6 +1,5 @@
 import React, { Suspense, useState } from "react";
 import { BrowserRouter as Router, Route, Switch, Link, withRouter } from 'react-router-dom';
-import { createBrowserHistory } from "history";
 import ErrorBoundry from './ErrorBoundry';
 import Navigator from "./components/header/Navigator";
 import Postnavigator from "./components/header/Postnavigator";
@@ -12,7 +11,6 @@ if (process.env.NODE_ENV === 'development') {
   import('./sass/styles.scss');
   import("./sass/fonts.scss");
 }
-const history = createBrowserHistory()
 function App() {
   return (
     <Router keyLength={12}>

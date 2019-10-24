@@ -13,8 +13,8 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import Home from "./home/Home";
 import Tariff from "./tariffs/Tariff";
-import Login from "./login/Login";
-import SignUp from "./signup/SignUp";
+import Login from "./auth/login/Login";
+import SignUp from "./auth/signup/SignUp";
 import Foot from "./footer/Foot";
 import AddNewsAd from './addnewsad/AddNewsAd';
 import { authReducer } from '../reducers/AuthReducer';

@@ -4,8 +4,7 @@ import { Form, Icon, Input, Button, Checkbox, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
-import FacebookAuth from './FacebookAuth';
-import FacebookWith from './FacebookWith';
+import FacebookAuth from '../facebook/FacebookAuth';
 
 function SignUpForm(props) {
     const [confirmDirty, setconfirmDirty] = useState(false);
@@ -220,7 +219,7 @@ function SignUpForm(props) {
             <Form.Item>
                 <p className="signin-with-help">Быстрая регистрация с помощью:</p>
                 <div className="d-flex-centered">
-                    <div><FacebookWith /></div>
+                    <div><FacebookAuth /></div>
 
                 </div>
                 <div className="no-account">

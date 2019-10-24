@@ -38,6 +38,9 @@ const sellers = (
                 Авторизация
         </a>
         </Menu.Item>
+        <Menu.Item>
+            <Link to="/tariff">Тарифы</Link>
+        </Menu.Item>
     </Menu>
 );
 const help = (
