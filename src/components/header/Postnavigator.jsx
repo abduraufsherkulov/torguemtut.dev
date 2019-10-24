@@ -43,16 +43,16 @@ const sellers = (
 const help = (
     <Menu>
         <Menu.Item>
-            <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
+            <Link to="/support">
                 Служба поддержки
-        </a>
+           </Link>
         </Menu.Item>
         <Menu.Item>
-            <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
+            <Link to="/disputes">
                 Споры и жалобы
-        </a>
+            </Link>
         </Menu.Item>
-    </Menu>
+    </Menu >
 );
 
 
@@ -76,18 +76,17 @@ const getMenu = () => (
 
 const loggedUser = (userData, dispatch) => (
     <div className="log-wrapper">
-        <div className="d-flex-horizontal">
-            <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-            <h2 className="log-text">Welcome back, <br /> {userData.id}</h2>
+        <div className="d-flex-space-evenly">
+            <Avatar style={{ backgroundColor: '#4a3a8a', verticalAlign: 'middle' }}>tt</Avatar>
+            <h2 className="log-text">Добро пожаловать, <br /> {userData.id}</h2>
         </div>
-        <a className="signup-btn" onClick={() => { dispatch({ type: 'SIGN_IN' }) }} > Выход </a>
     </div>
 );
 // localStorage.removeItem('username'); window.location.reload()
 const defaultText = (
     <div className="log-wrapper">
-        <h2 className="log-text">Welcome to tt.uz</h2>
-        <Link className="signin-btn" to="/signup"><Button type="danger">Join</Button></Link>
+        <h2 className="log-text">Добро пожаловать в tt.uz</h2>
+        <Link className="signin-btn" to="/signup"><Button type="danger">Регистрация</Button></Link>
         <Link className="signup-btn" to="/login" > <Button style={{ backgroundColor: "#ebebeb" }}>Войти</Button> </Link>
     </div>
 );
@@ -96,7 +95,7 @@ const getAccount = (authContext) => {
     const { userData, dispatch } = authContext;
     // console.log(userData, 'postnav');
     return (
-        <Menu>
+        <Menu style={{ width: "260px" }}>
             {userData ? loggedUser(userData, dispatch) : defaultText}
             <Menu.Divider />
             <Menu.Item>
@@ -123,6 +122,12 @@ const getAccount = (authContext) => {
                 <Link to="/settings">
                     <Icon type="setting" />    Настройки
         </Link>
+            </Menu.Item>
+            <Menu.Divider />
+            <Menu.Item>
+                <a className="signup-btn" onClick={() => { dispatch({ type: 'SIGN_IN' }) }} >
+                    <Icon type="poweroff" />  Выход
+                    </a>
             </Menu.Item>
         </Menu>
     )

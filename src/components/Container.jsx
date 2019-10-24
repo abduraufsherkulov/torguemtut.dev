@@ -21,6 +21,8 @@ import { authReducer } from '../reducers/AuthReducer';
 import { AuthContext } from '../contexts/AuthContext';
 import SideBar from './personal/SideBar';
 import DownloadApplication from './application/DownloadApplication';
+import SupportService from './help/SupportService';
+import Disputes from './help/Disputes';
 
 function PrivateRoute({ children, ...rest }) {
 
@@ -88,6 +90,12 @@ function Container({ location }) {
               <Route path="/tariff">
                 <Tariff />
               </Route>
+              <Route path="/support">
+                <SupportService />
+              </Route>
+              <PrivateRoute path="/disputes">
+                <Disputes />
+              </PrivateRoute>
               <Route path="/application">
                 <DownloadApplication />
               </Route>
