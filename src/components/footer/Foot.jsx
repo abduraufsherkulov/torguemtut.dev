@@ -46,7 +46,7 @@ function Foot() {
                             <li><a href="">Партнерство</a></li>
                             <li><a href="">Реклама на сайте</a></li>
                             <li><a href="">Обратная связь</a></li>
-                            <li><a href="">Мобильное приложение</a></li>
+                            <li><Link to="/application">Мобильное приложение</Link></li>
                         </ul>
                     </Col>
                 </Row>

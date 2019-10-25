@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 
 const { TextArea } = Input;
 
-function SupportService(props) {
+function Disputes(props) {
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -23,21 +23,22 @@ function SupportService(props) {
     const { getFieldDecorator } = props.form;
     return (
         <div className="container">
-            <h2>Служба поддержки</h2>
+            <h2>Споры и жалобы</h2>
             <p>Для связи с администрацией заполните форму</p>
             <Divider />
-            <div className="supportservice">
+            <div className="disputes">
                 <Row>
                     <Col span={12} offset={6}>
                         <Form onSubmit={handleSubmit} className="login-form">
-                            <Form.Item label="Выберите тему" layout="vertical">
+
+                            <Form.Item>
                                 <Select defaultValue="lucy" onChange={handleChange}>
-                                    <Option value="jack">Платные услуги</Option>
-                                    <Option value="lucy">Вопросы по использованию сайта</Option>
-                                    <Option value="Yiminghe">Другое</Option>
+                                    <Option value="jack">Жалоба на нарушение прав интеллектуальной собственности</Option>
+                                    <Option value="lucy">Сообщить о нарушении (для лиц, не являющихся правообладателями)</Option>
+                                    <Option value="Yiminghe">Нарушения по размещению</Option>
                                 </Select>
                             </Form.Item>
-                            {/* <Form.Item>
+                            <Form.Item>
                                 {getFieldDecorator('username', {
                                     rules: [{ required: true, message: 'Please input your username!' }],
                                 })(
@@ -46,7 +47,7 @@ function SupportService(props) {
                                         placeholder="Ссылка на товар"
                                     />,
                                 )}
-                            </Form.Item> */}
+                            </Form.Item>
                             <Form.Item>
                                 <TextArea placeholder="Текст сообщения" rows={4} />
                             </Form.Item>
@@ -64,4 +65,4 @@ function SupportService(props) {
 }
 
 
-export default Form.create()(withRouter(SupportService));
+export default Form.create()(withRouter(Disputes));
