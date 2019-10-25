@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Route, Link, withRouter, useLocation, useHisto
 import WishList from './wishlist/WishList';
 import MyAds from './myads/MyAds';
 import Settings from './settings/Settings';
+import MainMessages from './messages/MainMessages';
+import MainWallet from './wallet/MainWallet';
 
 
 const { SubMenu } = Menu;
@@ -40,23 +42,27 @@ function SideBar({ location }) {
                         <Menu theme="light" mode="inline" selectedKeys={[location.pathname]}>
                             <Menu.Item key="/myads">
                                 <Link to="/myads" >
-                                    <Icon type="user" />
+                                    <Icon type="container" />
                                     <span className="nav-text">Объявления</span>
                                 </Link>
                             </Menu.Item>
-                            <Menu.Item key="2">
-                                <Icon type="video-camera" />
-                                <span className="nav-text">Сообщения</span>
+                            <Menu.Item key="/messages">
+                                <Link to="/messages" >
+                                    <Icon type="message" />
+                                    <span className="nav-text">Сообщения</span>
+                                </Link>
                             </Menu.Item>
                             <Menu.Item key="/wishlist">
                                 <Link to="/wishlist" >
-                                    <Icon type="upload" />
+                                    <Icon type="heart" />
                                     <span className="nav-text">Избранное</span>
                                 </Link>
                             </Menu.Item>
-                            <Menu.Item key="4">
-                                <Icon type="user" />
-                                <span className="nav-text">Кошелек</span>
+                            <Menu.Item key="/wallet">
+                                <Link to="/wallet" >
+                                    <Icon type="wallet" />
+                                    <span className="nav-text">Кошелек</span>
+                                </Link>
                             </Menu.Item>
                             <Menu.Item key="/settings">
                                 <Link to="/settings" >
@@ -68,6 +74,8 @@ function SideBar({ location }) {
                     </Sider>
                     <Content style={{ padding: '0 24px', minHeight: 280 }}>
                         {/* <Route exact path="/" component={Dashboard} /> */}
+                        <Route path="/wallet" component={MainWallet} />
+                        <Route path="/messages" component={MainMessages} />
                         <Route path="/wishlist" component={WishList} />
                         <Route path="/myads" component={MyAds} />
                         <Route path="/settings" component={Settings} />

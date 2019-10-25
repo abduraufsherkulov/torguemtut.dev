@@ -964,6 +964,8 @@ footer {
     font-size: dynamicfont(12, 14);
     color: #000;
     @include regular;
+    margin: 0px;
+    margin-left: 5px;
   }
 }
 

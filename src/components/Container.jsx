@@ -23,6 +23,8 @@ import SideBar from './personal/SideBar';
 import DownloadApplication from './application/DownloadApplication';
 import SupportService from './help/SupportService';
 import Disputes from './help/Disputes';
+import MainMessages from './personal/messages/MainMessages';
+import MainWallet from './personal/wallet/MainWallet';
 
 function PrivateRoute({ children, ...rest }) {
 
@@ -84,6 +86,7 @@ function Container({ location }) {
         >
           <section className="route-section">
             <Switch location={location}>
+
               <Route exact path="/">
                 <Home />
               </Route>
@@ -93,18 +96,20 @@ function Container({ location }) {
               <Route path="/support">
                 <SupportService />
               </Route>
-              <PrivateRoute path="/disputes">
-                <Disputes />
-              </PrivateRoute>
               <Route path="/application">
                 <DownloadApplication />
               </Route>
+
               <AuthRoute path="/login">
                 <Login />
               </AuthRoute>
               <AuthRoute path="/signup">
                 <SignUp />
               </AuthRoute>
+
+              <PrivateRoute path="/disputes">
+                <Disputes />
+              </PrivateRoute>
               <PrivateRoute path="/add-news-ad">
                 <AddNewsAd />
               </PrivateRoute>
@@ -115,6 +120,12 @@ function Container({ location }) {
                 <SideBar />
               </PrivateRoute>
               <PrivateRoute path="/settings">
+                <SideBar />
+              </PrivateRoute>
+              <PrivateRoute path="/messages">
+                <SideBar />
+              </PrivateRoute>
+              <PrivateRoute path="/wallet">
                 <SideBar />
               </PrivateRoute>
 

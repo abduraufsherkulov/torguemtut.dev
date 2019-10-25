@@ -12,7 +12,7 @@ function WishList() {
             <TabPane tab="Избранные объявления  5" key="1">
                 Избранные объявления
         </TabPane>
-            <TabPane tab="Tab 2" key="2">
+            <TabPane tab="Избранные продавцы" key="2">
                 Избранные продавцы
         </TabPane>
             {/* <TabPane tab="Tab 3" key="3">

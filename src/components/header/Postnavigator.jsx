@@ -13,12 +13,12 @@ const IconFont = Icon.createFromIconfontCN({
 const menu = (
     <Menu>
         <Menu.Item>
-            <a target="_blank" rel="noopener noreferrer" href="#">
+            <a rel="noopener noreferrer" href="#">
                 EN
         </a>
         </Menu.Item>
         <Menu.Item>
-            <a target="_blank" rel="noopener noreferrer" href="#">
+            <a rel="noopener noreferrer" href="#">
                 UZ
         </a>
         </Menu.Item>
@@ -29,12 +29,12 @@ const menu = (
 const sellers = (
     <Menu>
         <Menu.Item>
-            <a target="_blank" rel="noopener noreferrer" href="#">
+            <a rel="noopener noreferrer" href="#">
                 Регистрация
         </a>
         </Menu.Item>
         <Menu.Item>
-            <a target="_blank" rel="noopener noreferrer" href="#">
+            <a rel="noopener noreferrer" href="#">
                 Авторизация
         </a>
         </Menu.Item>
@@ -79,8 +79,8 @@ const getMenu = () => (
 
 const loggedUser = (userData, dispatch) => (
     <div className="log-wrapper">
-        <div className="d-flex-space-evenly">
-            <Avatar style={{ backgroundColor: '#4a3a8a', verticalAlign: 'middle' }}>tt</Avatar>
+        <div className="d-flex-vertical">
+            <Avatar size="large" style={{ backgroundColor: '#4a3a8a', verticalAlign: 'middle' }}>tt</Avatar>
             <h2 className="log-text">Добро пожаловать, <br /> {userData.id}</h2>
         </div>
     </div>
@@ -97,6 +97,16 @@ const defaultText = (
 const getAccount = (authContext) => {
     const { userData, dispatch } = authContext;
     // console.log(userData, 'postnav');
+    const logOut = () => {
+        return (
+            <Menu.Item>
+                <a className="signup-btn" onClick={() => { dispatch({ type: 'SIGN_IN' }) }} >
+                    <Icon type="poweroff" />  Выход
+                    </a>
+            </Menu.Item>
+        )
+    }
+    console.log(userData);
     return (
         <Menu style={{ width: "260px" }}>
             {userData ? loggedUser(userData, dispatch) : defaultText}
@@ -126,12 +136,8 @@ const getAccount = (authContext) => {
                     <Icon type="setting" />    Настройки
         </Link>
             </Menu.Item>
-            <Menu.Divider />
-            <Menu.Item>
-                <a className="signup-btn" onClick={() => { dispatch({ type: 'SIGN_IN' }) }} >
-                    <Icon type="poweroff" />  Выход
-                    </a>
-            </Menu.Item>
+            {userData ? <Menu.Divider /> : null}
+            {userData ? logOut() : null}
         </Menu>
     )
 }

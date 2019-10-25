@@ -4,13 +4,15 @@ import { Breadcrumb, Icon } from 'antd'
 import { withRouter, Link } from 'react-router-dom'
 
 const breadcrumbNameMap = {
-    '/tariff': 'Application List',
-    '/login': 'Application1',
-    '/signup': 'Application2',
+    '/tariff': 'Тарифы',
+    '/login': 'Авторизация',
+    '/signup': 'Регистрация',
     '/add-news-ad': 'Добавить объявление',
     '/wishlist': 'Избранные',
     '/myads': 'Мои Объявлении',
     '/settings': 'Настройки',
+    '/messages': 'Сообщении',
+    '/wallet': 'Кошелок',
 };
 
 const MainBreadcrumbs = withRouter(props => {

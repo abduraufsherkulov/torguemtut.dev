@@ -14,7 +14,7 @@ function Home() {
     return (
         <Content style={{ background: "white" }}>
             <CategoriesAndSlider />
-            <MainSearch />
+            {/* <MainSearch /> */}
             {/* <div className="container">
                 <Categories />
             </div> */}
