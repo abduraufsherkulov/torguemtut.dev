@@ -12,7 +12,7 @@ module.exports = merge(common, {
     publicPath: "https://localhost:3000/dist/",
     historyApiFallback: true,
     hot: true,
-    https: true
+    https: false
   },
   output: {
     path: path.resolve(__dirname, "dist/"),

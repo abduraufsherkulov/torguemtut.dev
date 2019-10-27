@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Layout, Breadcrumb } from 'antd';
 import MainSearch from './MainSearch';
 import Categories from './Categories';

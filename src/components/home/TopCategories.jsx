@@ -24,73 +24,22 @@ function EachCat(props) {
         <dl className={hoverMe} onMouseEnter={handleEnter} onMouseLeave={handleLeave}>
             <dt className="cate-name" >
                 <span>
-                    <a>{props.cat}</a>
+                    <a>{props.cat.label}</a>
                 </span>
             </dt>
             <dd className="sub-cate">
                 <div className="sub-cate-main">
                     <div className="sub-cate-content">
-                        <div className="sub-cate-row">
-                            <dl className="sub-cate-items">
-                                <dt><a href="#">New Arrivals</a></dt>
-                                <dd><a href="#">Dresses</a></dd>
-                                <dd><a href="#">Blouses & Shirts</a></dd>
-                                <dd><a href="#">Hoodies & Sweatshirts</a></dd>
-                                <dd><a href="#">Beach style</a></dd>
-                                <dd><a href="#">Suits & Sets</a></dd>
-                                <dd><a href="#">Sweaters</a></dd>
-                            </dl>
-                            <dl className="sub-cate-items">
-                                <dt><a href="#">New Arrivals</a></dt>
-                                <dd><a href="#">Dresses</a></dd>
-                                <dd><a href="#">Blouses & Shirts</a></dd>
-                                <dd><a href="#">Hoodies & Sweatshirts</a></dd>
-                                <dd><a href="#">Beach style</a></dd>
-                                <dd><a href="#">Suits & Sets</a></dd>
-                                <dd><a href="#">Sweaters</a></dd>
-                            </dl>
-                        </div>
-                        <div className="sub-cate-row">
-                            <dl className="sub-cate-items">
-                                <dt><a href="#">New Arrivals</a></dt>
-                                <dd><a href="#">Dresses</a></dd>
-                                <dd><a href="#">Blouses & Shirts</a></dd>
-                                <dd><a href="#">Hoodies & Sweatshirts</a></dd>
-                                <dd><a href="#">Beach style</a></dd>
-                                <dd><a href="#">Suits & Sets</a></dd>
-                                <dd><a href="#">Sweaters</a></dd>
-                            </dl>
-                            <dl className="sub-cate-items">
-                                <dt><a href="#">New Arrivals</a></dt>
-                                <dd><a href="#">Dresses</a></dd>
-                                <dd><a href="#">Blouses & Shirts</a></dd>
-                                <dd><a href="#">Hoodies & Sweatshirts</a></dd>
-                                <dd><a href="#">Beach style</a></dd>
-                                <dd><a href="#">Suits & Sets</a></dd>
-                                <dd><a href="#">Sweaters</a></dd>
-                            </dl>
-                        </div>
-
-                        <div className="sub-cate-row">
-                            <dl className="sub-cate-items">
-                                <dt><a href="#">New Arrivals</a></dt>
-                                <dd><a href="#">Dresses</a></dd>
-                                <dd><a href="#">Blouses & Shirts</a></dd>
-                                <dd><a href="#">Hoodies & Sweatshirts</a></dd>
-                                <dd><a href="#">Beach style</a></dd>
-                                <dd><a href="#">Suits & Sets</a></dd>
-                                <dd><a href="#">Sweaters</a></dd>
-                            </dl>
-                            <dl className="sub-cate-items">
-                                <dt><a href="#">New Arrivals</a></dt>
-                                <dd><a href="#">Dresses</a></dd>
-                                <dd><a href="#">Blouses & Shirts</a></dd>
-                                <dd><a href="#">Hoodies & Sweatshirts</a></dd>
-                                <dd><a href="#">Beach style</a></dd>
-                                <dd><a href="#">Suits & Sets</a></dd>
-                                <dd><a href="#">Sweaters</a></dd>
-                            </dl>
-                        </div>
+                        {props.cat.children.map((num, index) =>
+                            <div className="sub-cate-row">
+                                <dl className="sub-cate-items">
+                                    <dt><a href="#">{num.label}</a></dt>
+                                    {num.children.length > 0 ? num.children.map((ok) =>
+                                        <dd><a href="#">{ok.label}</a></dd>
+                                    ) : null}
+                                </dl>
+                            </div>
+                        )}
                     </div>
                 </div>
             </dd>
@@ -135,9 +84,9 @@ function TopCategories(props) {
 
                 <div className="categories-list-box">
                     {category.map((cat, index) => {
-                        if (cat.parentId == null && index < 72) {
+                        if (cat.parentId == null) {
                             return (
-                                <EachCat key={index} cat={cat.name} />
+                                <EachCat key={index} cat={cat} />
                             )
                         }
                     })}

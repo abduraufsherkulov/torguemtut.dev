@@ -1,4 +1,6 @@
-import React from 'react'
+import React, {
+    useContext
+} from 'react'
 import {
     Form,
     Input,
@@ -13,15 +15,20 @@ import {
     Divider,
     Button,
     AutoComplete,
+    InputNumber
 } from 'antd';
 import { withRouter } from 'react-router-dom'
 import MainBreadcrumbs from '../MainBreadcrumbs';
 import PicturesWall from './PicturesWall';
 import GoogleMapsApi from './GoogleMapsApi';
+import { CategoryContext } from '../../contexts/CategoryContext';
 const { TextArea } = Input;
+const { Option } = Select;
 
 
 function AddNewsAd(props) {
+
+    const { category } = useContext(CategoryContext);
 
     const { getFieldDecorator } = props.form;
 
@@ -61,42 +68,6 @@ function AddNewsAd(props) {
     function onChange(value) {
         console.log(value);
     }
-
-    const options = [
-        {
-            value: 'Недвижимость',
-            label: 'Недвижимость',
-            children: [
-                {
-                    value: 'Недвижимость',
-                    label: 'Недвижимость',
-                    children: [
-                        {
-                            value: 'Недвижимость',
-                            label: 'Недвижимость',
-                        },
-                    ],
-                },
-            ],
-        },
-        {
-            value: 'Услуги',
-            label: 'Услуги',
-            children: [
-                {
-                    value: 'Услуги',
-                    label: 'Услуги',
-                    children: [
-                        {
-                            value: 'Услуги',
-                            label: 'Услуги',
-                        },
-                    ],
-                },
-            ],
-        },
-    ];
-
     return (
         <div className="container">
             <div id="addnews">
@@ -104,44 +75,60 @@ function AddNewsAd(props) {
                 <h2 className="header-text">Добавить объявление</h2>
                 <Form {...formItemLayout} onSubmit={handleSubmit}>
                     <div className="makenarrow">
-                        <Form.Item label="Заголовок*">
-                            {getFieldDecorator('email', {
+                        <Form.Item label="Заголовок">
+                            {getFieldDecorator('title', {
                                 rules: [
                                     {
-                                        type: 'email',
-                                        message: 'The input is not valid E-mail!',
-                                    },
-                                    {
                                         required: true,
-                                        message: 'Please input your E-mail!',
+                                        message: 'Где заголовок?',
                                     },
                                 ],
                             })(<Input />)}
                         </Form.Item>
-                        <Form.Item label="Категория*">
-                            <Cascader options={options} onChange={onChange} placeholder="Выбрать категории" />
+                        <Form.Item label="Категория">
+                            {getFieldDecorator('category', {
+                                rules: [
+                                    {
+                                        required: true,
+                                        message: 'Где категории?',
+                                    },
+                                ],
+                            })(<Cascader options={category} placeholder="Выбрать категории" />)}
+
                         </Form.Item>
-                        <Form.Item label="Цена*" style={{ marginBottom: 0 }}>
+                        <Form.Item label="Цена" style={{ marginBottom: 0 }}>
                             <Form.Item
-                                validateStatus="error"
-                                help="Please select the correct date"
+                                // help="Please select the correct date"
                                 style={{ display: 'inline-block', width: 'calc(37% - 16px)' }}
                             >
-                                <Input />
+                                {getFieldDecorator('price', {
+                                    rules: [
+                                        {
+                                            required: true,
+                                            message: 'Где заголовок?',
+                                        },
+                                    ],
+                                })(
+                                    <InputNumber
+                                        style={{ width: '100%' }}
+                                        // defaultValue={1000}
+                                        formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                        parser={value => value.replace(/\$\s?|(,*)/g, '')}
+                                        // onChange={onChange}
+                                        placeholder="1000"
+                                    />)}
                             </Form.Item>
                             <span style={{ display: 'inline-block', width: '24px', textAlign: 'center' }}>-</span>
                             <Form.Item style={{ display: 'inline-block', width: 'calc(37% - 16px)' }}>
-                                {getFieldDecorator('gender', {
-                                    rules: [{ required: true, message: 'Please select your gender!' }],
-                                })(
-                                    <Select
-                                        placeholder="Select a option and change input text above"
-                                    // onChange={this.handleSelectChange}
-                                    >
-                                        <Option value="usd">y.e.</Option>
-                                        <Option value="uzs">uzs</Option>
-                                    </Select>,
-                                )}
+                                <Select
+                                    labelInValue
+                                    defaultValue={{ key: 'y.e.' }}
+                                    placeholder="Выберите"
+                                // onChange={this.handleSelectChange}
+                                >
+                                    <Option value="y.e.">y.e.</Option>
+                                    <Option value="uzs">uzs</Option>
+                                </Select>
                             </Form.Item>
                             <span style={{ display: 'inline-block', width: '24px', textAlign: 'center' }}>-</span>
                             <Form.Item style={{ display: 'inline-block', width: 'calc(26% - 16px)' }}>
@@ -155,12 +142,26 @@ function AddNewsAd(props) {
                     <Divider />
 
                     <div className="makenarrow">
-                        <Form.Item label="Описание*" style={{ marginBottom: 0 }}>
-                            <TextArea rows={4} />
+                        <Form.Item label="Описание" style={{ marginBottom: 0 }}>
+                            {getFieldDecorator('description', {
+                                rules: [
+                                    {
+                                        required: true,
+                                        message: 'Где Описание?',
+                                    },
+                                ],
+                            })(<TextArea rows={4} />)}
                         </Form.Item>
+                        <Form.Item label="Фотографии" style={{ marginBottom: 0 }}>
+                            {getFieldDecorator('fotos', {
+                                rules: [
+                                    {
+                                        required: true,
+                                        message: 'Где Фотографии?',
+                                    },
+                                ],
+                            })(<PicturesWall />)}
 
-                        <Form.Item label="Фотографии*" style={{ marginBottom: 0 }}>
-                            <PicturesWall />
                         </Form.Item>
                     </div>
                     <Divider />
@@ -168,15 +169,11 @@ function AddNewsAd(props) {
                     <div className="makenarrow">
                         <h2>Местоположение</h2>
                         <Form.Item label="Адрес">
-                            {getFieldDecorator('сontact', {
+                            {getFieldDecorator('address', {
                                 rules: [
                                     {
-                                        type: 'email',
-                                        message: 'The input is not valid E-mail!',
-                                    },
-                                    {
                                         required: true,
-                                        message: 'Please input your E-mail!',
+                                        message: 'Где адрес!',
                                     },
                                 ],
                             })(<Input />)}
@@ -187,13 +184,9 @@ function AddNewsAd(props) {
 
                     <div className="makenarrow">
                         <h2>Ваши контактные данные</h2>
-                        <Form.Item label="Контактное лицо*">
+                        <Form.Item label="Контактное лицо">
                             {getFieldDecorator('сontact', {
                                 rules: [
-                                    {
-                                        type: 'email',
-                                        message: 'The input is not valid E-mail!',
-                                    },
                                     {
                                         required: true,
                                         message: 'Please input your E-mail!',
@@ -254,7 +247,7 @@ function AddNewsAd(props) {
                             valuePropName: 'checked',
                         })(
                             <Checkbox>
-                                I have read the <a href="">agreement</a>
+                                Я согласен <a href="">с</a>
                             </Checkbox>,
                         )}
                     </Form.Item>
