@@ -1,4 +1,4 @@
-import { Upload, Icon, Modal } from 'antd';
+import { Upload, Icon, Modal, Progress } from 'antd';
 import React, { useState } from 'react'
 import axios from 'axios';
 
@@ -15,7 +15,7 @@ function getBase64(file) {
 function PicturesWall() {
     const [previewVisible, setpreviewVisible] = useState(false)
     const [previewImage, setpreviewImage] = useState('');
-    const [loader, setLoader] = useState(initialState)
+    const [loader, setLoader] = useState("")
     const [fileList, setfileList] = useState(
         [
             {
@@ -36,10 +36,38 @@ function PicturesWall() {
 
     };
 
-    const handleChange = ({ fileList }) => {
-        console.log(fileList);
-        setfileList(fileList);
-    }
+    // const handleChange = ({ fileList }) => {
+    //     console.log(fileList);
+    //     setfileList(fileList);
+    // }
+    const handleChange = (info) => {
+        const reader = new FileReader();
+        reader.onloadend = (obj) => {
+            this.imageDataAsURL = obj.srcElement.result;
+        };
+        reader.readAsDataURL(info.file.originFileObj);
+
+    };
+
+    const customRequest = ({ onSuccess, onError, file }) => {
+        const checkInfo = () => {
+            setTimeout(() => {
+                if (!this.imageDataAsURL) {
+                    checkInfo();
+                } else {
+                    this.uploadFile(file)
+                        .then(() => {
+                            onSuccess(null, file);
+                        })
+                        .catch(() => {
+                            // call onError();
+                        });
+                }
+            }, 100);
+        };
+
+        checkInfo();
+    };
 
     function onStart(file) {
         console.log('onStart', file, file.name);
@@ -53,31 +81,33 @@ function PicturesWall() {
     function onProgress({ percent }, file) {
         console.log('onProgress', `${percent}%`, file.name);
     }
-    const dummyRequest = ({ file, onSuccess }) => {
+    const dummyRequest = ({ file, onSuccess, onProgress }) => {
         setTimeout(() => {
-            const mylink = "http://localhost:8080/uploads";
-            const bodyFormData = new FormData();
-
-
-            bodyFormData.set("filetoupload", file);
-            axios({
-                method: "post",
-                url: mylink,
-                data: bodyFormData,
-                onUploadProgress: ({ total, loaded }) => {
-                    onProgress({ percent: Math.round(loaded / total * 100).toFixed(2) }, file);
-                },
-                config: {
-                    headers: { "Content-Type": "multipart/form-data" }
-                }
-            }).then(response => {
-                onSuccess(response, file);
-
-                // onSuccess("ok");
-            }).catch(error => {
-                onError(error);
-            })
+            onSuccess('ok')
         }, 1000);
+
+        const mylink = "http://localhost:8080/uploads";
+        const bodyFormData = new FormData();
+
+
+        bodyFormData.set("filetoupload", file);
+        axios({
+            method: "post",
+            url: mylink,
+            data: bodyFormData,
+            onUploadProgress: ({ total, loaded }) => {
+                onProgress(10);
+            },
+            config: {
+                headers: { "Content-Type": "multipart/form-data" }
+            }
+        }).then(response => {
+            onSuccess(response, file);
+
+            // onSuccess("ok");
+        }).catch(error => {
+            onError(error);
+        })
     };
 
     const handleSubmit = () => {
@@ -111,6 +141,8 @@ function PicturesWall() {
                 onPreview={handlePreview}
                 onChange={handleChange}
                 customRequest={dummyRequest}
+                onload={loader}
+
             >
                 {fileList.length >= 8 ? null : uploadButton}
             </Upload>
