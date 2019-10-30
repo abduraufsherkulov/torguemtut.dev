@@ -15,13 +15,13 @@ function getBase64(file) {
 function PicturesWall() {
     const [previewVisible, setpreviewVisible] = useState(false)
     const [previewImage, setpreviewImage] = useState('');
-    const [loader, setLoader] = useState("")
     const [fileList, setfileList] = useState(
         [
             {
                 uid: '-1',
                 name: 'image.png',
                 status: 'uploading',
+                percent: 30,
                 url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
             }
         ])
@@ -36,38 +36,47 @@ function PicturesWall() {
 
     };
 
-    // const handleChange = ({ fileList }) => {
-    //     console.log(fileList);
-    //     setfileList(fileList);
-    // }
-    const handleChange = (info) => {
-        const reader = new FileReader();
-        reader.onloadend = (obj) => {
-            this.imageDataAsURL = obj.srcElement.result;
-        };
-        reader.readAsDataURL(info.file.originFileObj);
+    const handleChange = ({ fileList, file, event, onProgress }) => {
+        // setfileList(fileList);
 
-    };
 
-    const customRequest = ({ onSuccess, onError, file }) => {
-        const checkInfo = () => {
-            setTimeout(() => {
-                if (!this.imageDataAsURL) {
-                    checkInfo();
-                } else {
-                    this.uploadFile(file)
-                        .then(() => {
-                            onSuccess(null, file);
-                        })
-                        .catch(() => {
-                            // call onError();
-                        });
-                }
-            }, 100);
-        };
+        setfileList([file]);
+        // if ('percent' in event){
+        //     console.log(event.percent);
+        // }
+        if (typeof event != 'undefined') {
+            // fileList[file].percent = event.percent.toFixed();
+            console.log(file);
+            console.log(event.percent.toFixed());
+        }
 
-        checkInfo();
-    };
+        // const mylink = "http://localhost:8080/uploads";
+        // const bodyFormData = new FormData();
+
+
+        // bodyFormData.set("filetoupload", file);
+
+        // axios({
+        //     method: "post",
+        //     url: mylink,
+        //     data: bodyFormData,
+        //     onUploadProgress: (e) => {
+        //         onProgress({ percent: (e.loaded / e.total) * 100 }, file);
+        //     },
+        //     config: {
+        //         headers: { "Content-Type": "multipart/form-data" }
+        //     }
+        // }).then(response => {
+
+        //     setfileList(fileList);
+        //     // onSuccess(response, file);
+
+        //     // onSuccess("ok");
+        // }).catch(error => {
+        //     onError(error);
+        // })
+
+    }
 
     function onStart(file) {
         console.log('onStart', file, file.name);
@@ -81,28 +90,34 @@ function PicturesWall() {
     function onProgress({ percent }, file) {
         console.log('onProgress', `${percent}%`, file.name);
     }
-    const dummyRequest = ({ file, onSuccess, onProgress }) => {
-        setTimeout(() => {
-            onSuccess('ok')
-        }, 1000);
+
+    const dummyRequest = ({ fileList, file }) => {
+        // setTimeout(() => {
+        //     onSuccess('oked')
+        // }, 1000);
+        setfileList(fileList);
+        console.log(file, fileList);
 
         const mylink = "http://localhost:8080/uploads";
         const bodyFormData = new FormData();
 
 
         bodyFormData.set("filetoupload", file);
+
         axios({
             method: "post",
             url: mylink,
             data: bodyFormData,
-            onUploadProgress: ({ total, loaded }) => {
-                onProgress(10);
-            },
+            // onUploadProgress: ({ total, loaded }) => {
+            //     onProgress({ percent: Math.round(loaded / total * 100).toFixed(2) }, file);
+            // },
             config: {
                 headers: { "Content-Type": "multipart/form-data" }
             }
         }).then(response => {
-            onSuccess(response, file);
+
+            setfileList(fileList);
+            // onSuccess(response, file);
 
             // onSuccess("ok");
         }).catch(error => {
@@ -110,38 +125,23 @@ function PicturesWall() {
         })
     };
 
-    const handleSubmit = () => {
-        const mylink = "http://localhost:8080/uploads";
-        const bodyFormData = new FormData();
-        axios({
-            method: "post",
-            url: mylink,
-            data: bodyFormData,
-            config: {
-                headers: { "Content-Type": "multipart/form-data" }
-            }
-        })
-    }
-
     const uploadButton = (
         <div>
             <Icon type="plus" />
             <div className="ant-upload-text">Upload</div>
         </div>
     );
-    // console.log(fileList);
     return (
         <div className="clearfix">
             <Upload
-                // action="http://localhost:8080/uploads"
+                action="http://localhost:8080/uploads"
                 accept=".png, .jpeg, .jpg"
                 listType="picture-card"
                 fileList={fileList}
                 name="filetoupload"
                 onPreview={handlePreview}
                 onChange={handleChange}
-                customRequest={dummyRequest}
-                onload={loader}
+            // customRequest={dummyRequest}
 
             >
                 {fileList.length >= 8 ? null : uploadButton}
