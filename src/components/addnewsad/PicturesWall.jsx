@@ -15,16 +15,13 @@ function getBase64(file) {
 function PicturesWall() {
     const [previewVisible, setpreviewVisible] = useState(false)
     const [previewImage, setpreviewImage] = useState('');
-    const [fileList, setfileList] = useState(
-        [
-            {
-                uid: '-1',
-                name: 'image.png',
-                status: 'uploading',
-                percent: 30,
-                url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-            }
-        ])
+    const [fileList, setfileList] = useState([
+        {
+          uid: '-5',
+          name: 'image.png',
+          status: 'done',
+          url: 'C:/Users/a_sherkulov/Desktop/test/express-upload/uploads/1572593160176.jpg',
+        }])
 
     const handleCancel = () => setpreviewVisible(false);
     const handlePreview = async file => {
@@ -39,8 +36,16 @@ function PicturesWall() {
     const handleChange = ({ fileList, file, event, onProgress }) => {
         // setfileList(fileList);
 
-
-        setfileList([file]);
+        let newArr = [...fileList];
+        console.log(file.response);
+        if (typeof file.response != 'undefined') {
+            // fileList[file].percent = event.percent.toFixed();
+            file.url = file.response.url;
+        }
+        newArr[file] = file;
+        setfileList(newArr);
+        // console.log(fileList)
+        console.log(file);
         // if ('percent' in event){
         //     console.log(event.percent);
         // }
@@ -77,54 +82,7 @@ function PicturesWall() {
         // })
 
     }
-
-    function onStart(file) {
-        console.log('onStart', file, file.name);
-    }
-    function onSuccess(ret, file) {
-        console.log('onSuccess', ret, file.name);
-    }
-    function onError(err) {
-        console.log('onError', err);
-    }
-    function onProgress({ percent }, file) {
-        console.log('onProgress', `${percent}%`, file.name);
-    }
-
-    const dummyRequest = ({ fileList, file }) => {
-        // setTimeout(() => {
-        //     onSuccess('oked')
-        // }, 1000);
-        setfileList(fileList);
-        console.log(file, fileList);
-
-        const mylink = "http://localhost:8080/uploads";
-        const bodyFormData = new FormData();
-
-
-        bodyFormData.set("filetoupload", file);
-
-        axios({
-            method: "post",
-            url: mylink,
-            data: bodyFormData,
-            // onUploadProgress: ({ total, loaded }) => {
-            //     onProgress({ percent: Math.round(loaded / total * 100).toFixed(2) }, file);
-            // },
-            config: {
-                headers: { "Content-Type": "multipart/form-data" }
-            }
-        }).then(response => {
-
-            setfileList(fileList);
-            // onSuccess(response, file);
-
-            // onSuccess("ok");
-        }).catch(error => {
-            onError(error);
-        })
-    };
-
+    
     const uploadButton = (
         <div>
             <Icon type="plus" />

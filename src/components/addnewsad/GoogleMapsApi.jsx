@@ -8,9 +8,9 @@ import {
 } from "react-google-maps";
 
 function test(e) {
-    // console.log(e);
-    console.log(e.latLng.lat())
-    console.log(e.latLng.lng())
+    console.log(e);
+    // console.log(e.latLng.lat())
+    // console.log(e.latLng.lng())
 }
 
 const GoogleMapsApi = compose(

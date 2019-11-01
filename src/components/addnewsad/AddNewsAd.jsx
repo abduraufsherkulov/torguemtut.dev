@@ -22,6 +22,7 @@ import MainBreadcrumbs from '../MainBreadcrumbs';
 import PicturesWall from './PicturesWall';
 import GoogleMapsApi from './GoogleMapsApi';
 import { CategoryContext } from '../../contexts/CategoryContext';
+import YandexMapsApi from './YandexMapsApi';
 const { TextArea } = Input;
 const { Option } = Select;
 
@@ -179,6 +180,7 @@ function AddNewsAd(props) {
                             })(<Input />)}
                         </Form.Item>
                         <GoogleMapsApi />
+                        {/* <YandexMapsApi /> */}
                     </div>
                     <Divider />
 
