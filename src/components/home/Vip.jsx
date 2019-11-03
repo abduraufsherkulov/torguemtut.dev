@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Row, Col, Icon, Divider, Button } from 'antd';
 import Crown from "../../images/crown.png";
 import Watch from "../../images/watch.png";
-import HeartIcons from './HeartIcons';
+import HeartIcons from '../Icons/HeartIcons';
 
 function Vip() {
 

@@ -2,13 +2,11 @@ import React, { useState, useContext } from 'react';
 import { Layout, Menu, Icon, Dropdown, Select, Button, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
+import { IconFont } from '../Icons/Icons';
 
 const { Header } = Layout;
 const { SubMenu } = Menu;
 const { Option } = Select;
-const IconFont = Icon.createFromIconfontCN({
-    scriptUrl: '//at.alicdn.com/t/font_1336473_uzl8ge6437g.js',
-});
 
 const menu = (
     <Menu>

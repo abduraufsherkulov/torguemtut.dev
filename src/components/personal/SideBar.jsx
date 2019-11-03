@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Layout, Menu, Breadcrumb, Icon, Avatar } from 'antd';
 import MainBreadcrumbs from '../MainBreadcrumbs';
 // import { Link } from 'react-router-dom'
-import { BrowserRouter as Router, Route, Link, withRouter, useLocation, useHistory } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-dom";
 import WishList from './wishlist/WishList';
 import MyAds from './myads/MyAds';
 import Settings from './settings/Settings';

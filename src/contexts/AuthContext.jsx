@@ -8,7 +8,7 @@ function AuthContextProvider(props) {
         const localData = localStorage.getItem('userData');
         return localData ? JSON.parse(localData) : null;
     })
-    // console.log(username);
+    console.log(userData)
     return (
         <AuthContext.Provider value={{ userData, dispatch }}>
             {props.children}

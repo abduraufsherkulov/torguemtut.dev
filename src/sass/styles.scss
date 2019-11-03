@@ -239,6 +239,7 @@ body {
     }
   }
 }
+// INFO
 
 #infosection {
   text-align: center;
@@ -260,7 +261,7 @@ body {
     color: $parentcolor;
   }
 }
-
+//GET PHONE
 #getphone {
   padding-top: 35px;
   h1 {
@@ -303,6 +304,8 @@ footer {
     }
   }
 }
+
+// TARIFFS
 
 #tariffs {
   #contentbanner {
@@ -458,6 +461,8 @@ footer {
   }
 }
 
+//SEARCH
+
 #search {
   background: url("../images/longback.png");
   background-repeat: no-repeat;
@@ -485,6 +490,8 @@ footer {
     padding-bottom: 100px;
   }
 }
+
+//LOGIN
 
 #login {
   background: #edebee;
@@ -565,6 +572,9 @@ footer {
     box-shadow: 0px 0px 8px 0px #b9abab;
   }
 }
+
+//SIGN IN
+
 #signin {
   background: url("../images/signinbg.png");
   background-repeat: no-repeat;
@@ -648,13 +658,18 @@ footer {
     // box-shadow: 0px 0px 8px 0px #b9abab;
   }
 }
+
+//HOME CAROUSEL
+
 #homecarousel {
   position: relative;
   width: 100%;
   z-index: 1;
   overflow: hidden;
-  height: 419px;
+  height: 810px;
   .advertise-main {
+    width: 70%;
+    float: left;
     .ant-carousel .slick-dots {
       display: flex !important;
       align-items: center;
@@ -678,8 +693,55 @@ footer {
       height: 6px;
       width: 6px;
     }
+    .down-promotion {
+      margin-top: 16px;
+      .crowd-container {
+        width: 100%;
+        padding: 4px;
+        background-color: #fff;
+        .crowd-img {
+          overflow: hidden;
+          height: 122px;
+          border-radius: 4px;
+          position: relative;
+        }
+        .crowd-note {
+          text-align: center;
+          margin-top: -6px;
+          position: relative;
+          .crowd-price {
+            display: inline-block;
+            background-color: #ff4747;
+            border-radius: 9px;
+            font-size: 12px;
+            padding: 1px 8px;
+            color: #fff;
+            font-weight: 900;
+            font-style: italic;
+          }
+        }
+        .crowd-title {
+          padding-top: 5px;
+          text-align: center;
+          color: #000;
+          font-weight: 900;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1;
+        }
+      }
+    }
+  }
+  .fb-part {
+    width: 240px;
+    float: right;
   }
 }
+
+//TOP CATEGORIES
+
 #topcategories {
   position: absolute;
   top: -40px;
@@ -730,7 +792,7 @@ footer {
             span {
               height: 43px;
               padding-top: 5px;
-              &:before{
+              &:before {
                 top: 10px;
               }
             }
@@ -768,14 +830,14 @@ footer {
               color: #333;
               text-decoration: none;
             }
-            
-            &:before {    
+
+            &:before {
               display: block;
               position: absolute;
               left: 10px;
               top: 2px;
               top: 5px;
-              content: ' ';
+              content: " ";
               width: 24px;
               height: 24px;
               vertical-align: top;
@@ -883,6 +945,8 @@ footer {
   }
 }
 
+//CATEGORIES AND SLIDER
+
 #categoriesandslider {
   background: #f2f2f2;
   .container {
@@ -890,11 +954,13 @@ footer {
   }
   .under-cont {
     position: relative;
-    padding-left: 300px;
-    padding-top: 55px;
+    padding-left: 256px;
+    padding-top: 16px;
     z-index: 3;
   }
 }
+
+//TOP SEARCH
 
 #topsearch {
   .search-part {
@@ -909,6 +975,9 @@ footer {
     }
   }
 }
+
+//ANT MENU
+
 .ant-menu {
   font-size: dynamicfont(12, 14);
 }
@@ -916,6 +985,8 @@ footer {
 .ant-menu-submenu-title {
   padding: 0 5px;
 }
+
+//DROPDOWN CONTAINER
 
 .dropdown-container {
   background: #fff;
@@ -956,6 +1027,9 @@ footer {
   }
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
 }
+
+//LOG WRAPPER
+
 .log-wrapper {
   padding: 5px 12px;
   .log-text {
@@ -969,6 +1043,8 @@ footer {
   }
 }
 
+//ADD NEWS
+
 #addnews {
   .makenarrow {
     width: 80%;
@@ -980,11 +1056,16 @@ footer {
     padding-bottom: 50px;
   }
 }
+
+//HEADER TEXT
+
 .header-text {
   @include bold;
   font-size: dynamicfont(26, 28);
   padding: 30px 0 30px 0;
 }
+
+//SIDEBAR
 
 #sidebar-content {
   .user-section {
@@ -1004,6 +1085,9 @@ footer {
     }
   }
 }
+
+//FB BUTTON
+
 .facebook-button {
   button {
     background: #3b5998;
@@ -1020,4 +1104,128 @@ footer {
   background: rgba(255, 255, 255, 0.2);
   margin: 16px 28px 16px 0;
   float: left;
+}
+
+// ACTIVE ADS
+
+// VIP
+#activeads {
+  #activeads-top {
+    background: url("../images/strap.png");
+    background-size: cover;
+    .activeads-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      h1 {
+        font-size: dynamicfont(24, 28);
+        margin: 0px;
+        padding: 20px;
+        color: white;
+        text-align: center;
+        @include bold;
+      }
+      img {
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        top: -19px;
+      }
+      a {
+        color: #e3b8ee;
+        font-size: dynamicfont(13, 15);
+        @include regular;
+      }
+    }
+  }
+  .activeads-grid {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    .each {
+      border: 1px solid $bordercolor;
+      margin-bottom: 30px;
+      .img-part {
+        position: relative;
+        .activeads-face {
+          @include coverFaceWithSpanThree;
+        }
+      }
+      h1 {
+        margin: 0px;
+        @include bold;
+        font-size: dynamicfont(18, 20);
+        color: $parentcolor;
+      }
+      p {
+        margin: 0px;
+        @include regular;
+        font-size: dynamicfont(15, 17);
+        color: $parentcolor;
+      }
+      .info-part {
+        padding: 18px;
+      }
+    }
+    button {
+      color: $showmore;
+      border-color: $showmore;
+      padding: {
+        left: 53px;
+        right: 53px;
+      }
+      @include demi;
+      font-size: dynamicfont(14, 16);
+    }
+  }
+}
+
+//TAB MARGINS
+
+.tab-margins {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+#accountwallet {
+  .ttcard {
+    position: relative;
+    .ttcardimg {
+      width: 100%;
+      border-radius: 20px;
+    }
+    .ttcardinfo {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      color: white;
+      flex-direction: column;
+      .card-img-container {
+        align-self: flex-start;
+        margin: auto 0;
+        justify-self: end;
+        margin-top: 0;
+        padding: 23px;
+      }
+      p {
+        font-size: dynamicfont(20, 22);
+        padding-left: 23px;
+      }
+      h1 {
+        font-size: dynamicfont(20, 22);
+        padding-left: 23px;
+        @include bold;
+        color: white;
+      }
+      h2 {
+        font-size: dynamicfont(20, 22);
+        padding-left: 23px;
+        color: white;
+      }
+    }
+  }
 }

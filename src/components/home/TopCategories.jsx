@@ -31,11 +31,11 @@ function EachCat(props) {
                 <div className="sub-cate-main">
                     <div className="sub-cate-content">
                         {props.cat.children.map((num, index) =>
-                            <div className="sub-cate-row">
+                            <div className="sub-cate-row" key={index}>
                                 <dl className="sub-cate-items">
                                     <dt><a href="#">{num.label}</a></dt>
-                                    {num.children.length > 0 ? num.children.map((ok) =>
-                                        <dd><a href="#">{ok.label}</a></dd>
+                                    {num.children.length > 0 ? num.children.map((ok, index) =>
+                                        <dd key={index}><a href="#">{ok.label}</a></dd>
                                     ) : null}
                                 </dl>
                             </div>

@@ -1,21 +1,26 @@
 import React, { useState } from 'react';
 import { Row, Col, Icon, Divider, Button } from 'antd';
-import Crown from "../../../images/crown.png";
 import Watch from "../../../images/watch.png";
-import HeartIcons from '../../home/HeartIcons';
+import EditIcons from '../../Icons/EditIcons';
+import DeleteIcons from '../../Icons/DeleteIcons';
+import ViewIcons from '../../Icons/ViewIcons';
 
 function Active() {
     return (
-        <div id="vip">
-            <div className="vip-grid">
+        <div id="activeads">
+            <div className="activeads-grid">
                 <div className="container">
                     <Row justify="space-between" type="flex" className="mainrows">
                         {[1, 2, 3, 4, 5, 6, 7, 8].map((index, key) => (
                             <Col key={key} className="each">
                                 <div className="img-part"><a href="">
-                                    <div className="vip-face">
+                                    <div className="activeads-face">
                                         <span>VIP</span>
-                                        <HeartIcons />
+                                        <div className="action-block">
+                                            <ViewIcons />
+                                            <EditIcons />
+                                            <DeleteIcons />
+                                        </div>
                                     </div>
                                     <img src={Watch} alt="" /></a>
                                 </div>

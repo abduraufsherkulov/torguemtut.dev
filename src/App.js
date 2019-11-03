@@ -7,6 +7,8 @@ import { Layout } from 'antd';
 import Container from "./components/Container";
 import AuthContextProvider from "./contexts/AuthContext";
 import CategoryContextProvider from "./contexts/CategoryContext";
+import BalanceContextProvider from "./contexts/BalanceContext";
+import MyAdsProvider from "./contexts/MyAds";
 if (process.env.NODE_ENV === 'development') {
   import('./sass/styles.scss');
   import("./sass/fonts.scss");
@@ -19,9 +21,13 @@ function App() {
           <Layout className="layout">
             <AuthContextProvider>
               <CategoryContextProvider>
-                <Postnavigator />
-                <Navigator />
-                <Container />
+                <BalanceContextProvider>
+                  <MyAdsProvider>
+                    <Postnavigator />
+                    <Navigator />
+                    <Container />
+                  </MyAdsProvider>
+                </BalanceContextProvider>
               </CategoryContextProvider>
             </AuthContextProvider>
           </Layout>

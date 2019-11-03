@@ -4,7 +4,7 @@ import { Row, Col } from 'antd';
 import Malibu from "../../images/malibu.png";
 import Fridge from "../../images/fridge.png";
 import House from "../../images/house.png";
-import HeartIcons from './HeartIcons';
+import HeartIcons from '../Icons/HeartIcons';
 
 
 

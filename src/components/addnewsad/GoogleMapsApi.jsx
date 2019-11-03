@@ -7,10 +7,14 @@ import {
     Marker
 } from "react-google-maps";
 
-function test(e) {
-    console.log(e);
-    // console.log(e.latLng.lat())
-    // console.log(e.latLng.lng())
+function test(e, props) {
+    props.setPosition({
+        RegionId: "",
+        DistrictId: "",
+        Address: "",
+        Longtitude: e.latLng.lng(),
+        Latitude: e.latLng.lat()
+    })
 }
 
 const GoogleMapsApi = compose(
@@ -30,7 +34,7 @@ const GoogleMapsApi = compose(
     withGoogleMap
 )(props => (
     <GoogleMap defaultZoom={6} defaultCenter={{ lat: 41.311157, lng: 69.279718 }}>
-        <Marker draggable={true} onDragEnd={test} position={{ lat: 41.311157, lng: 69.279718 }} />
+        <Marker draggable={true} onDragEnd={(e) => test(e, props)} position={{ lat: props.position.Latitude, lng: props.position.Longtitude }} />
     </GoogleMap>
 ));
 

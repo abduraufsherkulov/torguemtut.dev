@@ -1,6 +1,6 @@
-import { Upload, Icon, Modal, Progress } from 'antd';
-import React, { useState } from 'react'
-import axios from 'axios';
+import { Upload, Icon, Modal, Form } from 'antd';
+import React, { useState, useContext } from 'react'
+import { AuthContext } from '../../contexts/AuthContext';
 
 
 function getBase64(file) {
@@ -12,16 +12,13 @@ function getBase64(file) {
     });
 }
 
-function PicturesWall() {
+function PicturesWall(props) {
     const [previewVisible, setpreviewVisible] = useState(false)
     const [previewImage, setpreviewImage] = useState('');
-    const [fileList, setfileList] = useState([
-        {
-          uid: '-5',
-          name: 'image.png',
-          status: 'done',
-          url: 'C:/Users/a_sherkulov/Desktop/test/express-upload/uploads/1572593160176.jpg',
-        }])
+    const [fileList, setfileList] = useState([])
+    const authContext = useContext(AuthContext);
+    const { userData, dispatch } = authContext;
+    const { getFieldDecorator } = props;
 
     const handleCancel = () => setpreviewVisible(false);
     const handlePreview = async file => {
@@ -33,56 +30,23 @@ function PicturesWall() {
 
     };
 
-    const handleChange = ({ fileList, file, event, onProgress }) => {
-        // setfileList(fileList);
+    const handleChange = ({ fileList, file }) => {
+        
 
         let newArr = [...fileList];
-        console.log(file.response);
         if (typeof file.response != 'undefined') {
-            // fileList[file].percent = event.percent.toFixed();
             file.url = file.response.url;
         }
         newArr[file] = file;
         setfileList(newArr);
-        // console.log(fileList)
-        console.log(file);
-        // if ('percent' in event){
-        //     console.log(event.percent);
-        // }
-        if (typeof event != 'undefined') {
-            // fileList[file].percent = event.percent.toFixed();
-            console.log(file);
-            console.log(event.percent.toFixed());
+        if(fileList.length>0){
+            props.setFileValidate("");
+            props.setFileRequired("");
         }
 
-        // const mylink = "http://localhost:8080/uploads";
-        // const bodyFormData = new FormData();
-
-
-        // bodyFormData.set("filetoupload", file);
-
-        // axios({
-        //     method: "post",
-        //     url: mylink,
-        //     data: bodyFormData,
-        //     onUploadProgress: (e) => {
-        //         onProgress({ percent: (e.loaded / e.total) * 100 }, file);
-        //     },
-        //     config: {
-        //         headers: { "Content-Type": "multipart/form-data" }
-        //     }
-        // }).then(response => {
-
-        //     setfileList(fileList);
-        //     // onSuccess(response, file);
-
-        //     // onSuccess("ok");
-        // }).catch(error => {
-        //     onError(error);
-        // })
-
+        console.log(fileList);
     }
-    
+
     const uploadButton = (
         <div>
             <Icon type="plus" />
@@ -90,24 +54,27 @@ function PicturesWall() {
         </div>
     );
     return (
-        <div className="clearfix">
-            <Upload
-                action="http://localhost:8080/uploads"
-                accept=".png, .jpeg, .jpg"
-                listType="picture-card"
-                fileList={fileList}
-                name="filetoupload"
-                onPreview={handlePreview}
-                onChange={handleChange}
-            // customRequest={dummyRequest}
+        <Form.Item label="Фотографии" validateStatus={props.fileValidate}  help={props.fileRequired}>
+            {getFieldDecorator('photos', {
+            })(
+                <Upload
+                    action="https://ttuz.azurewebsites.net/api/news/upload-image"
+                    accept=".png, .jpeg, .jpg"
+                    listType="picture-card"
+                    fileList={fileList}
+                    name="image"
+                    defaultFileList={[]}
+                    onPreview={handlePreview}
+                    onChange={handleChange}
+                    headers={{ Authorization: `Bearer ${userData.token}` }}
+                >
+                    {fileList.length >= 8 ? null : uploadButton}
+                </Upload>)}
 
-            >
-                {fileList.length >= 8 ? null : uploadButton}
-            </Upload>
             <Modal visible={previewVisible} footer={null} onCancel={handleCancel}>
                 <img alt="example" style={{ width: '100%' }} src={previewImage} />
             </Modal>
-        </div>
+        </Form.Item>
     )
 }
 

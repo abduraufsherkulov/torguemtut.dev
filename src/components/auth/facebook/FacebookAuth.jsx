@@ -9,9 +9,8 @@ import {
     useLocation
 } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthContext';
-const IconFont = Icon.createFromIconfontCN({
-    scriptUrl: '//at.alicdn.com/t/font_1336473_uzl8ge6437g.js',
-});
+import { IconFont } from '../../Icons/Icons';
+
 function FacebookAuth() {
     const [loading, setLoading] = useState(false);
     let history = useHistory();

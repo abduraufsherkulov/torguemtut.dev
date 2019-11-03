@@ -17,7 +17,6 @@ import Login from "./auth/login/Login";
 import SignUp from "./auth/signup/SignUp";
 import Foot from "./footer/Foot";
 import AddNewsAd from './addnewsad/AddNewsAd';
-import { authReducer } from '../reducers/AuthReducer';
 import { AuthContext } from '../contexts/AuthContext';
 import SideBar from './personal/SideBar';
 import DownloadApplication from './application/DownloadApplication';
@@ -25,6 +24,7 @@ import SupportService from './help/SupportService';
 import Disputes from './help/Disputes';
 import MainMessages from './personal/messages/MainMessages';
 import MainWallet from './personal/wallet/MainWallet';
+import { BalanceContext } from '../contexts/BalanceContext';
 
 function PrivateRoute({ children, ...rest }) {
 
@@ -52,8 +52,6 @@ function PrivateRoute({ children, ...rest }) {
 
 function AuthRoute({ children, ...rest }) {
   const { userData } = useContext(AuthContext);
-  // console.log(userData);
-  console.log('called')
   return (
     <Route
       {...rest}

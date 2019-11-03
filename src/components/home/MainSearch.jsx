@@ -1,13 +1,12 @@
 import React from 'react';
 import Bg from "../../images/longback.png";
 import { Row, Col, Form, Input, Select, Button, Icon } from 'antd';
+import { IconFont } from '../Icons/Icons';
 
 const { Search } = Input;
 const { Option } = Select;
 const InputGroup = Input.Group;
-const IconFont = Icon.createFromIconfontCN({
-    scriptUrl: '//at.alicdn.com/t/font_1336473_uzl8ge6437g.js',
-});
+
 
 function MainSearch() {
     return (
@@ -32,10 +31,10 @@ function MainSearch() {
                         <Col span={12}>
                             <p>Сейчас ищут: iphone xr 64gb, черная маска, велосипед</p>
                         </Col>
-                        <Col span={8} style={{textAlign: "right"}}>
-                            <h1> <IconFont style={{marginRight: "5px"}} type="icon-pin" />Показать на карте</h1>
+                        <Col span={8} style={{ textAlign: "right" }}>
+                            <h1> <IconFont style={{ marginRight: "5px" }} type="icon-pin" />Показать на карте</h1>
                         </Col>
-                        <Col span={4} style={{textAlign: "right"}}>
+                        <Col span={4} style={{ textAlign: "right" }}>
                             <Button size="large" type="warning">Найти</Button>
                         </Col>
                     </Row>
