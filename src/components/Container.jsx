@@ -16,7 +16,6 @@ import Tariff from "./tariffs/Tariff";
 import Login from "./auth/login/Login";
 import SignUp from "./auth/signup/SignUp";
 import Foot from "./footer/Foot";
-import AddNewsAd from './addnewsad/AddNewsAd';
 import { AuthContext } from '../contexts/AuthContext';
 import SideBar from './personal/SideBar';
 import DownloadApplication from './application/DownloadApplication';
@@ -25,9 +24,10 @@ import Disputes from './help/Disputes';
 import MainMessages from './personal/messages/MainMessages';
 import MainWallet from './personal/wallet/MainWallet';
 import { BalanceContext } from '../contexts/BalanceContext';
+import AddNewsAd from './news/adnews/AddNewsAd';
+import DetailsMain from './news/detailsnews/DetailsMain';
 
 function PrivateRoute({ children, ...rest }) {
-
   const { userData } = useContext(AuthContext);
   console.log('called private')
   return (
@@ -87,6 +87,10 @@ function Container({ location }) {
 
               <Route exact path="/">
                 <Home />
+              </Route>
+
+              <Route exact path="/newsdetails">
+                <DetailsMain />
               </Route>
               <Route path="/tariff">
                 <Tariff />

@@ -19,20 +19,21 @@ import {
 } from 'antd';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom'
-import MainBreadcrumbs from '../MainBreadcrumbs';
+import MainBreadcrumbs from '../../MainBreadcrumbs';
 import PicturesWall from './PicturesWall';
 import GoogleMapsApi from './GoogleMapsApi';
-import { CategoryContext } from '../../contexts/CategoryContext';
+import { CategoryContext } from '../../../contexts/CategoryContext';
 import YandexMapsApi from './YandexMapsApi';
-import { IconFont } from '../Icons/Icons';
-import { AuthContext } from '../../contexts/AuthContext';
+import { IconFont } from '../../Icons/Icons';
+import { AuthContext } from '../../../contexts/AuthContext';
+import { MyAdsContext } from '../../../contexts/MyAds';
 const { TextArea } = Input;
 const { Option } = Select;
 
 
 function AddNewsAd(props) {
 
-
+    const { setActiveKey } = useContext(MyAdsContext);
     const authContext = useContext(AuthContext);
     const { userData, dispatch } = authContext;
     const [checked, setChecked] = useState(false);
@@ -129,10 +130,10 @@ function AddNewsAd(props) {
                     }
                 }).then(response => {
                     console.log(response);
-                    if(response.data.status){
-                        
+                    if (response.data.status) {
+                        setActiveKey('waiting');
+                        props.history.push('/myads');
                     }
-
                 }).catch(error => {
                     console.log(error.response)
                 })

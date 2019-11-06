@@ -53,6 +53,11 @@ const help = (
                 Споры и жалобы
             </Link>
         </Menu.Item>
+        <Menu.Item>
+            <Link to="/newsdetails">
+                News details
+            </Link>
+        </Menu.Item>
     </Menu >
 );
 

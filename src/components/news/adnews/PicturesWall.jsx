@@ -1,6 +1,6 @@
 import { Upload, Icon, Modal, Form } from 'antd';
 import React, { useState, useContext } from 'react'
-import { AuthContext } from '../../contexts/AuthContext';
+import { AuthContext } from '../../../contexts/AuthContext';
 
 
 function getBase64(file) {

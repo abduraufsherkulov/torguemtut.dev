@@ -1,10 +1,11 @@
 import React, { createContext, useReducer, useState, useEffect } from 'react'
 // import { authReducer } from '../reducers/AuthReducer';
 import axios from 'axios'
-export const MyAds = createContext();
+export const MyAdsContext = createContext();
 
 function MyAdsProvider(props) {
     const [myAds, setMyAds] = useState([]);
+    const [activeKey, setActiveKey] = useState("active");
     useEffect(() => {
         const endpoint = "https://ttuz.azurewebsites.net/api/news/get-all";
         axios({
@@ -24,10 +25,11 @@ function MyAdsProvider(props) {
                 console.log(error, "error in categories");
             });
     }, [])
+    console.log(activeKey);
     return (
-        <MyAds.Provider value={{ myAds, setMyAds }}>
+        <MyAdsContext.Provider value={{ myAds, setMyAds, activeKey, setActiveKey }}>
             {props.children}
-        </MyAds.Provider>
+        </MyAdsContext.Provider>
     )
 }
 
