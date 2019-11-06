@@ -83,13 +83,14 @@ function AddNewsAd(props) {
         e.preventDefault();
         props.form.validateFieldsAndScroll((err, values) => {
             setLoading(true);
-            if (err) {
+            if (err || values.photos == undefined || values.photos.fileList.length == 0) {
                 if (values.photos == undefined || values.photos.fileList.length == 0) {
                     setFileValidate('error')
                     setFileRequired("Файл необходимо");
                 }
                 setLoading(false);
             } else {
+                console.log('called')
                 let images = [];
                 values.photos.fileList.map(i => {
                     images.push(i.response.imageId);

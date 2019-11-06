@@ -14,7 +14,6 @@ function CategoryContextProvider(props) {
             url: endpoint
         })
             .then(response => {
-                console.log(response.data);
                 setCategory(response.data);
             })
             .catch(error => {

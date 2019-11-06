@@ -31,7 +31,7 @@ function PicturesWall(props) {
     };
 
     const handleChange = ({ fileList, file }) => {
-        
+
 
         let newArr = [...fileList];
         if (typeof file.response != 'undefined') {
@@ -39,7 +39,7 @@ function PicturesWall(props) {
         }
         newArr[file] = file;
         setfileList(newArr);
-        if(fileList.length>0){
+        if (fileList.length > 0) {
             props.setFileValidate("");
             props.setFileRequired("");
         }
@@ -54,7 +54,7 @@ function PicturesWall(props) {
         </div>
     );
     return (
-        <Form.Item label="Фотографии" validateStatus={props.fileValidate}  help={props.fileRequired}>
+        <Form.Item label="Фотографии" validateStatus={props.fileValidate} help={props.fileRequired}>
             {getFieldDecorator('photos', {
             })(
                 <Upload
