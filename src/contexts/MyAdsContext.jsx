@@ -20,14 +20,12 @@ function MyAdsProvider(props) {
             }
         })
             .then(response => {
-                console.log(response);
                 setMyAds(response.data);
             })
             .catch(error => {
                 console.log(error, "error in categories");
             });
     }, [])
-    console.log(activeKey);
     return (
         <MyAdsContext.Provider value={{ myAds, setMyAds, activeKey, setActiveKey }}>
             {props.children}

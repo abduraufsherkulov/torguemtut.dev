@@ -4,34 +4,22 @@ import React, { useEffect, useContext, useState } from 'react'
 import { AuthContext } from '../../../contexts/AuthContext';
 import axios from 'axios';
 import { Link, withRouter } from 'react-router-dom';
+import { WishlistContext } from '../../../contexts/WishlistContext';
 
 
 function MainList() {
     const { userData } = useContext(AuthContext)
     const [listData, setListData] = useState([]);
+    const { addWish } = useContext(WishlistContext);
 
     let { id } = useParams();
 
-
-    // const listData = [];
-    // for (let i = 0; i < 23; i++) {
-    //     listData.push({
-    //         href: 'http://ant.design',
-    //         title: `ant design part ${i}`,
-    //         avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-    //         description:
-    //             'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-    //         content:
-    //             'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-    //     });
-    // }
 
     useEffect(() => {
         const data = JSON.stringify({
             categoryId: id
         })
         const endpoint = `https://ttuz.azurewebsites.net/api/news/get-all`;
-        console.log(data)
         axios({
             method: "post",
             url: endpoint,
@@ -42,7 +30,7 @@ function MainList() {
             }
         })
             .then(response => {
-                console.log(response);
+                // console.log(response);
                 setListData(response.data);
             })
             .catch(error => {
@@ -52,38 +40,17 @@ function MainList() {
     }, []);
 
 
-    const handleWish = () => {
-
-        const endpoint = `https://ttuz.azurewebsites.net/api/news/get-all`;
-        axios({
-            method: "post",
-            url: endpoint,
-            data: data,
-            headers: {
-                "content-type": "application/json",
-                Authorization: `Bearer ${userData}`
-            }
-        })
-            .then(response => {
-                console.log(response);
-                setListData(response.data);
-            })
-            .catch(error => {
-                console.log(error.response, "error in categories");
-            });
+    const handleWish = (e) => {
+        addWish(e);
     }
 
 
-
-    const IconText = ({ type, text }) => (
+    const IconText = ({ type, id }) => (
         <span>
-            <Icon type={type} style={{ marginRight: 8 }} />
-            {text}
+            <Icon onClick={() => handleWish(id)} type={type} style={{ marginRight: 8 }} />
         </span>
     );
 
-
-    console.log(id);
     return (
         <div className="container">
             <div id="mainlist">
@@ -106,9 +73,7 @@ function MainList() {
                         <List.Item
                             key={item.title}
                             actions={[
-                                <IconText onClick={handleWish} type="heart-o" text="156" key="list-vertical-heart-o" />,
-                                <IconText type="like-o" text="156" key="list-vertical-like-o" />,
-                                <IconText type="message" text="2" key="list-vertical-message" />,
+                                <IconText id={item.id} type="heart-o" text="156" key="list-vertical-heart-o" />
                             ]}
                             extra={
                                 <img

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Tabs } from 'antd';
+import SelectedWishes from './SelectedWishes';
 
 const { TabPane } = Tabs;
 
@@ -10,8 +11,8 @@ function WishList() {
     return (
         <Tabs defaultActiveKey="1" onChange={callback}>
             <TabPane tab="Избранные объявления  5" key="1">
-                Избранные объявления
-        </TabPane>
+                <SelectedWishes />
+            </TabPane>
             <TabPane tab="Избранные продавцы" key="2">
                 Избранные продавцы
         </TabPane>
