@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { CategoryContext } from '../../contexts/CategoryContext';
 import { Icon } from 'antd'
 
@@ -35,7 +35,7 @@ function EachCat(props) {
                                 <dl className="sub-cate-items">
                                     <dt><a href="#">{num.label}</a></dt>
                                     {num.children.length > 0 ? num.children.map((ok, index) =>
-                                        <dd key={index}><a href="#">{ok.label}</a></dd>
+                                        <dd key={index}><Link to={`/subcategories/${ok.value}`}>{ok.label}</Link></dd>
                                     ) : null}
                                 </dl>
                             </div>
@@ -49,34 +49,7 @@ function EachCat(props) {
 
 function TopCategories(props) {
     const { category } = useContext(CategoryContext)
-
-    // const [category, setCategory] = useState([]);
-
-    // useEffect(() => {
-    //     const endpoint = "https://ttuz.azurewebsites.net/api/category/get-all";
-    //     axios({
-    //         method: "get",
-    //         url: endpoint,
-    //         //   auth: {
-    //         //     username: "delivera",
-    //         //     password: "X19WkHHupFJBPsMRPCJwTbv09yCD50E2"
-    //         //   },
-    //         //   headers: {
-    //         //     "content-type": "application/json",
-    //         //     token: token
-    //         //   }
-    //     })
-    //         .then(response => {
-    //             // console.log(response.data);
-    //             setCategory(response.data);
-    //         })
-    //         .catch(error => {
-    //             console.log(error, "error in categories");
-    //         });
-
-    // }, []);
-
-
+    console.log(category);
     return (
         <div id="topcategories">
             <div className="categories-main">

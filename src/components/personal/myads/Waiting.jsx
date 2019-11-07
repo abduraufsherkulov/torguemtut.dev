@@ -6,9 +6,9 @@ import DeleteIcons from '../../Icons/DeleteIcons';
 import ViewIcons from '../../Icons/ViewIcons';
 import { MyAdsContext } from '../../../contexts/MyAdsContext';
 
-function Active() {
+function Waiting() {
     const { myAds } = useContext(MyAdsContext);
-    const perItem = myAds.filter(item => item.status == 2);
+    const perItem = myAds.filter(item => item.status == 1);
     return (
         <div id="activeads">
             <div className="activeads-grid">
@@ -42,4 +42,4 @@ function Active() {
     )
 }
 
-export default Active
+export default Waiting

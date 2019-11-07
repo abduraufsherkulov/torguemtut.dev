@@ -8,7 +8,8 @@ import Container from "./components/Container";
 import AuthContextProvider from "./contexts/AuthContext";
 import CategoryContextProvider from "./contexts/CategoryContext";
 import BalanceContextProvider from "./contexts/BalanceContext";
-import MyAdsProvider from "./contexts/MyAds";
+import MyAdsProvider from "./contexts/MyAdsContext";
+import WishlistContextProvider from "./contexts/WishlistContext";
 if (process.env.NODE_ENV === 'development') {
   import('./sass/styles.scss');
   import("./sass/fonts.scss");
@@ -23,9 +24,11 @@ function App() {
               <CategoryContextProvider>
                 <BalanceContextProvider>
                   <MyAdsProvider>
-                    <Postnavigator />
-                    <Navigator />
-                    <Container />
+                    <WishlistContextProvider>
+                      <Postnavigator />
+                      <Navigator />
+                      <Container />
+                    </WishlistContextProvider>
                   </MyAdsProvider>
                 </BalanceContextProvider>
               </CategoryContextProvider>

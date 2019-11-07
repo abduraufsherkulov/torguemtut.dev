@@ -23,12 +23,14 @@ function Vip() {
                     <Row justify="space-between" type="flex" className="mainrows">
                         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((index, key) => (
                             <Col key={key} className="each">
-                                <div className="img-part"><a href="">
-                                    <div className="vip-face">
-                                        <span>VIP</span>
-                                        <HeartIcons />
-                                    </div>
-                                    <img src={Watch} alt="" /></a>
+                                <div className="img-part">
+                                    <a>
+                                        <div className="vip-face">
+                                            <span>VIP</span>
+                                            <HeartIcons />
+                                        </div>
+                                        <img src={Watch} alt="" />
+                                    </a>
                                 </div>
                                 <div className="info-part">
                                     <h1>{index * 10} y.e.</h1>

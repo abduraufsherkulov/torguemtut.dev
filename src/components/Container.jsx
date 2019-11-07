@@ -26,6 +26,7 @@ import MainWallet from './personal/wallet/MainWallet';
 import { BalanceContext } from '../contexts/BalanceContext';
 import AddNewsAd from './news/adnews/AddNewsAd';
 import DetailsMain from './news/detailsnews/DetailsMain';
+import MainList from './news/subcategories/MainList';
 
 function PrivateRoute({ children, ...rest }) {
   const { userData } = useContext(AuthContext);
@@ -87,6 +88,10 @@ function Container({ location }) {
 
               <Route exact path="/">
                 <Home />
+              </Route>
+              
+              <Route exact path="/subcategories/:id">
+                <MainList />
               </Route>
 
               <Route exact path="/newsdetails">

@@ -26,7 +26,7 @@ import { CategoryContext } from '../../../contexts/CategoryContext';
 import YandexMapsApi from './YandexMapsApi';
 import { IconFont } from '../../Icons/Icons';
 import { AuthContext } from '../../../contexts/AuthContext';
-import { MyAdsContext } from '../../../contexts/MyAds';
+import { MyAdsContext } from '../../../contexts/MyAdsContext';
 const { TextArea } = Input;
 const { Option } = Select;
 
