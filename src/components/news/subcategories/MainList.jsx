@@ -51,6 +51,30 @@ function MainList() {
 
     }, []);
 
+
+    const handleWish = () => {
+
+        const endpoint = `https://ttuz.azurewebsites.net/api/news/get-all`;
+        axios({
+            method: "post",
+            url: endpoint,
+            data: data,
+            headers: {
+                "content-type": "application/json",
+                Authorization: `Bearer ${userData}`
+            }
+        })
+            .then(response => {
+                console.log(response);
+                setListData(response.data);
+            })
+            .catch(error => {
+                console.log(error.response, "error in categories");
+            });
+    }
+
+
+
     const IconText = ({ type, text }) => (
         <span>
             <Icon type={type} style={{ marginRight: 8 }} />
@@ -82,7 +106,7 @@ function MainList() {
                         <List.Item
                             key={item.title}
                             actions={[
-                                <IconText type="heart-o" text="156" key="list-vertical-star-o" />,
+                                <IconText onClick={handleWish} type="heart-o" text="156" key="list-vertical-heart-o" />,
                                 <IconText type="like-o" text="156" key="list-vertical-like-o" />,
                                 <IconText type="message" text="2" key="list-vertical-message" />,
                             ]}
