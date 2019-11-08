@@ -1,26 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Icon } from 'antd';
+import { WishlistContext } from '../../contexts/WishlistContext';
 
 function HeartIcons() {
-    const [heartHover, setHeartHover] = useState(false);
-    const handleWish = (params) => {
-        const endpoint = `https://ttuz.azurewebsites.net/api/news/post-favourite?newsId=${1}`;
-        axios({
-            method: 'post',
-            url: endpoint,
-            headers: {
-                "content-type": "application/json",
-                Authorization: `Bearer ${userData.token}`
-            }
-        }).then(response => {
-            console.log(response)
-        }).catch(error => {
-            console.log(error)
-        })
-    }
+    const [heartHover, setHeartHover] = useState("outlined");
+
+    const { addWish } = useContext(WishlistContext);
 
     return (
-        <Icon onClick={handleWish} onMouseLeave={() => setHeartHover(false)} onMouseOver={() => setHeartHover(true)} type="heart" theme={heartHover ? "filled" : "outlined"} />
+        <Icon onClick={addWish} onMouseLeave={() => setHeartHover("outlined")} onMouseOver={() => setHeartHover("twoTone")} type="heart" theme={heartHover} />
     )
 }
 

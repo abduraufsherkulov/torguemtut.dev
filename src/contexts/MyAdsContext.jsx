@@ -25,7 +25,7 @@ function MyAdsProvider(props) {
             .catch(error => {
                 console.log(error, "error in categories");
             });
-    }, [])
+    }, [myAds])
     return (
         <MyAdsContext.Provider value={{ myAds, setMyAds, activeKey, setActiveKey }}>
             {props.children}

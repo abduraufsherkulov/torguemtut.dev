@@ -5,7 +5,7 @@ export const wishlistReducer = (state, action) => {
         case 'INIT_WISHLIST':
             return { wishlist: [...action.wishlist] }
         case 'ADD_WISHLIST':
-            return
+            return 
         case 'REMOVE_WISHLIST':
             return
         default:

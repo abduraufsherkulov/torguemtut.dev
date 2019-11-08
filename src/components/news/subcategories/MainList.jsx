@@ -5,6 +5,7 @@ import { AuthContext } from '../../../contexts/AuthContext';
 import axios from 'axios';
 import { Link, withRouter } from 'react-router-dom';
 import { WishlistContext } from '../../../contexts/WishlistContext';
+import HeartIcons from '../../Icons/HeartIcons';
 
 
 function MainList() {
@@ -30,8 +31,11 @@ function MainList() {
             }
         })
             .then(response => {
-                // console.log(response);
-                setListData(response.data);
+                console.log(response);
+                // response.data.map(e=>{
+                    
+                // })
+                // setListData(response.data);
             })
             .catch(error => {
                 console.log(error.response, "error in categories");
@@ -73,7 +77,8 @@ function MainList() {
                         <List.Item
                             key={item.title}
                             actions={[
-                                <IconText id={item.id} type="heart-o" text="156" key="list-vertical-heart-o" />
+                                <HeartIcons id={item.id} />
+                                // <IconText id={item.id} type="heart-o" text="156" key="list-vertical-heart-o" />
                             ]}
                             extra={
                                 <img

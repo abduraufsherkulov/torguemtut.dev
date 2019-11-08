@@ -33,7 +33,7 @@ const { Option } = Select;
 
 function AddNewsAd(props) {
 
-    const { setActiveKey } = useContext(MyAdsContext);
+    const { myAds, setActiveKey, setMyAds } = useContext(MyAdsContext);
     const authContext = useContext(AuthContext);
     const { userData, dispatch } = authContext;
     const [checked, setChecked] = useState(false);
@@ -133,6 +133,8 @@ function AddNewsAd(props) {
                     console.log(response);
                     if (response.data.status) {
                         setActiveKey('waiting');
+                        setMyAds([...myAds, response.data.data]);
+                        // console.log(response.data.data)
                         props.history.push('/myads');
                     }
                 }).catch(error => {
