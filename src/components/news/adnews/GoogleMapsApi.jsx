@@ -16,6 +16,13 @@ function test(e, props) {
         Latitude: e.latLng.lat()
     })
 }
+const defaultMapOptions = {
+    fullscreenControl: true,
+    zoomControl: true,
+    disableDefaultUI: true
+};
+
+
 
 const GoogleMapsApi = compose(
     withProps({
@@ -33,7 +40,7 @@ const GoogleMapsApi = compose(
     withScriptjs,
     withGoogleMap
 )(props => (
-    <GoogleMap defaultZoom={6} defaultCenter={{ lat: 41.311157, lng: 69.279718 }}>
+    <GoogleMap defaultOptions={defaultMapOptions} defaultZoom={props.defaultZoom} defaultCenter={{ lat: 41.311157, lng: 69.279718 }}>
         <Marker draggable={true} onDragEnd={(e) => test(e, props)} position={{ lat: props.position.Latitude, lng: props.position.Longtitude }} />
     </GoogleMap>
 ));

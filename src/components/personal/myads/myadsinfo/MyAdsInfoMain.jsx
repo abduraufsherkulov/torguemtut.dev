@@ -1,14 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
-import { Row, Col } from 'antd';
-import DetailsCarousel from './DetailsCarousel';
-import DetailsInfoSeller from './DetailsInfoSeller';
-import DetailsInfoProduct from './DetailsInfoProduct';
-import { AuthContext } from '../../../contexts/AuthContext';
+import { Row, Col, message } from 'antd';
 import axios from 'axios'
+import MyAdsInfoProduct from './MyAdsInfoProduct';
+import MyAdsCarousel from './MyAdsCarousel';
+import { AuthContext } from '../../../../contexts/AuthContext';
 
-function DetailsMain() {
-    const { userData } = useContext(AuthContext)
+function MyAdsInfoMain() {
+    const { userData, dispatch } = useContext(AuthContext)
     const [loading, setLoading] = useState(true)
     const [listData, setListData] = useState([{}, {}]);
 
@@ -33,27 +32,27 @@ function DetailsMain() {
                 setListData(response.data);
                 setLoading(false)
             })
-            .catch(error => {                
+            .catch(error => {
                 if (error.response.status == 401) {
-                message.info('Сессия истекла', 2);
-                dispatcher({ type: 'SIGN_IN' })
-            }
+                    message.info('Сессия истекла', 2);
+                    dispatch({ type: 'SIGN_IN' })
+                }
                 console.log(error.response, "error in categories");
             });
     }, []);
+
     return (
         <div className="container">
             <div id="newsdetails">
                 <Row type="flex" gutter={24}>
-                    <Col span={18}>
-                        <DetailsCarousel listData={listData[0].images} />
-                        <DetailsInfoProduct listData={listData[0]} />
+                    <Col span={24}>
+                        <MyAdsCarousel />
+                        <MyAdsInfoProduct listData={listData[0]} />
                     </Col>
-                    <Col span={6}><DetailsInfoSeller listData={listData[0]} /></Col>
                 </Row>
             </div>
         </div>
     )
 }
 
-export default DetailsMain
+export default MyAdsInfoMain

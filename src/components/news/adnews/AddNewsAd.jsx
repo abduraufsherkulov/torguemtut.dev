@@ -15,7 +15,8 @@ import {
     Divider,
     Button,
     AutoComplete,
-    InputNumber
+    InputNumber,
+    message
 } from 'antd';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom'
@@ -138,6 +139,10 @@ function AddNewsAd(props) {
                         props.history.push('/myads');
                     }
                 }).catch(error => {
+                    if (error.response.status == 401) {
+                        message.info('Сессия истекла', 2);
+                        dispatch({ type: 'SIGN_IN' })
+                    }
                     console.log(error.response)
                 })
             }
@@ -256,7 +261,7 @@ function AddNewsAd(props) {
                                 ],
                             })(<Input />)}
                         </Form.Item>
-                        <GoogleMapsApi position={position} setPosition={setPosition} />
+                        <GoogleMapsApi defaultZoom={6} position={position} setPosition={setPosition} />
                         {/* <YandexMapsApi /> */}
                     </div>
                     <Divider />

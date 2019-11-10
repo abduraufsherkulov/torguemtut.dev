@@ -1,15 +1,30 @@
 import React, { useState, useContext } from 'react'
-import { Icon } from 'antd';
+import { Icon, message } from 'antd';
 import { WishlistContext } from '../../contexts/WishlistContext';
+import { AuthContext } from '../../contexts/AuthContext';
+import { withRouter } from 'react-router-dom'
 
-function HeartIcons() {
+function HeartIcons(props) {
     const [heartHover, setHeartHover] = useState("outlined");
+    const { addWish, removeWish } = useContext(WishlistContext);
+    const { userData } = useContext(AuthContext)
+    const wishController = () => {
+        if (!userData.token) {
+            props.history.push('/login');
+            message.info('Пожалуйста, войдите, чтобы добавить', 2);
+        } else {
+            if (props.favourite) {
+                removeWish(props.item, props.listData, props.setListData);
+            } else {
+                addWish(props.item, props.listData, props.setListData);
+            }
+        }
+    }
 
-    const { addWish } = useContext(WishlistContext);
 
     return (
-        <Icon onClick={addWish} onMouseLeave={() => setHeartHover("outlined")} onMouseOver={() => setHeartHover("twoTone")} type="heart" theme={heartHover} />
+        <Icon onClick={wishController} onMouseLeave={() => setHeartHover("outlined")} onMouseOver={() => setHeartHover("twoTone")} type="heart" theme={props.favourite ? "filled" : heartHover} />
     )
 }
 
-export default HeartIcons;
+export default withRouter(HeartIcons);

@@ -25,8 +25,12 @@ import MainMessages from './personal/messages/MainMessages';
 import MainWallet from './personal/wallet/MainWallet';
 import { BalanceContext } from '../contexts/BalanceContext';
 import AddNewsAd from './news/adnews/AddNewsAd';
+import BoostAd from './news/boostad/BoostAd';
 import DetailsMain from './news/detailsnews/DetailsMain';
 import MainList from './news/subcategories/MainList';
+import MyAdsInfoMain from './personal/myads/myadsinfo/MyAdsInfoMain';
+import NoMatch from './NoMatch';
+import RatingVendors from './ratingvendors/RatingVendors';
 
 function PrivateRoute({ children, ...rest }) {
   const { userData } = useContext(AuthContext);
@@ -35,7 +39,7 @@ function PrivateRoute({ children, ...rest }) {
     <Route
       {...rest}
       render={({ location }) =>
-        userData ? (
+        userData.token ? (
           children
         ) : (
             <Redirect
@@ -57,7 +61,7 @@ function AuthRoute({ children, ...rest }) {
     <Route
       {...rest}
       render={({ location }) =>
-        userData ? (
+        userData.token ? (
           <Redirect
             to={{
               pathname: "/",
@@ -86,17 +90,31 @@ function Container({ location }) {
           <section className="route-section">
             <Switch location={location}>
 
+
               <Route exact path="/">
                 <Home />
               </Route>
-              
+
+              <Route exact path="/ratings">
+                <RatingVendors />
+              </Route>
+
               <Route exact path="/subcategories/:id">
                 <MainList />
               </Route>
 
-              <Route exact path="/newsdetails">
+              <Route exact path="/boostad/:id">
+                <BoostAd />
+              </Route>
+
+              <Route exact path="/item/:id">
                 <DetailsMain />
               </Route>
+
+              <Route exact path="/myads/:id">
+                <MyAdsInfoMain />
+              </Route>
+
               <Route path="/tariff">
                 <Tariff />
               </Route>
@@ -136,6 +154,9 @@ function Container({ location }) {
                 <SideBar />
               </PrivateRoute>
 
+              <Route path="*">
+                <NoMatch />
+              </Route>
             </Switch>
             <Foot />
           </section>

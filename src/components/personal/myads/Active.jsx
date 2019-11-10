@@ -5,6 +5,7 @@ import EditIcons from '../../Icons/EditIcons';
 import DeleteIcons from '../../Icons/DeleteIcons';
 import ViewIcons from '../../Icons/ViewIcons';
 import { MyAdsContext } from '../../../contexts/MyAdsContext';
+import { Link } from 'react-router-dom'
 
 function Active() {
     const { myAds } = useContext(MyAdsContext);
@@ -17,7 +18,7 @@ function Active() {
                         {perItem.map((index, key) => (
                             <Col span={6} key={key} className="each">
                                 <div className="img-part">
-                                    <a href="">
+                                    <Link to={`myads/${index.id}`}>
                                         <div className="activeads-face">
                                             <span>VIP</span>
                                             <div className="action-block">
@@ -27,11 +28,11 @@ function Active() {
                                             </div>
                                         </div>
                                         <img src={Watch} alt="" />
-                                    </a>
+                                    </Link>
                                 </div>
                                 <div className="info-part">
                                     <h1>{index.price.amount} y.e.</h1>
-                                    <p>{index.title}</p>
+                                    <p title={index.title}>{index.title}</p>
                                 </div>
                             </Col>
                         ))}

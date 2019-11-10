@@ -39,6 +39,9 @@ const sellers = (
         <Menu.Item>
             <Link to="/tariff">Тарифы</Link>
         </Menu.Item>
+        <Menu.Item>
+            <Link to="/ratings">Рейтинг продавцов</Link>
+        </Menu.Item>
     </Menu>
 );
 const help = (
@@ -112,7 +115,7 @@ const getAccount = (authContext) => {
     console.log(userData);
     return (
         <Menu style={{ width: "260px" }}>
-            {userData ? loggedUser(userData, dispatch) : defaultText}
+            {userData.token ? loggedUser(userData, dispatch) : defaultText}
             <Menu.Divider />
             <Menu.Item>
                 <Link to="/myads">
@@ -139,8 +142,8 @@ const getAccount = (authContext) => {
                     <Icon type="setting" />    Настройки
         </Link>
             </Menu.Item>
-            {userData ? <Menu.Divider /> : null}
-            {userData ? logOut() : null}
+            {userData.token ? <Menu.Divider /> : null}
+            {userData.token ? logOut() : null}
         </Menu>
     )
 }

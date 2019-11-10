@@ -13,6 +13,7 @@ function LoginForm(props) {
     const { userData, dispatch } = useContext(AuthContext);
     const [checkUsername, setCheckUsername] = useState({ message: "Пожалуйста, введите адрес электронной почты или номер телефона!" });
 
+    const [validateConfirmCode, setvalidateConfirmCode] = useState("")
     const [phone, setphone] = useState(null);
     const [password, setpassword] = useState(null);
     // const [isMail, setisMail] = useState(false);
@@ -67,16 +68,26 @@ function LoginForm(props) {
                             // props.history.push('/');
                         } else {
                             setvalidateConfirmCode('error');
+                            setvalidateLoader('error');
                             props.form.setFields({
-                                confirmcode: {
-                                    value: values.confirmcode,
+                                password: {
+                                    value: values.password,
                                     errors: [new Error(response.data.message)],
                                 },
                             });
                         }
                     })
                     .catch(error => {
-                        console.log(error, "error on refresh");
+                        console.log(error.response, "error on refresh");
+                        setvalidateConfirmCode('error');
+
+                        setvalidateLoader('error');
+                        props.form.setFields({
+                            password: {
+                                value: values.password,
+                                errors: [new Error(error.response.data.message)],
+                            },
+                        });
                     });
             }
         });
@@ -92,9 +103,27 @@ function LoginForm(props) {
         // dispatch({ type: 'SIGN_IN', username: value })
         if (validateLoader === "error") {
             setvalidateLoader('success');
+        } else if (validateConfirmCode === "error") {
+            console.log('call')
+            setvalidateConfirmCode('success')
         }
         callback();
     };
+
+
+    function validatePass(rule, value, callback) {
+        // if (value && confirmDirty) {
+        //     props.form.validateFields(['emailphone'], { force: true });
+        // }
+        // if()
+
+        // dispatch({ type: 'SIGN_IN', username: value })
+        if (validateConfirmCode === "error") {
+            setvalidateConfirmCode('success')
+        }
+        callback();
+    };
+
     return (
         <Row type="flex" justify="center">
             <Col xl={6} xxl={5} lg={10} style={{ zIndex: 1 }}>
@@ -121,13 +150,15 @@ function LoginForm(props) {
                                 )}
                             </Form.Item>
 
-                            <Form.Item style={{ marginBottom: "10px" }} hasFeedback>
+                            <Form.Item style={{ marginBottom: "10px" }} validateStatus={validateConfirmCode} hasFeedback>
                                 {getFieldDecorator('password', {
                                     rules: [
                                         {
                                             required: true,
                                             message: 'Please input your password!',
-                                        },
+                                        }, {
+                                            validator: validatePass
+                                        }
                                     ],
                                 })(<Input.Password size="large"
                                     placeholder="Пароль" />)}

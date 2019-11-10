@@ -1,21 +1,27 @@
-import { List, Avatar, Icon } from 'antd';
+import { List, Avatar, Icon, Skeleton, message } from 'antd';
 import { useParams } from 'react-router-dom';
 import React, { useEffect, useContext, useState } from 'react'
 import { AuthContext } from '../../../contexts/AuthContext';
 import axios from 'axios';
 import { Link, withRouter } from 'react-router-dom';
-import { WishlistContext } from '../../../contexts/WishlistContext';
 import HeartIcons from '../../Icons/HeartIcons';
+import moment from 'moment';
+moment.locale('ru')
 
 
 function MainList() {
-    const { userData } = useContext(AuthContext)
-    const [listData, setListData] = useState([]);
-    const { addWish } = useContext(WishlistContext);
+    const { userData, dispatch } = useContext(AuthContext)
+    const [loading, setLoading] = useState(true)
+    const [listData, setListData] = useState([{}, {}]);
 
     let { id } = useParams();
 
-
+    function br2nl(str) {
+        return str.replace(/<br\s*\/?>/mg, "\n");
+    }
+    function momentize(date) {
+        return moment(date).format('LLLL')
+    }
     useEffect(() => {
         const data = JSON.stringify({
             categoryId: id
@@ -27,34 +33,22 @@ function MainList() {
             data: data,
             headers: {
                 "content-type": "application/json",
-                Authorization: `Bearer ${userData}`
+                Authorization: `Bearer ${userData.token}`
             }
         })
             .then(response => {
-                console.log(response);
-                // response.data.map(e=>{
-                    
-                // })
-                // setListData(response.data);
+                console.log(response.data)
+                setListData(response.data);
+                setLoading(false)
             })
             .catch(error => {
+                if (error.response.status == 401) {
+                    message.info('Сессия истекла', 2);
+                    dispatch({ type: 'SIGN_IN' })
+                }
                 console.log(error.response, "error in categories");
             });
-
     }, []);
-
-
-    const handleWish = (e) => {
-        addWish(e);
-    }
-
-
-    const IconText = ({ type, id }) => (
-        <span>
-            <Icon onClick={() => handleWish(id)} type={type} style={{ marginRight: 8 }} />
-        </span>
-    );
-
     return (
         <div className="container">
             <div id="mainlist">
@@ -70,30 +64,41 @@ function MainList() {
                     dataSource={listData}
                     footer={
                         <div>
-                            <b>ant design</b> footer part
+                            {/* <b>ant design</b> footer part */}
                         </div>
                     }
                     renderItem={item => (
                         <List.Item
-                            key={item.title}
-                            actions={[
-                                <HeartIcons id={item.id} />
+                            className="ant-card-hoverable"
+                            style={{ display: 'flex', padding: '16px' }}
+                            key={item.id}
+                            actions={!loading && [
+                                <HeartIcons setListData={setListData} listData={listData} item={item} favourite={item.favourite} />,
+                                <p>Добавлено в {momentize(item.updatedDate)}</p>
                                 // <IconText id={item.id} type="heart-o" text="156" key="list-vertical-heart-o" />
                             ]}
                             extra={
-                                <img
-                                    width={272}
-                                    alt="logo"
-                                    src={`https://ttuz.azurewebsites.net/${item.images[0].path}`}
-                                />
+                                !loading && (
+                                    <div className="listExtra"><img
+                                        style={{ maxWidth: "150px", maxHeight: "130px" }}
+                                        alt="logo"
+                                        src={`https://ttuz.azurewebsites.net/${item.images[0].path}`}
+                                    /></div>)
                             }
                         >
-                            <List.Item.Meta
-                                // avatar={<Avatar src={`https://ttuz.azurewebsites.net/${item.images[0].path}`} />}
-                                title={<Link to={`/item/${item.id}`}>{item.title}</Link>}
-                                description={item.description}
-                            />
-                            {item.content}
+                            <Skeleton loading={loading} active avatar>
+                                {!loading && (
+                                    <>
+                                        <List.Item.Meta
+                                            // avatar={<Avatar src={`https://ttuz.azurewebsites.net/${item.images[0].path}`} />}
+                                            title={<><Link style={{ width: '70%', float: 'left' }} to={`/item/${item.id}`}>{item.title}</Link><p style={{ display: 'inline-block', width: '30%', textAlign: 'right' }}>{item.price.amount} Сум</p></>}
+                                        // description={br2nl(item.description)}
+                                        />
+                                        {item.content}
+                                        <p style={{color: 'white'}}>asd</p>
+                                    </>
+                                )}
+                            </Skeleton>
                         </List.Item>
                     )}
                 />

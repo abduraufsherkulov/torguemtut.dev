@@ -6,7 +6,7 @@ export const AuthContext = createContext();
 function AuthContextProvider(props) {
     const [userData, dispatch] = useReducer(authReducer, null, () => {
         const localData = localStorage.getItem('userData');
-        return localData ? JSON.parse(localData) : null;
+        return localData ? JSON.parse(localData) : {token: null};
     })
     console.log(userData)
     return (

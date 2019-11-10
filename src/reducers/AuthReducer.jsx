@@ -4,7 +4,7 @@ export const authReducer = (state, action) => {
         case 'SIGN_IN':
             if (localStorage.getItem('userData') !== null) {
                 localStorage.removeItem('userData');
-                return null;
+                return {token: null};
             }
             localStorage.setItem('userData', action.userData);
             return JSON.parse(action.userData)

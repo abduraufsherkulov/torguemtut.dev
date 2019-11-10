@@ -31,7 +31,7 @@ function Waiting() {
                                 </div>
                                 <div className="info-part">
                                     <h1>{index.price.amount} y.e.</h1>
-                                    <p>{index.title}</p>
+                                    <p title={index.title}>{index.title}</p>
                                 </div>
                             </Col>
                         ))}

@@ -2,30 +2,38 @@ import React, { createContext, useReducer, useState, useEffect, useContext } fro
 // import { authReducer } from '../reducers/AuthReducer';
 import axios from 'axios'
 import { AuthContext } from './AuthContext';
+import { message } from 'antd'
 export const MyAdsContext = createContext();
 
 function MyAdsProvider(props) {
-    const { userData } = useContext(AuthContext);
+    const { userData, dispatch } = useContext(AuthContext);
     const [myAds, setMyAds] = useState([]);
     const [activeKey, setActiveKey] = useState("active");
     useEffect(() => {
-        const endpoint = "https://ttuz.azurewebsites.net/api/news/get-all-by-user";
-        axios({
-            method: "post",
-            url: endpoint,
-            data: {},
-            headers: {
-                "content-type": "application/json",
-                Authorization: `Bearer ${userData.token}`
-            }
-        })
-            .then(response => {
-                setMyAds(response.data);
+        if (userData.token) {
+
+            const endpoint = "https://ttuz.azurewebsites.net/api/news/get-all-by-user";
+            axios({
+                method: "post",
+                url: endpoint,
+                data: {},
+                headers: {
+                    "content-type": "application/json",
+                    Authorization: `Bearer ${userData.token}`
+                }
             })
-            .catch(error => {
-                console.log(error, "error in categories");
-            });
-    }, [myAds])
+                .then(response => {
+                    setMyAds(response.data);
+                })
+                .catch(error => {
+                    if (error.response.status == 401) {
+                        message.info('Сессия истекла', 2);
+                        dispatch({ type: 'SIGN_IN' })
+                    }
+                    console.log(error, "error in categories");
+                });
+        }
+    }, [userData])
     return (
         <MyAdsContext.Provider value={{ myAds, setMyAds, activeKey, setActiveKey }}>
             {props.children}

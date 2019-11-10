@@ -15,7 +15,7 @@ function HomeCarousel() {
                 </Carousel>
                 <div className="down-promotion">
                     <Row type="flex" justify="space-between">
-                        {[1, 2, 3, 4].map((k, i) => (
+                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((k, i) => (
                             <Col key={k}>
                                 <div className="crowd-container">
                                     <div className="crowd-img">

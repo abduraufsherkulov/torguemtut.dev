@@ -154,6 +154,9 @@ body {
         @include regular;
         font-size: dynamicfont(15, 17);
         color: $parentcolor;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
       }
       .info-part {
         padding: 18px;
@@ -222,6 +225,10 @@ body {
         @include regular;
         font-size: dynamicfont(15, 17);
         color: $parentcolor;
+
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
       }
       .info-part {
         padding: 18px;
@@ -1163,6 +1170,10 @@ footer {
         @include regular;
         font-size: dynamicfont(15, 17);
         color: $parentcolor;
+
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
       }
       .info-part {
         padding: 18px;
@@ -1226,6 +1237,111 @@ footer {
         padding-left: 23px;
         color: white;
       }
+    }
+  }
+}
+#boostad {
+  #boostcarouseltype {
+    margin-bottom: 100px;
+    .one {
+      .tariff-title {
+        background: #7bdce2;
+      }
+    }
+    .two {
+      .tariff-title {
+        background: $green;
+      }
+    }
+    .three {
+      .tariff-title {
+        background: $warning;
+      }
+      button {
+        background: $warning;
+      }
+    }
+
+    .title {
+      @include bold;
+      font-size: dynamicfont(20, 28);
+      color: $parentcolor;
+      margin: {
+        top: 75px;
+        bottom: 60px;
+      }
+      text-align: center;
+    }
+    .tariff-info {
+      border-radius: 6px;
+      box-shadow: 4px 6px 15px 7px #ececec;
+      .tariff-title {
+        text-align: center;
+        border-top-right-radius: 6px;
+        border-top-left-radius: 6px;
+        padding: 23px 0px;
+        p {
+          color: white;
+          font-size: dynamicfont(9, 11);
+          @include regular;
+          letter-spacing: 5px;
+          text-transform: uppercase;
+          margin-bottom: 0px;
+        }
+        h2 {
+          font-size: dynamicfont(16, 18);
+          @include bold;
+          color: white;
+        }
+      }
+      .tariff-rest {
+        .img-part {
+          margin-right: 35px;
+        }
+        .info-part {
+          h1 {
+            font-size: dynamicfont(13, 15);
+            @include regular;
+            color: $subcategory;
+          }
+        }
+        padding: 25px;
+      }
+      .tariff-btn {
+        text-align: center;
+        margin-top: 45px;
+        margin-bottom: 15px;
+      }
+    }
+  }
+}
+.new-line {
+  white-space: pre-line;
+}
+.detailscarousel {
+  .slick-slide {
+    text-align: center;
+    height: 500px;
+    line-height: 160px;
+    background: #364d79;
+    overflow: hidden;
+  }
+}
+#mainlist {
+  .ant-list-item-main {
+    order: 2;
+    margin-left: 40px;
+  }
+  .ant-list-item-extra {
+    order: 1;
+    margin-left: 0px;
+    .listExtra {
+      width: 150px;
+      height: 130px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }
