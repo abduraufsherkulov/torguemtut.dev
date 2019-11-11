@@ -26,7 +26,9 @@ function SelectedWishes() {
                                                 <DeleteIcons />
                                             </div>
                                         </div>
-                                        <img src={Watch} alt="" />
+                                        <div className="img-item-container">
+                                            <img src={index.images !== undefined ? `https://ttuz.azurewebsites.net/${index.images[0].path}` : null} alt="" />
+                                        </div>
                                     </a>
                                 </div>
                                 <div className="info-part">

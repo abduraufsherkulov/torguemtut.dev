@@ -5,7 +5,7 @@ import Up from "../../../images/up.png";
 import Vip from "../../../images/vip-gold.png";
 import { BalanceContext } from '../../../contexts/BalanceContext';
 import { AuthContext } from '../../../contexts/AuthContext';
-import { useParams } from 'react-router-dom'
+import { useParams, withRouter } from 'react-router-dom'
 import axios from 'axios'
 
 function BoostCarouselType(props) {
@@ -31,10 +31,10 @@ function BoostCarouselType(props) {
                 Authorization: `Bearer ${userData.token}`
             }
         }).then(response => {
-            console.log(response.data)
-            setLoading({ id: 1, status: false });
-            props.history.push('/myads');
-
+            if (response.data.status) {
+                setLoading({ id: 1, status: false });
+                props.history.push('/myads');
+            }
         }).catch(error => {
             if (error.response.status == 401) {
                 message.info('Сессия истекла', 2);
@@ -59,6 +59,10 @@ function BoostCarouselType(props) {
                 Authorization: `Bearer ${userData.token}`
             }
         }).then(response => {
+            if (response.data.status) {
+                setLoading({ id: 2, status: false });
+                props.history.push('/myads');
+            }
 
         }).catch(error => {
             if (error.response.status == 401) {
@@ -84,7 +88,10 @@ function BoostCarouselType(props) {
                 Authorization: `Bearer ${userData.token}`
             }
         }).then(response => {
-
+            if (response.data.status) {
+                setLoading({ id: 3, status: false });
+                props.history.push('/myads');
+            }
         }).catch(error => {
             if (error.response.status == 401) {
                 message.info('Сессия истекла', 2);

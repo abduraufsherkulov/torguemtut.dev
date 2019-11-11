@@ -27,7 +27,9 @@ function Active() {
                                                 <DeleteIcons />
                                             </div>
                                         </div>
-                                        <img src={Watch} alt="" />
+                                        <div className="img-item-container">
+                                            <img src={index.images !== undefined ? `https://ttuz.azurewebsites.net/${index.images[0].path}` : null} alt="" />
+                                        </div>
                                     </Link>
                                 </div>
                                 <div className="info-part">

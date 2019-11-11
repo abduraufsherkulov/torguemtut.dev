@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Carousel, Skeleton } from 'antd';
-import SliderPng from "../../../images/slider.png";
 import Magnifier from "react-magnifier";
 
 

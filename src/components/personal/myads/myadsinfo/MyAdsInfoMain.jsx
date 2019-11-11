@@ -46,7 +46,7 @@ function MyAdsInfoMain() {
             <div id="newsdetails">
                 <Row type="flex" gutter={24}>
                     <Col span={24}>
-                        <MyAdsCarousel />
+                        <MyAdsCarousel listData={listData[0].images} />
                         <MyAdsInfoProduct listData={listData[0]} />
                     </Col>
                 </Row>

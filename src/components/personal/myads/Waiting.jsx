@@ -9,6 +9,7 @@ import { MyAdsContext } from '../../../contexts/MyAdsContext';
 function Waiting() {
     const { myAds } = useContext(MyAdsContext);
     const perItem = myAds.filter(item => item.status == 1);
+    console.log(myAds);
     return (
         <div id="activeads">
             <div className="activeads-grid">
@@ -26,7 +27,9 @@ function Waiting() {
                                                 <DeleteIcons />
                                             </div>
                                         </div>
-                                        <img src={Watch} alt="" />
+                                        <div className="img-item-container">
+                                            <img src={index.images !== undefined ? `https://ttuz.azurewebsites.net/${index.images[0].path}` : null} alt="" />
+                                        </div>
                                     </a>
                                 </div>
                                 <div className="info-part">

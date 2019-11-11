@@ -1,20 +1,29 @@
-import React from 'react'
-import { Carousel } from 'antd';
-import SliderPng from "../../../../images/slider.png";
+import React, { useState, useEffect } from 'react'
+import { Carousel, Skeleton } from 'antd';
 import Magnifier from "react-magnifier";
 
 
-function MyAdsCarousel() {
+function MyAdsCarousel({ listData }) {
+    const [loading, setLoading] = useState(true)
     function onChange(a, b, c) {
         console.log(a, b, c);
     }
-
+    useEffect(() => {
+        if (listData !== undefined) {
+            console.log('ok')
+            setLoading(false)
+        }
+    }, [listData])
     return (
-        <Carousel afterChange={onChange}>
-            <Magnifier src={SliderPng} />
-            <Magnifier src={SliderPng} />
-            <Magnifier src={SliderPng} />
-        </Carousel>
+        <Skeleton active loading={loading}>
+            {!loading && (
+                <Carousel className="detailscarousel" afterChange={onChange}>
+                    {listData.map(item => (
+                        <Magnifier height={'100%'} key={item.createdDate} src={`https://ttuz.azurewebsites.net/${item.path.replace(/\\/g, "/")}`} />
+                    ))}
+                </Carousel>
+            )}
+        </Skeleton>
     )
 }
 

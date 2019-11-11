@@ -25,14 +25,14 @@ function DetailsInfoSeller({ listData }) {
             })
         }
     }, [listData])
-
+    console.log(listData)
     return (
         <div>
             <Card>
                 <Skeleton paragraph={{ rows: 0, width: "100%" }} loading={loading} active>
                     {!loading && (
                         <>
-                            <h2>{listData.price.amount}</h2>
+                            <h2>{listData.price.amount} y.e.</h2>
                         </>
                     )
                     }

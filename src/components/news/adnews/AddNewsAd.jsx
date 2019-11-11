@@ -135,7 +135,6 @@ function AddNewsAd(props) {
                     if (response.data.status) {
                         setActiveKey('waiting');
                         setMyAds([...myAds, response.data.data]);
-                        // console.log(response.data.data)
                         props.history.push('/myads');
                     }
                 }).catch(error => {
