@@ -10,7 +10,6 @@ function MyAdsCarousel({ listData }) {
     }
     useEffect(() => {
         if (listData !== undefined) {
-            console.log('ok')
             setLoading(false)
         }
     }, [listData])

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Card, Icon, Avatar, Skeleton, Button, Rate } from 'antd';
 import GoogleMapsApi from '../adnews/GoogleMapsApi';
+import HeartIcons from '../../Icons/HeartIcons';
 
 const { Meta } = Card;
 
@@ -42,18 +43,21 @@ function DetailsInfoSeller({ listData }) {
                 {!loading && (<Button href={`tel:${listData.contactDetail.phone}`} type="primary" block ><Icon type="phone" />{listData.contactDetail.phone}</Button>)}
             </Skeleton>
             <Card
+                style={{ display: 'flex', flexDirection: 'column' }}
+                extra={<HeartIcons />}
+                title={<Meta
+                    style={{ display: 'flex', alignItems: 'center' }}
+                    avatar={<Avatar size="large" icon="user" />}
+                    title="Доу"
+                    description="Джон"
+                />}
                 cover={
-                    <GoogleMapsApi position={position} defaultZoom={17} />
+                    <GoogleMapsApi style={{ order: 1 }} position={position} defaultZoom={17} />
                 }
                 actions={[
                     <Rate disabled={true} allowHalf count={4.5} defaultValue={2.5} />
                 ]}
             >
-                <Meta
-                    avatar={<Avatar icon="user" />}
-                    title="Доу"
-                    description="Джон"
-                />
             </Card>
         </div>
     )
