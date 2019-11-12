@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { Card, Icon, Avatar, Skeleton, Button, Rate } from 'antd';
 import GoogleMapsApi from '../adnews/GoogleMapsApi';
 import HeartIcons from '../../Icons/HeartIcons';
+import VendorHeartIcons from '../../Icons/VendorHeartIcons';
 
 const { Meta } = Card;
 
-function DetailsInfoSeller({ listData }) {
+function DetailsInfoSeller({ listData, setListData }) {
     const [loading, setLoading] = useState(true);
     const [position, setPosition] = useState({
         RegionId: 1,
@@ -44,12 +45,12 @@ function DetailsInfoSeller({ listData }) {
             </Skeleton>
             <Card
                 style={{ display: 'flex', flexDirection: 'column' }}
-                extra={<HeartIcons />}
+                extra={<VendorHeartIcons listData={listData} setListData={setListData} item={listData} favourite={listData.favourite} />}
                 title={<Meta
                     style={{ display: 'flex', alignItems: 'center' }}
                     avatar={<Avatar size="large" icon="user" />}
                     title="Доу"
-                    description="Джон"
+                    // description="Джон"
                 />}
                 cover={
                     <GoogleMapsApi style={{ order: 1 }} position={position} defaultZoom={17} />
