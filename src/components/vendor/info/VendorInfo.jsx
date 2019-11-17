@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 
 const { Meta } = Card;
 
-function DetailsInfoSeller({ listData, setListData, item }) {
+function VendorInfo({ listData, setListData, item }) {
     const [loading, setLoading] = useState(true);
     const [position, setPosition] = useState({
         RegionId: 1,
@@ -69,4 +69,4 @@ function DetailsInfoSeller({ listData, setListData, item }) {
     )
 }
 
-export default DetailsInfoSeller
+export default VendorInfo

@@ -9,8 +9,8 @@ import axios from 'axios'
 
 function DetailsMain() {
     const { userData } = useContext(AuthContext)
-    const [loading, setLoading] = useState(true)
-    const [listData, setListData] = useState([{}, {}]);
+    const [loading, setLoading] = useState(true);
+    const [listData, setListData] = useState([{}, {}, {}, {}]);
 
     let { id } = useParams();
 
@@ -29,7 +29,6 @@ function DetailsMain() {
             }
         })
             .then(response => {
-                console.log(response.data)
                 setListData(response.data);
                 setLoading(false)
             })
@@ -41,6 +40,7 @@ function DetailsMain() {
                 console.log(error.response, "error in categories");
             });
     }, []);
+    
     return (
         <div className="container">
             <div id="newsdetails">
@@ -49,7 +49,7 @@ function DetailsMain() {
                         <DetailsCarousel listData={listData[0].images} />
                         <DetailsInfoProduct listData={listData[0]} />
                     </Col>
-                    <Col span={6}><DetailsInfoSeller listData={listData[0]} /></Col>
+                    <Col span={6}><DetailsInfoSeller setListData={setListData} listData={listData} item={listData[0]} /></Col>
                 </Row>
             </div>
         </div>

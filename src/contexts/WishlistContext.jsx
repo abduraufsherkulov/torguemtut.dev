@@ -23,6 +23,7 @@ function WishlistContextProvider(props) {
                     Authorization: `Bearer ${userData.token}`
                 }
             }).then(response => {
+                console.log(response, 'wishlist')
                 dispatch({ type: 'INIT_WISHLIST', wishlist: response.data });
             }).catch(error => {
                 console.log(error.response.status);

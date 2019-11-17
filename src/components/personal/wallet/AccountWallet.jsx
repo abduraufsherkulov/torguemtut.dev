@@ -21,7 +21,7 @@ function AccountWallet(props) {
                                     <img src={LOGO} alt="" />
                                 </div>
                                 <p>ID: {userData.id}</p>
-                                <h2 >{balance} Сум</h2>
+                                <h2 >{balance} TT coin</h2>
                                 <h1>JOHN DOE</h1>
                             </div>
                         </div>

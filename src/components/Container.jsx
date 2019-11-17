@@ -31,6 +31,7 @@ import MainList from './news/subcategories/MainList';
 import MyAdsInfoMain from './personal/myads/myadsinfo/MyAdsInfoMain';
 import NoMatch from './NoMatch';
 import RatingVendors from './ratingvendors/RatingVendors';
+import VendorSideBar from './vendor/VendorSideBar';
 
 function PrivateRoute({ children, ...rest }) {
   const { userData } = useContext(AuthContext);
@@ -153,6 +154,16 @@ function Container({ location }) {
               <PrivateRoute path="/wallet">
                 <SideBar />
               </PrivateRoute>
+
+              <Route exact path="/vendorproducts/:id">
+                <VendorSideBar />
+              </Route>
+              <Route exact path="/vendorratings/:id">
+                <VendorSideBar />
+              </Route>
+              <Route exact path="/vendorstatistics/:id">
+                <VendorSideBar />
+              </Route>
 
               <Route path="*">
                 <NoMatch />

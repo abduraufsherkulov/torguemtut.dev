@@ -12,7 +12,7 @@ moment.locale('ru')
 function MainList() {
     const { userData, dispatch } = useContext(AuthContext)
     const [loading, setLoading] = useState(true)
-    const [listData, setListData] = useState([{}, {}]);
+    const [listData, setListData] = useState([{}, {}, {}, {}]);
 
     let { id } = useParams();
 
@@ -75,7 +75,6 @@ function MainList() {
                             actions={!loading && [
                                 <HeartIcons setListData={setListData} listData={listData} item={item} favourite={item.favourite} />,
                                 <p>Добавлено в {momentize(item.updatedDate)}</p>
-                                // <IconText id={item.id} type="heart-o" text="156" key="list-vertical-heart-o" />
                             ]}
                             extra={
                                 !loading && (

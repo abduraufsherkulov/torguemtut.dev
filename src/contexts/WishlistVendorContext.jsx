@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useContext, useReducer } from 'react'
 import axios from 'axios';
 import { AuthContext } from './AuthContext';
 import { wishlistReducer } from '../reducers/WishlistReducer';
+import { message, Button } from 'antd';
 
 export const WishlistVendorContext = createContext();
 
@@ -23,22 +24,22 @@ function WishlistVendorContextProvider(props) {
             console.log(response);
             dispatch({ type: 'INIT_WISHLIST_VENDOR', wishlistvendor: response.data });
         }).catch(error => {
-            console.log(error.response.status);
-            // if (error.response.status == 401) {
-            //     message.info('Сессия истекла', 2);
-            //     dispatcher({ type: 'SIGN_IN' })
-            // }
+            // console.log(error.response.status);
+            if (error.response.status == 401) {
+                message.info('Сессия истекла', 2);
+                dispatcher({ type: 'SIGN_IN' })
+            }
         })
     }, [])
 
 
     const addWish = (wish, listData, setListData) => {
         const key = 'updatable';
-        let selectedWish = listData.findIndex(x => x.id == wish.id);
-        listData[selectedWish].favourite = true;
+        let selectedWish = listData.findIndex(x => x.ownerId == wish.ownerId);
+        listData[selectedWish].vendorFavourite = true;
         setListData([...listData]);
         message.loading({ content: 'Добавление в избранных...', key });
-        const endpoint = `https://ttuz.azurewebsites.net/api/news/post-vendor-favourite?targetUserId=${wish.id}`;
+        const endpoint = `https://ttuz.azurewebsites.net/api/news/post-vendor-favourite?targetUserId=${wish.ownerId}`;
         axios({
             method: 'post',
             url: endpoint,
@@ -49,9 +50,9 @@ function WishlistVendorContextProvider(props) {
         }).then(response => {
             if (response.data.status) {
                 message.success({ content: 'Добавлено в избранные', key, duration: 2 });
-                dispatch({ type: 'ADD_WISH', wishlist: wish });
+                dispatch({ type: 'ADD_WISH_VENDOR', wishlistvendor: wish.ownerDetails });
             } else {
-                listData[selectedWish].favourite = false;
+                listData[selectedWish].vendorFavourite = false;
                 setListData([...listData]);
                 message.error({ content: 'Что то пошло не так', key, duration: 2 });
             }
@@ -60,19 +61,20 @@ function WishlistVendorContextProvider(props) {
                 message.info('Сессия истекла', 2);
                 dispatcher({ type: 'SIGN_IN' })
             }
-            listData[selectedWish].favourite = false;
+            listData[selectedWish].vendorFavourite = false;
             setListData([...listData]);
             message.error({ content: 'Что то пошло не так', key, duration: 2 });
         })
     }
 
     const removeWish = (wish, listData, setListData) => {
+        console.log(wish)
         const key = 'updatable';
-        let selectedWish = listData.findIndex(x => x.id == wish.id);
-        listData[selectedWish].favourite = false;
+        let selectedWish = listData.findIndex(x => x.ownerId == wish.ownerId);
+        listData[selectedWish].vendorFavourite = false;
         setListData([...listData]);
         message.loading({ content: 'Удаление из избранных...', key });
-        const endpoint = `https://ttuz.azurewebsites.net/api/news/delete-vendor-favourite?targetUserId=${wish.id}`;
+        const endpoint = `https://ttuz.azurewebsites.net/api/news/delete-vendor-favourite?targetUserId=${wish.ownerId}`;
         axios({
             method: 'post',
             url: endpoint,
@@ -83,9 +85,9 @@ function WishlistVendorContextProvider(props) {
         }).then(response => {
             if (response.data.status) {
                 message.success({ content: 'Удалено из избранных', key, duration: 2 });
-                dispatch({ type: 'REMOVE_WISH', wishlist: wish });
+                dispatch({ type: 'REMOVE_WISH_VENDOR', wishlistvendor: wish.ownerDetails });
             } else {
-                listData[selectedWish].favourite = true;
+                listData[selectedWish].vendorFavourite = true;
                 setListData([...listData]);
                 message.error({ content: 'Что то пошло не так', key, duration: 2 });
             }
@@ -94,7 +96,7 @@ function WishlistVendorContextProvider(props) {
                 message.info('Сессия истекла', 2);
                 dispatcher({ type: 'SIGN_IN' })
             }
-            listData[selectedWish].favourite = true;
+            listData[selectedWish].vendorFavourite = true;
             setListData([...listData]);
             message.error({ content: 'Что то пошло не так', key, duration: 2 });
         })
