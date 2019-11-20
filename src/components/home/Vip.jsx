@@ -24,10 +24,10 @@ function Vip() {
                 console.log(response)
             })
             .catch(error => {
-                if (error.response.status == 401) {
-                    message.info('Сессия истекла', 2);
-                    dispatch({ type: 'SIGN_IN' })
-                }
+                // if (error.response.status == 401) {
+                //     message.info('Сессия истекла', 2);
+                //     dispatch({ type: 'SIGN_IN' })
+                // }
                 console.log(error, "error in categories");
             });
     }, [])

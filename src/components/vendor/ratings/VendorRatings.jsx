@@ -52,7 +52,7 @@ function VendorRatings() {
                 {
                     author: 'Han Solo',
                     avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-                    content: <div><Rate value={rating} disabled={true} /><Divider /><p>{value}</p></div>,
+                    content: <div><Rate value={rating} disabled={true} /><p>{value}</p></div>,
                     datetime: moment().fromNow(),
                 },
                 ...comments,
@@ -69,6 +69,7 @@ function VendorRatings() {
         console.log(e)
         setRating(e);
     };
+    console.log(comments);
     return (
         <div id="messages">
             <div>
