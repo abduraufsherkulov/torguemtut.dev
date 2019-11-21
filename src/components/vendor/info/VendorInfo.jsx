@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Card, Icon, Avatar, Skeleton, Button, Rate } from 'antd';
-import GoogleMapsApi from '../adnews/GoogleMapsApi';
+// import GoogleMapsApi from '../adnews/GoogleMapsApi';
 import HeartIcons from '../../Icons/HeartIcons';
 import VendorHeartIcons from '../../Icons/VendorHeartIcons';
 import { Link } from 'react-router-dom'
+import GoogleMapsApi from '../../news/adnews/GoogleMapsApi';
 
 const { Meta } = Card;
 

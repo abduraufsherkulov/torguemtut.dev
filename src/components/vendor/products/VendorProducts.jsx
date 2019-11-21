@@ -14,7 +14,7 @@ function VendorProducts({ id }) {
     const [listData, setListData] = useState([{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]);
     useEffect(() => {
         const data = JSON.stringify({
-            id: id
+            ownerId: id
         })
         const endpoint = `https://ttuz.azurewebsites.net/api/news/get-all`;
         axios({

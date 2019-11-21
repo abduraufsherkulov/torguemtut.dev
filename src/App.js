@@ -11,6 +11,7 @@ import BalanceContextProvider from "./contexts/BalanceContext";
 import MyAdsProvider from "./contexts/MyAdsContext";
 import WishlistContextProvider from "./contexts/WishlistContext";
 import WishlistVendorContextProvider from "./contexts/WishlistVendorContext";
+import CommentContextProvider from "./contexts/CommentContext";
 if (process.env.NODE_ENV === 'development') {
   import('./sass/styles.scss');
   import("./sass/fonts.scss");
@@ -27,9 +28,11 @@ function App() {
                   <MyAdsProvider>
                     <WishlistContextProvider>
                       <WishlistVendorContextProvider>
-                        <Postnavigator />
-                        <Navigator />
-                        <Container />
+                        <CommentContextProvider>
+                          <Postnavigator />
+                          <Navigator />
+                          <Container />
+                        </CommentContextProvider>
                       </WishlistVendorContextProvider>
                     </WishlistContextProvider>
                   </MyAdsProvider>

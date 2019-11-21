@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import ComingSoon from '../../../images/coming_soon.gif';
 import { Comment, Tooltip, List, Avatar, Form, Button, Input, Rate, Divider } from 'antd';
 import moment from 'moment';
+import { CommentContext } from '../../../contexts/CommentContext';
+import axios from 'axios';
 
 const { TextArea } = Input;
 
@@ -31,11 +33,34 @@ const Editor = ({ rateChange, onChange, onSubmit, submitting, value, rating }) =
 );
 
 
-function VendorRatings() {
-    const [comments, setComments] = useState([])
+function VendorRatings({ id }) {
+    const { comments, setComments } = useContext(CommentContext);
     const [submitting, setSubmitting] = useState(false)
     const [value, setValue] = useState("")
     const [rating, setRating] = useState(0)
+
+    useEffect(() => {
+
+        const endpoint = `https://ttuz.azurewebsites.net/api/news/get-vendor-reviews?targetUserId=${id}`;
+
+        axios({
+            method: "post",
+            url: endpoint,
+            headers: {
+                "content-type": "application/json"
+            }
+        })
+            .then(response => {
+                setComments(response.data)
+            })
+            .catch(error => {
+                if (error.response.status == 401) {
+                    message.info('Сессия истекла', 2);
+                    dispatch({ type: 'SIGN_IN' })
+                }
+                console.log(error, "error in categories");
+            });
+    }, [])
 
     const handleSubmit = () => {
         if (!value || rating == 0) {
@@ -44,22 +69,44 @@ function VendorRatings() {
 
         setSubmitting(true)
 
-        setTimeout(() => {
-            setSubmitting(false)
-            setValue("")
-            setRating(0);
-            setComments([
-                {
-                    author: 'Han Solo',
-                    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-                    content: <div><Rate value={rating} disabled={true} /><p>{value}</p></div>,
-                    datetime: moment().fromNow(),
-                },
-                ...comments,
-            ])
+        const data = JSON.stringify({
+            TargetUserId: id,
+            Mark: rating,
+            Message: value
+        });
 
+        const endpoint = `https://ttuz.azurewebsites.net/api/news/get-vendor-reviews?targetUserId=${id}`;
 
-        }, 1000);
+        axios({
+            method: "post",
+            data: data,
+            url: endpoint,
+            headers: {
+                "content-type": "application/json"
+            }
+        })
+            .then(response => {
+                setSubmitting(false)
+                setValue("")
+                setRating(0);
+                setComments([
+                    {
+                        author: 'John Doe',
+                        avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+                        content: <div><Rate value={rating} disabled={true} /><p>{value}</p></div>,
+                        datetime: moment().fromNow(),
+                    },
+                    ...comments,
+                ])
+                setComments(response.data)
+            })
+            .catch(error => {
+                if (error.response.status == 401) {
+                    message.info('Сессия истекла', 2);
+                    dispatch({ type: 'SIGN_IN' })
+                }
+                console.log(error, "error in categories");
+            });
     };
     const handleChange = e => {
         setValue(e.target.value)

@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Link, withRouter, useParams } from "rea
 import VendorProducts from './products/VendorProducts';
 import VendorRatings from './ratings/VendorRatings';
 import VendorStatistics from './statistics/VendorStatistics';
+import VendorInfo from './info/VendorInfo';
 
 
 const { SubMenu } = Menu;
@@ -32,13 +33,11 @@ function VendorSideBar({ location }) {
                             console.log(collapsed, type);
                         }}
                     >
-                        <div className="text-align-center user-section">
+                        {/* <div className="text-align-center user-section">
                             <Avatar size={125} icon="user" />
                             <div className="auth-section"><span className="firstname">John</span> <span className="lastname">Doe</span></div>
-                            <div>
-                                <a className="edit-link" onClick={() => { console.log('ok') }}> Редактировать </a>
-                            </div>
-                        </div>
+                        </div> */}
+                        <VendorInfo />
                         <Menu theme="light" mode="inline" selectedKeys={[location.pathname]}>
                             <Menu.Item key={`/vendorproducts/${id}`}>
                                 <Link to={`/vendorproducts/${id}`} >
@@ -61,8 +60,8 @@ function VendorSideBar({ location }) {
                         </Menu>
                     </Sider>
                     <Content style={{ padding: '0 24px', minHeight: 280 }}>
-                        <Route path="/vendorproducts" component={VendorProducts} id={id} />
-                        <Route path="/vendorratings" component={VendorRatings} />
+                        <Route path="/vendorproducts" render={() => <VendorProducts id={id} />} />
+                        <Route path="/vendorratings" render={() => <VendorRatings id={id} />} />
                         <Route path="/vendorstatistics" component={VendorStatistics} />
                     </Content>
                 </Layout>
