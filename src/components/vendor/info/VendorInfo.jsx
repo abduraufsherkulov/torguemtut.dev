@@ -5,10 +5,11 @@ import HeartIcons from '../../Icons/HeartIcons';
 import VendorHeartIcons from '../../Icons/VendorHeartIcons';
 import { Link } from 'react-router-dom'
 import GoogleMapsApi from '../../news/adnews/GoogleMapsApi';
+import axios from 'axios'
 
 const { Meta } = Card;
 
-function VendorInfo({ listData, setListData, item }) {
+function VendorInfo({ listData, setListData, id }) {
     const [loading, setLoading] = useState(true);
     const [position, setPosition] = useState({
         RegionId: 1,
@@ -17,22 +18,45 @@ function VendorInfo({ listData, setListData, item }) {
         Longtitude: 69.279718,
         Latitude: 41.311157
     })
+    const [item, setItem] = useState({});
     useEffect(() => {
-        if (item.location !== undefined) {
-            setLoading(false)
-            setPosition({
-                RegionId: 1,
-                DistrictId: 1,
-                Address: "",
-                Longtitude: +item.location.longtitude,
-                Latitude: +item.location.latitude
+        const endpoint = `https://ttuz.azurewebsites.net/api/users/get-profile?userId=${id}`;
+        axios({
+            method: "post",
+            url: endpoint,
+            headers: {
+                "content-type": "application/json"
+            }
+        })
+            .then(response => {
+                console.log(response.data)
+                setItem(response.data);
+                setLoading(false)
             })
-        }
-    }, [item])
+            .catch(error => {
+                console.log(error);
+                if (error.response.status == 401) {
+                    message.info('Сессия истекла', 2);
+                    dispatch({ type: 'SIGN_IN' })
+                }
+                console.log(error.response, "error in categories");
+            });
+
+        // if (item.location !== undefined) {
+        //     setLoading(false)
+        //     setPosition({
+        //         RegionId: 1,
+        //         DistrictId: 1,
+        //         Address: "",
+        //         Longtitude: +item.location.longtitude,
+        //         Latitude: +item.location.latitude
+        //     })
+        // }
+    }, [])
     console.log(item)
     return (
         <div>
-            <Card>
+            {/* <Card>
                 <Skeleton paragraph={{ rows: 0, width: "100%" }} loading={loading} active>
                     {!loading && (
                         <>
@@ -41,9 +65,9 @@ function VendorInfo({ listData, setListData, item }) {
                     )
                     }
                 </Skeleton>
-            </Card>
+            </Card> */}
             <Skeleton paragraph={{ rows: 0 }} loading={loading} active>
-                {!loading && (<Button href={`tel:${item.contactDetail.phone}`} type="primary" block ><Icon type="phone" />{item.contactDetail.phone}</Button>)}
+                {!loading && (<Button href={`tel:${item.phone}`} type="primary" block ><Icon type="phone" />{item.phone}</Button>)}
             </Skeleton>
             <Skeleton paragraph={{ rows: 0 }} loading={loading} active>
                 {!loading && (
@@ -53,7 +77,7 @@ function VendorInfo({ listData, setListData, item }) {
                         title={<Meta
                             style={{ display: 'flex', alignItems: 'center' }}
                             avatar={<Avatar size="large" icon="user" />}
-                            title={<Link to={`/vendorproducts/${item.ownerId}`}>{item.ownerDetails.phone}</Link>}
+                            title={<Link to={`/vendorproducts/${item.ownerId}`}>{item.phone}</Link>}
                         // description="Джон"
                         />}
                         cover={

@@ -37,7 +37,7 @@ function VendorSideBar({ location }) {
                             <Avatar size={125} icon="user" />
                             <div className="auth-section"><span className="firstname">John</span> <span className="lastname">Doe</span></div>
                         </div> */}
-                        <VendorInfo />
+                        <VendorInfo id={id} />
                         <Menu theme="light" mode="inline" selectedKeys={[location.pathname]}>
                             <Menu.Item key={`/vendorproducts/${id}`}>
                                 <Link to={`/vendorproducts/${id}`} >
