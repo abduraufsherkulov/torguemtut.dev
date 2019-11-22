@@ -21,7 +21,6 @@ function VendorSideBar({ location }) {
             <div id="sidebar-content">
                 <MainBreadcrumbs />
                 <Layout style={{ padding: '24px 0', background: '#fff' }}>
-
                     <Sider
                         style={{ background: '#fff' }}
                         breakpoint="lg"
@@ -29,14 +28,11 @@ function VendorSideBar({ location }) {
                         onBreakpoint={broken => {
                             console.log(broken);
                         }}
+                        width={260}
                         onCollapse={(collapsed, type) => {
                             console.log(collapsed, type);
                         }}
                     >
-                        {/* <div className="text-align-center user-section">
-                            <Avatar size={125} icon="user" />
-                            <div className="auth-section"><span className="firstname">John</span> <span className="lastname">Doe</span></div>
-                        </div> */}
                         <VendorInfo id={id} />
                         <Menu theme="light" mode="inline" selectedKeys={[location.pathname]}>
                             <Menu.Item key={`/vendorproducts/${id}`}>

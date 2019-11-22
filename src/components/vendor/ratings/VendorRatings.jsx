@@ -4,6 +4,7 @@ import { Comment, Tooltip, List, Avatar, Form, Button, Input, Rate, Divider } fr
 import moment from 'moment';
 import { CommentContext } from '../../../contexts/CommentContext';
 import axios from 'axios';
+import { AuthContext } from '../../../contexts/AuthContext';
 
 const { TextArea } = Input;
 
@@ -35,6 +36,7 @@ const Editor = ({ rateChange, onChange, onSubmit, submitting, value, rating }) =
 
 function VendorRatings({ id }) {
     const { comments, setComments } = useContext(CommentContext);
+    const { userData } = useContext(AuthContext)
     const [submitting, setSubmitting] = useState(false)
     const [value, setValue] = useState("")
     const [rating, setRating] = useState(0)
@@ -51,7 +53,19 @@ function VendorRatings({ id }) {
             }
         })
             .then(response => {
-                setComments(response.data)
+                console.log(response.data);
+                let ratingArray = response.data;
+                ratingArray.map((each, i) => {
+                    ratingArray[i]['author'] = ratingArray[i]['userId']
+                    ratingArray[i]['avatar'] = 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
+                    ratingArray[i]['content'] = <div><Rate value={+ratingArray[i]['mark']} disabled={true} /><p>{ratingArray[i]['message']}</p></div>
+                    ratingArray[i]['datetime'] = moment(ratingArray[i]['updatedDate']).fromNow()
+                    delete ratingArray[i]['targetUserId'];
+                    delete ratingArray[i]['userId'];
+                    delete ratingArray[i]['createdDate'];
+                    delete ratingArray[i]['updatedDate'];
+                })
+                setComments(ratingArray);
             })
             .catch(error => {
                 if (error.response.status == 401) {
@@ -75,20 +89,23 @@ function VendorRatings({ id }) {
             Message: value
         });
 
-        const endpoint = `https://ttuz.azurewebsites.net/api/news/get-vendor-reviews?targetUserId=${id}`;
+        const endpoint = `https://ttuz.azurewebsites.net/api/news/post-vendor-review`;
 
         axios({
             method: "post",
             data: data,
             url: endpoint,
             headers: {
-                "content-type": "application/json"
+                "content-type": "application/json",
+                Authorization: `Bearer ${userData.token}`
             }
         })
             .then(response => {
                 setSubmitting(false)
                 setValue("")
                 setRating(0);
+
+                console.log(response.data)
                 setComments([
                     {
                         author: 'John Doe',
@@ -98,7 +115,6 @@ function VendorRatings({ id }) {
                     },
                     ...comments,
                 ])
-                setComments(response.data)
             })
             .catch(error => {
                 if (error.response.status == 401) {
