@@ -14,13 +14,12 @@ function VendorHeartIcons(props) {
             message.info('Пожалуйста, войдите, чтобы добавить', 2);
         } else {
             if (props.vendorFavourite) {
-                removeWish(props.item, props.listData, props.setListData);
+                removeWish(props.item, props.listData, props.setListData, props.single);
             } else {
-                addWish(props.item, props.listData, props.setListData);
+                addWish(props.item, props.listData, props.setListData, props.single);
             }
         }
     }
-
     return (
         <Icon onClick={wishController} onMouseLeave={() => setHeartHover("outlined")} onMouseOver={() => setHeartHover("twoTone")} type="heart" theme={props.vendorFavourite ? "filled" : heartHover} />
     )

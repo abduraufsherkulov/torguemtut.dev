@@ -48,7 +48,7 @@ function DetailsInfoSeller({ listData, setListData, item }) {
                 {!loading && (
                     <Card
                         style={{ display: 'flex', flexDirection: 'column' }}
-                        extra={<VendorHeartIcons listData={listData} setListData={setListData} item={item} vendorFavourite={item.vendorFavourite} />}
+                        extra={<VendorHeartIcons single={false} listData={listData} setListData={setListData} item={item} vendorFavourite={item.vendorFavourite} />}
                         title={<Meta
                             style={{ display: 'flex', alignItems: 'center' }}
                             avatar={<Avatar size="large" icon="user" />}

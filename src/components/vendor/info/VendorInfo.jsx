@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Card, Icon, Avatar, Skeleton, Button, Rate } from 'antd';
 // import GoogleMapsApi from '../adnews/GoogleMapsApi';
 import HeartIcons from '../../Icons/HeartIcons';
@@ -6,10 +6,12 @@ import VendorHeartIcons from '../../Icons/VendorHeartIcons';
 import { Link } from 'react-router-dom'
 import GoogleMapsApi from '../../news/adnews/GoogleMapsApi';
 import axios from 'axios'
+import { AuthContext } from '../../../contexts/AuthContext';
 
 const { Meta } = Card;
 
-function VendorInfo({ listData, setListData, id }) {
+function VendorInfo({ id }) {
+    const { userData } = useContext(AuthContext)
     const [loading, setLoading] = useState(true);
     const [position, setPosition] = useState({
         RegionId: 1,
@@ -25,11 +27,12 @@ function VendorInfo({ listData, setListData, id }) {
             method: "post",
             url: endpoint,
             headers: {
-                "content-type": "application/json"
+                "content-type": "application/json",
+                Authorization: `Bearer ${userData.token}`
             }
         })
             .then(response => {
-                console.log(response.data)
+                console.log(response.data, 'vendorinfo')
                 setItem(response.data);
                 setLoading(false)
             })
@@ -73,7 +76,7 @@ function VendorInfo({ listData, setListData, id }) {
                 {!loading && (
                     <Card
                         style={{ display: 'flex', flexDirection: 'column' }}
-                        extra={<VendorHeartIcons listData={listData} setListData={setListData} item={item} vendorFavourite={item.vendorFavourite} />}
+                        extra={<VendorHeartIcons single={true} listData={item} setListData={setItem} item={item} vendorFavourite={item.vendorFavourite} />}
                         title={<Meta
                             style={{ display: 'flex', alignItems: 'center' }}
                             avatar={<Avatar size="large" icon="user" />}

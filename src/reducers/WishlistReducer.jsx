@@ -1,4 +1,6 @@
 export const wishlistReducer = (state, action) => {
+    console.log(state.wishlistvendor)
+    console.log(action.wishlistvendor)
     switch (action.type) {
         case 'INIT_WISHLIST':
             return { wishlist: [...action.wishlist] }
@@ -11,7 +13,7 @@ export const wishlistReducer = (state, action) => {
         case 'ADD_WISH_VENDOR':
             return { wishlistvendor: [...state.wishlistvendor, action.wishlistvendor] }
         case 'REMOVE_WISH_VENDOR':
-            return { wishlistvendor: state.wishlistvendor.filter(wish => wish.id !== action.wishlistvendor.id) }
+            return { wishlistvendor: state.wishlistvendor.filter(wish => wish.userId !== action.wishlistvendor.userId) }
         default:
             return state
     }
