@@ -33,6 +33,14 @@ function Settings(props) {
                 />
             </Form.Item>
             <Form.Item>
+                <Input
+                    prefix={<Icon type="share-alt" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                    placeholder="Referral"
+                    readOnly
+                    value={`https://tt.uz/signup/?ReferrerCode=${userData.referralCode}`}
+                />
+            </Form.Item>
+            <Form.Item>
                 <Button>Facebook</Button>
             </Form.Item>
             <Form.Item>

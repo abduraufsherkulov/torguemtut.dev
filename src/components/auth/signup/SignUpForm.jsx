@@ -16,6 +16,10 @@ function SignUpForm(props) {
     const { getFieldDecorator } = props.form;
 
     function handleSubmit(e) {
+        let url_string = window.location.href; //window.location.href
+        let url = new URL(url_string);
+        let refer = url.searchParams.get("ReferrerCode");
+        console.log(refer ? refer : 0);
         e.preventDefault();
         setvalidateLoader('validating');
         props.form.validateFieldsAndScroll((err, values) => {
@@ -30,7 +34,8 @@ function SignUpForm(props) {
                     Phone: email ? '' : values.emailphone,
                     Password: values.password,
                     IsEmail: email,
-                    Email: email ? values.emailphone : ""
+                    Email: email ? values.emailphone : "",
+                    ReferrerCode: refer ? +refer : 0
                 });
 
                 console.log(data);
