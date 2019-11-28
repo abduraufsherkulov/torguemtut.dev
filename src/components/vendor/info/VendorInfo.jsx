@@ -63,7 +63,7 @@ function VendorInfo({ id }) {
                 <Skeleton paragraph={{ rows: 0, width: "100%" }} loading={loading} active>
                     {!loading && (
                         <>
-                            <h2>{item.price.amount} y.e.</h2>
+                            <h2>{item.price.amount} {index.price.currencyLabel}</h2>
                         </>
                     )
                     }

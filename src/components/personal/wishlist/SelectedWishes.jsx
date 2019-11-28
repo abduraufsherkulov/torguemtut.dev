@@ -32,7 +32,7 @@ function SelectedWishes() {
                                     </a>
                                 </div>
                                 <div className="info-part">
-                                    <h1>{index.price.amount} y.e.</h1>
+                                    <h1>{index.price.amount} {index.price.currencyLabel}</h1>
                                     <p>{index.title}</p>
                                 </div>
                             </Col>

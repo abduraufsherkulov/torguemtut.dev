@@ -35,7 +35,7 @@ function DetailsInfoSeller({ listData, setListData, item }) {
                 <Skeleton paragraph={{ rows: 0, width: "100%" }} loading={loading} active>
                     {!loading && (
                         <>
-                            <h2>{item.price.amount} y.e.</h2>
+                            <h2>{item.price.amount} {item.price.currencyLabel}</h2>
                         </>
                     )
                     }

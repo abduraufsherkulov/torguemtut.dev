@@ -38,7 +38,7 @@ function rand(){
                                     <img src={rand()} alt="" /></a>
                                 </div>
                                 <div className="info-part">
-                                    <h1>{index * 10} y.e.</h1>
+                                    <h1>{index * 10} </h1>
                                     <p>Smart Watch A1 Black</p>
                                 </div>
                             </Col>

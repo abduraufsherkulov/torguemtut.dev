@@ -90,7 +90,7 @@ function MainList() {
                                     <>
                                         <List.Item.Meta
                                             // avatar={<Avatar src={`https://ttuz.azurewebsites.net/${item.images[0].path}`} />}
-                                            title={<><Link style={{ width: '70%', float: 'left' }} to={`/item/${item.id}`}>{item.title}</Link><p style={{ display: 'inline-block', width: '30%', textAlign: 'right' }}>{item.price.amount} Сум</p></>}
+                                            title={<><Link style={{ width: '70%', float: 'left' }} to={`/item/${item.id}`}>{item.title}</Link><p style={{ display: 'inline-block', width: '30%', textAlign: 'right' }}>{item.price.amount} {item.price.currencyLabel}</p></>}
                                         // description={br2nl(item.description)}
                                         />
                                         {item.content}

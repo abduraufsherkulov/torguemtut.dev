@@ -214,7 +214,7 @@ function AddNewsAd(props) {
                                     placeholder="Выберите"
                                     onChange={handleSelectChange}
                                 >
-                                    <Option value="1">y.e.</Option>
+                                    <Option value="1">{index.price.currencyLabel}</Option>
                                     <Option value="2">uzs</Option>
                                 </Select>
                             </Form.Item>
