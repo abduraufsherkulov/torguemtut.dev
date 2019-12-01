@@ -13,6 +13,7 @@ const breadcrumbNameMap = {
     '/settings': 'Настройки',
     '/messages': 'Сообщении',
     '/wallet': 'Кошелок',
+    '/vendorproducts': 'Автор'
 };
 
 const MainBreadcrumbs = withRouter(props => {
