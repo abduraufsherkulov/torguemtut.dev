@@ -1,5 +1,5 @@
 import React, {
-    useContext, useState
+    useContext, useState, useMemo
 } from 'react'
 import {
     Form,
@@ -32,14 +32,17 @@ const { TextArea } = Input;
 const { Option } = Select;
 
 
-function AddNewsAd(props) {
 
+
+function AddNewsAd(props) {
     const { myAds, setActiveKey, setMyAds } = useContext(MyAdsContext);
     const authContext = useContext(AuthContext);
     const { userData, dispatch } = authContext;
     const [checked, setChecked] = useState(false);
     const [selectChange, setSelectChange] = useState(1);
     const [loading, setLoading] = useState(false);
+    const [cascaderLoading, setCascaderLoading] = useState(false);
+    const [attr, setAttr] = useState([]);
 
     const [fileRequired, setFileRequired] = useState("");
     const [fileValidate, setFileValidate] = useState("");
@@ -80,9 +83,13 @@ function AddNewsAd(props) {
         },
     };
 
+
+
     const handleSubmit = e => {
         e.preventDefault();
         props.form.validateFieldsAndScroll((err, values) => {
+            console.log(values)
+            console.log(err)
             setLoading(true);
             if (err || values.photos == undefined || values.photos.fileList.length == 0) {
                 if (values.photos == undefined || values.photos.fileList.length == 0) {
@@ -97,10 +104,17 @@ function AddNewsAd(props) {
                     images.push(i.response.imageId);
                 })
                 images = images.toString();
-
+                // NewsAttribute: [{"AttributeId" : 123, "Value" : "adasdasd"}]
                 const endpoint = "https://ttuz.azurewebsites.net/api/news/add";
+                console.log(values)
+                // return false;
+                let newAttr = [];
+                for (let i = 0; i < attr.length; i++) {
+                    newAttr.push({ AttributeId: attr[i].id, Value: attr[i].name in values ? (typeof values[attr[i].name] == "object" ? values[attr[i].name].key : values[attr[i].name]) : false })
+                }
 
                 const data = JSON.stringify({
+                    NewsAttribute: newAttr,
                     Title: values.title,
                     CategoryId: values.category[values.category.length - 1],
                     Price: {
@@ -156,6 +170,82 @@ function AddNewsAd(props) {
         console.log(params)
     }
 
+    const handleCascader = (value) => {
+        setCascaderLoading(true);
+        const attr = value[value.length - 1];
+        const endpoint = `https://ttuz.azurewebsites.net/api/category/get-category-attributes?Id=${attr}`;
+        axios({
+            method: 'get',
+            url: endpoint,
+            headers: {
+                "content-type": "application/json"
+            }
+        }).then(response => {
+            setCascaderLoading(false)
+            setAttr(response.data);
+        }).catch(error => {
+            console.log(error)
+        })
+    }
+    function AttrSelect({ item }) {
+        return (
+            <Form.Item label={item.title}>
+                {getFieldDecorator(`${item.name}`, {
+                    rules: [
+                        {
+                            required: item.required,
+                            message: `Где ${item.title}?`,
+                        },
+                    ],
+                })(
+                    <Select
+                        labelInValue
+                        placeholder="Выберите"
+                        onChange={handleSelectChange}>
+                        {
+                            item.attributeOptions.map((attritem, index) => {
+                                return (
+                                    <Option key={attritem.id} value={attritem.value}>{attritem.value}</Option>
+                                )
+                            })
+                        }
+                    </Select>
+                )}
+            </Form.Item>
+        )
+    }
+
+    function AttrInput({ item }) {
+        return (
+            <Form.Item label={item.title}>
+                {getFieldDecorator(`${item.name}`, {
+                    rules: [
+                        {
+                            required: true,
+                            message: `Где ${item.title}?`,
+                        },
+                    ],
+                })(<Input />)}
+            </Form.Item>
+        )
+    }
+
+    const Just = () => {
+        return (
+            attr.map((item, index) => {
+                if (item.attributeOptions.length > 0) {
+                    return (
+                        <AttrSelect item={item} key={item.name} />
+                    )
+                } else {
+                    return (
+                        <AttrInput item={item} key={item.name} />
+                    )
+                }
+            })
+        )
+    }
+    const MemoizedValue = useMemo(() => Just, [attr]);
     return (
         <div className="container">
             <div id="addnews">
@@ -173,7 +263,7 @@ function AddNewsAd(props) {
                                 ],
                             })(<Input />)}
                         </Form.Item>
-                        <Form.Item label="Категория">
+                        <Form.Item hasFeedback={cascaderLoading} validateStatus="validating" label="Категория">
                             {getFieldDecorator('category', {
                                 rules: [
                                     {
@@ -181,9 +271,10 @@ function AddNewsAd(props) {
                                         message: 'Где категории?',
                                     },
                                 ],
-                            })(<Cascader options={category} placeholder="Выбрать категории" />)}
+                            })(<Cascader onChange={handleCascader} options={category} placeholder="Выбрать категории" />)}
 
                         </Form.Item>
+                        <MemoizedValue />
                         <Form.Item label="Цена" style={{ marginBottom: 0 }}>
                             <Form.Item
                                 // help="Please select the correct date"
@@ -214,7 +305,7 @@ function AddNewsAd(props) {
                                     placeholder="Выберите"
                                     onChange={handleSelectChange}
                                 >
-                                    <Option value="1">{index.price.currencyLabel}</Option>
+                                    <Option value="1">usd</Option>
                                     <Option value="2">uzs</Option>
                                 </Select>
                             </Form.Item>

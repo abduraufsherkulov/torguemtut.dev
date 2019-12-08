@@ -29,12 +29,11 @@ function DetailsInfoProduct({ listData }) {
                     <h1>Номер объявления:  {listData.id}</h1>
                     <Divider />
                     <Descriptions title="" column={2}>
-                        <Descriptions.Item label="Объявление от">Частного лица</Descriptions.Item>
-                        <Descriptions.Item label="Количество комнат">6</Descriptions.Item>
-                        <Descriptions.Item label="Этаж">1</Descriptions.Item>
-                        <Descriptions.Item label="Этажность дома">4</Descriptions.Item>
-                        <Descriptions.Item label="В квартире есть">Балкон</Descriptions.Item>
-                        <Descriptions.Item label="Ремонт">Требует ремонта</Descriptions.Item>
+                        {listData.newsAttribute.map((item, index) => {
+                            return (
+                                <Descriptions.Item label={item.attributeInfo.title}>{item.value}</Descriptions.Item>
+                            )
+                        })}
                     </Descriptions>
                     <Divider />
                     <p className="new-line">{br2nl(listData.description)}</p>
