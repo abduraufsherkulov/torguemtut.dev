@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Bg from "../../images/longback.png";
 import { Row, Col, Form, Input, Select, Button, Icon } from 'antd';
 
@@ -8,18 +8,24 @@ const InputGroup = Input.Group;
 
 
 function TopSearch() {
+    const [searchTitle, setSearchTitle] = useState("");
+    const handleChange = (e) => {
+        e.preventDefault();
+        setSearchTitle(e.target.value);
+    }
+    console.log(searchTitle)
     return (
         <div id="topsearch">
             <div className="search-part">
-                    <InputGroup size="large" compact>
-                        <Input size="large" style={{ width: "70%" }} placeholder="Введите запрос поиска" />
-                        <Select placeholder="Город, адрес, район" size="large" style={{ width: "25%" }}>
-                            <Option value="Option1-1">Все категории</Option>
-                            <Option value="Option1-2">Самарканд</Option>
-                        </Select>
-                        <Button style={{ width: "5%", background: "#ff9500", borderColor: "#ff9500", color: 'white' }} size="large"><Icon type="search" /></Button>
-                    </InputGroup>
-                    <p className="recentSearch">Сейчас ищут: iphone xr 64gb, черная маска, велосипед</p>
+                <InputGroup size="large" compact>
+                    <Input value={searchTitle} onChange={handleChange} size="large" style={{ width: "70%" }} placeholder="Введите запрос поиска" />
+                    <Select placeholder="Город, адрес, район" size="large" style={{ width: "25%" }}>
+                        <Option value="Option1-1">Все категории</Option>
+                        <Option value="Option1-2">Самарканд</Option>
+                    </Select>
+                    <Button style={{ width: "5%", background: "#ff9500", borderColor: "#ff9500", color: 'white' }} size="large"><Icon type="search" /></Button>
+                </InputGroup>
+                <p className="recentSearch">Сейчас ищут: iphone xr 64gb, черная маска, велосипед</p>
             </div>
         </div>
     )

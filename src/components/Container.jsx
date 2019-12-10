@@ -32,6 +32,7 @@ import MyAdsInfoMain from './personal/myads/myadsinfo/MyAdsInfoMain';
 import NoMatch from './NoMatch';
 import RatingVendors from './ratingvendors/RatingVendors';
 import VendorSideBar from './vendor/VendorSideBar';
+import ForgotPassword from './auth/forgotpass/ForgotPassword';
 
 function PrivateRoute({ children, ...rest }) {
   const { userData } = useContext(AuthContext);
@@ -131,6 +132,9 @@ function Container({ location }) {
               </AuthRoute>
               <AuthRoute path="/signup">
                 <SignUp />
+              </AuthRoute>
+              <AuthRoute path="/forgot">
+                <ForgotPassword />
               </AuthRoute>
 
               <PrivateRoute path="/disputes">
