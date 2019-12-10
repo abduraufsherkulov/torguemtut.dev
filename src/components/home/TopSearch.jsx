@@ -1,19 +1,48 @@
 import React, { useState } from 'react';
 import Bg from "../../images/longback.png";
 import { Row, Col, Form, Input, Select, Button, Icon } from 'antd';
-
+import axios from 'axios';
 const { Search } = Input;
 const { Option } = Select;
 const InputGroup = Input.Group;
 
-
+let timer = null;
 function TopSearch() {
     const [searchTitle, setSearchTitle] = useState("");
+    const [send, setSend] = useState(false);
+    const handleSubmit = (e) => {
+        let data = JSON.stringify({
+            title: e
+        })
+        const endpoint = "https://ttuz.azurewebsites.net/api/news/get-all";
+        axios({
+            method: "post",
+            url: endpoint,
+            data: data,
+            headers: {
+                "content-type": "application/json"
+            }
+        })
+            .then(response => {
+                console.log(response.data);
+                // return response.data;
+            })
+            .catch(error => {
+                console.log(error, "error in categories");
+            });
+    }
     const handleChange = (e) => {
         e.preventDefault();
-        setSearchTitle(e.target.value);
+        let value = e.target.value;
+        setSearchTitle(value);
+        if (timer) {
+            clearTimeout(timer);
+        }
+        timer = setTimeout(() => {
+            handleSubmit(value)
+        }, 2000);
+
     }
-    console.log(searchTitle)
     return (
         <div id="topsearch">
             <div className="search-part">
