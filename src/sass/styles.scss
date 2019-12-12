@@ -1363,3 +1363,18 @@ footer {
 .vip-head-loading {
   @include img-loading;
 }
+
+.global-search-item{
+  .global-search-item-desc{
+    .search-word{
+      color: $footerbg;
+    }
+    .from-to{
+      color: $subcategory;
+    }
+    .from-category{
+      @include bold;
+      color: $subcategory;
+    }
+  }
+}

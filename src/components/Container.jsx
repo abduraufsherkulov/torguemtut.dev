@@ -104,6 +104,10 @@ function Container({ location }) {
               <Route exact path="/subcategories/:id">
                 <MainList />
               </Route>
+              {/* Needed query */}
+              {/* <Route exact path="/subcategories/:id">
+                <MainList />
+              </Route> */}
 
               <Route exact path="/boostad/:id">
                 <BoostAd />
