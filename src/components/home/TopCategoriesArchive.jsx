@@ -20,7 +20,6 @@ function EachCat(props) {
     function handleLeave() {
         setUnfold(false);
     }
-    console.log(props);
     return (
         <dl className={hoverMe} onMouseEnter={handleEnter} onMouseLeave={handleLeave}>
             <dt className="cate-name" >
@@ -34,7 +33,7 @@ function EachCat(props) {
                         {props.cat.children.map((num, index) =>
                             <div className="sub-cate-row" key={index}>
                                 <dl className="sub-cate-items">
-                                    <dt><Link to={`/subcategories/${num.value}`}>{num.label}</Link></dt>
+                                    <dt><a href="#">{num.label}</a></dt>
                                     {num.children.length > 0 ? num.children.map((ok, index) =>
                                         <dd key={index}><Link to={`/subcategories/${ok.value}`}>{ok.label}</Link></dd>
                                     ) : null}

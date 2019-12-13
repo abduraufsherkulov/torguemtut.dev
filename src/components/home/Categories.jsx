@@ -44,15 +44,7 @@ function Categories() {
         const endpoint = "https://ttuz.azurewebsites.net/api/category";
         axios({
             method: "get",
-            url: endpoint,
-            //   auth: {
-            //     username: "delivera",
-            //     password: "X19WkHHupFJBPsMRPCJwTbv09yCD50E2"
-            //   },
-            //   headers: {
-            //     "content-type": "application/json",
-            //     token: token
-            //   }
+            url: endpoint
         })
             .then(response => {
                 // console.log(response.data);
