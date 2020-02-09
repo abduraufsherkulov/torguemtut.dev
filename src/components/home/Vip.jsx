@@ -73,7 +73,7 @@ function Vip() {
                                                 <HeartIcons setListData={setVip} listData={vip} item={index} favourite={index.favourite} />
                                             </div>
                                             <div className="img-item-container">
-                                                <img src={index.images !== undefined ? `https://ttuz.azurewebsites.net/${index.images[0].path}` : null} alt="" />
+                                                <img src={index.images !== undefined ? `https://ttuz.azurewebsites.net/Resources/Images/${index.images[0].path}` : null} alt="" />
                                             </div>
                                         </div>
                                         <div className="info-part">

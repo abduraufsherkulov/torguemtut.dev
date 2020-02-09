@@ -22,7 +22,7 @@ function TopSearch() {
             title: e
         })
         // return [];
-        const endpoint = "https://ttuz.azurewebsites.net/api/news/get-all";
+        const endpoint = "https://ttuz.azurewebsites.net/api/news/search";
         axios({
             method: "post",
             url: endpoint,
@@ -48,19 +48,19 @@ function TopSearch() {
     function renderOption(item) {
         console.log(item);
         return (
-            <Optioner key={item.id} text={item.category.name}>
+            <Optioner key={item.id} text={item.name}>
                 <div className="global-search-item">
                     <span className="global-search-item-desc">
                         <Link
-                            to={`/subcategories/${item.category.id}`}
+                            to={`/subcategories/${item.id}`}
                         >
-                            <span className="search-word">{ searchTitle}</span> {" "} <span className="from-to">в рубрике</span> {" "}
+                            <span className="search-word">{searchTitle}</span> {" "} <span className="from-to">в рубрике</span> {" "}
 
-                            <span className="from-category">{item.category.name}</span>
+                            <span className="from-category">{item.name}</span>
                         </Link>
                         {" "}
                     </span>
-                    {/* <span className="global-search-item-count">123 results</span> */}
+                    <span className="global-search-item-count">Найдено: {item.countNews}</span>
                 </div>
             </Optioner>
         );
@@ -74,7 +74,7 @@ function TopSearch() {
         }
         timer = setTimeout(() => {
             handleSubmit(value)
-        }, 2000);
+        }, 300);
     };
     console.log(searchTitle)
     return (

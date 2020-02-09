@@ -81,7 +81,7 @@ function MainList() {
                                     <div className="listExtra"><img
                                         style={{ maxWidth: "150px", maxHeight: "130px" }}
                                         alt="logo"
-                                        src={`https://ttuz.azurewebsites.net/${item.images[0].path}`}
+                                        src={`https://ttuz.azurewebsites.net/Resources/Images/${item.images[0].path}`}
                                     /></div>)
                             }
                         >
@@ -94,7 +94,7 @@ function MainList() {
                                         // description={br2nl(item.description)}
                                         />
                                         {item.content}
-                                        <p style={{color: 'white'}}>asd</p>
+                                        <p style={{ color: 'white' }}>asd</p>
                                     </>
                                 )}
                             </Skeleton>
