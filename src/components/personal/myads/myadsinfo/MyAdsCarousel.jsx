@@ -13,6 +13,7 @@ function MyAdsCarousel({ listData }) {
             setLoading(false)
         }
     }, [listData])
+    console.log(listData)
     return (
         <Skeleton active loading={loading}>
             {!loading && (

@@ -104,7 +104,7 @@ function BoostCarouselType(props) {
     return (
         <div id="boostcarouseltype">
             <div className="container">
-                <h1 style={{ textAlign: 'right' }}>Ваш счет: <Tag color="green">{balance} {index.price.currencyLabel}</Tag></h1>
+                <h1 style={{ textAlign: 'right' }}>Ваш счет: <Tag color="green">{balance} Сум</Tag></h1>
                 <h1 className="title">Тарифы</h1>
                 <Row gutter={48}>
                     <Col span={8}>

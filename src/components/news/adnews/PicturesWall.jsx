@@ -31,7 +31,7 @@ function PicturesWall(props) {
     };
 
     const handleChange = ({ fileList, file }) => {
-
+        console.log(file)
 
         let newArr = [...fileList];
         if (typeof file.response != 'undefined') {
