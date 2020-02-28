@@ -1,6 +1,7 @@
 import React from 'react'
 import { Tabs, Empty } from 'antd';
 import AccountWallet from './AccountWallet';
+import FillWallet from './FillWallet';
 
 const { TabPane } = Tabs;
 
@@ -17,7 +18,7 @@ function MainWallet() {
             </TabPane>
             <TabPane tab="Пополнить счеть" key="2">
                 <div className="tab-margins">
-                    <Empty description={false} />
+                    <FillWallet />
                 </div>
             </TabPane>
             <TabPane tab="История покупки" key="3">
