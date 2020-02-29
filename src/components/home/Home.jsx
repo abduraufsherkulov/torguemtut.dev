@@ -3,7 +3,7 @@ import { Layout, Breadcrumb } from 'antd';
 import MainSearch from './MainSearch';
 import Categories from './Categories';
 import Vip from './Vip';
-import TopVendors from './TopVendors';
+import VipPopular from './VipPopular';
 import InfoSection from './InfoSection';
 import GetPhone from './GetPhone';
 import CategoriesAndSlider from './CategoriesAndSlider';
@@ -19,7 +19,7 @@ function Home() {
                 <Categories />
             </div> */}
             <Vip />
-            <TopVendors />
+            <VipPopular />
             <InfoSection />
             <GetPhone />
         </Content>

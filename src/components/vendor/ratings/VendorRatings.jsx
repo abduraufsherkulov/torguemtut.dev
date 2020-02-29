@@ -10,7 +10,7 @@ const { TextArea } = Input;
 
 const CommentList = ({ comments }) => (
     <List
-        options={comments}
+        dataSource={comments}
         header={`${comments.length} ${comments.length > 1 ? 'replies' : 'reply'}`}
         itemLayout="horizontal"
         renderItem={props => <Comment {...props} />}

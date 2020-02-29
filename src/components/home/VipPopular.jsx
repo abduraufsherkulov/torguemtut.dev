@@ -1,18 +1,19 @@
 import React, { useState, useEffect, useContext } from 'react';
+import Logo from "../../images/mainlogo.png";
 import { Row, Col, Divider, Button, Card, Skeleton } from 'antd';
-import Crown from "../../images/crown.png";
 import HeartIcons from '../Icons/HeartIcons';
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext';
 
+
 const { Meta } = Card;
 
-function Vip() {
+function VipPopular() {
     const { userData, dispatch } = useContext(AuthContext)
     const [vip, setVip] = useState([{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]);
     useEffect(() => {
-        const endpoint = "https://ttuz.azurewebsites.net/api/news/get-all-by-tariff?type=1";
+        const endpoint = "https://ttuz.azurewebsites.net/api/news/get-all-by-tariff?type=2";
         axios({
             method: "post",
             url: endpoint,
@@ -23,29 +24,29 @@ function Vip() {
         })
             .then(response => {
                 setVip(response.data)
-                console.log(response)
             })
             .catch(error => {
-                if (error.response.status == 401) {
-                    message.info('Сессия истекла', 2);
-                    dispatch({ type: 'SIGN_IN' })
-                }
+                // if (error.response.status == 401) {
+                //     message.info('Сессия истекла', 2);
+                //     dispatch({ type: 'SIGN_IN' })
+                // }
                 console.log(error, "error in categories");
             });
     }, [])
+
     return (
-        <div id="vip">
-            <div id="vip-top">
+        <div id="top-vendors">
+            <div className="top-vendor-top">
                 <div className="container">
-                    <div className="vip-title">
-                        <img src={Crown} alt="" />
-                        <a style={{ visibility: "hidden" }} href="">Как сюда попасть?</a>
-                        <h1>VIP объявления</h1>
-                        <a href="#">Как сюда попасть?</a>
+                    <div className="top-vendor-title">
+                        <img src={Logo} alt="" />
+                        {/* <a style={{ visibility: "hidden" }} href="">Как сюда попасть?</a> */}
+                        <h1>Популярные</h1>
+                        <img src={Logo} style={{ visibility: "hidden" }} alt="" />
                     </div>
                 </div>
             </div>
-            <div className="vip-grid">
+            <div className="top-vendor-grid">
                 <div className="container">
                     <Row justify="space-between" type="flex" className="mainrows">
                         {vip.map((index, key) => {
@@ -66,12 +67,12 @@ function Vip() {
                                 return (
                                     <Col style={{ width: '19%' }} key={key} className="each">
                                         <div className="img-part">
-                                            <div className="vip-face">
+                                            <div className="top-face">
                                                 <Link to={`/item/${index.id}`}>
                                                 </Link>
                                             </div>
-                                            <div className="vip-links">
-                                                <i className="spanner">VIP</i>
+                                            <div className="top-links">
+                                                <i className="spanner">TOP</i>
                                                 <HeartIcons setListData={setVip} listData={vip} item={index} favourite={index.favourite} />
                                             </div>
                                             <div className="img-item-container">
@@ -86,14 +87,13 @@ function Vip() {
                                 )
                             }
                         })}
+
                         <Divider><Button>Посмотреть все</Button></Divider>
-
                     </Row>
-
                 </div>
             </div>
-        </div >
+        </div>
     )
 }
 
-export default Vip;
+export default VipPopular;

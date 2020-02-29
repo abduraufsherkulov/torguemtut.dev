@@ -10,6 +10,7 @@ import FacebookAuth from '../facebook/FacebookAuth';
 import { AuthContext } from '../../../contexts/AuthContext';
 
 function LoginForm(props) {
+    const [form] = Form.useForm();
     const { userData, dispatch } = useContext(AuthContext);
     const [checkUsername, setCheckUsername] = useState({ message: "Пожалуйста, введите адрес электронной почты или номер телефона!" });
 
@@ -18,110 +19,104 @@ function LoginForm(props) {
     const [password, setpassword] = useState(null);
     // const [isMail, setisMail] = useState(false);
     const [validateLoader, setvalidateLoader] = useState("");
-    const { getFieldDecorator } = props.form;
 
     let history = useHistory();
     let location = useLocation();
 
     let { from } = location.state || { from: { pathname: "/" } };
-    function handleSubmit(e) {
-        e.preventDefault();
-        setvalidateLoader('validating');
-        props.form.validateFieldsAndScroll((err, values) => {
-            if (!err) {
-                console.log('Received values of form: ', values);
-                const email = (values.emailphone[0] === "+" || typeof values.emailphone === "number") ? false : true;
-                // let token = await AsyncStorage.getItem("access_token");
 
-                const endpoint = "https://ttuz.azurewebsites.net/api/users/authenticate";
-
-                const data = JSON.stringify({
-                    Phone: email ? '' : values.emailphone,
-                    Password: values.password,
-                    IsEmail: email,
-                    Email: email ? values.emailphone : ""
-                });
-
-                console.log(data);
-                axios({
-                    method: "post",
-                    url: endpoint,
-                    data: data,
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                })
-                    .then(response => {
-                        console.log(response);
-                        if (response.data.status) {
-                            if (email) {
-                                dispatch({ type: 'SIGN_IN', userData: JSON.stringify(response.data.userData) })
-                                // localStorage.setItem('username', values.emailphone);
-                                history.replace(from);
-                            } else {
-                                // localStorage.setItem('username', values.emailphone);
-
-                                dispatch({ type: 'SIGN_IN', userData: JSON.stringify(response.data.userData) })
-                                history.replace(from);
-                            }
-                            // window.location.replace("/");
-                            // props.history.push('/');
-                        } else {
-                            setvalidateConfirmCode('error');
-                            setvalidateLoader('error');
-                            props.form.setFields({
-                                password: {
-                                    value: values.password,
-                                    errors: [new Error(response.data.message)],
-                                },
-                            });
-                        }
-                    })
-                    .catch(error => {
-                        console.log(error.response, "error on refresh");
-                        setvalidateConfirmCode('error');
-
-                        setvalidateLoader('error');
-                        props.form.setFields({
-                            password: {
-                                value: values.password,
-                                errors: [new Error(error.response.data.message)],
-                            },
-                        });
-                    });
-            }
-        });
+    const handleFinishFailed = ({ errorFields }) => {
+        console.log(errorFields)
+        // form.scrollToField(errorFields[0].name);
     };
 
 
-    function validateEmailPhone(rule, value, callback) {
-        // if (value && confirmDirty) {
-        //     props.form.validateFields(['emailphone'], { force: true });
-        // }
-        // if()
 
-        // dispatch({ type: 'SIGN_IN', username: value })
+    const handleFinish = (values) => {
+        setvalidateLoader('validating');
+
+
+        console.log('Received values of form: ', values);
+        const email = (values.emailphone[0] === "+" || typeof values.emailphone === "number") ? false : true;
+        // let token = await AsyncStorage.getItem("access_token");
+
+        const endpoint = "https://ttuz.azurewebsites.net/api/users/authenticate";
+
+        const data = JSON.stringify({
+            Phone: email ? '' : values.emailphone,
+            Password: values.password,
+            IsEmail: email,
+            Email: email ? values.emailphone : ""
+        });
+
+        console.log(data);
+        axios({
+            method: "post",
+            url: endpoint,
+            data: data,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then(response => {
+                console.log(response);
+                if (response.data.status) {
+                    if (email) {
+                        dispatch({ type: 'SIGN_IN', userData: JSON.stringify(response.data.userData) })
+                        // localStorage.setItem('username', values.emailphone);
+                        history.replace(from);
+                    } else {
+                        // localStorage.setItem('username', values.emailphone);
+
+                        dispatch({ type: 'SIGN_IN', userData: JSON.stringify(response.data.userData) })
+                        history.replace(from);
+                    }
+                    // window.location.replace("/");
+                    // props.history.push('/');
+                } else {
+                    setvalidateConfirmCode('error');
+                    setvalidateLoader('error');
+                    form.setFields({
+                        password: {
+                            value: values.password,
+                            errors: [new Error(response.data.message)],
+                        },
+                    });
+                }
+            })
+            .catch(error => {
+                console.log(error.response, "error on refresh");
+                setvalidateConfirmCode('error');
+
+                setvalidateLoader('error');
+                form.setFields({
+                    password: {
+                        value: values.password,
+                        errors: [new Error(error.response.data.message)],
+                    },
+                });
+            });
+
+    };
+
+
+    function validateEmailPhone(rule, value) {
+
         if (validateLoader === "error") {
             setvalidateLoader('success');
         } else if (validateConfirmCode === "error") {
-            console.log('call')
             setvalidateConfirmCode('success')
         }
-        callback();
+        return Promise.resolve();
     };
 
 
-    function validatePass(rule, value, callback) {
-        // if (value && confirmDirty) {
-        //     props.form.validateFields(['emailphone'], { force: true });
-        // }
-        // if()
-
-        // dispatch({ type: 'SIGN_IN', username: value })
+    function validatePass(rule, value) {
         if (validateConfirmCode === "error") {
             setvalidateConfirmCode('success')
         }
-        callback();
+
+        return Promise.resolve();
     };
 
     return (
@@ -130,7 +125,7 @@ function LoginForm(props) {
                 <div className="login-wrapper">
                     <h1>Вход в аккаунт</h1>
                     <div className="input-wrapper">
-                        <Form onSubmit={handleSubmit} className="login-form">
+                        <Form form={form} scrollToFirstError onFinish={handleFinish} onFinishFailed={handleFinishFailed} className="login-form">
                             <Form.Item name="emailphone" hasFeedback validateStatus={validateLoader} rules={[
                                 {
                                     required: true,
@@ -152,10 +147,11 @@ function LoginForm(props) {
                                 }, {
                                     validator: validatePass
                                 }
-                            ]}><Input.Password size="large"
-                                placeholder="Пароль" />
+                            ]}>
+                                <Input.Password size="large"
+                                    placeholder="Пароль" />
                             </Form.Item>
-                            <Form.Item name="remember" style={{ marginBottom: "10px" }}>
+                            <Form.Item style={{ marginBottom: "10px" }}>
                                 <Checkbox>Remember me</Checkbox>
                                 <Link to="/forgot" className="login-form-forgot" href="">
                                     Забыли пароль?

@@ -21,7 +21,6 @@ function HeartIcons(props) {
             }
         }
     }
-
     // <Icon onClick={wishController} onMouseLeave={() => setHeartHover("outlined")} onMouseOver={() => setHeartHover("twoTone")} type="heart" theme={props.favourite ? "filled" : heartHover} />
     return props.favourite ? (
         <HeartFilled onClick={wishController} />

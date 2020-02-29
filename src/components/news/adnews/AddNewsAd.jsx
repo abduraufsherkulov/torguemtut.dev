@@ -35,6 +35,7 @@ const { Option } = Select;
 
 
 function AddNewsAd(props) {
+    const [form] = Form.useForm();
     const { myAds, setActiveKey, setMyAds } = useContext(MyAdsContext);
     const authContext = useContext(AuthContext);
     const { userData, dispatch } = authContext;
@@ -83,82 +84,77 @@ function AddNewsAd(props) {
 
 
 
-    const handleSubmit = e => {
-        e.preventDefault();
-        props.form.validateFieldsAndScroll((err, values) => {
+    const handleFinish = values => {
+        setLoading(true);
+        console.log(values)
+        if (values.photos == undefined || values.photos.fileList.length == 0) {
+            if (values.photos == undefined || values.photos.fileList.length == 0) {
+                setFileValidate('error')
+                setFileRequired("Файл необходимо");
+            }
+            setLoading(false);
+        } else {
+            console.log('called')
+            let images = [];
+            values.photos.fileList.map(i => {
+                images.push(i.response.imageId);
+            })
+            images = images.toString();
+            // NewsAttribute: [{"AttributeId" : 123, "Value" : "adasdasd"}]
+            const endpoint = "https://ttuz.azurewebsites.net/api/news/add";
             console.log(values)
-            console.log(err)
-            setLoading(true);
-            if (err || values.photos == undefined || values.photos.fileList.length == 0) {
-                if (values.photos == undefined || values.photos.fileList.length == 0) {
-                    setFileValidate('error')
-                    setFileRequired("Файл необходимо");
-                }
-                setLoading(false);
-            } else {
-                console.log('called')
-                let images = [];
-                values.photos.fileList.map(i => {
-                    images.push(i.response.imageId);
-                })
-                images = images.toString();
-                // NewsAttribute: [{"AttributeId" : 123, "Value" : "adasdasd"}]
-                const endpoint = "https://ttuz.azurewebsites.net/api/news/add";
-                console.log(values)
-                // return false;
-                let newAttr = [];
-                for (let i = 0; i < attr.length; i++) {
-                    newAttr.push({ AttributeId: attr[i].id, Value: attr[i].name in values ? (typeof values[attr[i].name] == "object" ? values[attr[i].name].key : values[attr[i].name]) : false })
-                }
-
-                const data = JSON.stringify({
-                    NewsAttribute: newAttr,
-                    Title: values.title,
-                    CategoryId: values.category[values.category.length - 1],
-                    Price: {
-                        Amount: values.price,
-                        Currency: +selectChange,
-                        Exchange: false,
-                        Free: false,
-                        Negotiatable: checked
-                    },
-                    Description: values.description,
-                    Location: position,
-                    ContactDetail: {
-                        Name: values.contactperson,
-                        IsIndividual: true,
-                        Email: userData.email,
-                        Phone: userData.phone
-                    },
-                    Status: 1,
-                    ImageIds: images
-                });
-
-                axios({
-                    method: 'post',
-                    url: endpoint,
-                    data: data,
-                    headers: {
-                        "content-type": "application/json",
-                        Authorization: `Bearer ${userData.token}`
-                    }
-                }).then(response => {
-                    console.log(response);
-                    if (response.data.status) {
-                        setActiveKey('waiting');
-                        setMyAds([...myAds, response.data.data]);
-                        props.history.push('/myads');
-                    }
-                }).catch(error => {
-                    if (error.response.status == 401) {
-                        message.info('Сессия истекла', 2);
-                        dispatch({ type: 'SIGN_IN' })
-                    }
-                    console.log(error.response)
-                })
+            // return false;
+            let newAttr = [];
+            for (let i = 0; i < attr.length; i++) {
+                newAttr.push({ AttributeId: attr[i].id, Value: attr[i].name in values ? (typeof values[attr[i].name] == "object" ? values[attr[i].name].key : values[attr[i].name]) : false })
             }
 
-        });
+            const data = JSON.stringify({
+                NewsAttribute: newAttr,
+                Title: values.title,
+                CategoryId: values.category[values.category.length - 1],
+                Price: {
+                    Amount: values.price,
+                    Currency: +selectChange,
+                    Exchange: false,
+                    Free: false,
+                    Negotiatable: checked
+                },
+                Description: values.description,
+                Location: position,
+                ContactDetail: {
+                    Name: values.contactperson,
+                    IsIndividual: true,
+                    Email: userData.email,
+                    Phone: userData.phone
+                },
+                Status: 1,
+                ImageIds: images
+            });
+            console.log(data);
+            axios({
+                method: 'post',
+                url: endpoint,
+                data: data,
+                headers: {
+                    "content-type": "application/json",
+                    Authorization: `Bearer ${userData.token}`
+                }
+            }).then(response => {
+                console.log(response);
+                if (response.data.status) {
+                    setActiveKey('waiting');
+                    setMyAds([...myAds, response.data.data]);
+                    props.history.push('/myads');
+                }
+            }).catch(error => {
+                if (error.response.status == 401) {
+                    message.info('Сессия истекла', 2);
+                    dispatch({ type: 'SIGN_IN' })
+                }
+                console.log(error.response)
+            })
+        }
     };
 
     const handleCheck = () => {
@@ -185,6 +181,8 @@ function AddNewsAd(props) {
             console.log(error)
         })
     }
+
+
     function AttrSelect({ item }) {
         return (
             <Form.Item name={item.name} label={item.title} rules={[
@@ -243,7 +241,7 @@ function AddNewsAd(props) {
             <div id="addnews">
                 <MainBreadcrumbs />
                 <h2 className="header-text">Добавить объявление</h2>
-                <Form {...formItemLayout} onSubmit={handleSubmit}>
+                <Form {...formItemLayout} onFinish={handleFinish}>
                     <div className="makenarrow">
                         <Form.Item name='title' label="Заголовок" rules={[
                             {

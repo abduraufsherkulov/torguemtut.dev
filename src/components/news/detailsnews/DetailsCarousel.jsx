@@ -20,7 +20,7 @@ function DetailsCarousel({ listData }) {
             {!loading && (
                 <Carousel className="detailscarousel" afterChange={onChange}>
                     {listData.map(item => (
-                        <Magnifier style={{ maxWidth: '100%', maxHeight: '100%' }} key={item.createdDate} src={`https://ttuz.azurewebsites.net/Resources/Images${item.path}`} />
+                        <Magnifier style={{ maxWidth: '100%', maxHeight: '100%' }} key={item.createdDate} src={`https://ttuz.azurewebsites.net/Resources/Images/${item.path}`} />
                     ))}
                 </Carousel>
             )}

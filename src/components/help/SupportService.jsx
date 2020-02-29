@@ -20,7 +20,6 @@ function SupportService(props) {
         console.log(`selected ${value}`);
     }
 
-    const { getFieldDecorator } = props.form;
     return (
         <div className="container">
             <h2>Служба поддержки</h2>

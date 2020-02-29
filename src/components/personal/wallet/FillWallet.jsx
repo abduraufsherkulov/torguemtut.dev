@@ -1,76 +1,88 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
+import axios from 'axios'
+import {
+     Form,
+     Input,
+     Button, Row, Col
+} from 'antd';
+import { payme } from '../../../helpers/PaymentHelpers';
 
-
+import { withRouter } from 'react-router-dom'
+import PaymeLogo from '../../../images/payme.png'
+import ClickLogo from '../../../images/click.png'
+import { AuthContext } from '../../../contexts/AuthContext';
 
 function FillWallet() {
-    return (
-        <form method="POST" action="https://test.paycom.uz">
+     const [form] = Form.useForm();
+     const { userData } = useContext(AuthContext);
+     const [amount, setAmount] = useState(5000)
+     console.log(payme.merchandId, userData.id, 'two')
+     return (
+          <React.Fragment>
+               <form
+                    method="POST"
+                    action={payme.action}
+               >
+                    <input type="hidden" name="merchant" value={payme.merchandId} />
+                    <input type="hidden" name="account[userId]" value={userData.id} />
+                    <input type="hidden" name="amount" value={amount} />
+                    <Row type="flex" justify="space-between">
+                         <Col span={4}><img style={{ maxHeight: "38px" }} src={PaymeLogo} /></Col>
+                         <Col span={8}><Input onChange={(val) => setAmount(val)} placeholder="Сумма" type="number" value={amount} /></Col>
+                         <Col span={12}>< Button style={{ marginLeft: "10px" }} type="primary" htmlType="submit">
+                              Оплатить с помощью <b> Payme</b>
+                         </Button></Col>
+                    </Row>
+               </form>
 
-            {/* <!-- Идентификатор WEB Кассы --> */}
-            <input type="hidden" name="merchant" value="{Merchant ID}" />
+               <form
+                    layout="inline"
+               // action={payme.action}
+               >
+                    <input type="hidden" name="merchant" value={payme.merchandId} />
+                    <input type="hidden" name="account[userId]" value={userData.id} />
+                    <Row type="flex" justify="space-between">
+                         <Col span={4}><img style={{ maxHeight: "38px" }} src={ClickLogo} /></Col>
+                         <Col span={8}><Input name="amount" defaultValue="5000" placeholder="Сумма" type="number" /></Col>
+                         <Col span={12}>< Button style={{ marginLeft: "10px" }} type="primary" htmlType="submit">
+                              Оплатить с помощью <b> Click</b>
+                         </Button></Col>
+                    </Row>
 
-            {/* <!-- Сумма платежа в тийинах --> */}
-            <input type="hidden" name="amount" value="{сумма чека в ТИИНАХ}" />
 
-            {/* <!-- Поля Объекта Account --> */}
-            <input type="hidden" name="account[{field_name}]" value="{field_value}" />
 
-            {/* <!-- ==================== НЕОБЯЗАТЕЛЬНЫЕ ПОЛЯ ====================== -->
-<!-- Язык. Доступные значения: ru|uz|en
-                 Другие значения игнорируются
-                 Значение по умолчанию ru --> */}
-            <input type="hidden" name="lang" value="ru" />
+               </form>
 
-            {/* <!-- Валюта. Доступные значения: 643|840|860|978
-                 Другие значения игнорируются
-                 Значение по умолчанию 860
-                 Коды валют в ISO формате
-                 643 - RUB
-                 840 - USD
-                 860 - UZS
-                 978 - EUR --> */}
-            <input type="hidden" name="currency" value="860" />
+               <form method="POST" action="https://test.paycom.uz">
 
-            {/* <!-- URL возврата после оплаты или отмены платежа.
-                 Если URL возврата не указан, он берется из заголовка запроса Referer.
-                 URL возврата может содержать параметры, которые заменяются Paycom при запросе.
-                 Доступные параметры для callback:
-                 :transaction - id транзакции или "null" если транзакцию не удалось создать
-     :account.{field} - поля объекта Account
-            Пример: https://your-service.uz/paycom/:transaction --> */}
-            <input type="hidden" name="callback" value="{url возврата после платежа}" />
+                    <input type="hidden" name="merchant" value="{Merchant ID}" />
+                    <input type="hidden" name="amount" value="{сумма чека в ТИИНАХ}" />
+                    <input type="hidden" name="account[{field_name}]" value="{field_value}" />
+                    <input type="hidden" name="lang" value="ru" />
+                    <input type="hidden" name="currency" value="860" />
 
-            {/* <!-- Таймаут после успешного платежа в миллисекундах.
-                 Значение по умолчанию 15
-                 После успешной оплаты, по истечении времени callback_timeout
-                 производится перенаправление пользователя по url возврата после платежа --> */}
-            <input type="hidden" name="callback_timeout" value="{miliseconds}" />
+                    <input type="hidden" name="callback" value="{url возврата после платежа}" />
 
-            {/* <!-- Выбор платежного инструмента Paycom.
-                 В Paycom доступна регистрация несколько платежных
-                 инструментов. Если платёжный инструмент не указан,
-                 пользователю предоставляется выбор инструмента оплаты.
-                 Если указать id определённого платежного инструмента -
-                 пользователь перенаправляется на указанный платежный инструмент. --> */}
-            <input type="hidden" name="payment" value="{payment_id}" />
+                    <input type="hidden" name="callback_timeout" value="{miliseconds}" />
 
-            {/* <!-- Описание платежа
-                 Для описания платежа доступны 3 языка: узбекский, русский, английский.
-                 Для описания платежа на нескольких языках следует использовать
-     несколько полей с атрибутом  name="description[{lang}]"
-            lang может принимать значения ru|en|uz --> */}
-            <input type="hidden" name="description" value="{Описание платежа}" />
+                    <input type="hidden" name="payment" value="{payment_id}" />
+                    <input type="hidden" name="description" value="{Описание платежа}" />
+                    <input type="hidden" name="detail" value="{JSON объект детализации в BASE64}" />
 
-            {/* <!-- Объект детализации платежа
-                 Поле для детального описания платежа, например, перечисления
-                 купленных товаров, стоимости доставки, скидки.
-                 Значение поля (value) — JSON-строка закодированная в BASE64 --> */}
-            <input type="hidden" name="detail" value="{JSON объект детализации в BASE64}" />
-            {/* <!-- ================================================================== --> */}
+                    <button type="submit">Оплатить с помощью <b>Payme</b></button>
+               </form>
 
-            <button type="submit">Оплатить с помощью <b>Payme</b></button>
-        </form>
-    )
+          </React.Fragment >
+     )
 }
 
-export default FillWallet
+export default withRouter(FillWallet);
+
+
+// <form method="POST" action="https://test.paycom.uz">
+
+// <input type="hidden" name="merchant" value="{Merchant ID}" />
+
+// <input type="hidden" name="account[{field_name}]" value="{field_value}" />
+
+// <button type="submit">Оплатить с помощью <b>Payme</b></button>

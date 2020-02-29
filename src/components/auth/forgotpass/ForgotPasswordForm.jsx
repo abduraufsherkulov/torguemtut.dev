@@ -16,7 +16,6 @@ function ForgotPasswordForm(props) {
     const [phone, setphone] = useState(null);
     const [password, setpassword] = useState(null);
     const [validateLoader, setvalidateLoader] = useState("");
-    const { getFieldDecorator } = props.form;
 
     let history = useHistory();
     let location = useLocation();

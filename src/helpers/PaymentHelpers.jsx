@@ -1,15 +1,15 @@
-const currentEnv = 'production';
+const currentEnv = process.env.NODE_ENV;
 
-const payme = {
+const modes = {
     production: {
-        
+        action: 'https://test.paycom.uz',
+        merchandId: "uK5P5cKZwAkM7wznzI90OdKEfnf9ErYfMfvt",
     },
     development: {
         action: 'https://test.paycom.uz',
-        merchandId: 123
+        merchandId: "5e4b7246af9572847bcace84",
+        testKey: '&spY27IEMr5VBib1h7JVuyKXZUkDuE?HTfQX'
     }
 }
 
-const payme = {
-    
-}
+export const payme = currentEnv == 'production' ? modes.production : modes.development;

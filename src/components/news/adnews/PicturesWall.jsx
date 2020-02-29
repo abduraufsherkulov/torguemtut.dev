@@ -54,24 +54,27 @@ function PicturesWall(props) {
         </div>
     );
     return (
-        <Form.Item label="Фотографии" validateStatus={props.fileValidate} help={props.fileRequired}>
-            <Upload
-                action="https://ttuz.azurewebsites.net/api/news/upload-image"
-                accept=".png, .jpeg, .jpg"
-                listType="picture-card"
-                fileList={fileList}
-                name="image"
-                defaultFileList={[]}
-                onPreview={handlePreview}
-                onChange={handleChange}
-                headers={{ Authorization: `Bearer ${userData.token}` }}
-            >
-                {fileList.length >= 8 ? null : uploadButton}
-            </Upload>
+        <React.Fragment>
+            <Form.Item
+                name="photos" label="Фотографии" validateStatus={props.fileValidate} help={props.fileRequired}>
+                <Upload
+                    action="https://ttuz.azurewebsites.net/api/news/upload-image"
+                    accept=".png, .jpeg, .jpg"
+                    listType="picture-card"
+                    fileList={fileList}
+                    name="image"
+                    defaultFileList={[]}
+                    onPreview={handlePreview}
+                    onChange={handleChange}
+                    headers={{ Authorization: `Bearer ${userData.token}` }}
+                >
+                    {fileList.length >= 8 ? null : uploadButton}
+                </Upload>
+            </Form.Item>
             <Modal visible={previewVisible} footer={null} onCancel={handleCancel}>
                 <img alt="example" style={{ width: '100%' }} src={previewImage} />
             </Modal>
-        </Form.Item>
+        </React.Fragment>
     )
 }
 

@@ -20,7 +20,6 @@ function Disputes(props) {
         console.log(`selected ${value}`);
     }
 
-    const { getFieldDecorator } = props.form;
     return (
         <div className="container">
             <h2>Споры и жалобы</h2>

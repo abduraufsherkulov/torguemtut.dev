@@ -4,6 +4,11 @@ import {
     Link, withRouter,
 } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthContext';
+import {
+    ShareAltOutlined,
+    UserOutlined,
+    PhoneOutlined
+} from '@ant-design/icons';
 
 function Settings(props) {
     const { userData } = useContext(AuthContext)
@@ -15,7 +20,6 @@ function Settings(props) {
             }
         });
     };
-    const { getFieldDecorator } = props.form;
     return (
         <Form onSubmit={handleSubmit} className="login-form">
             <Form.Item>

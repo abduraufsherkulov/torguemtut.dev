@@ -7,140 +7,136 @@ import { withRouter } from 'react-router-dom';
 import FacebookAuth from '../facebook/FacebookAuth';
 
 function SignUpForm(props) {
+    const [form] = Form.useForm();
+
     const [confirmDirty, setconfirmDirty] = useState(false);
     const [phone, setphone] = useState(null);
     const [password, setpassword] = useState(null);
     const [isMail, setisMail] = useState(false);
     const [validateLoader, setvalidateLoader] = useState("");
     const [validateConfirmCode, setvalidateConfirmCode] = useState("")
-    const { getFieldDecorator } = props.form;
 
-    function handleSubmit(e) {
+    const handleFinishFailed = ({ errorFields }) => {
+        console.log(errorFields)
+        // form.scrollToField(errorFields[0].name);
+    };
+
+
+
+    const handleFinish = (values) => {
         let url_string = window.location.href; //window.location.href
         let url = new URL(url_string);
         let refer = url.searchParams.get("ReferrerCode");
         console.log(refer ? refer : 0);
-        e.preventDefault();
+
         setvalidateLoader('validating');
-        props.form.validateFieldsAndScroll((err, values) => {
-            if (!err) {
-                console.log('Received values of form: ', values);
-                const email = (values.emailphone[0] === "+" || typeof values.emailphone === "number") ? false : true;
-                // let token = await AsyncStorage.getItem("access_token");
 
-                const endpoint = "https://ttuz.azurewebsites.net/api/users/register";
+        console.log('Received values of form: ', values);
+        const email = (values.emailphone[0] === "+" || typeof values.emailphone === "number") ? false : true;
+        // let token = await AsyncStorage.getItem("access_token");
 
-                const data = JSON.stringify({
-                    Phone: email ? '' : values.emailphone,
-                    Password: values.password,
-                    IsEmail: email,
-                    Email: email ? values.emailphone : "",
-                    ReferrerCode: refer ? +refer : 0
-                });
+        const endpoint = "https://ttuz.azurewebsites.net/api/users/register";
 
-                console.log(data);
-                axios({
-                    method: "post",
-                    url: endpoint,
-                    data: data,
-                    headers: {
-                        "Content-Type": "application/json"
+        const data = JSON.stringify({
+            Phone: email ? '' : values.emailphone,
+            Password: values.password,
+            IsEmail: email,
+            Email: email ? values.emailphone : "",
+            ReferrerCode: refer ? +refer : 0
+        });
+
+        console.log(data);
+        axios({
+            method: "post",
+            url: endpoint,
+            data: data,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then(response => {
+                if (response.data.status) {
+                    setphone(values.emailphone);
+                    setpassword(values.password);
+                    setisMail(email);
+                    setvalidateLoader('success');
+                } else {
+
+                    setvalidateLoader('error');
+                    form.setFields({
+                        emailphone: {
+                            value: values.emailphone,
+                            errors: [new Error(response.data.message)],
+                        },
+                    });
+                }
+
+                console.log(response);
+            })
+            .catch(error => {
+                console.log(error.response, "error on refresh");
+            });
+    };
+
+
+    const handleConfirmFinish = (values) => {
+        // let token = await AsyncStorage.getItem("access_token");
+        const endpoint = "https://ttuz.azurewebsites.net/api/users/validate";
+
+        const data = JSON.stringify({
+            Phone: isMail ? '' : phone,
+            Code: values.confirmcode,
+            IsEmail: isMail,
+            Email: isMail ? phone : ''
+        });
+        console.log(data);
+        axios({
+            method: "post",
+            url: endpoint,
+            // auth: {
+            //     username: "delivera",
+            //     password: "X19WkHHupFJBPsMRPCJwTbv09yCD50E2"
+            // },
+            headers: {
+                "content-type": "application/json"
+            },
+            data: data
+        })
+            .then(response => {
+                if (response.data.status) {
+                    if (isMail) {
+                        localStorage.setItem('username', phone);
+                    } else {
+                        localStorage.setItem('username', phone);
                     }
-                })
-                    .then(response => {
-                        if (response.data.status) {
-                            setphone(values.emailphone);
-                            setpassword(values.password);
-                            setisMail(email);
-                            setvalidateLoader('success');
-                        } else {
-
-                            setvalidateLoader('error');
-                            props.form.setFields({
-                                emailphone: {
-                                    value: values.emailphone,
-                                    errors: [new Error(response.data.message)],
-                                },
-                            });
-                        }
-
-                        console.log(response);
-                    })
-                    .catch(error => {
-                        console.log(error.response, "error on refresh");
+                    props.history.push('/');
+                } else {
+                    setvalidateConfirmCode('error');
+                    form.setFields({
+                        confirmcode: {
+                            value: values.confirmcode,
+                            errors: [new Error(response.data.message)],
+                        },
                     });
-            }
-        });
+                }
+            })
+            .catch(error => {
+                console.log(error, "error on refresh");
+            });
     };
 
 
-    function handleConfirmCode(e) {
-        e.preventDefault();
-        console.log('here');
-        props.form.validateFieldsAndScroll(['confirmcode'], (err, values) => {
-            console.log(err);
-            if (!err) {
-                console.log('Received values of form: ', values);
-
-                // let token = await AsyncStorage.getItem("access_token");
-                const endpoint = "https://ttuz.azurewebsites.net/api/users/validate";
-
-                const data = JSON.stringify({
-                    Phone: isMail ? '' : phone,
-                    Code: values.confirmcode,
-                    IsEmail: isMail,
-                    Email: isMail ? phone : ''
-                });
-                console.log(data);
-                axios({
-                    method: "post",
-                    url: endpoint,
-                    // auth: {
-                    //     username: "delivera",
-                    //     password: "X19WkHHupFJBPsMRPCJwTbv09yCD50E2"
-                    // },
-                    headers: {
-                        "content-type": "application/json"
-                    },
-                    data: data
-                })
-                    .then(response => {
-                        if (response.data.status) {
-                            if (isMail) {
-                                localStorage.setItem('username', phone);
-                            } else {
-                                localStorage.setItem('username', phone);
-                            }
-                            props.history.push('/');
-                        } else {
-                            setvalidateConfirmCode('error');
-                            props.form.setFields({
-                                confirmcode: {
-                                    value: values.confirmcode,
-                                    errors: [new Error(response.data.message)],
-                                },
-                            });
-                        }
-                    })
-                    .catch(error => {
-                        console.log(error, "error on refresh");
-                    });
-            }
-        });
-    };
-
-
-    function validateToNextPassword(rule, value, callback) {
+    function validateToNextPassword(rule, value) {
         if (value && confirmDirty) {
-            props.form.validateFields(['confirm'], { force: true });
+            form.validateFields(['confirm'], { force: true });
         }
-        callback();
+        return Promise.resolve();
     };
-    function compareToFirstPassword(rule, value, callback) {
-        if (value && value !== props.form.getFieldValue('password')) {
-            callback('Two passwords that you enter is inconsistent!');
+    function compareToFirstPassword(rule, value) {
+        if (value && value !== form.getFieldValue('password')) {
+            return Promise.reject('Two passwords that you enter is inconsistent!');
         } else {
-            callback();
+            return Promise.resolve();
         }
     };
 
@@ -154,7 +150,7 @@ function SignUpForm(props) {
         } else if (validateConfirmCode === "error") {
             setvalidateConfirmCode('success')
         }
-        callback();
+        return Promise.resolve();
     };
 
     function handleConfirmBlur(e) {
@@ -162,7 +158,7 @@ function SignUpForm(props) {
         setconfirmDirty(confirmDirty || !!value);
     };
     const mainForm = (
-        <Form onSubmit={handleSubmit} className="signin-form">
+        <Form form={form} scrollToFirstError onFinish={handleFinish} onFinishFailed={handleFinishFailed} className="signin-form">
             <Form.Item name="emailphone" hasFeedback validateStatus={validateLoader} rules={[
                 {
                     required: true,
@@ -177,19 +173,16 @@ function SignUpForm(props) {
                 />
             </Form.Item>
 
-            <Form.Item hasFeedback>
-                {getFieldDecorator('password', {
-                    rules: [
-                        {
-                            required: true,
-                            message: 'Please input your password!',
-                        },
-                        {
-                            validator: validateToNextPassword,
-                        }
-                    ],
-                })(<Input.Password size="large"
-                    placeholder="Придумайте пароль" />)}
+            <Form.Item name="password" hasFeedback rules={[
+                {
+                    required: true,
+                    message: 'Please input your password!',
+                },
+                {
+                    validator: validateToNextPassword,
+                }
+            ]}><Input.Password size="large"
+                placeholder="Придумайте пароль" />
             </Form.Item>
             <Form.Item name="confirm" hasFeedback rules={[
                 {
@@ -202,7 +195,7 @@ function SignUpForm(props) {
             ]}>
                 <Input.Password placeholder="Подтвердите пароль" size="large" onBlur={handleConfirmBlur} />
             </Form.Item>
-            <Form.Item name="privacypolicy" style={{ marginBottom: "10px" }}>
+            <Form.Item style={{ marginBottom: "10px" }}>
                 <Checkbox>Я принимаю условия</Checkbox>
                 <a className="signin-form-forgot" href="">
                     Пользовательского соглашения и Политики конфиденциальности
@@ -224,7 +217,7 @@ function SignUpForm(props) {
         </Form>
     );
     const confirmCode = (
-        <Form onSubmit={handleConfirmCode} className="signin-form">
+        <Form onFinish={handleConfirmFinish} className="signin-form">
             <Form.Item name="confirmcode" label="Код для подтверждения" hasFeedback validateStatus={validateConfirmCode} rules={[
                 {
                     required: phone ? true : false,

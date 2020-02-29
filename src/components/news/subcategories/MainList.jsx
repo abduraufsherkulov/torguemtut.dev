@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Link, withRouter } from 'react-router-dom';
 import HeartIcons from '../../Icons/HeartIcons';
 import moment from 'moment';
+import SubcategoriesFilter from './SubcategoriesFilter';
 moment.locale('ru')
 
 
@@ -37,7 +38,7 @@ function MainList() {
             }
         })
             .then(response => {
-                console.log(response.data, 'called')
+                console.log(response, 'called')
                 setListData(response.data);
                 setLoading(false)
             })
@@ -49,8 +50,13 @@ function MainList() {
                 console.log(error.response, "error in categories");
             });
     }, []);
+
+
     return (
         <div className="container">
+            <div className="filtration">
+                <SubcategoriesFilter catId={id} />
+            </div>
             <div id="mainlist">
                 <List
                     itemLayout="vertical"
@@ -61,7 +67,7 @@ function MainList() {
                         },
                         pageSize: 3,
                     }}
-                    options={listData}
+                    dataSource={listData}
                     footer={
                         <div>
                             {/* <b>ant design</b> footer part */}
