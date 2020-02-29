@@ -1,4 +1,4 @@
-import { List, Avatar, Icon, Skeleton, message } from 'antd';
+import { List, Avatar, Skeleton, message } from 'antd';
 import { useParams } from 'react-router-dom';
 import React, { useEffect, useContext, useState } from 'react'
 import { AuthContext } from '../../../contexts/AuthContext';
@@ -37,7 +37,7 @@ function MainList() {
             }
         })
             .then(response => {
-                console.log(response.data)
+                console.log(response.data, 'called')
                 setListData(response.data);
                 setLoading(false)
             })

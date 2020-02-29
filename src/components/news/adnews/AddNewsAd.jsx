@@ -286,7 +286,6 @@ function AddNewsAd(props) {
                             <span style={{ display: 'inline-block', width: '24px', textAlign: 'center' }}>-</span>
                             <Form.Item style={{ display: 'inline-block', width: 'calc(37% - 16px)' }}>
                                 <Select
-                                    labelInValue
                                     defaultValue='1'
                                     placeholder="Выберите"
                                     onChange={handleSelectChange}

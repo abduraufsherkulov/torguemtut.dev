@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { Card, Icon, Avatar, Skeleton, Button, Rate } from 'antd';
+import { Card, Avatar, Skeleton, Button, Rate } from 'antd';
 import GoogleMapsApi from '../adnews/GoogleMapsApi';
 import HeartIcons from '../../Icons/HeartIcons';
 import VendorHeartIcons from '../../Icons/VendorHeartIcons';
 import { Link } from 'react-router-dom'
+
+import { PhoneOutlined, UserOutlined } from '@ant-design/icons';
 
 const { Meta } = Card;
 
@@ -42,7 +44,7 @@ function DetailsInfoSeller({ listData, setListData, item }) {
                 </Skeleton>
             </Card>
             <Skeleton paragraph={{ rows: 0 }} loading={loading} active>
-                {!loading && (<Button href={`tel:${item.contactDetail.phone}`} type="primary" block ><Icon type="phone" />{item.contactDetail.phone}</Button>)}
+                {!loading && (<Button href={`tel:${item.contactDetail.phone}`} type="primary" block ><PhoneOutlined />{item.contactDetail.phone}</Button>)}
             </Skeleton>
             <Skeleton paragraph={{ rows: 0 }} loading={loading} active>
                 {!loading && (
@@ -51,7 +53,7 @@ function DetailsInfoSeller({ listData, setListData, item }) {
                         extra={<VendorHeartIcons single={false} listData={listData} setListData={setListData} item={item} vendorFavourite={item.vendorFavourite} />}
                         title={<Meta
                             style={{ display: 'flex', alignItems: 'center' }}
-                            avatar={<Avatar size="large" icon="user" />}
+                            avatar={<Avatar size="large" icon={<UserOutlined />} />}
                             title={<Link to={`/vendorproducts/${item.ownerId}`}>{item.ownerDetails.phone}</Link>}
                         // description="Джон"
                         />}

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox } from 'antd';
 import {
     Link, withRouter,
 } from 'react-router-dom';

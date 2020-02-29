@@ -90,14 +90,13 @@ function TopSearch() {
                         onSelect={onSelect}
                         onSearch={handleSearch}
                         placeholder="Введите запрос поиска"
-                        optionLabelProp="text"
                     >
                         <Input
                             value={searchTitle} /* onChange={handleChange} */ size="large"
                         />
                     </AutoComplete>
                     {/* <Input value={searchTitle} onChange={handleChange} size="large" style={{ width: "70%" }} placeholder="Введите запрос поиска" /> */}
-                    <Select placeholder="Город, адрес, район" size="large" style={{ width: "25%" }}>
+                    <Select defaultValue="Option1-1" placeholder="Город, адрес, район" size="large" style={{ width: "25%" }}>
                         <Option value="Option1-1">Все категории</Option>
                         <Option value="Option1-2">Самарканд</Option>
                     </Select>

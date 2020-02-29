@@ -1,6 +1,7 @@
-import { Upload, Icon, Modal, Form } from 'antd';
+import { Upload, Modal, Form } from 'antd';
 import React, { useState, useContext } from 'react'
 import { AuthContext } from '../../../contexts/AuthContext';
+import { PlusOutlined } from '@ant-design/icons';
 
 
 function getBase64(file) {
@@ -48,13 +49,12 @@ function PicturesWall(props) {
 
     const uploadButton = (
         <div>
-            <Icon type="plus" />
+            <PlusOutlined />
             <div className="ant-upload-text">Upload</div>
         </div>
     );
     return (
-        <Form.Item name='photos' label="Фотографии" validateStatus={props.fileValidate} help={props.fileRequired}>
-
+        <Form.Item label="Фотографии" validateStatus={props.fileValidate} help={props.fileRequired}>
             <Upload
                 action="https://ttuz.azurewebsites.net/api/news/upload-image"
                 accept=".png, .jpeg, .jpg"

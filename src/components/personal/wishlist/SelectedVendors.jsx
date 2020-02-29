@@ -21,7 +21,7 @@ function SelectedVendors() {
                                 <div className="img-part">
                                     <a href="">
                                         <div className="activeads-face">
-                                            <span>VIP</span>
+                                            <i className="spanner">VIP</i>
                                             <div className="action-block">
                                                 <ViewIcons />
                                                 <EditIcons />

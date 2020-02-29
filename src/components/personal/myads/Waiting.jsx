@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Row, Col, Icon, Divider, Button } from 'antd';
+import { Row, Col, Divider, Button } from 'antd';
 import Watch from "../../../images/watch.png";
 import EditIcons from '../../Icons/EditIcons';
 import DeleteIcons from '../../Icons/DeleteIcons';
@@ -9,7 +9,7 @@ import { MyAdsContext } from '../../../contexts/MyAdsContext';
 function Waiting() {
     const { myAds } = useContext(MyAdsContext);
     const perItem = myAds.filter(item => item.status == 1);
-    console.log(myAds);
+    console.log(perItem, 'peritem');
     return (
         <div id="activeads">
             <div className="activeads-grid">
@@ -20,7 +20,7 @@ function Waiting() {
                                 <div className="img-part">
                                     <a href="">
                                         <div className="activeads-face">
-                                            <span>VIP</span>
+                                            <i className="spanner">VIP</i>
                                             <div className="action-block">
                                                 <ViewIcons />
                                                 <EditIcons />

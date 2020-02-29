@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Icon, Divider, Button, Card, Skeleton } from 'antd';
+import { Row, Col, Divider, Button, Card, Skeleton } from 'antd';
 import Crown from "../../images/crown.png";
 import Watch from "../../images/watch.png";
 import HeartIcons from '../Icons/HeartIcons';
@@ -69,7 +69,7 @@ function Vip() {
                                                 </Link>
                                             </div>
                                             <div className="vip-links">
-                                                <span class="spanner">VIP</span>
+                                                <i className="spanner">VIP</i>
                                                 <HeartIcons setListData={setVip} listData={vip} item={index} favourite={index.favourite} />
                                             </div>
                                             <div className="img-item-container">
