@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Icon, Input, Button, Checkbox, Row, Col, Select, Divider } from 'antd';
+import { Form, Input, Button, Checkbox, Row, Col, Select, Divider } from 'antd';
 import { withRouter } from 'react-router-dom';
 
 
@@ -37,16 +37,6 @@ function SupportService(props) {
                                     <Option value="Yiminghe">Другое</Option>
                                 </Select>
                             </Form.Item>
-                            {/* <Form.Item>
-                                {getFieldDecorator('username', {
-                                    rules: [{ required: true, message: 'Please input your username!' }],
-                                })(
-                                    <Input
-                                        prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                        placeholder="Ссылка на товар"
-                                    />,
-                                )}
-                            </Form.Item> */}
                             <Form.Item>
                                 <TextArea placeholder="Текст сообщения" rows={4} />
                             </Form.Item>
@@ -64,4 +54,4 @@ function SupportService(props) {
 }
 
 
-export default Form.create()(withRouter(SupportService));
+export default withRouter(SupportService);

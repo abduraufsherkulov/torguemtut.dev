@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
-import { Icon } from 'antd';
+import { DeleteFilled, DeleteOutlined } from '@ant-design/icons';
 
 function DeleteIcons() {
     const [deleteHover, setDeleteHover] = useState(false);
-    return (
-        <Icon onMouseLeave={() => setDeleteHover(false)} onMouseOver={() => setDeleteHover(true)} type="delete" theme={deleteHover ? "filled" : "outlined"} />
-    )
+
+    return deleteHover ? (
+        <DeleteFilled onMouseLeave={() => setDeleteHover(false)} onMouseOver={() => setDeleteHover(true)} />
+    ) : (
+            <DeleteOutlined onMouseLeave={() => setDeleteHover(false)} onMouseOver={() => setDeleteHover(true)} />
+        )
 }
 
 export default DeleteIcons;

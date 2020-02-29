@@ -1,7 +1,7 @@
 import React from 'react'
-import { Form, Icon, Input, Button, Checkbox, Row, Col, Select, Divider } from 'antd';
+import { Form, Input, Button, Checkbox, Row, Col, Select, Divider } from 'antd';
 import { withRouter } from 'react-router-dom';
-
+import { UserOutlined } from '@ant-design/icons';
 
 const { TextArea } = Input;
 
@@ -38,15 +38,11 @@ function Disputes(props) {
                                     <Option value="Yiminghe">Нарушения по размещению</Option>
                                 </Select>
                             </Form.Item>
-                            <Form.Item>
-                                {getFieldDecorator('username', {
-                                    rules: [{ required: true, message: 'Please input your username!' }],
-                                })(
-                                    <Input
-                                        prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                        placeholder="Ссылка на товар"
-                                    />,
-                                )}
+                            <Form.Item name="username" rules={[{ required: true, message: 'Please input your username!' }]}>
+                                <Input
+                                    prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                    placeholder="Ссылка на товар"
+                                />
                             </Form.Item>
                             <Form.Item>
                                 <TextArea placeholder="Текст сообщения" rows={4} />
@@ -65,4 +61,4 @@ function Disputes(props) {
 }
 
 
-export default Form.create()(withRouter(Disputes));
+export default withRouter(Disputes);

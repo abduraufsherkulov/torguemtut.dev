@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { Form, Icon, Input, Button, Checkbox, Row, Col, message } from 'antd';
+import { Form, Input, Button, Checkbox, Row, Col, message } from 'antd';
 import {
     Link, withRouter,
     useHistory,
@@ -98,22 +98,18 @@ function ForgotPasswordForm(props) {
                     <h1>Восстановление пароля</h1>
                     <div className="input-wrapper">
                         <Form onSubmit={handleSubmit} className="login-form">
-                            <Form.Item hasFeedback validateStatus={validateLoader}>
-                                {getFieldDecorator('emailphone', {
-                                    rules: [
-                                        {
-                                            required: true,
-                                            message: 'Please input your username!'
-                                        },
-                                        {
-                                            validator: validateEmailPhone,
-                                        }],
-                                })(
-                                    <Input
-                                        size="large"
-                                        placeholder="E-mail или номер телефона"
-                                    />
-                                )}
+                            <Form.Item name="emailphone" hasFeedback validateStatus={validateLoader} rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your username!'
+                                },
+                                {
+                                    validator: validateEmailPhone,
+                                }]}>
+                                <Input
+                                    size="large"
+                                    placeholder="E-mail или номер телефона"
+                                />
                             </Form.Item>
                             <Form.Item style={{ marginBottom: "10px" }}>
                                 <Button style={{ marginTop: "33px" }} size="large" type="primary" htmlType="submit" className="login-form-button">
@@ -130,4 +126,4 @@ function ForgotPasswordForm(props) {
 }
 
 
-export default Form.create()(withRouter(ForgotPasswordForm));
+export default withRouter(ForgotPasswordForm);

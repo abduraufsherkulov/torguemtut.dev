@@ -153,7 +153,7 @@
   width: 100%;
   height: 100%;
   position: absolute;
-  span {
+  .spanner {
     border-radius: 32px;
     position: absolute;
     @include bold;
@@ -164,7 +164,8 @@
     padding: 1px 12px;
     z-index: 2;
   }
-  i {
+  span {
+    background: transparent;
     position: absolute;
     right: 0;
     bottom: 0;
@@ -186,7 +187,7 @@
   &:hover {
     background-color: rgba(121, 37, 142, 0.8);
   }
-  span {
+  .spanner {
     border-radius: 32px;
     position: absolute;
     @include bold;
@@ -196,7 +197,8 @@
     margin: 14px;
     padding: 1px 12px;
   }
-  i.anticon-edit {
+  span.anticon-edit {
+    background: transparent;
     position: absolute;
     right: 0;
     bottom: 0;
@@ -207,7 +209,8 @@
       color: #ff1d1d;
     }
   }
-  i.anticon-delete {
+  span.anticon-delete {
+    background: transparent;
     position: absolute;
     right: 0;
     bottom: 0;
@@ -218,7 +221,8 @@
       color: #ff1d1d;
     }
   }
-  i.anticon-read {
+  span.anticon-read {
+    background: transparent;
     position: absolute;
     right: 0;
     bottom: 0;
@@ -239,7 +243,8 @@
   &:hover {
     background-color: rgba(121, 37, 142, 0.8);
   }
-  i {
+  span {
+    background: transparent;
     position: absolute;
     right: 0;
     bottom: 0;

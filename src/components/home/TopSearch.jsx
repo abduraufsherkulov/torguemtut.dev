@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import Bg from "../../images/longback.png";
-import { Row, Col, Form, Input, Select, Button, Icon, AutoComplete } from 'antd';
+import { Row, Col, Form, Input, Select, Button, AutoComplete } from 'antd';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
+import { SearchOutlined } from '@ant-design/icons';
+
 const { Search } = Input;
 const { Option } = Select;
 const { Option: Optioner } = AutoComplete;
@@ -83,9 +85,8 @@ function TopSearch() {
                 <InputGroup size="large" compact>
                     <AutoComplete
                         className="global-search"
-                        size="large"
                         style={{ width: '70%' }}
-                        dataSource={dataSource.map(renderOption, searchTitle)}
+                        options={dataSource.map(renderOption, searchTitle)}
                         onSelect={onSelect}
                         onSearch={handleSearch}
                         placeholder="Введите запрос поиска"
@@ -100,7 +101,7 @@ function TopSearch() {
                         <Option value="Option1-1">Все категории</Option>
                         <Option value="Option1-2">Самарканд</Option>
                     </Select>
-                    <Button style={{ width: "5%", background: "#ff9500", borderColor: "#ff9500", color: 'white' }} size="large"><Icon type="search" /></Button>
+                    <Button style={{ width: "5%", background: "#ff9500", borderColor: "#ff9500", color: 'white' }} size="large"><SearchOutlined /></Button>
                 </InputGroup>
                 <p className="recentSearch">Сейчас ищут: iphone xr 64gb, черная маска, велосипед</p>
             </div>

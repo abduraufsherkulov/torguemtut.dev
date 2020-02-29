@@ -1,8 +1,20 @@
 import React, { useState, useContext } from 'react';
-import { Layout, Menu, Icon, Dropdown, Select, Button, Avatar } from 'antd';
+import { Layout, Menu, Dropdown, Select, Button, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 import { IconFont } from '../Icons/Icons';
+import {
+    PoweroffOutlined,
+    ContainerOutlined,
+    MessageOutlined,
+    HeartOutlined,
+    WalletOutlined,
+    SettingOutlined,
+    DownOutlined,
+    PlusOutlined,
+    UserOutlined,
+    MobileOutlined
+} from '@ant-design/icons';
 
 const { Header } = Layout;
 const { SubMenu } = Menu;
@@ -107,7 +119,7 @@ const getAccount = (authContext) => {
         return (
             <Menu.Item>
                 <a className="signup-btn" onClick={() => { dispatch({ type: 'SIGN_IN' }) }} >
-                    <Icon type="poweroff" />  Выход
+                    <PoweroffOutlined />  Выход
                     </a>
             </Menu.Item>
         )
@@ -119,27 +131,27 @@ const getAccount = (authContext) => {
             <Menu.Divider />
             <Menu.Item>
                 <Link to="/myads">
-                    <Icon type="container" /> Мои Объявлении
+                    <ContainerOutlined /> Мои Объявлении
         </Link>
             </Menu.Item>
             <Menu.Item>
                 <Link to="/messages">
-                    <Icon type="message" />    Сообщения
+                    <MessageOutlined />    Сообщения
         </Link>
             </Menu.Item>
             <Menu.Item>
                 <Link to="/wishlist">
-                    <Icon type="heart" />    Избранное
+                    <HeartOutlined />    Избранное
         </Link>
             </Menu.Item>
             <Menu.Item>
                 <Link to="/wallet">
-                    <Icon type="wallet" />    Кошелок
+                    <WalletOutlined />    Кошелок
         </Link>
             </Menu.Item>
             <Menu.Item>
                 <Link to="/settings">
-                    <Icon type="setting" />    Настройки
+                    <SettingOutlined />    Настройки
         </Link>
             </Menu.Item>
             {userData.token ? <Menu.Divider /> : null}
@@ -188,20 +200,20 @@ function Postnavigator() {
                     <Menu.Item key="1">
                         <Dropdown overlay={sellers}>
                             <a className="ant-dropdown-link" href="#">
-                                Продавцам <Icon type="down" />
+                                Продавцам <DownOutlined />
                             </a>
                         </Dropdown>
                     </Menu.Item>
                     <Menu.Item key="2">
                         <Dropdown overlay={help}>
                             <a className="ant-dropdown-link" href="#">
-                                Помощь <Icon type="down" />
+                                Помощь <DownOutlined />
                             </a>
                         </Dropdown>
                     </Menu.Item>
                     <Menu.Item key="3">
                         <Link className="ant-dropdown-link" to="/application">
-                            Приложение <Icon type="mobile" />
+                            Приложение <MobileOutlined />
                         </Link>
                     </Menu.Item>
 
@@ -211,20 +223,20 @@ function Postnavigator() {
                             visible={visible}
                         >
                             <a className="ant-dropdown-link" href="#">
-                                Уз / Русский / RUB<Icon type="down" />
+                                Уз / Русский / RUB<DownOutlined />
                             </a>
                         </Dropdown>
                     </Menu.Item>
                     <Menu.Item key="7">
                         <Link to="/add-news-ad" >
-                            <Icon type="plus" />
+                            <PlusOutlined />
                             Подать объявление </Link>
                     </Menu.Item>
                     <Menu.Item key="8">
                         <Dropdown overlay={getAccount(authContext)} placement="bottomRight">
                             <a className="ant-dropdown-link">
-                                <Icon type="user" />
-                                Мой профиль <Icon type="down" />
+                                <UserOutlined />
+                                Мой профиль <DownOutlined />
                             </a>
                         </Dropdown>
                     </Menu.Item>

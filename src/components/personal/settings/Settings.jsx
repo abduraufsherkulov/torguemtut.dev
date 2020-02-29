@@ -20,21 +20,21 @@ function Settings(props) {
         <Form onSubmit={handleSubmit} className="login-form">
             <Form.Item>
                 <Input
-                    prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                    prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                     placeholder="Email"
                     value={userData.email}
                 />
             </Form.Item>
             <Form.Item>
                 <Input
-                    prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                    prefix={<PhoneOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                     placeholder="Phone"
                     value={userData.phone}
                 />
             </Form.Item>
             <Form.Item>
                 <Input
-                    prefix={<Icon type="share-alt" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                    prefix={<ShareAltOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                     placeholder="Referral"
                     readOnly
                     value={`https://tt.uz/signup/?ReferrerCode=${userData.referralCode}`}
@@ -52,4 +52,4 @@ function Settings(props) {
     )
 }
 
-export default Form.create()(withRouter(Settings));
+export default withRouter(Settings);

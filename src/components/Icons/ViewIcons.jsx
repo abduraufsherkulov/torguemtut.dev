@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
-import { Icon } from 'antd';
+import { ReadFilled, ReadOutlined } from '@ant-design/icons';
 
 function ViewIcons() {
     const [heartHover, setHeartHover] = useState(false);
-    return (
-        <Icon onMouseLeave={() => setHeartHover(false)} onMouseOver={() => setHeartHover(true)} type="read" theme={heartHover ? "filled" : "outlined"} />
-    )
+
+    return heartHover ? (
+        <ReadFilled onMouseLeave={() => setHeartHover(false)} onMouseOver={() => setHeartHover(true)} />
+    ) : (
+            <ReadOutlined onMouseLeave={() => setHeartHover(false)} onMouseOver={() => setHeartHover(true)} />
+        )
 }
 
 export default ViewIcons;

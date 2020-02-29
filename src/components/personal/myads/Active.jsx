@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Row, Col, Icon, Divider, Button } from 'antd';
+import { Row, Col, Divider, Button } from 'antd';
 import Watch from "../../../images/watch.png";
 import EditIcons from '../../Icons/EditIcons';
 import DeleteIcons from '../../Icons/DeleteIcons';

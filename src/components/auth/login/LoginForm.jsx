@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { Form, Icon, Input, Button, Checkbox, Row, Col } from 'antd';
+import { Form, Input, Button, Checkbox, Row, Col } from 'antd';
 import {
     Link, withRouter,
     useHistory,
@@ -131,43 +131,32 @@ function LoginForm(props) {
                     <h1>Вход в аккаунт</h1>
                     <div className="input-wrapper">
                         <Form onSubmit={handleSubmit} className="login-form">
-                            <Form.Item hasFeedback validateStatus={validateLoader}>
-                                {getFieldDecorator('emailphone', {
-                                    rules: [
-                                        {
-                                            required: true,
-                                            message: 'Please input your username!'
-                                        },
-                                        {
-                                            validator: validateEmailPhone,
-                                        }],
-                                })(
-                                    <Input
-                                        size="large"
-                                        // prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                        placeholder="E-mail или номер телефона"
-                                    />,
-                                )}
+                            <Form.Item name="emailphone" hasFeedback validateStatus={validateLoader} rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your username!'
+                                },
+                                {
+                                    validator: validateEmailPhone,
+                                }]}>
+                                <Input
+                                    size="large"
+                                    placeholder="E-mail или номер телефона"
+                                />
                             </Form.Item>
 
-                            <Form.Item style={{ marginBottom: "10px" }} validateStatus={validateConfirmCode} hasFeedback>
-                                {getFieldDecorator('password', {
-                                    rules: [
-                                        {
-                                            required: true,
-                                            message: 'Please input your password!',
-                                        }, {
-                                            validator: validatePass
-                                        }
-                                    ],
-                                })(<Input.Password size="large"
-                                    placeholder="Пароль" />)}
+                            <Form.Item name="password" style={{ marginBottom: "10px" }} validateStatus={validateConfirmCode} hasFeedback rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your password!',
+                                }, {
+                                    validator: validatePass
+                                }
+                            ]}><Input.Password size="large"
+                                placeholder="Пароль" />
                             </Form.Item>
-                            <Form.Item style={{ marginBottom: "10px" }}>
-                                {getFieldDecorator('remember', {
-                                    valuePropName: 'checked',
-                                    initialValue: true,
-                                })(<Checkbox>Remember me</Checkbox>)}
+                            <Form.Item name="remember" style={{ marginBottom: "10px" }}>
+                                <Checkbox>Remember me</Checkbox>
                                 <Link to="/forgot" className="login-form-forgot" href="">
                                     Забыли пароль?
                                 </Link>
@@ -196,4 +185,4 @@ function LoginForm(props) {
 }
 
 
-export default Form.create()(withRouter(LoginForm));
+export default withRouter(LoginForm);

@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react'
-import { Form, Icon, Input, Button, Checkbox, Row, Col } from 'antd';
+import { Form, Input, Button, Checkbox, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
@@ -163,23 +163,18 @@ function SignUpForm(props) {
     };
     const mainForm = (
         <Form onSubmit={handleSubmit} className="signin-form">
-            <Form.Item hasFeedback validateStatus={validateLoader}>
-                {getFieldDecorator('emailphone', {
-                    rules: [
-                        {
-                            required: true,
-                            message: 'Please input your username!'
-                        },
-                        {
-                            validator: validateEmailPhone,
-                        }],
-                })(
-                    <Input
-                        size="large"
-                        // prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                        placeholder="E-mail или номер телефона"
-                    />,
-                )}
+            <Form.Item name="emailphone" hasFeedback validateStatus={validateLoader} rules={[
+                {
+                    required: true,
+                    message: 'Please input your username!'
+                },
+                {
+                    validator: validateEmailPhone,
+                }]}>
+                <Input
+                    size="large"
+                    placeholder="E-mail или номер телефона"
+                />
             </Form.Item>
 
             <Form.Item hasFeedback>
@@ -196,24 +191,19 @@ function SignUpForm(props) {
                 })(<Input.Password size="large"
                     placeholder="Придумайте пароль" />)}
             </Form.Item>
-            <Form.Item hasFeedback>
-                {getFieldDecorator('confirm', {
-                    rules: [
-                        {
-                            required: true,
-                            message: 'Please confirm your password!',
-                        },
-                        {
-                            validator: compareToFirstPassword,
-                        },
-                    ],
-                })(<Input.Password placeholder="Подтвердите пароль" size="large" onBlur={handleConfirmBlur} />)}
+            <Form.Item name="confirm" hasFeedback rules={[
+                {
+                    required: true,
+                    message: 'Please confirm your password!',
+                },
+                {
+                    validator: compareToFirstPassword,
+                },
+            ]}>
+                <Input.Password placeholder="Подтвердите пароль" size="large" onBlur={handleConfirmBlur} />
             </Form.Item>
-            <Form.Item style={{ marginBottom: "10px" }}>
-                {getFieldDecorator('privacypolicy', {
-                    valuePropName: 'checked',
-                    initialValue: true,
-                })(<Checkbox>Я принимаю условия</Checkbox>)}
+            <Form.Item name="privacypolicy" style={{ marginBottom: "10px" }}>
+                <Checkbox>Я принимаю условия</Checkbox>
                 <a className="signin-form-forgot" href="">
                     Пользовательского соглашения и Политики конфиденциальности
             </a>
@@ -235,18 +225,16 @@ function SignUpForm(props) {
     );
     const confirmCode = (
         <Form onSubmit={handleConfirmCode} className="signin-form">
-            <Form.Item label="Код для подтверждения" hasFeedback validateStatus={validateConfirmCode}>
-                {getFieldDecorator('confirmcode', {
-                    rules: [
-                        {
-                            required: phone ? true : false,
-                            len: 5,
+            <Form.Item name="confirmcode" label="Код для подтверждения" hasFeedback validateStatus={validateConfirmCode} rules={[
+                {
+                    required: phone ? true : false,
+                    len: 5,
 
-                            message: 'Please input your confirm code?',
-                        }
-                    ],
-                })(<Input.Password size="large"
-                    placeholder="------" />)}
+                    message: 'Please input your confirm code?',
+                }
+            ]}>
+                <Input.Password size="large"
+                    placeholder="------" />
             </Form.Item>
             <Form.Item style={{ marginBottom: "10px" }}>
                 <div className="d-flex-space-between">
@@ -276,4 +264,4 @@ function SignUpForm(props) {
 }
 
 
-export default Form.create()(withRouter(SignUpForm));
+export default withRouter(SignUpForm);

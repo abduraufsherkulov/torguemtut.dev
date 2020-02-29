@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Card, Icon, Avatar, Skeleton, Button, Rate } from 'antd';
+import { Card, Avatar, Skeleton, Button, Rate } from 'antd';
 // import GoogleMapsApi from '../adnews/GoogleMapsApi';
 import HeartIcons from '../../Icons/HeartIcons';
 import VendorHeartIcons from '../../Icons/VendorHeartIcons';
@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import GoogleMapsApi from '../../news/adnews/GoogleMapsApi';
 import axios from 'axios'
 import { AuthContext } from '../../../contexts/AuthContext';
+import { PhoneOutlined, UserOutlined } from '@ant-design/icons';
 
 const { Meta } = Card;
 
@@ -70,7 +71,7 @@ function VendorInfo({ id }) {
                 </Skeleton>
             </Card> */}
             <Skeleton paragraph={{ rows: 0 }} loading={loading} active>
-                {!loading && (<Button href={`tel:${item.phone}`} type="primary" block ><Icon type="phone" />{item.phone}</Button>)}
+                {!loading && (<Button href={`tel:${item.phone}`} type="primary" block ><PhoneOutlined />{item.phone}</Button>)}
             </Skeleton>
             <Skeleton paragraph={{ rows: 0 }} loading={loading} active>
                 {!loading && (
@@ -79,7 +80,7 @@ function VendorInfo({ id }) {
                         extra={<VendorHeartIcons single={true} listData={item} setListData={setItem} item={item} vendorFavourite={item.vendorFavourite} />}
                         title={<Meta
                             style={{ display: 'flex', alignItems: 'center' }}
-                            avatar={<Avatar size="large" icon="user" />}
+                            avatar={<Avatar size="large" icon={<UserOutlined />} />}
                             title={<Link to={`/vendorproducts/${item.ownerId}`}>{item.phone}</Link>}
                         // description="Джон"
                         />}

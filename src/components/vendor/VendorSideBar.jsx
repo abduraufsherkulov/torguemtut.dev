@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Layout, Menu, Breadcrumb, Icon, Avatar } from 'antd';
+import { Layout, Menu, Breadcrumb, Avatar } from 'antd';
 import MainBreadcrumbs from '../MainBreadcrumbs';
 // import { Link } from 'react-router-dom'
 import { BrowserRouter as Router, Route, Link, withRouter, useParams } from "react-router-dom";
@@ -7,6 +7,7 @@ import VendorProducts from './products/VendorProducts';
 import VendorRatings from './ratings/VendorRatings';
 import VendorStatistics from './statistics/VendorStatistics';
 import VendorInfo from './info/VendorInfo';
+import { ContainerOutlined, MessageOutlined, HeartOutlined } from '@ant-design/icons';
 
 
 const { SubMenu } = Menu;
@@ -37,19 +38,19 @@ function VendorSideBar({ location }) {
                         <Menu theme="light" mode="inline" selectedKeys={[location.pathname]}>
                             <Menu.Item key={`/vendorproducts/${id}`}>
                                 <Link to={`/vendorproducts/${id}`} >
-                                    <Icon type="container" />
+                                    <ContainerOutlined />
                                     <span className="nav-text">Продукты</span>
                                 </Link>
                             </Menu.Item>
                             <Menu.Item key={`/vendorratings/${id}`}>
                                 <Link to={`/vendorratings/${id}`} >
-                                    <Icon type="message" />
+                                    <MessageOutlined />
                                     <span className="nav-text">Рейтинг</span>
                                 </Link>
                             </Menu.Item>
                             <Menu.Item key={`/vendorstatistics/${id}`}>
                                 <Link to={`/vendorstatistics/${id}`} >
-                                    <Icon type="heart" />
+                                    <HeartOutlined />
                                     <span className="nav-text">Статистика</span>
                                 </Link>
                             </Menu.Item>

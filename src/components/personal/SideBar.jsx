@@ -8,7 +8,14 @@ import MyAds from './myads/MyAds';
 import Settings from './settings/Settings';
 import MainMessages from './messages/MainMessages';
 import MainWallet from './wallet/MainWallet';
-
+import {
+    ContainerOutlined,
+    MessageOutlined,
+    HeartOutlined,
+    WalletOutlined,
+    SettingOutlined,
+    UserOutlined
+} from '@ant-design/icons';
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
@@ -33,7 +40,7 @@ function SideBar({ location }) {
                         }}
                     >
                         <div className="text-align-center user-section">
-                            <Avatar size={125} icon="user" />
+                            <Avatar size={125} icon={<UserOutlined />} />
                             <div className="auth-section"><span className="firstname">John</span> <span className="lastname">Doe</span></div>
                             <div>
                                 <a className="edit-link" onClick={() => { console.log('ok') }}> Редактировать </a>
@@ -42,31 +49,31 @@ function SideBar({ location }) {
                         <Menu theme="light" mode="inline" selectedKeys={[location.pathname]}>
                             <Menu.Item key="/myads">
                                 <Link to="/myads" >
-                                    <Icon type="container" />
+                                    <ContainerOutlined />
                                     <span className="nav-text">Объявления</span>
                                 </Link>
                             </Menu.Item>
                             <Menu.Item key="/messages">
                                 <Link to="/messages" >
-                                    <Icon type="message" />
+                                    <MessageOutlined />
                                     <span className="nav-text">Сообщения</span>
                                 </Link>
                             </Menu.Item>
                             <Menu.Item key="/wishlist">
                                 <Link to="/wishlist" >
-                                    <Icon type="heart" />
+                                    <HeartOutlined />
                                     <span className="nav-text">Избранное</span>
                                 </Link>
                             </Menu.Item>
                             <Menu.Item key="/wallet">
                                 <Link to="/wallet" >
-                                    <Icon type="wallet" />
+                                    <WalletOutlined />
                                     <span className="nav-text">Кошелек</span>
                                 </Link>
                             </Menu.Item>
                             <Menu.Item key="/settings">
                                 <Link to="/settings" >
-                                    <Icon type="setting" />
+                                    <SettingOutlined />
                                     <span className="nav-text">Настройки</span>
                                 </Link>
                             </Menu.Item>

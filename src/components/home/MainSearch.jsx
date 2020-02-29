@@ -1,6 +1,7 @@
 import React from 'react';
 import Bg from "../../images/longback.png";
-import { Row, Col, Form, Input, Select, Button, Icon } from 'antd';
+import { Row, Col, Form, Input, Select, Button } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
 import { IconFont } from '../Icons/Icons';
 
 const { Search } = Input;
@@ -14,7 +15,7 @@ function MainSearch() {
             <div className="container" >
                 <div className="search-part">
                     <InputGroup size="large" compact>
-                        <Input size="large" style={{ width: "40%" }} addonBefore={<Icon type="search" />} placeholder="Введите запрос поиска" />
+                        <Input size="large" style={{ width: "40%" }} addonBefore={<SearchOutlined />} placeholder="Введите запрос поиска" />
                         <Input size="large" suffix="$" style={{ width: "10%" }} placeholder="до" />
                         <Select placeholder="Сортировка" size="large" style={{ width: "20%" }}>
                             <Option value="Select.Option1-1">Последние</Option>

@@ -1,5 +1,6 @@
 import React from 'react'
-import { Table, Divider, Tag, Rate, Icon } from 'antd';
+import { Table, Divider, Tag, Rate } from 'antd';
+import { HeartOutlined } from '@ant-design/icons';
 
 const columns = [
 
@@ -28,7 +29,7 @@ const columns = [
     {
         title: 'Добавить в избранных',
         key: 'action',
-        render: () => <Icon type="heart" />,
+        render: () => <HeartOutlined />,
     },
 ];
 

@@ -1,11 +1,12 @@
 import React, { useState, useContext } from 'react'
-import { Icon, message } from 'antd';
+import { message } from 'antd';
 import { WishlistContext } from '../../contexts/WishlistContext';
 import { AuthContext } from '../../contexts/AuthContext';
 import { withRouter } from 'react-router-dom'
+import { HeartFilled, HeartTwoTone, HeartOutlined } from '@ant-design/icons';
 
 function HeartIcons(props) {
-    const [heartHover, setHeartHover] = useState("outlined");
+    const [heartHover, setHeartHover] = useState(false);
     const { addWish, removeWish } = useContext(WishlistContext);
     const { userData } = useContext(AuthContext)
     const wishController = () => {
@@ -21,10 +22,16 @@ function HeartIcons(props) {
         }
     }
 
-
-    return (
-        <Icon onClick={wishController} onMouseLeave={() => setHeartHover("outlined")} onMouseOver={() => setHeartHover("twoTone")} type="heart" theme={props.favourite ? "filled" : heartHover} />
-    )
+    // <Icon onClick={wishController} onMouseLeave={() => setHeartHover("outlined")} onMouseOver={() => setHeartHover("twoTone")} type="heart" theme={props.favourite ? "filled" : heartHover} />
+    return props.favourite ? (
+        <HeartFilled onClick={wishController} />
+    ) : (
+            heartHover ? (
+                <HeartTwoTone onClick={wishController} onMouseLeave={() => setHeartHover(false)} onMouseOver={() => setHeartHover(true)} />
+            ) : (
+                    <HeartOutlined onClick={wishController} onMouseLeave={() => setHeartHover(false)} onMouseOver={() => setHeartHover(true)} />
+                )
+        )
 }
 
 export default withRouter(HeartIcons);

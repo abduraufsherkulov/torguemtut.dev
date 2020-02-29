@@ -69,7 +69,7 @@ function Vip() {
                                                 </Link>
                                             </div>
                                             <div className="vip-links">
-                                                <span>VIP</span>
+                                                <span class="spanner">VIP</span>
                                                 <HeartIcons setListData={setVip} listData={vip} item={index} favourite={index.favourite} />
                                             </div>
                                             <div className="img-item-container">

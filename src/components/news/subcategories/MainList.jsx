@@ -61,7 +61,7 @@ function MainList() {
                         },
                         pageSize: 3,
                     }}
-                    dataSource={listData}
+                    options={listData}
                     footer={
                         <div>
                             {/* <b>ant design</b> footer part */}

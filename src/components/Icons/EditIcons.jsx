@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
-import { Icon } from 'antd';
+import { EditFilled, EditOutlined } from '@ant-design/icons';
 
 function EditIcons() {
     const [editHover, setEditHover] = useState(false);
-    return (
-        <Icon onMouseLeave={() => setEditHover(false)} onMouseOver={() => setEditHover(true)} type="edit" theme={editHover ? "filled" : "outlined"} />
-    )
+
+    return editHover ? (
+        <EditFilled onMouseLeave={() => setEditHover(false)} onMouseOver={() => setEditHover(true)} />
+    ) : (
+            <EditOutlined onMouseLeave={() => setEditHover(false)} onMouseOver={() => setEditHover(true)} />
+        )
 }
 
 export default EditIcons;

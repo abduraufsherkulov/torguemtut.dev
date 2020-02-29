@@ -2,8 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios';
 import { withRouter, Link } from 'react-router-dom';
 import { CategoryContext } from '../../contexts/CategoryContext';
-import { Icon } from 'antd'
-
+import { UnorderedListOutlined } from '@ant-design/icons';
 
 
 
@@ -54,7 +53,7 @@ function TopCategories(props) {
     return (
         <div id="topcategories">
             <div className="categories-main">
-                <div className="categories-content-title"><a href="#"> <Icon type="unordered-list" /><span>Категории</span> <i></i> </a></div>
+                <div className="categories-content-title"><a href="#"> <UnorderedListOutlined /><span>Категории</span> <i></i> </a></div>
 
                 <div className="categories-list-box">
                     {category.map((cat, index) => {

@@ -1,6 +1,6 @@
 import React from 'react'
-import { Breadcrumb, Icon } from 'antd'
-
+import { Breadcrumb } from 'antd'
+import { HomeOutlined } from '@ant-design/icons';
 import { withRouter, Link } from 'react-router-dom'
 
 const breadcrumbNameMap = {
@@ -29,7 +29,7 @@ const MainBreadcrumbs = withRouter(props => {
     });
     const breadcrumbItems = [
         <Breadcrumb.Item key="home">
-            <Link to="/"><Icon type="home" /></Link>
+            <Link to="/"><HomeOutlined /></Link>
         </Breadcrumb.Item>
     ].concat(extraBreadcrumbItems);
     return (

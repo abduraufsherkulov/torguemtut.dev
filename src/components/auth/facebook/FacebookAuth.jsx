@@ -1,7 +1,7 @@
 import React, {
     useEffect, useContext, useState,
 } from 'react'
-import { Icon, Button } from 'antd';
+import { Button } from 'antd';
 import axios from 'axios';
 
 import {
@@ -67,7 +67,7 @@ function FacebookAuth() {
             .then(response => {
                 console.log(response);
                 if (response.data.status) {
-                    
+
                     setLoading(false);
                     dispatch({ type: 'SIGN_IN', userData: JSON.stringify(response.data.userData) })
                     history.replace(from);
@@ -105,7 +105,7 @@ function FacebookAuth() {
     }
 
     useEffect(() => {
-        
+
         window.fbAsyncInit = function () {
             FB.init({
                 appId: '2496083423969818',
@@ -131,12 +131,12 @@ function FacebookAuth() {
 
         return () => {
             // let fb_sdk = document.getElementById('facebook-jssdk');
-            
+
             // document.head.removeChild(fb_sdk.previousElementSibling);
             // document.head.removeChild(fb_sdk);
 
             // subscription.unsubscribe();
-          };
+        };
     }, [])
     return (
         <div className="facebook-button">
