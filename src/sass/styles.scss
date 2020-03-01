@@ -679,7 +679,7 @@ footer {
   width: 100%;
   z-index: 1;
   overflow: hidden;
-  height: 810px;
+  height: 257px;
   .advertise-main {
     width: 70%;
     float: left;
@@ -961,9 +961,10 @@ footer {
 //CATEGORIES AND SLIDER
 
 #categoriesandslider {
-  background: #f2f2f2;
+  background: #fff;
   .container {
     position: relative;
+    padding: 30px 20px;
   }
   .under-cont {
     position: relative;
@@ -1385,5 +1386,331 @@ footer {
   }
   .global-search-item-count {
     flex: none;
+  }
+}
+
+#floatingcategories.x-categories-view {
+  .x-categories-view__table {
+    position: relative;
+    z-index: 2;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    direction: rtl;
+    // This is for right content
+    .x-categories-view__content-holder {
+      position: relative;
+      z-index: -1;
+      display: table-cell;
+      vertical-align: top;
+      direction: ltr;
+
+      .x-categories-view__content {
+        position: relative;
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+        margin-bottom: 10px;
+
+        .x-categories-view__slider-holder {
+          display: table-cell;
+          width: 100%;
+          box-sizing: border-box;
+          padding: 10px;
+          background: linear-gradient(135deg, #4854a2, #772088);
+          vertical-align: middle;
+
+          .x-slider {
+            position: relative;
+            overflow: hidden;
+          }
+        }
+      }
+
+      span {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-weight: inherit;
+        font-style: inherit;
+      }
+
+      .x-anti-fear {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 30px 20px;
+        border: 1px solid #dfe1f0;
+        list-style: none;
+        .x-anti-fear__item {
+          text-align: left;
+          .x-anti-fear__item-content {
+            display: flex;
+            align-items: center;
+            color: inherit;
+            .x-anti-fear__icon-holder {
+              display: block;
+              width: 40px;
+              font-size: 0;
+              .x-anti-fear__icon {
+                height: 30px;
+                width: 30px;
+                fill: #000;
+              }
+            }
+            .x-anti-fear__title {
+              display: block;
+              margin-bottom: 5px;
+              max-width: 170px;
+              font-weight: 700;
+            }
+          }
+        }
+
+        .x-anti-fear__item + .x-anti-fear__item {
+          padding-left: 20px;
+          border-left: 1px solid #dfe1f0;
+        }
+      }
+    }
+    // This is for menu
+    .x-categories-view__menu-holder {
+      display: table-cell;
+      width: 240px;
+      vertical-align: top;
+      direction: ltr;
+      ul,
+      li,
+      span,
+      div {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-weight: inherit;
+        font-style: inherit;
+      }
+
+      .x-categories-menu {
+        .portalCategoriesMenu__stateStatic--3oxxu {
+          .portalCategoriesMenu__list--1Nfz6 {
+            overflow: auto;
+            max-height: 530px;
+            width: 430px;
+            list-style: none;
+          }
+          .portalCategoriesMenu__listTypeFake--3JlQn {
+            background: rgba(255, 255, 255, 0.1);
+            position: relative;
+            width: auto;
+            height: 480px;
+            overflow: hidden;
+
+            .portalCategoriesMenu__item--13TAa {
+              width: auto;
+            }
+            .portalCategoriesMenu__link--2I1GQ {
+              border-right-width: 10px;
+            }
+            &:after {
+              position: absolute;
+              right: 0;
+              bottom: 0;
+              left: 0;
+              height: 40px;
+              background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+              content: "";
+            }
+          }
+          .portalCategoriesMenu__item--13TAa {
+            width: 310px;
+            box-sizing: border-box;
+          }
+          .portalCategoriesMenu__link--2I1GQ {
+            display: table;
+            width: 100%;
+            height: 40px;
+            border-style: solid;
+            border-color: transparent;
+            border-width: 0 20px 0 10px;
+            box-sizing: border-box;
+            table-layout: fixed;
+            color: #333;
+            line-height: 1.3;
+          }
+          .portalCategoriesMenu__title--2sUdr {
+            display: table-cell;
+            vertical-align: middle;
+            font-family: inherit;
+          }
+
+          //floating menu
+          .floatingmenu {
+            .portalCategoriesMenu__overlay--1HRbA {
+              position: fixed;
+              z-index: -1;
+              top: 0;
+              right: 0;
+              bottom: 0;
+              left: 0;
+              background: rgba(223, 225, 240, 0.5);
+            }
+
+            .portalCategoriesMenu__wrapper--ub8rf {
+              position: absolute;
+              left: -10px;
+              right: -10px;
+              top: 100%;
+              height: 0;
+              margin-top: 10px;
+              z-index: 2;
+
+              .portalCategoriesMenu__tableHolder--7dPE7 {
+                position: relative;
+                float: left;
+
+                .portalCategoriesMenu__table--v5p3b {
+                  position: relative;
+                  display: table;
+                  table-layout: fixed;
+                  background: #fff;
+                  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.1);
+
+                  .portalCategoriesMenu__column--f_Zf6 {
+                    position: relative;
+                    display: table-cell;
+                    width: 320px;
+                    padding: 10px;
+                    box-sizing: border-box;
+                    vertical-align: top;
+                    z-index: 1;
+
+                    &:first-child {
+                      width: 240px;
+                      .portalCategoriesMenu__columnContent--8Yr5n {
+                        width: 250px;
+                        .portalCategoriesMenu__item--13TAa {
+                          width: 250px !important;
+                        }
+                      }
+                    }
+                    &::before {
+                      position: absolute;
+                      top: 0;
+                      bottom: 0;
+                      left: 0;
+                      border-left: 1px solid #dfe1f0;
+                      content: "";
+                    }
+                    .portalCategoriesMenu__columnContent--8Yr5n {
+                      overflow: hidden;
+                      width: 310px;
+                      margin-right: -10px;
+                      .portalCategoriesMenu__list--1Nfz6 {
+                        overflow: auto;
+                        max-height: 530px;
+                        width: 430px;
+                        list-style: none;
+                        // &:first-child {
+                        //   .portalCategoriesMenu__item--13TAa {
+                        //     width: 250px;
+                        //   }
+                        // }
+                        .portalCategoriesMenu__item--13TAa {
+                          width: 310px;
+                          box-sizing: border-box;
+
+                          .portalCategoriesMenu__link--2I1GQ {
+                            border-right-width: 10px;
+                            display: table;
+                            width: 100%;
+                            height: 40px;
+                            border-style: solid;
+                            border-color: transparent;
+                            border-width: 0 20px 0 10px;
+                            box-sizing: border-box;
+                            table-layout: fixed;
+                            color: #333;
+                            line-height: 1.3;
+
+                            .portalCategoriesMenu__title--2sUdr {
+                              display: table-cell;
+                              vertical-align: middle;
+                              font-family: inherit;
+                            }
+                            .portalCategoriesMenu__arrowHolder--3cLQr {
+                              display: table-cell;
+                              width: 20px;
+                              vertical-align: middle;
+                              text-align: right;
+                              .portalCategoriesMenu__arrow--jqd9p {
+                                display: inline-block;
+                                width: 10px;
+                                height: 10px;
+                                vertical-align: middle;
+                                fill: currentColor;
+                              }
+                            }
+                          }
+                        }
+                      }
+                      .portalCategoriesMenu__scrollButtonPositionBottom--hciZH {
+                        bottom: 10px;
+                      }
+                      .portalCategoriesMenu__scrollButton--3rtih {
+                        position: absolute;
+                        left: 10px;
+                        right: 10px;
+                        background: #f6f8fd;
+                        text-align: center;
+                        color: #8646aa;
+                        font-size: 0;
+                        font-family: inherit;
+                        &::before {
+                          display: inline-block;
+                          vertical-align: middle;
+                          height: 40px;
+                          content: "";
+                        }
+                        &::after {
+                          position: absolute;
+                          top: 0;
+                          bottom: 0;
+                          left: 100%;
+                          width: 10px;
+                          background: #fff;
+                          cursor: default;
+                          content: "";
+                        }
+                      }
+                      .portalCategoriesMenu__scrollIcon--Spvyz {
+                        display: inline-block;
+                        vertical-align: middle;
+                        width: 10px;
+                        height: 10px;
+                        fill: currentColor;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            .portalCategoriesMenu__wrapper--ub8rf {
+              z-index: 1;
+              top: 0;
+              margin-top: -10px;
+            }
+            .portalCategoriesMenu__linkStateActive--2x_OG {
+              background: #8646aa;
+              color: #fff;
+              span {
+                color: #fff;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

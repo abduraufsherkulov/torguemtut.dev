@@ -53,7 +53,7 @@ function FillWallet() {
 
                </form>
 
-               <form method="POST" action="https://test.paycom.uz">
+               {/* <form method="POST" action="https://test.paycom.uz">
 
                     <input type="hidden" name="merchant" value="{Merchant ID}" />
                     <input type="hidden" name="amount" value="{сумма чека в ТИИНАХ}" />
@@ -70,19 +70,10 @@ function FillWallet() {
                     <input type="hidden" name="detail" value="{JSON объект детализации в BASE64}" />
 
                     <button type="submit">Оплатить с помощью <b>Payme</b></button>
-               </form>
+               </form> */}
 
           </React.Fragment >
      )
 }
 
 export default withRouter(FillWallet);
-
-
-// <form method="POST" action="https://test.paycom.uz">
-
-// <input type="hidden" name="merchant" value="{Merchant ID}" />
-
-// <input type="hidden" name="account[{field_name}]" value="{field_value}" />
-
-// <button type="submit">Оплатить с помощью <b>Payme</b></button>
