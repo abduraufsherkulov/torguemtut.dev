@@ -38,7 +38,8 @@ function MainList() {
             }
         })
             .then(response => {
-                console.log(response, 'called')
+                // console.log(response.headers.get('Authorization'))
+                console.log(response.headers['x-pagination'], 'called')
                 setListData(response.data);
                 setLoading(false)
             })

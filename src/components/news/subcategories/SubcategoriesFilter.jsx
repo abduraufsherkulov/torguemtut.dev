@@ -81,10 +81,10 @@ function SubcategoriesFilter({ catId }) {
                     )
                 } else {
                     return (
-                        <div style={{ textAlign: 'center' }}>
-                            <AttrInput item={item} key={item.name + "from"} pref="от" fromto="from" />
+                        <div key={item.name} style={{ textAlign: 'center' }}>
+                            <AttrInput item={item} pref="от" fromto="from" />
                             <Divider style={{ marginRight: "16px", background: "#0098d0", height: '26%' }} orientation="center" type="vertical" />
-                            <AttrInput item={item} key={item.name + "to"} pref="до" fromto="to" />
+                            <AttrInput item={item} pref="до" fromto="to" />
                         </div>
                     )
                 }

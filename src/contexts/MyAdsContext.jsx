@@ -23,6 +23,7 @@ function MyAdsProvider(props) {
                 }
             })
                 .then(response => {
+                    // console.log(response.headers)
                     setMyAds(response.data);
                 })
                 .catch(error => {
