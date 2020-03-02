@@ -11,6 +11,7 @@ import {
 } from '../../helpers/SvgHelper';
 import { Link } from 'react-router-dom'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function FloatingBottom() {
     return (
@@ -93,6 +94,7 @@ function FloatingMenuItem({ cat, setSecondLevel, setThirdLevel, lvl, secondLevel
         <li onMouseOver={(e) => handleMouseOver(e, cat.children)} onMouseLeave={(e) => handleMouseLeave(e)} className={activeClass}>
 
             <Link className="portalCategoriesMenu__link--2I1GQ" to={`/subcategories/${cat.value}`}>
+                {lvl == 1 ? <span className="webIcons"><FontAwesomeIcon icon={cat.webIcon} /></span> : null}
                 <span className="portalCategoriesMenu__title--2sUdr">{cat.name}</span>
                 <span className="portalCategoriesMenu__arrowHolder--3cLQr">{cat.children && cat.children.length > 0 ? <RightIcon /> : null}</span>
             </Link>
@@ -226,7 +228,10 @@ function FloatingCategories() {
                                         return (
                                             <li key={index} className="portalCategoriesMenu__item--13TAa">
                                                 <span className="portalCategoriesMenu__link--2I1GQ">
+                                                    {/* <FontAwesomeIcon icon={['fab', 'coffee']} /> */}
+                                                    <span className="webIcons"><FontAwesomeIcon icon={cat.webIcon} /></span>
                                                     <span className="portalCategoriesMenu__title--2sUdr">{cat.name}</span>
+                                                    <span className="portalCategoriesMenu__arrowHolder--3cLQr">{cat.children && cat.children.length > 0 ? <RightIcon /> : null}</span>
                                                 </span>
                                             </li>
                                         )

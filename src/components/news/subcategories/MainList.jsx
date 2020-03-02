@@ -13,19 +13,21 @@ moment.locale('ru')
 function MainList() {
     const { userData, dispatch } = useContext(AuthContext)
     const [loading, setLoading] = useState(true)
-    const [listData, setListData] = useState([{}, {}, {}, {}]);
+    const [listData, setListData] = useState([{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]);
+    const [pagination, setPagination] = useState({});
+    const [currentPage, setCurrentPage] = useState(1);
 
     let { id } = useParams();
 
-    function br2nl(str) {
-        return str.replace(/<br\s*\/?>/mg, "\n");
-    }
     function momentize(date) {
         return moment(date).format('LLLL')
     }
     useEffect(() => {
+        setLoading(true)
         const data = JSON.stringify({
-            categoryId: id
+            categoryId: id,
+            pageSize: 30,
+            pageNumber: currentPage
         })
         const endpoint = `https://ttuz.azurewebsites.net/api/news/get-all`;
         axios({
@@ -38,8 +40,9 @@ function MainList() {
             }
         })
             .then(response => {
-                // console.log(response.headers.get('Authorization'))
-                console.log(response.headers['x-pagination'], 'called')
+                let pagination = JSON.parse(response.headers['x-pagination']);
+                console.log(pagination)
+                setPagination(pagination);
                 setListData(response.data);
                 setLoading(false)
             })
@@ -50,23 +53,28 @@ function MainList() {
                 }
                 console.log(error.response, "error in categories");
             });
-    }, []);
+    }, [currentPage]);
 
-
+    const handleChange = (page) => {
+        setCurrentPage(page)
+    }
     return (
         <div className="container">
             <div className="filtration">
                 <SubcategoriesFilter catId={id} />
             </div>
             <div id="mainlist">
+                <h1>Обычные объявления</h1>
+                <span>Найдено объявлений: {pagination.TotalCount ? pagination.TotalCount : 0}</span>
                 <List
                     itemLayout="vertical"
                     size="large"
                     pagination={{
                         onChange: page => {
-                            console.log(page);
+                            handleChange(page);
                         },
-                        pageSize: 3,
+                        pageSize: 30,
+                        total: pagination.TotalCount
                     }}
                     dataSource={listData}
                     footer={

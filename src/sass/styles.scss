@@ -1513,6 +1513,21 @@ footer {
             }
             .portalCategoriesMenu__link--2I1GQ {
               border-right-width: 10px;
+
+              .portalCategoriesMenu__arrowHolder--3cLQr {
+                display: table-cell;
+                width: 20px;
+                vertical-align: middle;
+                text-align: right;
+
+                .portalCategoriesMenu__arrow--jqd9p {
+                  display: inline-block;
+                  width: 10px;
+                  height: 10px;
+                  vertical-align: middle;
+                  fill: currentColor;
+                }
+              }
             }
             // &:after {
             //   position: absolute;
@@ -1544,6 +1559,19 @@ footer {
             display: table-cell;
             vertical-align: middle;
             font-family: inherit;
+          }
+
+          .webIcons {
+            display: table-cell;
+            width: 26px;
+            vertical-align: middle;
+            svg {
+              display: inline-block;
+              width: 16px;
+              height: 16px;
+              vertical-align: middle;
+              fill: #4953a1;
+            }
           }
 
           //floating menu
@@ -1639,6 +1667,18 @@ footer {
                               display: table-cell;
                               vertical-align: middle;
                               font-family: inherit;
+                            }
+                            .webIcons {
+                              display: table-cell;
+                              width: 26px;
+                              vertical-align: middle;
+                              svg {
+                                display: inline-block;
+                                width: 16px;
+                                height: 16px;
+                                vertical-align: middle;
+                                fill: #4953a1;
+                              }
                             }
                             .portalCategoriesMenu__arrowHolder--3cLQr {
                               display: table-cell;
