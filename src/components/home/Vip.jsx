@@ -12,10 +12,18 @@ function Vip() {
     const { userData, dispatch } = useContext(AuthContext)
     const [vip, setVip] = useState([{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]);
     useEffect(() => {
-        const endpoint = "https://ttuz.azurewebsites.net/api/news/get-all-by-tariff?type=1";
+        const endpoint = "https://ttuz.azurewebsites.net/api/news/get-all-by-tariff";
+
+        const data = JSON.stringify({
+            Type: 1,
+            pageSize: 30,
+            // pageNumber: currentPage
+        })
+
         axios({
             method: "post",
             url: endpoint,
+            data: data,
             headers: {
                 "content-type": "application/json",
                 Authorization: `Bearer ${userData.token}`

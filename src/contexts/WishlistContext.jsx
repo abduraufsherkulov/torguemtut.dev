@@ -18,6 +18,7 @@ function WishlistContextProvider(props) {
             axios({
                 method: 'post',
                 url: endpoint,
+                data: {},
                 headers: {
                     "content-type": "application/json",
                     Authorization: `Bearer ${userData.token}`
