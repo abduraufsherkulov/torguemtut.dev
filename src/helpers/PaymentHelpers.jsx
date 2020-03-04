@@ -2,7 +2,7 @@ const currentEnv = process.env.NODE_ENV;
 
 const modes = {
     production: {
-        action: 'https://test.paycom.uz',
+        action: 'https://checkout.paycom.uz',
         merchandId: "uK5P5cKZwAkM7wznzI90OdKEfnf9ErYfMfvt",
     },
     development: {

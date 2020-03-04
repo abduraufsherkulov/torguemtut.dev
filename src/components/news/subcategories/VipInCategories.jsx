@@ -73,11 +73,15 @@ function VipInCategories({ id, userData, vipLoading, setVipLoading }) {
                         ]}
                         extra={
                             !vipLoading && (
-                                <div className="listExtra"><img
-                                    style={{ maxWidth: "150px", maxHeight: "130px" }}
-                                    alt="logo"
-                                    src={`https://ttuz.azurewebsites.net/Resources/Images/${item.images[0].path}`}
-                                /></div>)
+                                <div className="listExtra">
+                                    <div className="vip-links">
+                                        <i className="spanner">VIP</i>
+                                    </div>
+                                    <img
+                                        style={{ maxWidth: "150px", maxHeight: "130px" }}
+                                        alt="logo"
+                                        src={`https://ttuz.azurewebsites.net/Resources/Images/${item.images[0].path}`}
+                                    /></div>)
                         }
                     >
                         <Skeleton loading={vipLoading} active avatar>

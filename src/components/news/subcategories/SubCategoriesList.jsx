@@ -29,7 +29,7 @@ function SubCategoriesList({ id, userData, currentPage, setCurrentPage, catLoadi
         })
             .then(response => {
                 let pagination = JSON.parse(response.headers['x-pagination']);
-                console.log(pagination)
+                console.log(response.data)
                 setPagination(pagination);
                 setListData(response.data);
                 setCatLoading(false)
@@ -69,37 +69,46 @@ function SubCategoriesList({ id, userData, currentPage, setCurrentPage, catLoadi
                     </div>
                 }
                 renderItem={item => (
-                    <List.Item
-                        className="ant-card-hoverable"
-                        style={{ display: 'flex', padding: '16px' }}
-                        key={item.id}
-                        actions={!catLoading && [
-                            <HeartIcons setListData={setListData} listData={listData} item={item} favourite={item.favourite} />,
-                            <p>Добавлено в {momentize(item.updatedDate)}</p>
-                        ]}
-                        extra={
-                            !catLoading && (
-                                <div className="listExtra"><img
-                                    style={{ maxWidth: "150px", maxHeight: "130px" }}
-                                    alt="logo"
-                                    src={`https://ttuz.azurewebsites.net/Resources/Images/${item.images[0].path}`}
-                                /></div>)
-                        }
-                    >
-                        <Skeleton loading={catLoading} active avatar>
-                            {!catLoading && (
-                                <>
-                                    <List.Item.Meta
-                                        // avatar={<Avatar src={`https://ttuz.azurewebsites.net/${item.images[0].path}`} />}
-                                        title={<><Link style={{ width: '70%', float: 'left' }} to={`/item/${item.id}`}>{item.title}</Link><p style={{ display: 'inline-block', width: '30%', textAlign: 'right' }}>{item.price.amount} {item.price.currencyLabel}</p></>}
-                                    // description={br2nl(item.description)}
-                                    />
-                                    {item.content}
-                                    <p style={{ color: 'white' }}>asd</p>
-                                </>
-                            )}
-                        </Skeleton>
-                    </List.Item>
+                    <Link to={`/item/${item.id}`}>
+                        <List.Item
+                            className="ant-card-hoverable"
+                            style={{ display: 'flex', padding: '16px', border: item.tariffs && item.tariffs.find(x => x.type == 2) ? '1px solid #543f92' : 'none' }}
+                            key={item.id}
+                            actions={!catLoading && [
+                                <HeartIcons setListData={setListData} listData={listData} item={item} favourite={item.favourite} />,
+                                <p>Добавлено в {momentize(item.updatedDate)}</p>
+                            ]}
+                            extra={
+                                !catLoading && (
+                                    <div className="listExtra">
+                                        {item.tariffs && item.tariffs.find(x => x.type == 1) ?
+                                            <div className="vip-links">
+                                                <i className="spanner">VIP</i>
+                                            </div> : null}
+
+
+                                        <img
+                                            style={{ maxWidth: "150px", maxHeight: "130px" }}
+                                            alt="logo"
+                                            src={`https://ttuz.azurewebsites.net/Resources/Images/${item.images[0].path}`}
+                                        /></div>)
+                            }
+                        >
+                            <Skeleton loading={catLoading} active avatar>
+                                {!catLoading && (
+                                    <>
+                                        <List.Item.Meta
+                                            // avatar={<Avatar src={`https://ttuz.azurewebsites.net/${item.images[0].path}`} />}
+                                            title={<><div style={{ width: '70%', float: 'left' }}>{item.title}</div><p style={{ display: 'inline-block', width: '30%', textAlign: 'right' }}>{item.price.amount} {item.price.currencyLabel}</p></>}
+                                        // description={br2nl(item.description)}
+                                        />
+                                        {item.content}
+                                        <p style={{ color: 'white' }}>asd</p>
+                                    </>
+                                )}
+                            </Skeleton>
+                        </List.Item>
+                    </Link>
                 )}
             />
         </React.Fragment>
