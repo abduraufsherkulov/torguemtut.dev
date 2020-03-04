@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import { Carousel, Row, Col } from 'antd';
 import { AuthContext } from '../../contexts/AuthContext';
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 function UnderCarouselNews() {
     const { userData, dispatch } = useContext(AuthContext)
     const [vip, setVip] = useState([{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]);
@@ -24,8 +25,8 @@ function UnderCarouselNews() {
             }
         })
             .then(response => {
-                setLoading(false)
                 setVip(response.data)
+                setLoading(false)
                 console.log(response.data, 'called wanted')
             })
             .catch(error => {
@@ -39,23 +40,26 @@ function UnderCarouselNews() {
 
     return (
         <div className="down-promotion">
-            <Row type="flex" justify="space-between">
+            <Row type="flex" gutter={[8, 8]} justify="space-between">
                 {!loading && vip.map((item, index) => (
                     <Col span={6} key={index}>
-                        <div className="crowd-container">
-                            <div className="crowd-img">
-                                <img style={{ width: '100%' }} src={item.images !== undefined ? `https://ttuz.azurewebsites.net/Resources/Images/${item.images[0].path}` : null} alt="" />
-                                {/* <img src="//ae01.alicdn.com/kf/H44270036a201444eaff9af72aaf84556z.jpg_140x140.jpg_.webp" /> */}
+                        <Link to={`/item/${item.id}`}>
+                            <div className="crowd-container">
+                                <div className="crowd-img">
+                                    <img style={{ width: '100%' }} src={item.images !== undefined ? `https://ttuz.azurewebsites.net/Resources/Images/${item.images[0].path}` : null} alt="" />
+                                    {/* <img src="//ae01.alicdn.com/kf/H44270036a201444eaff9af72aaf84556z.jpg_140x140.jpg_.webp" /> */}
+                                </div>
+                                <div className="crowd-note">
+                                    <div className="crowd-price">{item.price.amount} sum</div>
+                                </div>
+                                <div className="crowd-title" title={item.title}>{item.title}</div>
                             </div>
-                            <div className="crowd-note">
-                                <div className="crowd-price">{item.amount} sum</div>
-                            </div>
-                            <div className="crowd-title" title="">Гуру гаджетов</div>
-                        </div>
+                        </Link>
                     </Col>
-                ))}
-            </Row>
-        </div>
+                ))
+                }
+            </Row >
+        </div >
     )
 }
 

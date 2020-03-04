@@ -33,6 +33,7 @@ import NoMatch from './NoMatch';
 import RatingVendors from './ratingvendors/RatingVendors';
 import VendorSideBar from './vendor/VendorSideBar';
 import ForgotPassword from './auth/forgotpass/ForgotPassword';
+import PrivacyPolicy from './footer/PrivacyPolicy';
 
 function PrivateRoute({ children, ...rest }) {
   const { userData } = useContext(AuthContext);
@@ -95,6 +96,11 @@ function Container({ location }) {
 
               <Route exact path="/">
                 <Home />
+              </Route>
+
+
+              <Route exact path="/privacypolicy">
+                <PrivacyPolicy />
               </Route>
 
               <Route exact path="/ratings">

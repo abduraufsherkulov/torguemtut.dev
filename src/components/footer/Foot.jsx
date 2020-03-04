@@ -28,7 +28,7 @@ function Foot() {
                         <ul>
                             <li><Link to="/tariff">Тарифы</Link></li>
                             <li><a href="">Реклама на сайте</a></li>
-                            <li><a href="">Политика конфиденциальности</a></li>
+                            <li><Link to="/privacypolicy">Политика конфиденциальности</Link></li>
                             <li><a href="">Правила пользования порталом</a></li>
                         </ul>
                     </Col>
