@@ -14,6 +14,7 @@ function SignUpForm(props) {
     const [password, setpassword] = useState(null);
     const [isMail, setisMail] = useState(false);
     const [validateLoader, setvalidateLoader] = useState("");
+    const [validateConfirmLoader, setValidateConfirmLoader] = useState("");
     const [validateConfirmCode, setvalidateConfirmCode] = useState("")
 
     const handleFinishFailed = ({ errorFields }) => {
@@ -55,6 +56,7 @@ function SignUpForm(props) {
             }
         })
             .then(response => {
+                console.log(response)
                 if (response.data.status) {
                     setphone(values.emailphone);
                     setpassword(values.password);
@@ -62,16 +64,16 @@ function SignUpForm(props) {
                     setvalidateLoader('success');
                 } else {
 
+                    console.log(response);
                     setvalidateLoader('error');
                     form.setFields({
                         emailphone: {
                             value: values.emailphone,
-                            errors: [new Error(response.data.message)],
+                            errors: response.data.message,
                         },
                     });
                 }
 
-                console.log(response);
             })
             .catch(error => {
                 console.log(error.response, "error on refresh");
@@ -93,10 +95,6 @@ function SignUpForm(props) {
         axios({
             method: "post",
             url: endpoint,
-            // auth: {
-            //     username: "delivera",
-            //     password: "X19WkHHupFJBPsMRPCJwTbv09yCD50E2"
-            // },
             headers: {
                 "content-type": "application/json"
             },
@@ -111,6 +109,7 @@ function SignUpForm(props) {
                     }
                     props.history.push('/');
                 } else {
+                    console.log(response.data)
                     setvalidateConfirmCode('error');
                     form.setFields({
                         confirmcode: {
@@ -153,6 +152,17 @@ function SignUpForm(props) {
         return Promise.resolve();
     };
 
+
+    function validateConfirm(rule, value, callback) {
+        if (validateConfirmLoader === "error") {
+            setvalidateConfirmLoader('success');
+        } else if (validateConfirmCode === "error") {
+            setvalidateConfirmCode('success')
+        }
+        return Promise.resolve();
+    };
+
+
     function handleConfirmBlur(e) {
         const { value } = e.target;
         setconfirmDirty(confirmDirty || !!value);
@@ -162,14 +172,15 @@ function SignUpForm(props) {
             <Form.Item name="emailphone" hasFeedback validateStatus={validateLoader} rules={[
                 {
                     required: true,
-                    message: 'Please input your username!'
+                    type: 'email',
+                    message: 'Email не является допустимым!'
                 },
                 {
                     validator: validateEmailPhone,
                 }]}>
                 <Input
                     size="large"
-                    placeholder="E-mail или номер телефона"
+                    placeholder="E-mail"
                 />
             </Form.Item>
 
@@ -200,7 +211,7 @@ function SignUpForm(props) {
                 <a className="signin-form-forgot" href="">
                     Пользовательского соглашения и Политики конфиденциальности
             </a>
-                <Button style={{ marginTop: "33px" }} size="large" type="primary" htmlType="submit" className="signin-form-button">
+                <Button loading={validateLoader == "validating" ? true : false} style={{ marginTop: "33px" }} size="large" type="primary" htmlType="submit" className="signin-form-button">
                     Зарегистрироваться
             </Button>
             </Form.Item>
@@ -217,13 +228,16 @@ function SignUpForm(props) {
         </Form>
     );
     const confirmCode = (
-        <Form onFinish={handleConfirmFinish} className="signin-form">
+        <Form form={form} onFinish={handleConfirmFinish} onFinishFailed={handleFinishFailed} className="signin-form">
             <Form.Item name="confirmcode" label="Код для подтверждения" hasFeedback validateStatus={validateConfirmCode} rules={[
                 {
                     required: phone ? true : false,
                     len: 5,
 
-                    message: 'Please input your confirm code?',
+                    message: 'Пожалуйста, введите ваш код подтверждения',
+                },
+                {
+                    validator: validateConfirm
                 }
             ]}>
                 <Input.Password size="large"

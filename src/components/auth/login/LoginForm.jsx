@@ -79,7 +79,7 @@ function LoginForm(props) {
                     form.setFields({
                         password: {
                             value: values.password,
-                            errors: [new Error(response.data.message)],
+                            errors: response.data.message,
                         },
                     });
                 }
@@ -90,10 +90,9 @@ function LoginForm(props) {
 
                 setvalidateLoader('error');
                 form.setFields({
-                    password: {
-                        value: values.password,
-                        errors: [new Error(error.response.data.message)],
-                    },
+                    name: 'password',
+                    value: values.password,
+                    errors: error.response.data.message,
                 });
             });
 
