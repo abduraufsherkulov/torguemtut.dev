@@ -10,7 +10,7 @@ function Navigator() {
     return (
         <Header style={{
             background: "white", padding: "0px", paddingBottom: "40px",
-            height: "104px"
+            height: "104px", paddingTop: '10px'
         }}>
             <div className="container">
                 <Row type="flex" align="middle">

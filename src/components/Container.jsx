@@ -21,7 +21,7 @@ import SideBar from './personal/SideBar';
 import DownloadApplication from './application/DownloadApplication';
 import SupportService from './help/SupportService';
 import Disputes from './help/Disputes';
-import MainMessages from './personal/messages/MainMessages';
+import MainBusiness from './personal/business/MainBusiness';
 import MainWallet from './personal/wallet/MainWallet';
 import { BalanceContext } from '../contexts/BalanceContext';
 import AddNewsAd from './news/adnews/AddNewsAd';
@@ -162,7 +162,7 @@ function Container({ location }) {
               <PrivateRoute path="/settings">
                 <SideBar />
               </PrivateRoute>
-              <PrivateRoute path="/messages">
+              <PrivateRoute path="/business">
                 <SideBar />
               </PrivateRoute>
               <PrivateRoute path="/wallet">

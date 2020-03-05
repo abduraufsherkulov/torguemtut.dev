@@ -49,7 +49,7 @@ function VipPopular() {
                     <div className="top-vendor-title">
                         <img src={Logo} alt="" />
                         {/* <a style={{ visibility: "hidden" }} href="">Как сюда попасть?</a> */}
-                        <h1>Популярные</h1>
+                        <h1>Популярные продацы</h1>
                         <img src={Logo} style={{ visibility: "hidden" }} alt="" />
                     </div>
                 </div>

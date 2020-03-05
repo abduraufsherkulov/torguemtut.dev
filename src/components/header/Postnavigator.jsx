@@ -6,7 +6,7 @@ import { IconFont } from '../Icons/Icons';
 import {
     PoweroffOutlined,
     ContainerOutlined,
-    MessageOutlined,
+    ShopOutlined,
     HeartOutlined,
     WalletOutlined,
     SettingOutlined,
@@ -135,8 +135,8 @@ const getAccount = (authContext) => {
         </Link>
             </Menu.Item>
             <Menu.Item>
-                <Link to="/messages">
-                    <MessageOutlined />    Сообщения
+                <Link to="/business">
+                    <ShopOutlined />    Бизнес
         </Link>
             </Menu.Item>
             <Menu.Item>
