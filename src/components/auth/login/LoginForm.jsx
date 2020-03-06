@@ -76,12 +76,10 @@ function LoginForm(props) {
                 } else {
                     setvalidateConfirmCode('error');
                     setvalidateLoader('error');
-                    form.setFields({
-                        password: {
-                            value: values.password,
-                            errors: response.data.message,
-                        },
-                    });
+                    form.setFields([{
+                        name: 'password',
+                        errors: [response.data.message],
+                    }]);
                 }
             })
             .catch(error => {
@@ -89,11 +87,12 @@ function LoginForm(props) {
                 setvalidateConfirmCode('error');
 
                 setvalidateLoader('error');
-                form.setFields({
+
+                form.setFields([{
                     name: 'password',
-                    value: values.password,
-                    errors: error.response.data.message,
-                });
+                    values: values.password,
+                    errors: [error.response.data.message],
+                }]);
             });
 
     };

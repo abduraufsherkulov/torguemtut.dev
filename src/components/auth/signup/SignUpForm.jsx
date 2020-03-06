@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Form, Input, Button, Checkbox, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -9,6 +9,7 @@ import FacebookAuth from '../facebook/FacebookAuth';
 function SignUpForm(props) {
     const [form] = Form.useForm();
 
+    const { userData, dispatch } = useContext(AuthContext);
     const [confirmDirty, setconfirmDirty] = useState(false);
     const [phone, setphone] = useState(null);
     const [password, setpassword] = useState(null);
@@ -66,12 +67,11 @@ function SignUpForm(props) {
 
                     console.log(response);
                     setvalidateLoader('error');
-                    form.setFields({
-                        emailphone: {
-                            value: values.emailphone,
-                            errors: response.data.message,
-                        },
-                    });
+
+                    form.setFields([{
+                        name: 'emailphone',
+                        errors: [error.response.data.message],
+                    }]);
                 }
 
             })
@@ -101,22 +101,31 @@ function SignUpForm(props) {
             data: data
         })
             .then(response => {
-                if (response.data.status) {
+                if (response.data.code) {
                     if (isMail) {
                         localStorage.setItem('username', phone);
                     } else {
                         localStorage.setItem('username', phone);
                     }
+
+                    if (email) {
+                        dispatch({ type: 'SIGN_IN', userData: JSON.stringify(response.data.userData) })
+                        // localStorage.setItem('username', values.emailphone);
+                        history.replace(from);
+                    } else {
+                        // localStorage.setItem('username', values.emailphone);
+
+                        dispatch({ type: 'SIGN_IN', userData: JSON.stringify(response.data.userData) })
+                        history.replace(from);
+                    }
                     props.history.push('/');
                 } else {
                     console.log(response.data)
                     setvalidateConfirmCode('error');
-                    form.setFields({
-                        confirmcode: {
-                            value: values.confirmcode,
-                            errors: [new Error(response.data.message)],
-                        },
-                    });
+                    form.setFields([{
+                        name: 'confirmcode',
+                        errors: [response.data.message],
+                    }]);
                 }
             })
             .catch(error => {

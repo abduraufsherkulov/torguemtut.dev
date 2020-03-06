@@ -18,6 +18,7 @@ function DetailsMain() {
         const data = JSON.stringify({
             id: id
         })
+        console.log(data)
         const endpoint = `https://ttuz.azurewebsites.net/api/news/get-all`;
         axios({
             method: "post",
@@ -29,18 +30,19 @@ function DetailsMain() {
             }
         })
             .then(response => {
+                console.log(response.data, 'data')
                 setListData(response.data);
                 setLoading(false)
             })
-            .catch(error => {                
+            .catch(error => {
                 if (error.response.status == 401) {
-                message.info('Сессия истекла', 2);
-                dispatcher({ type: 'SIGN_IN' })
-            }
+                    message.info('Сессия истекла', 2);
+                    dispatcher({ type: 'SIGN_IN' })
+                }
                 console.log(error.response, "error in categories");
             });
     }, []);
-    
+
     return (
         <div className="container">
             <div id="newsdetails">

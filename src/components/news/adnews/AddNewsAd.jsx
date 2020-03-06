@@ -28,6 +28,7 @@ import { IconFont } from '../../Icons/Icons';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { MyAdsContext } from '../../../contexts/MyAdsContext';
 import { MailOutlined, PhoneOutlined } from '@ant-design/icons';
+import { SoatoContext } from '../../../contexts/SoataContext';
 const { TextArea } = Input;
 const { Option } = Select;
 
@@ -37,8 +38,8 @@ const { Option } = Select;
 function AddNewsAd(props) {
     const [form] = Form.useForm();
     const { myAds, setActiveKey, setMyAds } = useContext(MyAdsContext);
-    const authContext = useContext(AuthContext);
-    const { userData, dispatch } = authContext;
+    const { userData, dispatch } = useContext(AuthContext);
+    const { soato } = useContext(SoatoContext)
     const [checked, setChecked] = useState(false);
     const [selectChange, setSelectChange] = useState(1);
     const [loading, setLoading] = useState(false);
@@ -327,7 +328,7 @@ function AddNewsAd(props) {
                                 message: 'Где адрес!',
                             },
                         ]}>
-                            <Input />
+                            <Cascader onChange={handleCascader} options={soato} placeholder="Выбрать категории" />
                         </Form.Item>
                         <GoogleMapsApi defaultZoom={6} position={position} setPosition={setPosition} />
                         {/* <YandexMapsApi /> */}

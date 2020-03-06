@@ -16,6 +16,7 @@ import CommentContextProvider from "./contexts/CommentContext";
 import { library } from '@fortawesome/fontawesome-svg-core'
 // import { fab } from '@fortawesome/free-brands-svg-icons'
 import { faBlender, faCar, faHome, faGraduationCap, faLaptop, faMobileAlt, faCameraRetro, faTshirt, faCouch, faDraftingCompass, faHardHat, faClipboardCheck, faHandHoldingUsd, faBabyCarriage, faPaw, faGifts, faBook, faPalette, faTableTennis, faHeartbeat, faBinoculars, faArchive, faUsers } from '@fortawesome/free-solid-svg-icons'
+import SoataContextProvider from "./contexts/SoataContext";
 
 library.add(faBlender, faCar, faHome, faGraduationCap, faLaptop, faMobileAlt, faCameraRetro, faTshirt, faCouch, faDraftingCompass, faHardHat, faClipboardCheck, faHandHoldingUsd, faBabyCarriage, faPaw, faGifts, faBook, faPalette, faTableTennis, faHeartbeat, faBinoculars, faArchive, faUsers);
 
@@ -36,9 +37,11 @@ function App() {
                     <WishlistContextProvider>
                       <WishlistVendorContextProvider>
                         <CommentContextProvider>
-                          <Postnavigator />
-                          <Navigator />
-                          <Container />
+                          <SoataContextProvider>
+                            <Postnavigator />
+                            <Navigator />
+                            <Container />
+                          </SoataContextProvider>
                         </CommentContextProvider>
                       </WishlistVendorContextProvider>
                     </WishlistContextProvider>
