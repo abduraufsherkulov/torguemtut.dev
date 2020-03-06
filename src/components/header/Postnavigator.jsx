@@ -175,7 +175,7 @@ function Postnavigator() {
     return (
         <Header style={{ background: "white", padding: "0px", height: "40px" }}>
             <div className="container">
-                <Menu
+                {/* <Menu
                     theme="light"
                     mode="horizontal"
                     style={{ lineHeight: '40px', float: "left" }}
@@ -190,7 +190,7 @@ function Postnavigator() {
                             Выбрать регион
                     </Link>
                     </Menu.Item>
-                </Menu>
+                </Menu> */}
                 <Menu
                     theme="light"
                     mode="horizontal"

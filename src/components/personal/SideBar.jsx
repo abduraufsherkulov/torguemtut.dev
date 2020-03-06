@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { Layout, Menu, Breadcrumb, Avatar, Input, Button } from 'antd';
+import { Layout, Menu, Breadcrumb, Avatar, Input, Button, Form } from 'antd';
 import MainBreadcrumbs from '../MainBreadcrumbs';
 // import { Link } from 'react-router-dom'
 import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-dom";
@@ -18,27 +18,28 @@ import {
 import MainBusiness from './business/MainBusiness';
 import { AuthContext } from '../../contexts/AuthContext';
 import axios from 'axios';
+import { UserInfoContext } from '../../contexts/UserInfoContext';
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
 
 
 function SideBar({ location }) {
+    const [form] = Form.useForm();
     const { userData } = useContext(AuthContext)
+    const { userInfo, setUserInfo } = useContext(UserInfoContext)
 
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
     const [edit, setEdit] = useState(false)
     const [loading, setLoading] = useState(false)
 
-    function handleSubmit(e) {
-        e.preventDefault()
+    const handleSubmit = values => {
+        console.log(values)
         setLoading(true)
         const endpoint = "https://ttuz.azurewebsites.net/api/users/update-profile";
 
         const data = JSON.stringify({
-            Name: firstName,
-            Surname: setLastName
+            Name: values.firstName,
+            Surname: values.lastName
         });
 
         axios({
@@ -50,9 +51,11 @@ function SideBar({ location }) {
                 Authorization: `Bearer ${userData.token}`
             }
         }).then(response => {
+            console.log(typeof response.data.status)
             if (response.data.status) {
-                // setterUserInfo(info)
                 setLoading(false)
+                setEdit(false)
+                setUserInfo({ ...userInfo, name: values.firstName, surname: values.lastName })
             }
         }).catch(error => {
 
@@ -79,28 +82,41 @@ function SideBar({ location }) {
                             <Avatar size={125} icon={<UserOutlined />} />
                             <div className="auth-section">
                                 {edit ? <div>
-                                    <Input
-                                        name="firstName"
-                                        placeholder="Имя"
-                                        value={firstName}
-                                        onChange={(val) => setFirstName(val)}
-                                    />
-                                    <br />
-                                    <Input
-                                        name="lastName"
-                                        placeholder="Фамилия"
-                                        value={lastName}
-                                        onChange={(val) => setLastName(val)}
-                                    />
+                                    <Form
+                                        onFinish={handleSubmit}
+                                        // onFinishFailed={onFinishFailed}
+                                        form={form}
+                                        initialValues={{ firstName: userInfo.name, lastName: userInfo.surname }}
+                                    >
+                                        <Form.Item
+                                            name="firstName"
+                                            rules={[{ required: true, message: 'Please input your username!' }]}
+                                        >
+                                            <Input
+                                                placeholder="Имя"
+                                            />
+                                        </Form.Item>
+                                        <Form.Item
+                                            name="lastName"
+                                            rules={[{ required: true, message: 'Please input your username!' }]}
+                                        >
+                                            <Input
+                                                placeholder="Фамилия"
+                                            />
+                                        </Form.Item>
+                                        <Form.Item>
+                                            <Button loading={loading} htmlType="submit" type="link">Отправить</Button>
+                                        </Form.Item>
+                                    </Form>
                                 </div> :
                                     <div>
-                                        <span className="firstname">John</span>
+                                        <span className="infos">{userInfo.name}</span>
                                         <br />
-                                        <span className="lastname">Doe</span>
+                                        <span className="infos">{userInfo.surname}</span>
                                     </div>}
                             </div>
                             <div>
-                                <Button type="link" onClick={() => edit ? handleSubmit() : setEdit(true)}> {edit ? "Отправить" : "Редактировать"}</Button>
+                                {!edit ? <Button type="link" onClick={() => setEdit(true)}>Редактировать</Button> : null}
                             </div>
                         </div>
                         <Menu theme="light" mode="inline" selectedKeys={[location.pathname]}>

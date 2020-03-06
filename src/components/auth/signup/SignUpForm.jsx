@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import FacebookAuth from '../facebook/FacebookAuth';
+import { AuthContext } from '../../../contexts/AuthContext';
 
 function SignUpForm(props) {
     const [form] = Form.useForm();
@@ -101,24 +102,10 @@ function SignUpForm(props) {
             data: data
         })
             .then(response => {
-                if (response.data.code) {
-                    if (isMail) {
-                        localStorage.setItem('username', phone);
-                    } else {
-                        localStorage.setItem('username', phone);
-                    }
-
-                    if (email) {
-                        dispatch({ type: 'SIGN_IN', userData: JSON.stringify(response.data.userData) })
-                        // localStorage.setItem('username', values.emailphone);
-                        history.replace(from);
-                    } else {
-                        // localStorage.setItem('username', values.emailphone);
-
-                        dispatch({ type: 'SIGN_IN', userData: JSON.stringify(response.data.userData) })
-                        history.replace(from);
-                    }
-                    props.history.push('/');
+                if (response.data.status) {
+                    dispatch({ type: 'SIGN_IN', userData: JSON.stringify(response.data.userData) })
+                    // localStorage.setItem('username', values.emailphone);
+                    history.replace(from);
                 } else {
                     console.log(response.data)
                     setvalidateConfirmCode('error');

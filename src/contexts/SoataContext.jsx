@@ -14,6 +14,7 @@ function SoataContextProvider(props) {
             url: endpoint
         })
             .then(response => {
+                console.log(response.data)
                 setSoato(response.data);
             })
             .catch(error => {

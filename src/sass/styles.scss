@@ -1087,7 +1087,7 @@ footer {
     padding-bottom: 35px;
     .auth-section {
       padding-top: 25px;
-      span {
+      .infos {
         @include medium;
         color: $parentcolor;
         font-size: dynamicfont(20, 22);

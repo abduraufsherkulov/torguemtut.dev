@@ -25,8 +25,6 @@ function DetailsInfoProduct({ listData }) {
             {!loading && (
                 <>
                     <h1>{listData.title}</h1>
-                    <h1>Добавлено в {momentize(listData.createdDate)}</h1>
-                    <h1>Номер объявления:  {listData.id}</h1>
                     <Divider />
                     <Descriptions title="" column={2}>
                         {listData.newsAttribute.map((item, index) => {
@@ -37,6 +35,9 @@ function DetailsInfoProduct({ listData }) {
                     </Descriptions>
                     <Divider />
                     <p className="new-line">{br2nl(listData.description)}</p>
+
+                    <h1>Добавлено в {momentize(listData.createdDate)}</h1>
+                    <h1>Номер объявления:  {listData.id}</h1>
                 </>
             )}
         </Card>
