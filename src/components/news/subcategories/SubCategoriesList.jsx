@@ -72,7 +72,7 @@ function SubCategoriesList({ id, userData, currentPage, setCurrentPage, catLoadi
                     <Link to={`/item/${item.id}`}>
                         <List.Item
                             className="ant-card-hoverable"
-                            style={{ display: 'flex', padding: '16px', border: item.tariffs && item.tariffs.find(x => x.type == 2) ? '1px solid #543f92' : 'none' }}
+                            style={{ display: 'flex', padding: '16px', border: item.tariffs && item.tariffs.find(x => x.type == 2) ? '4px solid #543f92' : 'none' }}
                             key={item.id}
                             actions={!catLoading && [
                                 <HeartIcons setListData={setListData} listData={listData} item={item} favourite={item.favourite} />,

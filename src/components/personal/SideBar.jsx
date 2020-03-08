@@ -19,6 +19,7 @@ import MainBusiness from './business/MainBusiness';
 import { AuthContext } from '../../contexts/AuthContext';
 import axios from 'axios';
 import { UserInfoContext } from '../../contexts/UserInfoContext';
+import UploadAvatar from './UploadAvatar';
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
@@ -79,15 +80,17 @@ function SideBar({ location }) {
                         }}
                     >
                         <div className="text-align-center user-section">
-                            <Avatar size={125} icon={<UserOutlined />} />
-                            <div className="auth-section">
-                                {edit ? <div>
-                                    <Form
-                                        onFinish={handleSubmit}
-                                        // onFinishFailed={onFinishFailed}
-                                        form={form}
-                                        initialValues={{ firstName: userInfo.name, lastName: userInfo.surname }}
-                                    >
+
+                            <Form
+                                onFinish={handleSubmit}
+                                // onFinishFailed={onFinishFailed}
+                                form={form}
+                                initialValues={{ firstName: userInfo.name, lastName: userInfo.surname }}
+                            >
+                                {edit ? <UploadAvatar edit={edit} setEdit={setEdit} /> : <Avatar size={125} icon={<UserOutlined />} />}
+
+                                <div className="auth-section">
+                                    {edit ? <div>
                                         <Form.Item
                                             name="firstName"
                                             rules={[{ required: true, message: 'Please input your username!' }]}
@@ -107,14 +110,15 @@ function SideBar({ location }) {
                                         <Form.Item>
                                             <Button loading={loading} htmlType="submit" type="link">Отправить</Button>
                                         </Form.Item>
-                                    </Form>
-                                </div> :
-                                    <div>
-                                        <span className="infos">{userInfo.name}</span>
-                                        <br />
-                                        <span className="infos">{userInfo.surname}</span>
-                                    </div>}
-                            </div>
+                                    </div> :
+                                        <div>
+                                            <span className="infos">{userInfo.name}</span>
+                                            <br />
+                                            <span className="infos">{userInfo.surname}</span>
+                                        </div>}
+                                </div>
+
+                            </Form>
                             <div>
                                 {!edit ? <Button type="link" onClick={() => setEdit(true)}>Редактировать</Button> : null}
                             </div>

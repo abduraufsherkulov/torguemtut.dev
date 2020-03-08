@@ -98,7 +98,7 @@ const getMenu = () => (
 const loggedUser = (userData, dispatch) => (
     <div className="log-wrapper">
         <div className="d-flex-vertical">
-            <Avatar size="large" style={{ backgroundColor: '#4a3a8a', verticalAlign: 'middle' }}>tt</Avatar>
+            <Avatar icon={<UserOutlined />} size="large" style={{ backgroundColor: '#4a3a8a', verticalAlign: 'middle' }} />
             <h2 className="log-text">Добро пожаловать, <br /> {userData.id}</h2>
         </div>
     </div>

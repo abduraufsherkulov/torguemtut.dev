@@ -13,6 +13,8 @@ const breadcrumbNameMap = {
     '/settings': 'Настройки',
     '/business': 'Сообщении',
     '/wallet': 'Кошелок',
+    '/privacypolicy': 'Политика конфиденциальности',
+    '/howpay': 'Как оплатить',
     '/vendorproducts': 'Автор'
 };
 

@@ -108,10 +108,10 @@ function FacebookAuth() {
 
         window.fbAsyncInit = function () {
             FB.init({
-                appId: '2496083423969818',
+                appId: '656151361204007',
                 cookie: true,                     // Enable cookies to allow the server to access the session.
                 xfbml: true,                     // Parse social plugins on this webpage.
-                version: 'v4.0'           // Use this Graph API version for this call.
+                version: 'v6.0'           // Use this Graph API version for this call.
             });
 
 

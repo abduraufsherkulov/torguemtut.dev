@@ -183,6 +183,9 @@ function AddNewsAd(props) {
         })
     }
 
+    const handleSoato = (value) => {
+        setPosition({ ...position, RegionId: value[0], DistrictId: value[1] })
+    }
 
     function AttrSelect({ item }) {
         return (
@@ -237,6 +240,7 @@ function AddNewsAd(props) {
         )
     }
     const MemoizedValue = useMemo(() => Just, [attr]);
+    console.log(position)
     return (
         <div className="container">
             <div id="addnews">
@@ -328,7 +332,7 @@ function AddNewsAd(props) {
                                 message: 'Где адрес!',
                             },
                         ]}>
-                            <Cascader onChange={handleCascader} options={soato} placeholder="Выбрать категории" />
+                            <Cascader onChange={handleSoato} options={soato} placeholder="Выбрать адрес" />
                         </Form.Item>
                         <GoogleMapsApi defaultZoom={6} position={position} setPosition={setPosition} />
                         {/* <YandexMapsApi /> */}

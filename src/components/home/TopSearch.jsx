@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Bg from "../../images/longback.png";
-import { Row, Col, Form, Input, Select, Button, AutoComplete } from 'antd';
+import { Row, Col, Form, Input, Select, Button, AutoComplete, Cascader } from 'antd';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { SearchOutlined } from '@ant-design/icons';
+import { SoatoContext } from '../../contexts/SoataContext';
 
 const { Search } = Input;
 const { Option } = Select;
@@ -17,6 +18,7 @@ function TopSearch() {
     const [searchTitle, setSearchTitle] = useState("");
     const [send, setSend] = useState(false);
     const [dataSource, setDataSource] = useState([])
+    const { soato } = useContext(SoatoContext)
 
     const handleSubmit = (e) => {
         console.log(e)
@@ -85,7 +87,7 @@ function TopSearch() {
                 <InputGroup size="large" compact>
                     <AutoComplete
                         className="global-search"
-                        style={{ width: '70%' }}
+                        style={{ width: '60%' }}
                         options={dataSource.map(renderOption, searchTitle)}
                         onSelect={onSelect}
                         onSearch={handleSearch}
@@ -96,10 +98,12 @@ function TopSearch() {
                         />
                     </AutoComplete>
                     {/* <Input value={searchTitle} onChange={handleChange} size="large" style={{ width: "70%" }} placeholder="Введите запрос поиска" /> */}
-                    <Select defaultValue="Option1-1" placeholder="Город, адрес, район" size="large" style={{ width: "25%" }}>
+                    {/* <Select defaultValue="Option1-1" placeholder="Город, адрес, район" size="large" style={{ width: "25%" }}>
                         <Option value="Option1-1">Все категории</Option>
                         <Option value="Option1-2">Самарканд</Option>
-                    </Select>
+                    </Select> */}
+
+                    <Cascader style={{ width: "35%" }} options={soato} placeholder="Выбрать адрес" />
                     <Button style={{ width: "5%", background: "#ff9500", borderColor: "#ff9500", color: 'white' }} size="large"><SearchOutlined /></Button>
                 </InputGroup>
                 <p className="recentSearch">Сейчас ищут: iphone xr 64gb, черная маска, велосипед</p>

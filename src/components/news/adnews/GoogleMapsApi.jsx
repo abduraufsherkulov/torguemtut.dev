@@ -9,10 +9,7 @@ import {
 
 function test(e, props) {
     props.setPosition({
-        RegionId: "",
-        DistrictId: "",
-        Address: "",
-        Longtitude: e.latLng.lng(),
+        ...props.position, Longtitude: e.latLng.lng(),
         Latitude: e.latLng.lat()
     })
 }

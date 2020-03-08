@@ -1,10 +1,16 @@
-import { Upload, Modal, Form } from 'antd';
+import { Upload, Modal, Form, Avatar } from 'antd';
 import React, { useState, useContext } from 'react'
-import { AuthContext } from '../../../contexts/AuthContext';
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined, UserOutlined } from '@ant-design/icons';
+import { AuthContext } from '../../contexts/AuthContext';
 
 
-function getBase64(file) {
+function getBase64(img, callback) {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result));
+    reader.readAsDataURL(img);
+}
+
+function getBase642(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
@@ -13,25 +19,17 @@ function getBase64(file) {
     });
 }
 
-function UploadPhoto({ defaultUrl }) {
-    const [previewVisible, setpreviewVisible] = useState(false)
-    const [previewImage, setpreviewImage] = useState('');
+
+function UploadAvatar({ defaultUrl, edit }) {
     const [fileList, setfileList] = useState([])
     const { userData, dispatch } = useContext(AuthContext);
-
-    const handleCancel = () => setpreviewVisible(false);
-    const handlePreview = async file => {
-        if (!file.url && !file.preview) {
-            file.preview = await getBase64(file.originFileObj);
-        }
-        setpreviewVisible(true);
-        setpreviewImage(file.url || file.preview);
-
-    };
-
+    const [imageUrl, setImageUrl] = useState(null)
+    const [previewVisible, setpreviewVisible] = useState(false)
+    const [previewImage, setpreviewImage] = useState('');
     const handleChange = ({ fileList, file }) => {
-        console.log(file)
-
+        getBase64(file.originFileObj, imageUrl =>
+            setImageUrl(imageUrl)
+        );
         let newArr = [...fileList];
         if (typeof file.response != 'undefined') {
             file.url = file.response.url;
@@ -40,12 +38,26 @@ function UploadPhoto({ defaultUrl }) {
         setfileList(newArr);
     }
 
+    const handleCancel = () => setpreviewVisible(false);
+    const handlePreview = async file => {
+        if (!file.url && !file.preview) {
+            file.preview = await getBase642(file.originFileObj);
+        }
+        setpreviewVisible(true);
+        setpreviewImage(file.url || file.preview);
+
+    };
     const uploadButton = (
         <div>
             <PlusOutlined />
             <div className="ant-upload-text">Upload</div>
         </div>
     );
+    const UploadAvatarOn = (
+        <div>
+            <Avatar size={104} icon={<UserOutlined />} />
+        </div>
+    )
     function beforeUpload(file) {
         const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
         if (!isJpgOrPng) {
@@ -60,31 +72,21 @@ function UploadPhoto({ defaultUrl }) {
     return (
         <React.Fragment>
             <Form.Item
-                name="photos" label="Фотографии" rules={[
-                    {
-                        required: true,
-                        message: 'Где Фото!',
-                    },
-                ]}>
+                name="photos">
                 <Upload
                     action="https://ttuz.azurewebsites.net/api/news/upload-image"
                     accept=".png, .jpeg, .jpg"
                     listType="picture-card"
                     fileList={fileList}
                     name="image"
-                    // defaultFileList={[{
-                    //     uid: '-1',
-                    //     name: 'xxx.png',
-                    //     status: 'done',
-                    //     url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-                    //     thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-                    // }]}
-                    onPreview={handlePreview}
                     onChange={handleChange}
                     beforeUpload={beforeUpload}
+                    onPreview={handlePreview}
                     headers={{ Authorization: `Bearer ${userData.token}` }}
                 >
-                    {fileList.length == 1 ? null : defaultUrl ? <img src={defaultUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+                    {/* {edit ? UploadAvatarOn : null} */}
+                    {fileList.length == 1 ? null : defaultUrl ? <img src={defaultUrl} alt="avatar" style={{ width: '100%' }} /> : UploadAvatarOn}
+                    {/* {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton} */}
                 </Upload>
             </Form.Item>
             <Modal visible={previewVisible} footer={null} onCancel={handleCancel}>
@@ -94,4 +96,4 @@ function UploadPhoto({ defaultUrl }) {
     )
 }
 
-export default UploadPhoto;
+export default UploadAvatar;

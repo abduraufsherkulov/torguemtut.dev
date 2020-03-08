@@ -18,7 +18,7 @@ function Foot() {
                     <Col>
                         <h5>Покупателям</h5>
                         <ul>
-                            <li><a href="">Как покупать</a></li>
+                            <li><Link to="/howpay">Как оплатить</Link></li>
                             <li><a href="">Как оставить полезный отзыв</a></li>
                             <li><a href="">Правила безопасности</a></li>
                         </ul>

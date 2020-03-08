@@ -34,6 +34,7 @@ import RatingVendors from './ratingvendors/RatingVendors';
 import VendorSideBar from './vendor/VendorSideBar';
 import ForgotPassword from './auth/forgotpass/ForgotPassword';
 import PrivacyPolicy from './footer/PrivacyPolicy';
+import HowPay from './footer/HowPay';
 
 function PrivateRoute({ children, ...rest }) {
   const { userData } = useContext(AuthContext);
@@ -101,6 +102,10 @@ function Container({ location }) {
 
               <Route exact path="/privacypolicy">
                 <PrivacyPolicy />
+              </Route>
+
+              <Route exact path="/howpay">
+                <HowPay />
               </Route>
 
               <Route exact path="/ratings">

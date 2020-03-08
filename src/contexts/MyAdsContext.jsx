@@ -16,7 +16,7 @@ function MyAdsProvider(props) {
             axios({
                 method: "post",
                 url: endpoint,
-                data: {},
+                data: { PageSize: 50 },
                 headers: {
                     "content-type": "application/json",
                     Authorization: `Bearer ${userData.token}`

@@ -18,6 +18,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faBlender, faCar, faHome, faGraduationCap, faLaptop, faMobileAlt, faCameraRetro, faTshirt, faCouch, faDraftingCompass, faHardHat, faClipboardCheck, faHandHoldingUsd, faBabyCarriage, faPaw, faGifts, faBook, faPalette, faTableTennis, faHeartbeat, faBinoculars, faArchive, faUsers } from '@fortawesome/free-solid-svg-icons'
 import SoataContextProvider from "./contexts/SoataContext";
 import UserInfoContextProvider from "./contexts/UserInfoContext";
+import BusinessContextProvider from "./contexts/BusinessContext";
 
 library.add(faBlender, faCar, faHome, faGraduationCap, faLaptop, faMobileAlt, faCameraRetro, faTshirt, faCouch, faDraftingCompass, faHardHat, faClipboardCheck, faHandHoldingUsd, faBabyCarriage, faPaw, faGifts, faBook, faPalette, faTableTennis, faHeartbeat, faBinoculars, faArchive, faUsers);
 
@@ -40,9 +41,11 @@ function App() {
                         <CommentContextProvider>
                           <SoataContextProvider>
                             <UserInfoContextProvider>
-                              <Postnavigator />
-                              <Navigator />
-                              <Container />
+                              <BusinessContextProvider>
+                                <Postnavigator />
+                                <Navigator />
+                                <Container />
+                              </BusinessContextProvider>
                             </UserInfoContextProvider>
                           </SoataContextProvider>
                         </CommentContextProvider>

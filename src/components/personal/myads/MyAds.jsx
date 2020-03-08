@@ -9,8 +9,8 @@ const { TabPane } = Tabs;
 function MyAds() {
     const { myAds, activeKey, setActiveKey } = useContext(MyAdsContext);
     // const [keyValue, setKeyValue] = useState("1")
-    const active = myAds.filter(item => item.status == 2);
     const waiting = myAds.filter(item => item.status == 1);
+    const active = myAds.filter(item => item.status == 2);
     const archived = myAds.filter(item => item.status == 3);
 
     return (

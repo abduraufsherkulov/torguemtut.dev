@@ -17,8 +17,7 @@ function PicturesWall(props) {
     const [previewVisible, setpreviewVisible] = useState(false)
     const [previewImage, setpreviewImage] = useState('');
     const [fileList, setfileList] = useState([])
-    const authContext = useContext(AuthContext);
-    const { userData, dispatch } = authContext;
+    const { userData, dispatch } = useContext(AuthContext);
 
     const handleCancel = () => setpreviewVisible(false);
     const handlePreview = async file => {

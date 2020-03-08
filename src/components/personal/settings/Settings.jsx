@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox, Typography } from 'antd';
 import {
     Link, withRouter,
 } from 'react-router-dom';
@@ -9,6 +9,7 @@ import {
     UserOutlined,
     PhoneOutlined
 } from '@ant-design/icons';
+const { Paragraph } = Typography;
 
 function Settings(props) {
     const { userData } = useContext(AuthContext)
@@ -37,12 +38,7 @@ function Settings(props) {
                 />
             </Form.Item>
             <Form.Item>
-                <Input
-                    prefix={<ShareAltOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
-                    placeholder="Referral"
-                    readOnly
-                    value={`https://tt.uz/signup/?ReferrerCode=${userData.referralCode}`}
-                />
+                <Paragraph copyable>{`https://tt.uz/signup/?ReferrerCode=${userData.referralCode}`}</Paragraph>
             </Form.Item>
             <Form.Item>
                 <Button>Facebook</Button>
