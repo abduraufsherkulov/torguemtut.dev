@@ -15,10 +15,10 @@ function Active() {
             <div className="activeads-grid">
                 <div className="container">
                     <Row className="mainrows">
-                        {perItem.map((index, key) => (
-                            <Col span={6} key={key} className="each">
+                        {perItem.map((item, index) => (
+                            <Col span={6} key={index} className="each">
                                 <div className="img-part">
-                                    <Link to={`myads/${index.id}`}>
+                                    <Link to={`myads/${item.id}`}>
                                         <div className="activeads-face">
                                             <i className="spanner">VIP</i>
                                             <div className="action-block">
@@ -28,13 +28,13 @@ function Active() {
                                             </div>
                                         </div>
                                         <div className="img-item-container">
-                                            <img src={index.images !== undefined ? `https://ttuz.azurewebsites.net/Resources/Images/${index.images[0].path}` : null} alt="" />
+                                            <img src={item.images !== undefined ? `https://ttuz.azurewebsites.net/Resources/Images/${item.images[0].path}` : null} alt="" />
                                         </div>
                                     </Link>
                                 </div>
                                 <div className="info-part">
-                                    <h1>{index.price.amount} {index.price.currencyLabel}</h1>
-                                    <p title={index.title}>{index.title}</p>
+                                    <h1>{item.price.amount} {item.price.currencyLabel}</h1>
+                                    <p title={item.title}>{item.title}</p>
                                 </div>
                             </Col>
                         ))}

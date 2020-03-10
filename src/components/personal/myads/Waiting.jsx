@@ -5,6 +5,7 @@ import EditIcons from '../../Icons/EditIcons';
 import DeleteIcons from '../../Icons/DeleteIcons';
 import ViewIcons from '../../Icons/ViewIcons';
 import { MyAdsContext } from '../../../contexts/MyAdsContext';
+import { Link } from 'react-router-dom'
 
 function Waiting() {
     const { myAds } = useContext(MyAdsContext);
@@ -15,26 +16,24 @@ function Waiting() {
             <div className="activeads-grid">
                 <div className="container">
                     <Row className="mainrows">
-                        {perItem.map((index, key) => (
-                            <Col span={6} key={key} className="each">
+                        {perItem.map((item, index) => (
+                            <Col span={6} key={index} className="each">
                                 <div className="img-part">
-                                    <a href="">
-                                        <div className="activeads-face">
-                                            <i className="spanner">VIP</i>
-                                            <div className="action-block">
-                                                <ViewIcons />
-                                                <EditIcons />
-                                                <DeleteIcons />
-                                            </div>
+                                    <div className="activeads-face">
+                                        {/* <i className="spanner">VIP</i> */}
+                                        <div className="action-block">
+                                            {/* <ViewIcons />
+                                            <EditIcons />
+                                            <DeleteIcons /> */}
                                         </div>
-                                        <div className="img-item-container">
-                                            <img src={index.images !== undefined ? `https://ttuz.azurewebsites.net/Resources/Images/${index.images[0].path}` : null} alt="" />
-                                        </div>
-                                    </a>
+                                    </div>
+                                    <div className="img-item-container">
+                                        <img src={item.images !== undefined ? `https://ttuz.azurewebsites.net/Resources/Images/${item.images[0].path}` : null} alt="" />
+                                    </div>
                                 </div>
                                 <div className="info-part">
-                                    <h1>{index.price.amount} {index.price.currencyLabel}</h1>
-                                    <p title={index.title}>{index.title}</p>
+                                    <h1>{item.price.amount} {item.price.currencyLabel}</h1>
+                                    <p title={item.title}>{item.title}</p>
                                 </div>
                             </Col>
                         ))}

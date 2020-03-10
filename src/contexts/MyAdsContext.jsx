@@ -11,12 +11,11 @@ function MyAdsProvider(props) {
     const [activeKey, setActiveKey] = useState("active");
     useEffect(() => {
         if (userData.token) {
-
             const endpoint = "https://ttuz.azurewebsites.net/api/news/get-all-by-user";
             axios({
                 method: "post",
                 url: endpoint,
-                data: { PageSize: 50 },
+                data: { PageSize: 100 },
                 headers: {
                     "content-type": "application/json",
                     Authorization: `Bearer ${userData.token}`
