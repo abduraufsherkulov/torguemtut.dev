@@ -18,17 +18,26 @@ function MainList() {
     const [currentPage, setCurrentPage] = useState(1);
     const [vipLoading, setVipLoading] = useState(true)
     const [catLoading, setCatLoading] = useState(true)
+    const [selectedAttr, setSelectedAttr] = useState([]);
 
     let { id } = useParams();
 
     return (
         <div className="container">
             <div className="filtration">
-                <SubcategoriesFilter catId={id} />
+                <SubcategoriesFilter setSelectedAttr={setSelectedAttr} selectedAttr={selectedAttr} catId={id} />
             </div>
             <div id="mainlist">
                 <VipInCategories vipLoading={vipLoading} setVipLoading={setVipLoading} id={id} userData={userData} />
-                <SubCategoriesList catLoading={catLoading} setCatLoading={setCatLoading} setCurrentPage={setCurrentPage} currentPage={currentPage} userData={userData} id={id} />
+                <SubCategoriesList
+                    setSelectedAttr={setSelectedAttr}
+                    selectedAttr={selectedAttr}
+                    catLoading={catLoading}
+                    setCatLoading={setCatLoading}
+                    setCurrentPage={setCurrentPage}
+                    currentPage={currentPage}
+                    userData={userData}
+                    id={id} />
             </div>
         </div>
     )

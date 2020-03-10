@@ -10,7 +10,7 @@ const { TextArea } = Input;
 const { Option } = Select;
 
 
-function SubcategoriesFilter({ catId }) {
+function SubcategoriesFilter({ catId, selectedAttr, setSelectedAttr }) {
     const [cascaderLoading, setCascaderLoading] = useState(true)
     const [attr, setAttr] = useState([]);
 
@@ -24,6 +24,7 @@ function SubcategoriesFilter({ catId }) {
                 "content-type": "application/json"
             }
         }).then(response => {
+            console.log(response)
             setCascaderLoading(false)
             setAttr(response.data);
         }).catch(error => {
@@ -31,19 +32,18 @@ function SubcategoriesFilter({ catId }) {
         })
     }, [catId])
 
-    const handleSelectChange = (params) => {
+    const handleSelectChange = (one, two) => {
+        console.log(one, two)
+    }
+
+    const handleInputChange = (params) => {
         console.log(params)
     }
 
 
     function AttrInput({ item, pref, fromto }) {
         return (
-            <Form.Item name={item.name + fromto} rules={[
-                {
-                    required: true,
-                    message: `Где ${item.title}?`,
-                },
-            ]}>
+            <Form.Item  name={item.name + fromto}>
                 <Input placeholder={`${item.title} ${pref}`} />
             </Form.Item>
         )
@@ -51,16 +51,10 @@ function SubcategoriesFilter({ catId }) {
 
     function AttrSelect({ item }) {
         return (
-            <Form.Item name={item.name} rules={[
-                {
-                    required: item.required,
-                    message: `Где ${item.title}?`,
-                },
-            ]}>
+            <Form.Item name={item.name}>
                 <Select
                     labelInValue
-                    placeholder={item.title}
-                    onChange={handleSelectChange}>
+                    placeholder={item.title}>
                     {
                         item.attributeOptions.map((attritem, index) => {
                             return (
@@ -98,6 +92,7 @@ function SubcategoriesFilter({ catId }) {
             layout="inline"
             className="components-table-demo-control-bar"
             style={{ marginBottom: 16 }}
+            onFieldsChange={(one, two) => handleSelectChange(one, two)}
         >
             <MemoizedValue />
         </Form>

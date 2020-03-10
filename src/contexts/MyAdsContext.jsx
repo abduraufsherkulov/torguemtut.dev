@@ -10,31 +10,29 @@ function MyAdsProvider(props) {
     const [myAds, setMyAds] = useState([]);
     const [activeKey, setActiveKey] = useState("active");
     useEffect(() => {
-        if (userData.token) {
-
-            const endpoint = "https://ttuz.azurewebsites.net/api/news/get-all-by-user";
-            axios({
-                method: "post",
-                url: endpoint,
-                data: { PageSize: 50 },
-                headers: {
-                    "content-type": "application/json",
-                    Authorization: `Bearer ${userData.token}`
-                }
+        const endpoint = "https://ttuz.azurewebsites.net/api/news/get-all-by-user";
+        axios({
+            method: "post",
+            url: endpoint,
+            data: { PageSize: 50 },
+            headers: {
+                "content-type": "application/json",
+                Authorization: `Bearer ${userData.token}`
+            }
+        })
+            .then(response => {
+                // console.log(response.headers)
+                setMyAds(response.data);
             })
-                .then(response => {
-                    // console.log(response.headers)
-                    setMyAds(response.data);
-                })
-                .catch(error => {
-                    if (error.response.status == 401) {
-                        message.info('Сессия истекла', 2);
-                        dispatch({ type: 'SIGN_IN' })
-                    }
-                    console.log(error, "error in categories");
-                });
-        }
-    }, [userData])
+            .catch(error => {
+                console.log(error)
+                if (error.response.status == 401) {
+                    message.info('Сессия истекла', 2);
+                    dispatch({ type: 'SIGN_IN' })
+                }
+                console.log(error, "error in categories");
+            });
+    }, [userData.token])
     return (
         <MyAdsContext.Provider value={{ myAds, setMyAds, activeKey, setActiveKey }}>
             {props.children}
