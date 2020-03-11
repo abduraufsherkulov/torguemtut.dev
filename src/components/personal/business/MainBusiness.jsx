@@ -63,7 +63,7 @@ function MainBusiness() {
         })
     };
     useEffect(() => {
-        if (businessInfo) {
+        if (businessInfo && businessInfo.logoImage) {
             setDefaultUrl(`https://ttuz.azurewebsites.net/Resources/Images/${businessInfo.logoImage.path}`)
         }
 
@@ -82,7 +82,7 @@ function MainBusiness() {
                     file: {
                         response: {
                             status: true,
-                            imageId: businessInfo.logoImage.imageId
+                            imageId: businessInfo.logoImage ? businessInfo.logoImage.imageId : null
                         }
                     }
                 }

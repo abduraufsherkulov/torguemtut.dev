@@ -6,7 +6,7 @@ import { Link, withRouter } from 'react-router-dom';
 import HeartIcons from '../../Icons/HeartIcons';
 import { momentize } from '../../../helpers/MomentHelper';
 
-function VipInCategories({ id, userData, vipLoading, setVipLoading }) {
+function VipInCategories({ id, userData, vipLoading, setVipLoading, selectedAttr }) {
     const [listData, setListData] = useState([{}, {}, {}, {}, {}]);
     // const [pagination, setPagination] = useState({});
     useEffect(() => {
@@ -15,6 +15,7 @@ function VipInCategories({ id, userData, vipLoading, setVipLoading }) {
             Type: 1,
             categoryId: id,
             pageSize: 5,
+            Attributes: selectedAttr
             // pageNumber: currentPage
         })
         const endpoint = `https://ttuz.azurewebsites.net/api/news/get-all-by-tariff`;
@@ -41,7 +42,7 @@ function VipInCategories({ id, userData, vipLoading, setVipLoading }) {
                 }
                 console.log(error.response, "error in categories");
             });
-    }, []);
+    }, [selectedAttr]);
 
     return (
         <React.Fragment>

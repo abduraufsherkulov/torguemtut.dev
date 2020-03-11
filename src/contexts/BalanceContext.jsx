@@ -11,28 +11,26 @@ function BalanceContextProvider(props) {
     const { userData, dispatch } = useContext(AuthContext)
     const [balance, setBalance] = useState(0)
     useEffect(() => {
-        if (userData.token) {
-            const endpoint = "https://ttuz.azurewebsites.net/api/users/user-balance";
-            axios({
-                method: "post",
-                url: endpoint,
-                headers: {
-                    "content-type": "application/json",
-                    Authorization: `Bearer ${userData.token}`
-                }
+        const endpoint = "https://ttuz.azurewebsites.net/api/users/user-balance";
+        axios({
+            method: "post",
+            url: endpoint,
+            headers: {
+                "content-type": "application/json",
+                Authorization: `Bearer ${userData.token}`
+            }
+        })
+            .then(response => {
+                setBalance(response.data)
             })
-                .then(response => {
-                    setBalance(response.data)
-                })
-                .catch(error => {
-                    if (error.response.status == 401) {
-                        message.info('Сессия истекла', 2);
-                        dispatch({ type: 'SIGN_IN' })
-                    }
-                    console.log(error, "error in categories");
-                });
-        }
-    }, [userData])
+            .catch(error => {
+                if (error.response.status == 401) {
+                    message.info('Сессия истекла', 2);
+                    dispatch({ type: 'SIGN_IN' })
+                }
+                console.log(error, "error in categories");
+            });
+    }, [userData.token])
     return (
         <BalanceContext.Provider value={{ balance, setBalance }}>
             {props.children}

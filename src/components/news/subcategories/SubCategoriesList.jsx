@@ -7,7 +7,7 @@ import HeartIcons from '../../Icons/HeartIcons';
 import moment from 'moment';
 import { momentize } from '../../../helpers/MomentHelper';
 
-function SubCategoriesList({ id, userData, currentPage, setCurrentPage, catLoading, setCatLoading }) {
+function SubCategoriesList({ id, userData, currentPage, setCurrentPage, catLoading, setCatLoading, selectedAttr }) {
     const [listData, setListData] = useState([{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]);
     const [pagination, setPagination] = useState({});
     useEffect(() => {
@@ -15,8 +15,10 @@ function SubCategoriesList({ id, userData, currentPage, setCurrentPage, catLoadi
         const data = JSON.stringify({
             categoryId: id,
             pageSize: 30,
-            pageNumber: currentPage
+            pageNumber: currentPage,
+            Attributes: selectedAttr
         })
+        console.log(data);
         const endpoint = `https://ttuz.azurewebsites.net/api/news/get-all`;
         axios({
             method: "post",
@@ -41,7 +43,7 @@ function SubCategoriesList({ id, userData, currentPage, setCurrentPage, catLoadi
                 }
                 console.log(error.response, "error in categories");
             });
-    }, [currentPage]);
+    }, [currentPage, selectedAttr]);
 
 
 

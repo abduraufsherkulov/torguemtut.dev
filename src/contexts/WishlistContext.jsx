@@ -13,28 +13,26 @@ function WishlistContextProvider(props) {
     const [{ wishlist }, dispatch] = useReducer(wishlistReducer, { wishlist: [] })
 
     useEffect(() => {
-        if (userData.token) {
-            const endpoint = "https://ttuz.azurewebsites.net/api/news/get-all-favourites";
-            axios({
-                method: 'post',
-                url: endpoint,
-                data: {},
-                headers: {
-                    "content-type": "application/json",
-                    Authorization: `Bearer ${userData.token}`
-                }
-            }).then(response => {
-                console.log(response, 'wishlist')
-                dispatch({ type: 'INIT_WISHLIST', wishlist: response.data });
-            }).catch(error => {
-                console.log(error.response.status);
-                if (error.response.status == 401) {
-                    message.info('Сессия истекла', 2);
-                    dispatcher({ type: 'SIGN_IN' })
-                }
-            })
-        }
-    }, []);
+        const endpoint = "https://ttuz.azurewebsites.net/api/news/get-all-favourites";
+        axios({
+            method: 'post',
+            url: endpoint,
+            data: {},
+            headers: {
+                "content-type": "application/json",
+                Authorization: `Bearer ${userData.token}`
+            }
+        }).then(response => {
+            console.log(response, 'wishlist')
+            dispatch({ type: 'INIT_WISHLIST', wishlist: response.data });
+        }).catch(error => {
+            console.log(error.response.status);
+            if (error.response.status == 401) {
+                message.info('Сессия истекла', 2);
+                dispatcher({ type: 'SIGN_IN' })
+            }
+        })
+    }, [userData.token]);
 
     const addWish = (wish, listData, setListData) => {
         const key = 'updatable';

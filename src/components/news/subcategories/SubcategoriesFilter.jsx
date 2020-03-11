@@ -9,8 +9,9 @@ import axios from 'axios'
 const { TextArea } = Input;
 const { Option } = Select;
 
+let timer = null;
 
-function SubcategoriesFilter({ catId }) {
+function SubcategoriesFilter({ catId, selectedAttr, setSelectedAttr }) {
     const [cascaderLoading, setCascaderLoading] = useState(true)
     const [attr, setAttr] = useState([]);
 
@@ -24,6 +25,7 @@ function SubcategoriesFilter({ catId }) {
                 "content-type": "application/json"
             }
         }).then(response => {
+            console.log(response)
             setCascaderLoading(false)
             setAttr(response.data);
         }).catch(error => {
@@ -31,40 +33,87 @@ function SubcategoriesFilter({ catId }) {
         })
     }, [catId])
 
-    const handleSelectChange = (params) => {
-        console.log(params)
+    const handleSelectChange = (value, id) => {
+        console.log(value, id)
+        let newArr = [...selectedAttr];
+        let index = newArr.findIndex(x => x.AttributeId == id);
+        console.log(index)
+        if (index > -1 && typeof value == 'undefined') {
+            newArr.splice(index, 1);
+            setSelectedAttr([...newArr])
+            return
+        }
+        if (index > -1) {
+            newArr[index].AttributeId = id;
+            newArr[index].Value = value;
+            setSelectedAttr([...newArr])
+        } else {
+            setSelectedAttr([...newArr, { AttributeId: id, Value: value }])
+        }
+
+
+        console.log(selectedAttr)
     }
 
+    const handleInputChange = (value, id, fromto) => {
+        console.log(value)
+        if (timer) {
+            clearTimeout(timer);
+        }
+        timer = setTimeout(() => {
+            let newArr = [...selectedAttr];
+            let index = newArr.findIndex(x => x.AttributeId == id);
+            console.log(index);
+            if (index > -1) {
+                newArr[index].AttributeId = id;
+                if (fromto == 'from') {
+                    if (value != '') {
+                        newArr[index].ValueFrom = value;
+                    } else {
+                        delete newArr[index].ValueFrom;
+                    }
+                } else {
+                    if (value != '') {
+                        newArr[index].ValueTo = value;
+                    } else {
+                        delete newArr[index].ValueTo;
+                    }
+                }
+
+                if (typeof newArr[index].ValueFrom == 'undefined' && typeof newArr[index].ValueTo == 'undefined') {
+                    newArr.splice(index, 1);
+                }
+                setSelectedAttr([...newArr]);
+            } else {
+                if (fromto == 'from') {
+                    setSelectedAttr([...newArr, { AttributeId: id, ValueFrom: value }])
+                } else {
+                    setSelectedAttr([...newArr, { AttributeId: id, ValueTo: value }])
+                }
+            }
+
+        }, 600);
+    }
 
     function AttrInput({ item, pref, fromto }) {
         return (
-            <Form.Item name={item.name + fromto} rules={[
-                {
-                    required: true,
-                    message: `Где ${item.title}?`,
-                },
-            ]}>
-                <Input placeholder={`${item.title} ${pref}`} />
+            <Form.Item name={item.name + fromto}>
+                <Input allowClear onChange={(e) => handleInputChange(e.target.value, item.id, fromto)} placeholder={`${item.title} ${pref}`} />
             </Form.Item>
         )
     }
 
     function AttrSelect({ item }) {
         return (
-            <Form.Item name={item.name} rules={[
-                {
-                    required: item.required,
-                    message: `Где ${item.title}?`,
-                },
-            ]}>
+            <Form.Item name={item.name}>
                 <Select
-                    labelInValue
-                    placeholder={item.title}
-                    onChange={handleSelectChange}>
+                    allowClear
+                    onChange={(val) => handleSelectChange(val, item.id)}
+                    placeholder={item.title}>
                     {
                         item.attributeOptions.map((attritem, index) => {
                             return (
-                                <Option key={attritem.id} value={attritem.value}>{attritem.value}</Option>
+                                <Option key={attritem.id} id={attritem.id} value={attritem.value}>{attritem.value}</Option>
                             )
                         })
                     }
@@ -72,9 +121,15 @@ function SubcategoriesFilter({ catId }) {
             </Form.Item>
         )
     }
-    const Just = () => {
-        return (
-            attr.map((item, index) => {
+
+    return (
+        <Form
+            layout="inline"
+            className="components-table-demo-control-bar"
+            style={{ marginBottom: 16 }}
+        // onFieldsChange={(one, two) => handleSelectChange(one, two)}
+        >
+            {attr.map((item, index) => {
                 if (item.attributeOptions.length > 0) {
                     return (
                         <AttrSelect item={item} key={item.name} />
@@ -88,18 +143,7 @@ function SubcategoriesFilter({ catId }) {
                         </div>
                     )
                 }
-            })
-        )
-    }
-
-    const MemoizedValue = useMemo(() => Just, [attr]);
-    return (
-        <Form
-            layout="inline"
-            className="components-table-demo-control-bar"
-            style={{ marginBottom: 16 }}
-        >
-            <MemoizedValue />
+            })}
         </Form>
     )
 }
