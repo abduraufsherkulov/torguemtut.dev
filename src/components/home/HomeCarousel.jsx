@@ -28,7 +28,18 @@ function HomeCarousel() {
             js = d.createElement(s); js.id = id;
             js.src = "https://connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
+        }(document, 'script', 'facebook-jssdk'))
+    }, [])
+
+    useEffect(() => {
+        const script = document.createElement("script");
+        script.src = "https://telegram.org/js/telegram-widget.js?7";
+        script.setAttribute("data-telegram-post", "ttuzelon/1702");
+        script.setAttribute("data-width", "100%");
+        script.setAttribute("data-userpic", "auto");
+        script.async = true;
+        let tg = document.getElementById('telegram-widget');
+        tg.appendChild(script);
     }, [])
     return (
         <div id="homecarousel">
@@ -41,11 +52,10 @@ function HomeCarousel() {
                 <UnderCarouselNews />
             </div>
             <div className="fb-part">
-                <div className="fb-group" data-href="https://www.facebook.com/groups/torguem.tut/" data-width="230" data-show-social-context="true" data-show-metadata="false"></div>
+                <div className="fb-group" data-href="https://www.facebook.com/groups/torguem.tut/" data-width="320" data-show-social-context="true" data-show-metadata="false"></div>
                 <span style={{ marginTop: '12px', display: 'block', width: '100%' }}></span>
-                <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fwww.tt.uz%2F&tabs=timeline&width=230&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=292801224405886" width="100%" height="810" style={{ border: 'none', overflow: 'hidden' }} scrolling="no" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-
-                {/* <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fwww.tt.uz%2F&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=292801224405886" width="340" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe> */}
+                <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fwww.tt.uz%2F&tabs=timeline&width=321&height=170&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=292801224405886" width="100%" height="170" style={{ border: 'none', overflow: 'hidden' }} scrolling="no" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                <div style={{ width: '321px', background: 'white' }} id="telegram-widget"></div>
             </div>
         </div>
     )
