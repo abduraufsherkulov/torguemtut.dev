@@ -31,7 +31,7 @@ function ForgotPasswordForm(props) {
                 const email = (values.emailphone[0] === "+" || typeof values.emailphone === "number") ? false : true;
                 // let token = await AsyncStorage.getItem("access_token");
 
-                const endpoint = "https://ttuz.azurewebsites.net/api/users/forget-password";
+                const endpoint = "https://tt.delivera.uz/api/users/forget-password";
 
                 const data = JSON.stringify({
                     Phone: email ? '' : values.emailphone,

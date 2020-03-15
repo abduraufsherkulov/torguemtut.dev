@@ -11,7 +11,7 @@ function BalanceContextProvider(props) {
     const { userData, dispatch } = useContext(AuthContext)
     const [balance, setBalance] = useState(0)
     useEffect(() => {
-        const endpoint = "https://ttuz.azurewebsites.net/api/users/user-balance";
+        const endpoint = "https://tt.delivera.uz/api/users/user-balance";
         axios({
             method: "post",
             url: endpoint,

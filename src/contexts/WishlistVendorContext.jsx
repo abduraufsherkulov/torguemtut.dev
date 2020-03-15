@@ -12,7 +12,7 @@ function WishlistVendorContextProvider(props) {
     const [{ wishlistvendor }, dispatch] = useReducer(wishlistReducer, { wishlistvendor: [] })
 
     useEffect(() => {
-        const endpoint = "https://ttuz.azurewebsites.net/api/news/get-vendors";
+        const endpoint = "https://tt.delivera.uz/api/news/get-vendors";
         axios({
             method: 'post',
             url: endpoint,
@@ -38,7 +38,7 @@ function WishlistVendorContextProvider(props) {
             const key = 'updatable';
             setListData({ ...wish, vendorFavourite: true });
             message.loading({ content: 'Добавление в избранных...', key });
-            const endpoint = `https://ttuz.azurewebsites.net/api/news/post-vendor-favourite?targetUserId=${wish.userId}`;
+            const endpoint = `https://tt.delivera.uz/api/news/post-vendor-favourite?targetUserId=${wish.userId}`;
             axios({
                 method: 'post',
                 url: endpoint,
@@ -68,7 +68,7 @@ function WishlistVendorContextProvider(props) {
             listData[selectedWish].vendorFavourite = true;
             setListData([...listData]);
             message.loading({ content: 'Добавление в избранных...', key });
-            const endpoint = `https://ttuz.azurewebsites.net/api/news/post-vendor-favourite?targetUserId=${wish.ownerDetails.userId}`;
+            const endpoint = `https://tt.delivera.uz/api/news/post-vendor-favourite?targetUserId=${wish.ownerDetails.userId}`;
             axios({
                 method: 'post',
                 url: endpoint,
@@ -102,7 +102,7 @@ function WishlistVendorContextProvider(props) {
             const key = 'updatable';
             setListData({ ...wish, vendorFavourite: false });
             message.loading({ content: 'Удаление из избранных...', key });
-            const endpoint = `https://ttuz.azurewebsites.net/api/news/delete-vendor-favourite?targetUserId=${wish.userId}`;
+            const endpoint = `https://tt.delivera.uz/api/news/delete-vendor-favourite?targetUserId=${wish.userId}`;
             axios({
                 method: 'post',
                 url: endpoint,
@@ -134,7 +134,7 @@ function WishlistVendorContextProvider(props) {
             listData[selectedWish].vendorFavourite = false;
             setListData([...listData]);
             message.loading({ content: 'Удаление из избранных...', key });
-            const endpoint = `https://ttuz.azurewebsites.net/api/news/delete-vendor-favourite?targetUserId=${wish.ownerDetails.userId}`;
+            const endpoint = `https://tt.delivera.uz/api/news/delete-vendor-favourite?targetUserId=${wish.ownerDetails.userId}`;
             axios({
                 method: 'post',
                 url: endpoint,

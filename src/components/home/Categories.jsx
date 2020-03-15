@@ -41,7 +41,7 @@ function Categories() {
 
 
     useEffect(() => {
-        const endpoint = "https://ttuz.azurewebsites.net/api/category";
+        const endpoint = "https://tt.delivera.uz/api/category";
         axios({
             method: "get",
             url: endpoint

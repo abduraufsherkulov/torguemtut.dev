@@ -74,7 +74,7 @@ function UploadAvatar({ defaultUrl, edit }) {
             <Form.Item
                 name="photos">
                 <Upload
-                    action="https://ttuz.azurewebsites.net/api/news/upload-image"
+                    action="https://tt.delivera.uz/api/news/upload-image"
                     accept=".png, .jpeg, .jpg"
                     listType="picture-card"
                     fileList={fileList}

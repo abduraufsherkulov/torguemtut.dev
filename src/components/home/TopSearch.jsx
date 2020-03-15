@@ -26,7 +26,7 @@ function TopSearch() {
             title: e
         })
         // return [];
-        const endpoint = "https://ttuz.azurewebsites.net/api/news/search";
+        const endpoint = "https://tt.delivera.uz/api/news/search";
         axios({
             method: "post",
             url: endpoint,

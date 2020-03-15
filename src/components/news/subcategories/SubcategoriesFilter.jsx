@@ -17,7 +17,7 @@ function SubcategoriesFilter({ catId, selectedAttr, setSelectedAttr }) {
 
     useEffect(() => {
         const attr = catId;
-        const endpoint = `https://ttuz.azurewebsites.net/api/category/get-category-attributes?Id=${attr}`;
+        const endpoint = `https://tt.delivera.uz/api/category/get-category-attributes?Id=${attr}`;
         axios({
             method: 'get',
             url: endpoint,

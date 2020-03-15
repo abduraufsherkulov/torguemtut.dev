@@ -14,7 +14,7 @@ function BoostCarouselType(props) {
     const [loading, setLoading] = useState({ id: 0, status: false });
     let { id } = useParams();
 
-    const endpoint = "https://ttuz.azurewebsites.net/api/news/post-tariff";
+    const endpoint = "https://tt.delivera.uz/api/news/post-tariff";
 
     const handleHome = () => {
         setLoading({ id: 1, status: true });

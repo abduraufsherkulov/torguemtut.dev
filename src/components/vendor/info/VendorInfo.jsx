@@ -23,7 +23,7 @@ function VendorInfo({ id }) {
     })
     const [item, setItem] = useState({});
     useEffect(() => {
-        const endpoint = `https://ttuz.azurewebsites.net/api/users/get-profile?userId=${id}`;
+        const endpoint = `https://tt.delivera.uz/api/users/get-profile?userId=${id}`;
         axios({
             method: "post",
             url: endpoint,

@@ -8,7 +8,7 @@ function UnderCarouselNews() {
     const [vip, setVip] = useState([{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]);
     const [loading, setLoading] = useState(true)
     useEffect(() => {
-        const endpoint = "https://ttuz.azurewebsites.net/api/news/get-all-by-tariff";
+        const endpoint = "https://tt.delivera.uz/api/news/get-all-by-tariff";
         const data = JSON.stringify({
             Type: 3,
             pageSize: 30,
@@ -46,7 +46,7 @@ function UnderCarouselNews() {
                         <Link to={`/item/${item.id}`}>
                             <div className="crowd-container">
                                 <div className="crowd-img">
-                                    <img style={{ width: '100%' }} src={item.images !== undefined ? `https://ttuz.azurewebsites.net/Resources/Images/${item.images[0].path}` : null} alt="" />
+                                    <img style={{ width: '100%' }} src={item.images !== undefined ? `https://tt.delivera.uz/Resources/Images/${item.images[0].path}` : null} alt="" />
                                     {/* <img src="//ae01.alicdn.com/kf/H44270036a201444eaff9af72aaf84556z.jpg_140x140.jpg_.webp" /> */}
                                 </div>
                                 <div className="crowd-note">

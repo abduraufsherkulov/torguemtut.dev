@@ -10,7 +10,7 @@ function MyAdsProvider(props) {
     const [myAds, setMyAds] = useState([]);
     const [activeKey, setActiveKey] = useState("active");
     useEffect(() => {
-        const endpoint = "https://ttuz.azurewebsites.net/api/news/get-all-by-user";
+        const endpoint = "https://tt.delivera.uz/api/news/get-all-by-user";
         axios({
             method: "post",
             url: endpoint,

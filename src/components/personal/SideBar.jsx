@@ -36,7 +36,7 @@ function SideBar({ location }) {
     const handleSubmit = values => {
         console.log(values)
         setLoading(true)
-        const endpoint = "https://ttuz.azurewebsites.net/api/users/update-profile";
+        const endpoint = "https://tt.delivera.uz/api/users/update-profile";
 
         const data = JSON.stringify({
             Name: values.firstName,

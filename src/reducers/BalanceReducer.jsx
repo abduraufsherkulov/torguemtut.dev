@@ -3,7 +3,7 @@ export const balanceReducer = (state, action) => {
     console.log(action, state);
     switch (action.type) {
         case 'GET_BALANCE':
-            const endpoint = "https://ttuz.azurewebsites.net/api/users/user-balance";
+            const endpoint = "https://tt.delivera.uz/api/users/user-balance";
             axios({
                 method: "post",
                 url: endpoint,

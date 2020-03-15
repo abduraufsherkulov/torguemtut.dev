@@ -57,7 +57,7 @@ function PicturesWall(props) {
             <Form.Item
                 name="photos" label="Фотографии" validateStatus={props.fileValidate} help={props.fileRequired}>
                 <Upload
-                    action="https://ttuz.azurewebsites.net/api/news/upload-image"
+                    action="https://tt.delivera.uz/api/news/upload-image"
                     accept=".png, .jpeg, .jpg"
                     listType="picture-card"
                     fileList={fileList}

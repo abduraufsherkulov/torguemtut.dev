@@ -10,7 +10,7 @@ function BusinessContextProvider(props) {
     const { userData, dispatch } = useContext(AuthContext);
 
     useEffect(() => {
-        const endpoint = "https://ttuz.azurewebsites.net/api/users/get-business-entities";
+        const endpoint = "https://tt.delivera.uz/api/users/get-business-entities";
         axios({
             method: "get",
             url: endpoint,

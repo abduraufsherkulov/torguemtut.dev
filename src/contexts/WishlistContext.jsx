@@ -13,7 +13,7 @@ function WishlistContextProvider(props) {
     const [{ wishlist }, dispatch] = useReducer(wishlistReducer, { wishlist: [] })
 
     useEffect(() => {
-        const endpoint = "https://ttuz.azurewebsites.net/api/news/get-all-favourites";
+        const endpoint = "https://tt.delivera.uz/api/news/get-all-favourites";
         axios({
             method: 'post',
             url: endpoint,
@@ -40,7 +40,7 @@ function WishlistContextProvider(props) {
         listData[selectedWish].favourite = true;
         setListData([...listData]);
         message.loading({ content: 'Добавление в избранных...', key });
-        const endpoint = `https://ttuz.azurewebsites.net/api/news/post-favourite?newsId=${wish.id}`;
+        const endpoint = `https://tt.delivera.uz/api/news/post-favourite?newsId=${wish.id}`;
         axios({
             method: 'post',
             url: endpoint,
@@ -74,7 +74,7 @@ function WishlistContextProvider(props) {
         listData[selectedWish].favourite = false;
         setListData([...listData]);
         message.loading({ content: 'Удаление из избранных...', key });
-        const endpoint = `https://ttuz.azurewebsites.net/api/news/delete-favourite?newsId=${wish.id}`;
+        const endpoint = `https://tt.delivera.uz/api/news/delete-favourite?newsId=${wish.id}`;
         axios({
             method: 'post',
             url: endpoint,

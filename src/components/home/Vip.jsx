@@ -12,7 +12,7 @@ function Vip() {
     const { userData, dispatch } = useContext(AuthContext)
     const [vip, setVip] = useState([{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]);
     useEffect(() => {
-        const endpoint = "https://ttuz.azurewebsites.net/api/news/get-all-by-tariff";
+        const endpoint = "https://tt.delivera.uz/api/news/get-all-by-tariff";
 
         const data = JSON.stringify({
             Type: 1,
@@ -83,7 +83,7 @@ function Vip() {
                                                 <HeartIcons setListData={setVip} listData={vip} item={index} favourite={index.favourite} />
                                             </div>
                                             <div className="img-item-container">
-                                                <img src={index.images !== undefined ? `https://ttuz.azurewebsites.net/Resources/Images/${index.images[0].path}` : null} alt="" />
+                                                <img src={index.images !== undefined ? `https://tt.delivera.uz/Resources/Images/${index.images[0].path}` : null} alt="" />
                                             </div>
                                         </div>
                                         <div className="info-part">

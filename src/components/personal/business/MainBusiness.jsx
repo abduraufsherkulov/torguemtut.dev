@@ -43,7 +43,7 @@ function MainBusiness() {
 
         })
 
-        const endpoint = "https://ttuz.azurewebsites.net/api/users/add-business-entity";
+        const endpoint = "https://tt.delivera.uz/api/users/add-business-entity";
         axios({
             method: 'post',
             url: endpoint,
@@ -64,7 +64,7 @@ function MainBusiness() {
     };
     useEffect(() => {
         if (businessInfo && businessInfo.logoImage) {
-            setDefaultUrl(`https://ttuz.azurewebsites.net/Resources/Images/${businessInfo.logoImage.path}`)
+            setDefaultUrl(`https://tt.delivera.uz/Resources/Images/${businessInfo.logoImage.path}`)
         }
 
     }, [businessInfo])

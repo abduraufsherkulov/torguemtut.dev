@@ -102,7 +102,7 @@ function AddNewsAd(props) {
             })
             images = images.toString();
             // NewsAttribute: [{"AttributeId" : 123, "Value" : "adasdasd"}]
-            const endpoint = "https://ttuz.azurewebsites.net/api/news/add";
+            const endpoint = "https://tt.delivera.uz/api/news/add";
             console.log(values)
             // return false;
             let newAttr = [];
@@ -168,7 +168,7 @@ function AddNewsAd(props) {
     const handleCascader = (value) => {
         setCascaderLoading(true);
         const attr = value[value.length - 1];
-        const endpoint = `https://ttuz.azurewebsites.net/api/category/get-category-attributes?Id=${attr}`;
+        const endpoint = `https://tt.delivera.uz/api/category/get-category-attributes?Id=${attr}`;
         axios({
             method: 'get',
             url: endpoint,

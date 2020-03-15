@@ -50,7 +50,7 @@ function FacebookAuth() {
 
     function sendToServer(response) {
         setLoading(true);
-        const endpoint = "https://ttuz.azurewebsites.net/api/users/facebook";
+        const endpoint = "https://tt.delivera.uz/api/users/facebook";
 
         const data = JSON.stringify({
             access_token: response.authResponse.accessToken

@@ -19,7 +19,7 @@ function MyAdsCarousel({ listData }) {
             {!loading && (
                 <Carousel className="detailscarousel" afterChange={onChange}>
                     {listData.map(item => (
-                        <Magnifier height={'100%'} key={item.createdDate} src={`https://ttuz.azurewebsites.net/Resources/Images/${item.path}`} />
+                        <Magnifier height={'100%'} key={item.createdDate} src={`https://tt.delivera.uz/Resources/Images/${item.path}`} />
                     ))}
                 </Carousel>
             )}

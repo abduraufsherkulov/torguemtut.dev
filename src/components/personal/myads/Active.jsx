@@ -28,7 +28,7 @@ function Active() {
                                             </div>
                                         </div>
                                         <div className="img-item-container">
-                                            <img src={item.images !== undefined ? `https://ttuz.azurewebsites.net/Resources/Images/${item.images[0].path}` : null} alt="" />
+                                            <img src={item.images !== undefined ? `https://tt.delivera.uz/Resources/Images/${item.images[0].path}` : null} alt="" />
                                         </div>
                                     </Link>
                                 </div>

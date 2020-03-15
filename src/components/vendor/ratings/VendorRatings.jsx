@@ -43,7 +43,7 @@ function VendorRatings({ id }) {
 
     useEffect(() => {
 
-        const endpoint = `https://ttuz.azurewebsites.net/api/news/get-vendor-reviews?targetUserId=${id}`;
+        const endpoint = `https://tt.delivera.uz/api/news/get-vendor-reviews?targetUserId=${id}`;
 
         axios({
             method: "post",
@@ -89,7 +89,7 @@ function VendorRatings({ id }) {
             Message: value
         });
 
-        const endpoint = `https://ttuz.azurewebsites.net/api/news/post-vendor-review`;
+        const endpoint = `https://tt.delivera.uz/api/news/post-vendor-review`;
 
         axios({
             method: "post",

@@ -38,7 +38,7 @@ function SignUpForm(props) {
         const email = (values.emailphone[0] === "+" || typeof values.emailphone === "number") ? false : true;
         // let token = await AsyncStorage.getItem("access_token");
 
-        const endpoint = "https://ttuz.azurewebsites.net/api/users/register";
+        const endpoint = "https://tt.delivera.uz/api/users/register";
 
         const data = JSON.stringify({
             Phone: email ? '' : values.emailphone,
@@ -84,7 +84,7 @@ function SignUpForm(props) {
 
     const handleConfirmFinish = (values) => {
         // let token = await AsyncStorage.getItem("access_token");
-        const endpoint = "https://ttuz.azurewebsites.net/api/users/validate";
+        const endpoint = "https://tt.delivera.uz/api/users/validate";
 
         const data = JSON.stringify({
             Phone: isMail ? '' : phone,

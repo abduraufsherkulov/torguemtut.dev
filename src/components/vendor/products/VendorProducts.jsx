@@ -16,7 +16,7 @@ function VendorProducts({ id }) {
         const data = JSON.stringify({
             ownerId: id
         })
-        const endpoint = `https://ttuz.azurewebsites.net/api/news/get-all`;
+        const endpoint = `https://tt.delivera.uz/api/news/get-all`;
         axios({
             method: "post",
             url: endpoint,
@@ -74,7 +74,7 @@ function VendorProducts({ id }) {
                                                     </div>
                                                 </div>
                                                 <div className="img-item-container">
-                                                    <img src={index.images !== undefined ? `https://ttuz.azurewebsites.net/Resources/Images/${index.images[0].path}` : null} alt="" />
+                                                    <img src={index.images !== undefined ? `https://tt.delivera.uz/Resources/Images/${index.images[0].path}` : null} alt="" />
                                                 </div>
                                             </Link>
                                         </div>
