@@ -19,6 +19,7 @@ import { faBlender, faCar, faHome, faGraduationCap, faLaptop, faMobileAlt, faCam
 import SoataContextProvider from "./contexts/SoataContext";
 import UserInfoContextProvider from "./contexts/UserInfoContext";
 import BusinessContextProvider from "./contexts/BusinessContext";
+import { fblogin } from "./helpers/SocialLoginHelper";
 
 library.add(fab, faBlender, faCar, faHome, faGraduationCap, faLaptop, faMobileAlt, faCameraRetro, faTshirt, faCouch, faDraftingCompass, faHardHat, faClipboardCheck, faHandHoldingUsd, faBabyCarriage, faPaw, faGifts, faBook, faPalette, faTableTennis, faHeartbeat, faBinoculars, faArchive, faUsers);
 
@@ -31,7 +32,7 @@ function App() {
   useEffect(() => {
     window.fbAsyncInit = function () {
       FB.init({
-        appId: '656151361204007',
+        appId: fblogin,
         cookie: true,                     // Enable cookies to allow the server to access the session.
         xfbml: true,                     // Parse social plugins on this webpage.
         version: 'v6.0',           // Use this Graph API version for this call.

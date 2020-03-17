@@ -103,41 +103,6 @@ function FacebookAuth() {
             }
         });
     }
-
-    useEffect(() => {
-
-        window.fbAsyncInit = function () {
-            FB.init({
-                appId: '656151361204007',
-                cookie: true,                     // Enable cookies to allow the server to access the session.
-                xfbml: true,                     // Parse social plugins on this webpage.
-                version: 'v6.0'           // Use this Graph API version for this call.
-            });
-
-
-            // FB.getLoginStatus(function (response) {   // Called after the JS SDK has been initialized.
-            //     statusChangeCallback(response);        // Returns the login status.
-            // });
-        };
-
-
-        (function (d, s, id) {                      // Load the SDK asynchronously
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-
-        return () => {
-            // let fb_sdk = document.getElementById('facebook-jssdk');
-
-            // document.head.removeChild(fb_sdk.previousElementSibling);
-            // document.head.removeChild(fb_sdk);
-
-            // subscription.unsubscribe();
-        };
-    }, [])
     return (
         <div className="facebook-button">
             <Button size="large" loading={loading} onClick={checkLoginState}><IconFont type="icon-facebook" /> Facebook </Button>
