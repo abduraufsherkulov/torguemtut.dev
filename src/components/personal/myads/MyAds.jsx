@@ -1,28 +1,30 @@
 import React, { useState, useContext } from 'react'
+import { MyAdsContext } from '../../../contexts/MyAdsContext';
+import { AdsActiveContext } from '../../../contexts/AdsActiveContext';
+import { AdsArchiveContext } from '../../../contexts/AdsArchiveContext';
+import { AdsWaitingContext } from '../../../contexts/AdsWaitingContext';
 import { Tabs } from 'antd';
 import Active from './Active';
-import { MyAdsContext } from '../../../contexts/MyAdsContext';
 import Waiting from './Waiting';
+import Archive from './Archive';
 
 const { TabPane } = Tabs;
 
 function MyAds() {
-    const { myAds, activeKey, setActiveKey } = useContext(MyAdsContext);
-    // const [keyValue, setKeyValue] = useState("1")
-    const waiting = myAds.filter(item => item.status == 1);
-    const active = myAds.filter(item => item.status == 2);
-    const archived = myAds.filter(item => item.status == 3);
-
+    const { waitingAds, pagination: paginationWaiting } = useContext(AdsWaitingContext);
+    const { activeAds, pagination: paginationActive } = useContext(AdsActiveContext);
+    const { archiveAds, pagination: paginationArchive } = useContext(AdsArchiveContext);
+    const { activeKey, setActiveKey } = useContext(MyAdsContext);
     return (
         <Tabs defaultActiveKey="active" activeKey={activeKey} onChange={setActiveKey}>
-            <TabPane tab={`Активные  ${active.length}`} key="active">
+            <TabPane tab={`Активные  ${paginationActive.TotalCount}`} key="active">
                 <Active />
             </TabPane>
-            <TabPane tab={`На проверке  ${waiting.length}`} key="waiting">
+            <TabPane tab={`На проверке  ${paginationWaiting.TotalCount}`} key="waiting">
                 <Waiting />
             </TabPane>
-            <TabPane tab={`Архивные  ${archived.length}`} key="archived">
-                Архивные  3
+            <TabPane tab={`Архивные  ${paginationArchive.TotalCount}`} key="archived">
+                <Archive />
             </TabPane>
         </Tabs>
     )

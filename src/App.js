@@ -20,6 +20,9 @@ import SoataContextProvider from "./contexts/SoataContext";
 import UserInfoContextProvider from "./contexts/UserInfoContext";
 import BusinessContextProvider from "./contexts/BusinessContext";
 import { fblogin } from "./helpers/SocialLoginHelper";
+import AdsActiveProvider from "./contexts/AdsActiveContext";
+import AdsArchiveProvider from "./contexts/AdsArchiveContext";
+import AdsWaitingProvider from "./contexts/AdsWaitingContext";
 
 library.add(fab, faBlender, faCar, faHome, faGraduationCap, faLaptop, faMobileAlt, faCameraRetro, faTshirt, faCouch, faDraftingCompass, faHardHat, faClipboardCheck, faHandHoldingUsd, faBabyCarriage, faPaw, faGifts, faBook, faPalette, faTableTennis, faHeartbeat, faBinoculars, faArchive, faUsers);
 
@@ -65,21 +68,27 @@ function App() {
               <CategoryContextProvider>
                 <BalanceContextProvider>
                   <MyAdsProvider>
-                    <WishlistContextProvider>
-                      <WishlistVendorContextProvider>
-                        <CommentContextProvider>
-                          <SoataContextProvider>
-                            <UserInfoContextProvider>
-                              <BusinessContextProvider>
-                                <Postnavigator />
-                                <Navigator />
-                                <Container />
-                              </BusinessContextProvider>
-                            </UserInfoContextProvider>
-                          </SoataContextProvider>
-                        </CommentContextProvider>
-                      </WishlistVendorContextProvider>
-                    </WishlistContextProvider>
+                    <AdsActiveProvider>
+                      <AdsArchiveProvider>
+                        <AdsWaitingProvider>
+                          <WishlistContextProvider>
+                            <WishlistVendorContextProvider>
+                              <CommentContextProvider>
+                                <SoataContextProvider>
+                                  <UserInfoContextProvider>
+                                    <BusinessContextProvider>
+                                      <Postnavigator />
+                                      <Navigator />
+                                      <Container />
+                                    </BusinessContextProvider>
+                                  </UserInfoContextProvider>
+                                </SoataContextProvider>
+                              </CommentContextProvider>
+                            </WishlistVendorContextProvider>
+                          </WishlistContextProvider>
+                        </AdsWaitingProvider>
+                      </AdsArchiveProvider>
+                    </AdsActiveProvider>
                   </MyAdsProvider>
                 </BalanceContextProvider>
               </CategoryContextProvider>

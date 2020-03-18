@@ -1,22 +1,23 @@
 import React, { useState, useContext } from 'react';
-import { Row, Col, Divider, Button } from 'antd';
+import { Row, Col, Divider, Button, Pagination } from 'antd';
 import Watch from "../../../images/watch.png";
 import EditIcons from '../../Icons/EditIcons';
 import DeleteIcons from '../../Icons/DeleteIcons';
 import ViewIcons from '../../Icons/ViewIcons';
-import { MyAdsContext } from '../../../contexts/MyAdsContext';
 import { Link } from 'react-router-dom'
+import { AdsWaitingContext } from '../../../contexts/AdsWaitingContext';
 
 function Waiting() {
-    const { myAds } = useContext(MyAdsContext);
-    const perItem = myAds.filter(item => item.status == 1);
-    console.log(perItem, 'peritem');
+    const { waitingAds, pagination, currentPage, setCurrentPage, pageSize } = useContext(AdsWaitingContext)
+    const handlePage = (page) => {
+        setCurrentPage(page)
+    }
     return (
         <div id="activeads">
             <div className="activeads-grid">
                 <div className="container">
                     <Row className="mainrows">
-                        {perItem.map((item, index) => (
+                        {waitingAds.map((item, index) => (
                             <Col span={6} key={index} className="each">
                                 <div className="img-part">
                                     <div className="activeads-face">
@@ -38,6 +39,7 @@ function Waiting() {
                             </Col>
                         ))}
                     </Row>
+                    <Pagination current={currentPage} total={pagination.TotalCount} onChange={handlePage} pageSize={pageSize} />
                 </div>
             </div>
         </div>
