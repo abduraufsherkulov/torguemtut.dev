@@ -15,7 +15,7 @@ function WishList() {
     }
     return (
         <Tabs defaultActiveKey="1" onChange={callback}>
-            <TabPane tab={`Активные  ${wishlist.length}`} key="1">
+            <TabPane tab={`Избранные продукты  ${wishlist.length}`} key="1">
                 <SelectedWishes />
             </TabPane>
             <TabPane tab={`Избранные продавцы ${wishlistvendor.length}`} key="2">
