@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Row, Col, Icon, Divider, Button, Avatar } from 'antd';
+import { Row, Col, Icon, Divider, Button, Avatar, Pagination } from 'antd';
 import Watch from "../../../images/watch.png";
 import EditIcons from '../../Icons/EditIcons';
 import DeleteIcons from '../../Icons/DeleteIcons';
@@ -8,9 +8,10 @@ import { WishlistContext } from '../../../contexts/WishlistContext';
 import { WishlistVendorContext } from '../../../contexts/WishlistVendorContext';
 
 function SelectedVendors() {
-    const { wishlistvendor } = useContext(WishlistVendorContext);
-    // const perItem = myAds.filter(item => item.status == 2);
-    console.log(wishlistvendor);
+    const { wishlistvendor, pagination, currentPage, setCurrentPage, pageSize } = useContext(WishlistVendorContext);
+    const handlePage = (page) => {
+        setCurrentPage(page)
+    }
     return (
         <div id="activeads">
             <div className="activeads-grid">
@@ -29,7 +30,7 @@ function SelectedVendors() {
                                             </div>
                                         </div>
                                         <div className="img-item-container">
-                                        <Avatar shape="square" size={"100%"} icon="user" />
+                                            <Avatar shape="square" size={"100%"} icon="user" />
                                         </div>
                                     </a>
                                 </div>
@@ -40,6 +41,7 @@ function SelectedVendors() {
                             </Col>
                         ))}
                     </Row>
+                    <Pagination current={currentPage} total={pagination.TotalCount} onChange={handlePage} pageSize={pageSize} />
                 </div>
             </div>
         </div>

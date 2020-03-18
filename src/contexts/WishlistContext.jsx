@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect, useContext } from 'react'
+import React, { createContext, useReducer, useEffect, useContext, useState } from 'react'
 import axios from 'axios';
 import { AuthContext } from './AuthContext';
 import { wishlistReducer } from '../reducers/WishlistReducer';
@@ -10,6 +10,11 @@ function WishlistContextProvider(props) {
 
     const { userData, dispatch: dispatcher } = useContext(AuthContext);
 
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pagination, setPagination] = useState({ TotalCount: 0 });
+    const pageSize = 16;
+
     const [{ wishlist }, dispatch] = useReducer(wishlistReducer, { wishlist: [] })
 
     useEffect(() => {
@@ -17,13 +22,17 @@ function WishlistContextProvider(props) {
         axios({
             method: 'post',
             url: endpoint,
-            data: {},
+            data: {
+                pageSize: pageSize,
+                pageNumber: currentPage,
+            },
             headers: {
                 "content-type": "application/json",
                 Authorization: `Bearer ${userData.token}`
             }
         }).then(response => {
-            console.log(response, 'wishlist')
+            let pagination = JSON.parse(response.headers['x-pagination']);
+            setPagination(pagination);
             dispatch({ type: 'INIT_WISHLIST', wishlist: response.data });
         }).catch(error => {
             console.log(error.response.status);
@@ -32,7 +41,7 @@ function WishlistContextProvider(props) {
                 dispatcher({ type: 'SIGN_IN' })
             }
         })
-    }, [userData.token]);
+    }, [userData.token, currentPage]);
 
     const addWish = (wish, listData, setListData) => {
         const key = 'updatable';
@@ -103,7 +112,7 @@ function WishlistContextProvider(props) {
     }
 
     return (
-        <WishlistContext.Provider value={{ wishlist, dispatch, addWish, removeWish }}>
+        <WishlistContext.Provider value={{ wishlist, dispatch, addWish, removeWish, currentPage, setCurrentPage, pagination, pageSize }}>
             {props.children}
         </WishlistContext.Provider>
     )

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Row, Col, Divider, Button } from 'antd';
+import { Row, Col, Divider, Button, Pagination } from 'antd';
 import Watch from "../../../images/watch.png";
 import EditIcons from '../../Icons/EditIcons';
 import DeleteIcons from '../../Icons/DeleteIcons';
@@ -7,8 +7,11 @@ import ViewIcons from '../../Icons/ViewIcons';
 import { WishlistContext } from '../../../contexts/WishlistContext';
 
 function SelectedWishes() {
-    const { wishlist } = useContext(WishlistContext);
-    // const perItem = myAds.filter(item => item.status == 2);
+    const { wishlist, pagination, currentPage, setCurrentPage, pageSize } = useContext(WishlistContext);
+
+    const handlePage = (page) => {
+        setCurrentPage(page)
+    }
     return (
         <div id="activeads">
             <div className="activeads-grid">
@@ -38,6 +41,7 @@ function SelectedWishes() {
                             </Col>
                         ))}
                     </Row>
+                    <Pagination current={currentPage} total={pagination.TotalCount} onChange={handlePage} pageSize={pageSize} />
                 </div>
             </div>
         </div>

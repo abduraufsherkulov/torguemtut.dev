@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useContext, useReducer } from 'react'
+import React, { createContext, useEffect, useContext, useReducer, useState } from 'react'
 import axios from 'axios';
 import { AuthContext } from './AuthContext';
 import { wishlistReducer } from '../reducers/WishlistReducer';
@@ -11,17 +11,25 @@ function WishlistVendorContextProvider(props) {
     const { userData, dispatch: dispatcher } = useContext(AuthContext);
     const [{ wishlistvendor }, dispatch] = useReducer(wishlistReducer, { wishlistvendor: [] })
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pagination, setPagination] = useState({ TotalCount: 0 });
+    const pageSize = 16;
     useEffect(() => {
         const endpoint = "https://tt.delivera.uz/api/news/get-vendors";
         axios({
             method: 'post',
             url: endpoint,
+            data: {
+                pageSize: pageSize,
+                pageNumber: currentPage,
+            },
             headers: {
                 "content-type": "application/json",
                 Authorization: `Bearer ${userData.token}`
             }
         }).then(response => {
-            console.log(response);
+            let pagination = JSON.parse(response.headers['x-pagination']);
+            setPagination(pagination);
             dispatch({ type: 'INIT_WISHLIST_VENDOR', wishlistvendor: response.data });
         }).catch(error => {
             // console.log(error.response.status);
@@ -163,7 +171,7 @@ function WishlistVendorContextProvider(props) {
         }
     }
     return (
-        <WishlistVendorContext.Provider value={{ wishlistvendor, dispatch, addWish, removeWish }}>
+        <WishlistVendorContext.Provider value={{ wishlistvendor, dispatch, addWish, removeWish, currentPage, setCurrentPage, pagination, pageSize }}>
             {props.children}
         </WishlistVendorContext.Provider>
     )
