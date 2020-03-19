@@ -25,7 +25,7 @@ function Active() {
                                             <i className="spanner">VIP</i>
                                             <div className="action-block">
                                                 <ViewIcons />
-                                                <EditIcons />
+                                                <EditIcons to={`edit-ads/${item.id}`} />
                                                 <DeleteIcons />
                                             </div>
                                         </div>

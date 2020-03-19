@@ -21,9 +21,6 @@ function WishList() {
             <TabPane tab={`Избранные продавцы ${wishlistvendor.length}`} key="2">
                 <SelectedVendors />
             </TabPane>
-            {/* <TabPane tab="Tab 3" key="3">
-                Content of Tab Pane 3
-        </TabPane> */}
         </Tabs>
     )
 }

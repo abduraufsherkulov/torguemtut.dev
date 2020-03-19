@@ -35,6 +35,7 @@ import VendorSideBar from './vendor/VendorSideBar';
 import ForgotPassword from './auth/forgotpass/ForgotPassword';
 import PrivacyPolicy from './footer/PrivacyPolicy';
 import HowPay from './footer/HowPay';
+import EditNewsAd from './personal/myads/editads/EditNewsAd';
 
 function PrivateRoute({ children, ...rest }) {
   const { userData } = useContext(AuthContext);
@@ -183,6 +184,10 @@ function Container({ location }) {
               <Route exact path="/vendorstatistics/:id">
                 <VendorSideBar />
               </Route>
+
+              <PrivateRoute path="/edit-ads/:id">
+                <EditNewsAd />
+              </PrivateRoute>
 
               <Route path="*">
                 <NoMatch />
