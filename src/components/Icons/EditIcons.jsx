@@ -1,13 +1,18 @@
 import React, { useState } from 'react'
 import { EditFilled, EditOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 
-function EditIcons() {
+function EditIcons({ to }) {
     const [editHover, setEditHover] = useState(false);
 
     return editHover ? (
-        <EditFilled onMouseLeave={() => setEditHover(false)} onMouseOver={() => setEditHover(true)} />
+        <Link to={to}>
+            <EditFilled onMouseLeave={() => setEditHover(false)} onMouseOver={() => setEditHover(true)} />
+        </Link>
     ) : (
-            <EditOutlined onMouseLeave={() => setEditHover(false)} onMouseOver={() => setEditHover(true)} />
+            <Link to={to}>
+                <EditOutlined onMouseLeave={() => setEditHover(false)} onMouseOver={() => setEditHover(true)} />
+            </Link>
         )
 }
 
