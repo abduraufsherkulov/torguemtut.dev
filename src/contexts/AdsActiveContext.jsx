@@ -1,8 +1,14 @@
-import React, { createContext, useReducer, useState, useEffect, useContext } from 'react'
+import React, {
+    createContext,
+    useReducer,
+    useState,
+    useEffect,
+    useContext,
+} from "react";
 // import { authReducer } from '../reducers/AuthReducer';
-import axios from 'axios'
-import { AuthContext } from './AuthContext';
-import { message } from 'antd'
+import axios from "axios";
+import { AuthContext } from "./AuthContext";
+import { message } from "antd";
 export const AdsActiveContext = createContext();
 
 function AdsActiveProvider(props) {
@@ -24,28 +30,38 @@ function AdsActiveProvider(props) {
             },
             headers: {
                 "content-type": "application/json",
-                Authorization: `Bearer ${userData.token}`
-            }
+                Authorization: `Bearer ${userData.token}`,
+            },
         })
-            .then(response => {
-                let pagination = JSON.parse(response.headers['x-pagination']);
+            .then((response) => {
+                let pagination = JSON.parse(response.headers["x-pagination"]);
                 setPagination(pagination);
                 setActiveAds(response.data);
             })
-            .catch(error => {
-                console.log(error)
+            .catch((error) => {
+                console.log(error);
                 if (error.response.status == 401) {
-                    message.info('Сессия истекла', 2);
-                    dispatch({ type: 'SIGN_IN' })
+                    message.info("Сессия истекла", 2);
+                    dispatch({ type: "SIGN_IN" });
                 }
                 console.log(error, "error in categories");
             });
-    }, [userData.token, currentPage])
+    }, [userData.token, currentPage]);
     return (
-        <AdsActiveContext.Provider value={{ activeAds, setActiveAds, currentPage, setCurrentPage, pagination, pageSize }}>
+        <AdsActiveContext.Provider
+            value={{
+                activeAds,
+                setActiveAds,
+                currentPage,
+                setCurrentPage,
+                pageSize,
+                pagination,
+                setPagination,
+            }}
+        >
             {props.children}
         </AdsActiveContext.Provider>
-    )
+    );
 }
 
-export default AdsActiveProvider
+export default AdsActiveProvider;

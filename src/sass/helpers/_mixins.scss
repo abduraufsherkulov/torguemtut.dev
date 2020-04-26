@@ -14,14 +14,6 @@
   }
 }
 
-@mixin demiitalic {
-  font: {
-    family: "Avenir Next Cyr";
-    weight: bold;
-    style: italic;
-  }
-}
-
 @mixin mediumitalic {
   font: {
     family: "Avenir Next Cyr";
@@ -179,7 +171,7 @@
   }
 }
 
-@mixin coverFaceWithSpanThree {
+@mixin coverFaceLinksThree {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -196,6 +188,7 @@
     background: linear-gradient(to right, #543f92, #8f2b9f);
     margin: 14px;
     padding: 1px 12px;
+    z-index: 2;
   }
   span.anticon-edit {
     background: transparent;
@@ -208,6 +201,7 @@
     &:hover {
       color: #ff1d1d;
     }
+    z-index: 2;
   }
   span.anticon-delete {
     background: transparent;
@@ -220,6 +214,7 @@
     &:hover {
       color: #ff1d1d;
     }
+    z-index: 2;
   }
   span.anticon-read {
     background: transparent;
@@ -232,6 +227,33 @@
     &:hover {
       color: #ff1d1d;
     }
+    z-index: 2;
+  }
+  span.anticon-undo {
+    background: transparent;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 0 10px 30px 0;
+    font-size: dynamicfont(15, 17);
+    color: white;
+    &:hover {
+      color: #ff1d1d;
+    }
+    z-index: 2;
+  }
+  span.anticon-heart {
+    background: transparent;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 0 10px 10px 0;
+    font-size: dynamicfont(15, 17);
+    color: white;
+    &:hover {
+      color: #ff1d1d;
+    }
+    z-index: 2;
   }
 }
 

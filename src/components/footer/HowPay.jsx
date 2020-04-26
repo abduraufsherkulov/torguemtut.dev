@@ -18,37 +18,37 @@ function HowPay() {
                 <li>Click</li>
             </ul>
 
-            Пополнение через Payme , Click, Upay:
-            Вы можете сделать пополнение счета OLX через данных платежных агентов.
-            Пополнение возможно, как через сайты данных агентов, так и через их мобильные приложения при наличии выхода в сеть интернет.
-            Компания Click дополнительно предоставляет возможность оплаты через USSD запрос *880# без наличия подключения к интернету.
-            Инструкция:
-            -Зайдите на страницу или в приложение любого из указанных платежных агентов, если Ваша карта была зарегистрирована у кого-то из них.
-            -Найдите в списке на пополнение OLX
-            -Укажите в поле верное ID своего профиля
-            -Укажите сумм пополнения
-            -Сверьте еще раз все данные на верность и точность
-            -Сделайте оплату
-            В случае ошибочности пополнения ознакомитесь с инструкцией по Возврату средств (https://help.olx.uz/ru/pakety-obyavlenij-limity/obshhie-usloviya-i-oplata/usloviya-vozvrata-denezhnyx-sredstv/), описанные на странице Помощи.
-            В обязательном порядке, в случае ошибочности пополнения необходимо уведомить службу поддержки платежного агента и службу поддержки сервиса OLX.
-            Номер технической службы — Payme при возникновении вопросов: 99871 200-02-05
-            Cайт компании: https://payme.uz (https://payme.uz/)/
-            Номер технической службы — Click при возникновении вопросов:99871 231-0-880
-            Cайт компании: http://click.uz/ (http://click.uz/contacts)
-            Номер технической службы — Upay при возникновении вопросов: 99871 200-00-85
-            Cайт компании: http://upay.uz/ (http://upay.uz/index.html)
-            Оплата договором перечисления
-            Для Юридических лиц можно произвести оплату договором перечисления
-            Минимальная сумма оплаты договором перечисления – от 100 000 сум
-            Необходимые документы для оформления договора перечисления, предварительно вышлите на почту – info@olx.uz с пометкой “Запрос договора на пополнения счета OLX” c указанием своих контактов для связи.
-            Условия и список требуемых документов для юридических лиц на заключения договора по перечислению:
-            1) Сканированная копия гувохномы
-            2) Сканированная копия патента (для индивидуальных предпринимателей)
-            3) Сканированная копия лицензии (если имеется)
-            4) Банковские реквизиты (р/с)
-            5) ФИО директора (подпись ответственного лица)
-            6) ID — аккаунт
-            7) Сумма договора от 100.000 сум и более
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Пополнение&nbsp;через&nbsp;Payme&nbsp;,&nbsp;Click,&nbsp;Upay:</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Вы&nbsp;можете&nbsp;сделать&nbsp;пополнение&nbsp;счета&nbsp;OLX&nbsp;через&nbsp;данных&nbsp;платежных&nbsp;агентов.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Пополнение&nbsp;возможно,&nbsp;как&nbsp;через&nbsp;сайты&nbsp;данных&nbsp;агентов,&nbsp;так&nbsp;и&nbsp;через&nbsp;их&nbsp;мобильные&nbsp;приложения&nbsp;при&nbsp;наличии&nbsp;выхода&nbsp;в&nbsp;сеть&nbsp;интернет.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Компания&nbsp;Click&nbsp;дополнительно&nbsp;предоставляет&nbsp;возможность&nbsp;оплаты&nbsp;через&nbsp;USSD&nbsp;запрос&nbsp;*880#&nbsp;без&nbsp;наличия&nbsp;подключения&nbsp;к&nbsp;интернету.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Инструкция:</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-Зайдите&nbsp;на&nbsp;страницу&nbsp;или&nbsp;в&nbsp;приложение&nbsp;любого&nbsp;из&nbsp;указанных&nbsp;платежных&nbsp;агентов,&nbsp;если&nbsp;Ваша&nbsp;карта&nbsp;была&nbsp;зарегистрирована&nbsp;у&nbsp;кого-то&nbsp;из&nbsp;них.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-Найдите&nbsp;в&nbsp;списке&nbsp;на&nbsp;пополнение&nbsp;OLX</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-Укажите&nbsp;в&nbsp;поле&nbsp;верное&nbsp;ID&nbsp;своего&nbsp;профиля</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-Укажите&nbsp;сумм&nbsp;пополнения</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-Сверьте&nbsp;еще&nbsp;раз&nbsp;все&nbsp;данные&nbsp;на&nbsp;верность&nbsp;и&nbsp;точность</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-Сделайте&nbsp;оплату</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;В&nbsp;случае&nbsp;ошибочности&nbsp;пополнения&nbsp;ознакомитесь&nbsp;с&nbsp;инструкцией&nbsp;по&nbsp;Возврату&nbsp;средств&nbsp;(https://help.olx.uz/ru/pakety-obyavlenij-limity/obshhie-usloviya-i-oplata/usloviya-vozvrata-denezhnyx-sredstv/),&nbsp;описанные&nbsp;на&nbsp;странице&nbsp;Помощи.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;В&nbsp;обязательном&nbsp;порядке,&nbsp;в&nbsp;случае&nbsp;ошибочности&nbsp;пополнения&nbsp;необходимо&nbsp;уведомить&nbsp;службу&nbsp;поддержки&nbsp;платежного&nbsp;агента&nbsp;и&nbsp;службу&nbsp;поддержки&nbsp;сервиса&nbsp;OLX.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Номер&nbsp;технической&nbsp;службы&nbsp;&mdash;&nbsp;Payme&nbsp;при&nbsp;возникновении&nbsp;вопросов:&nbsp;99871&nbsp;200-02-05</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cайт&nbsp;компании:&nbsp;https://payme.uz&nbsp;(https://payme.uz/)/</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Номер&nbsp;технической&nbsp;службы&nbsp;&mdash;&nbsp;Click&nbsp;при&nbsp;возникновении&nbsp;вопросов:99871&nbsp;231-0-880</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cайт&nbsp;компании:&nbsp;http://click.uz/&nbsp;(http://click.uz/contacts)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Номер&nbsp;технической&nbsp;службы&nbsp;&mdash;&nbsp;Upay&nbsp;при&nbsp;возникновении&nbsp;вопросов:&nbsp;99871&nbsp;200-00-85</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cайт&nbsp;компании:&nbsp;http://upay.uz/&nbsp;(http://upay.uz/index.html)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Оплата&nbsp;договором&nbsp;перечисления</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Для&nbsp;Юридических&nbsp;лиц&nbsp;можно&nbsp;произвести&nbsp;оплату&nbsp;договором&nbsp;перечисления</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Минимальная&nbsp;сумма&nbsp;оплаты&nbsp;договором&nbsp;перечисления&nbsp;&ndash;&nbsp;от&nbsp;100&nbsp;000&nbsp;сум</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Необходимые&nbsp;документы&nbsp;для&nbsp;оформления&nbsp;договора&nbsp;перечисления,&nbsp;предварительно&nbsp;вышлите&nbsp;на&nbsp;почту&nbsp;&ndash;&nbsp;info@olx.uz&nbsp;с&nbsp;пометкой&nbsp;&ldquo;Запрос&nbsp;договора&nbsp;на&nbsp;пополнения&nbsp;счета&nbsp;OLX&rdquo;&nbsp;c&nbsp;указанием&nbsp;своих&nbsp;контактов&nbsp;для&nbsp;связи.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Условия&nbsp;и&nbsp;список&nbsp;требуемых&nbsp;документов&nbsp;для&nbsp;юридических&nbsp;лиц&nbsp;на&nbsp;заключения&nbsp;договора&nbsp;по&nbsp;перечислению:</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1)&nbsp;Сканированная&nbsp;копия&nbsp;гувохномы</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2)&nbsp;Сканированная&nbsp;копия&nbsp;патента&nbsp;(для&nbsp;индивидуальных&nbsp;предпринимателей)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3)&nbsp;Сканированная&nbsp;копия&nbsp;лицензии&nbsp;(если&nbsp;имеется)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4)&nbsp;Банковские&nbsp;реквизиты&nbsp;(р/с)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5)&nbsp;ФИО&nbsp;директора&nbsp;(подпись&nbsp;ответственного&nbsp;лица)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6)&nbsp;ID&nbsp;&mdash;&nbsp;аккаунт</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7)&nbsp;Сумма&nbsp;договора&nbsp;от&nbsp;100.000&nbsp;сум&nbsp;и&nbsp;более</p>
         </div>
     )
 }

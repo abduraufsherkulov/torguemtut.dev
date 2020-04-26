@@ -94,7 +94,7 @@ function TopSearch() {
                         placeholder="Введите запрос поиска"
                     >
                         <Input
-                            value={searchTitle} /* onChange={handleChange} */ size="large"
+                            value={searchTitle} /* onChange={handleChange} */ size="large" 
                         />
                     </AutoComplete>
                     {/* <Input value={searchTitle} onChange={handleChange} size="large" style={{ width: "70%" }} placeholder="Введите запрос поиска" /> */}

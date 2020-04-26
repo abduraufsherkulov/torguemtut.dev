@@ -989,6 +989,9 @@ footer {
       @include regular;
     }
   }
+  .ant-select-selector {
+    width: 100%;
+  }
 }
 
 //ANT MENU
@@ -1164,7 +1167,10 @@ footer {
       .img-part {
         position: relative;
         .activeads-face {
-          @include coverFaceWithSpanThree;
+          @include coverFaceWithSpan;
+        }
+        .activeads-links {
+          @include coverFaceLinksThree;
         }
       }
       h1 {
@@ -1371,6 +1377,53 @@ footer {
           left: 0;
         }
       }
+    }
+  }
+
+  .gallery-grid {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    .each {
+      border: 1px solid $bordercolor;
+      margin-bottom: 30px;
+      .img-part {
+        position: relative;
+        .gallery-face {
+          @include coverFaceWithSpan;
+        }
+        .gallery-links {
+          @include coverFaceLinks;
+        }
+      }
+      h1 {
+        margin: 0px;
+        @include bold;
+        font-size: dynamicfont(18, 20);
+        color: $parentcolor;
+      }
+      p {
+        margin: 0px;
+        @include regular;
+        font-size: dynamicfont(15, 17);
+        color: $parentcolor;
+
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .info-part {
+        padding: 18px;
+      }
+    }
+    button {
+      color: $showmore;
+      border-color: $showmore;
+      padding: {
+        left: 53px;
+        right: 53px;
+      }
+      @include demi;
+      font-size: dynamicfont(14, 16);
     }
   }
 }

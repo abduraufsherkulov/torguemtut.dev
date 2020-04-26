@@ -1,14 +1,14 @@
-import React, { useContext, useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom';
-import { Row, Col } from 'antd';
-import DetailsCarousel from './DetailsCarousel';
-import DetailsInfoSeller from './DetailsInfoSeller';
-import DetailsInfoProduct from './DetailsInfoProduct';
-import { AuthContext } from '../../../contexts/AuthContext';
-import axios from 'axios'
+import React, { useContext, useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { Row, Col } from "antd";
+import DetailsCarousel from "./DetailsCarousel";
+import DetailsInfoSeller from "./DetailsInfoSeller";
+import DetailsInfoProduct from "./DetailsInfoProduct";
+import { AuthContext } from "../../../contexts/AuthContext";
+import axios from "axios";
 
 function DetailsMain() {
-    const { userData } = useContext(AuthContext)
+    const { userData } = useContext(AuthContext);
     const [loading, setLoading] = useState(true);
     const [listData, setListData] = useState([{}, {}, {}, {}]);
 
@@ -16,9 +16,9 @@ function DetailsMain() {
 
     useEffect(() => {
         const data = JSON.stringify({
-            id: id
-        })
-        console.log(data)
+            id: id,
+        });
+        console.log(data);
         const endpoint = `https://tt.delivera.uz/api/news/get-all`;
         axios({
             method: "post",
@@ -26,23 +26,23 @@ function DetailsMain() {
             data: data,
             headers: {
                 "content-type": "application/json",
-                Authorization: `Bearer ${userData.token}`
-            }
+                Authorization: `Bearer ${userData.token}`,
+            },
         })
-            .then(response => {
-                console.log(response.data, 'data')
+            .then((response) => {
+                console.log(response.data, "data");
                 setListData(response.data);
-                setLoading(false)
+                setLoading(false);
             })
-            .catch(error => {
+            .catch((error) => {
                 if (error.response.status == 401) {
-                    message.info('Сессия истекла', 2);
-                    dispatcher({ type: 'SIGN_IN' })
+                    message.info("Сессия истекла", 2);
+                    dispatcher({ type: "SIGN_IN" });
                 }
                 console.log(error.response, "error in categories");
             });
     }, []);
-
+    console.log(listData, 'listdata');
     return (
         <div className="container">
             <div id="newsdetails">
@@ -51,11 +51,17 @@ function DetailsMain() {
                         <DetailsCarousel listData={listData[0].images} />
                         <DetailsInfoProduct listData={listData[0]} />
                     </Col>
-                    <Col span={6}><DetailsInfoSeller setListData={setListData} listData={listData} item={listData[0]} /></Col>
+                    <Col span={6}>
+                        <DetailsInfoSeller
+                            setListData={setListData}
+                            listData={listData}
+                            item={listData[0]}
+                        />
+                    </Col>
                 </Row>
             </div>
         </div>
-    )
+    );
 }
 
-export default DetailsMain
+export default DetailsMain;

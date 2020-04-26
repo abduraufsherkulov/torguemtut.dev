@@ -28,11 +28,12 @@ function WishlistVendorContextProvider(props) {
                 Authorization: `Bearer ${userData.token}`
             }
         }).then(response => {
+            console.log(response, 'vendors asd asd asd as das d')
             let pagination = JSON.parse(response.headers['x-pagination']);
             setPagination(pagination);
             dispatch({ type: 'INIT_WISHLIST_VENDOR', wishlistvendor: response.data });
         }).catch(error => {
-            // console.log(error.response.status);
+            console.log(error);
             if (error.response.status == 401) {
                 message.info('Сессия истекла', 2);
                 dispatcher({ type: 'SIGN_IN' })

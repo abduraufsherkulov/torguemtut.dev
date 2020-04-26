@@ -11,7 +11,7 @@ const breadcrumbNameMap = {
     '/wishlist': 'Избранные',
     '/myads': 'Мои Объявлении',
     '/settings': 'Настройки',
-    '/business': 'Сообщении',
+    '/business': 'Бизнес',
     '/wallet': 'Кошелок',
     '/privacypolicy': 'Политика конфиденциальности',
     '/howpay': 'Как оплатить',

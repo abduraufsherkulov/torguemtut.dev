@@ -1,8 +1,14 @@
-import React, { createContext, useReducer, useState, useEffect, useContext } from 'react'
+import React, {
+    createContext,
+    useReducer,
+    useState,
+    useEffect,
+    useContext,
+} from "react";
 // import { authReducer } from '../reducers/AuthReducer';
-import axios from 'axios'
-import { AuthContext } from './AuthContext';
-import { message } from 'antd'
+import axios from "axios";
+import { AuthContext } from "./AuthContext";
+import { message } from "antd";
 export const AdsWaitingContext = createContext();
 
 function AdsWaitingProvider(props) {
@@ -20,32 +26,42 @@ function AdsWaitingProvider(props) {
             data: {
                 Status: 1,
                 pageSize: pageSize,
-                pageNumber: currentPage
+                pageNumber: currentPage,
             },
             headers: {
                 "content-type": "application/json",
-                Authorization: `Bearer ${userData.token}`
-            }
+                Authorization: `Bearer ${userData.token}`,
+            },
         })
-            .then(response => {
-                let pagination = JSON.parse(response.headers['x-pagination']);
+            .then((response) => {
+                let pagination = JSON.parse(response.headers["x-pagination"]);
                 setPagination(pagination);
                 setWaitingAds(response.data);
             })
-            .catch(error => {
-                console.log(error)
+            .catch((error) => {
+                console.log(error);
                 if (error.response.status == 401) {
-                    message.info('Сессия истекла', 2);
-                    dispatch({ type: 'SIGN_IN' })
+                    message.info("Сессия истекла", 2);
+                    dispatch({ type: "SIGN_IN" });
                 }
                 console.log(error, "error in categories");
             });
-    }, [userData.token, currentPage])
+    }, [userData.token, currentPage]);
     return (
-        <AdsWaitingContext.Provider value={{ waitingAds, setWaitingAds, currentPage, setCurrentPage, pagination, pageSize }}>
+        <AdsWaitingContext.Provider
+            value={{
+                waitingAds,
+                setWaitingAds,
+                currentPage,
+                setCurrentPage,
+                pageSize,
+                pagination,
+                setPagination,
+            }}
+        >
             {props.children}
         </AdsWaitingContext.Provider>
-    )
+    );
 }
 
-export default AdsWaitingProvider
+export default AdsWaitingProvider;
