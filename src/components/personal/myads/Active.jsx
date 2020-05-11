@@ -34,13 +34,29 @@ function Active() {
                 <div className="container">
                     <Row className="mainrows">
                         {activeAds.map((item, index) => (
-                            <Col span={6} key={index} className="each">
+                            <Col
+                                style={{
+                                    border:
+                                        item.tariffs &&
+                                        item.tariffs.find((x) => x.type == 2)
+                                            ? "1px solid #543f92"
+                                            : "1px solid #ebebeb",
+                                }}
+                                span={6}
+                                key={index}
+                                className="each"
+                            >
                                 <div className="img-part">
                                     <div className="activeads-face">
                                         <Link to={`myads/${item.id}`}></Link>
                                     </div>
                                     <div className="activeads-links">
-                                        <i className="spanner">VIP</i>
+                                        {item.tariffs &&
+                                        item.tariffs.find(
+                                            (x) => x.type == 1
+                                        ) ? (
+                                            <i className="spanner">VIP</i>
+                                        ) : null}
                                         <ViewIcons />
                                         <EditIcons to={`edit-ads/${item.id}`} />
                                         <DeleteIcons

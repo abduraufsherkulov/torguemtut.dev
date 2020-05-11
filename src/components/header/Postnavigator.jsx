@@ -217,7 +217,7 @@ function Postnavigator() {
                         </Link>
                     </Menu.Item>
 
-                    <Menu.Item key="4">
+                    {/* <Menu.Item key="4">
                         <Dropdown overlay={getMenu()} trigger={['click']} placement="bottomRight"
                             onVisibleChange={val => handleDropdownVisibility(val)}
                             visible={visible}
@@ -226,7 +226,7 @@ function Postnavigator() {
                                 Уз / Русский / RUB<DownOutlined />
                             </a>
                         </Dropdown>
-                    </Menu.Item>
+                    </Menu.Item> */}
                     <Menu.Item key="7">
                         <Link to="/add-news-ad" >
                             <PlusOutlined />
