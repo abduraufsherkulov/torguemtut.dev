@@ -20,7 +20,7 @@ function BusinessProfile() {
     };
     return (
         <div>
-            <Select
+            {/* <Select
                 defaultValue="new"
                 style={{ width: 120 }}
                 onChange={handleChange}
@@ -32,7 +32,7 @@ function BusinessProfile() {
                             {item.name}
                         </Option>
                     ))}
-            </Select>
+            </Select> */}
             <MainBusiness />
         </div>
     );

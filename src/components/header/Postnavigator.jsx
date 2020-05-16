@@ -99,14 +99,14 @@ const loggedUser = (userData, dispatch) => (
     <div className="log-wrapper">
         <div className="d-flex-vertical">
             <Avatar icon={<UserOutlined />} size="large" style={{ backgroundColor: '#4a3a8a', verticalAlign: 'middle' }} />
-            <h2 className="log-text">Добро пожаловать, <br /> {userData.id}</h2>
+            <Link to="/settings"><h2 className="log-text">Добро пожаловать, <br /> {userData.id}</h2></Link>
         </div>
     </div>
 );
 // localStorage.removeItem('username'); window.location.reload()
 const defaultText = (
     <div className="log-wrapper">
-        <h2 className="log-text">Добро пожаловать в tt.uz</h2>
+        <Link to="/settings"><h2 className="log-text">Добро пожаловать в tt.uz</h2></Link>
         <Link className="signin-btn" to="/signup"><Button type="danger">Регистрация</Button></Link>
         <Link className="signup-btn" to="/login" > <Button style={{ backgroundColor: "#ebebeb" }}>Войти</Button> </Link>
     </div>
@@ -146,7 +146,7 @@ const getAccount = (authContext) => {
             </Menu.Item>
             <Menu.Item>
                 <Link to="/wallet">
-                    <WalletOutlined />    Кошелок
+                    <WalletOutlined />    Баланс
         </Link>
             </Menu.Item>
             <Menu.Item>

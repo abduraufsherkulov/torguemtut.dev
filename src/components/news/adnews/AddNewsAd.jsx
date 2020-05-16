@@ -1,6 +1,4 @@
-import React, {
-    useContext, useState, useMemo
-} from 'react'
+import React, { useContext, useState, useMemo } from "react";
 import {
     Form,
     Input,
@@ -15,36 +13,40 @@ import {
     Button,
     AutoComplete,
     InputNumber,
-    message
-} from 'antd';
-import axios from 'axios';
-import { withRouter } from 'react-router-dom'
-import MainBreadcrumbs from '../../MainBreadcrumbs';
-import PicturesWall from './PicturesWall';
-import GoogleMapsApi from './GoogleMapsApi';
-import { CategoryContext } from '../../../contexts/CategoryContext';
-import YandexMapsApi from './YandexMapsApi';
-import { IconFont } from '../../Icons/Icons';
-import { AuthContext } from '../../../contexts/AuthContext';
-import { MyAdsContext } from '../../../contexts/MyAdsContext';
-import { MailOutlined, PhoneOutlined } from '@ant-design/icons';
-import { SoatoContext } from '../../../contexts/SoataContext';
+    message,
+} from "antd";
+import axios from "axios";
+import { withRouter } from "react-router-dom";
+import MainBreadcrumbs from "../../MainBreadcrumbs";
+import PicturesWall from "./PicturesWall";
+import GoogleMapsApi from "./GoogleMapsApi";
+import { CategoryContext } from "../../../contexts/CategoryContext";
+import YandexMapsApi from "./YandexMapsApi";
+import { IconFont } from "../../Icons/Icons";
+import { AuthContext } from "../../../contexts/AuthContext";
+import { MyAdsContext } from "../../../contexts/MyAdsContext";
+import { MailOutlined, PhoneOutlined } from "@ant-design/icons";
+import { SoatoContext } from "../../../contexts/SoataContext";
+import { BusinessContext } from "../../../contexts/BusinessContext";
 const { TextArea } = Input;
 const { Option } = Select;
-
-
-
 
 function AddNewsAd(props) {
     const [form] = Form.useForm();
     const { myAds, setActiveKey, setMyAds } = useContext(MyAdsContext);
     const { userData, dispatch } = useContext(AuthContext);
-    const { soato } = useContext(SoatoContext)
+    const { soato } = useContext(SoatoContext);
+    const {
+        businessInfo,
+        setBusinessInfo,
+        selectedBusiness,
+        setSelectedBusiness,
+    } = useContext(BusinessContext);
     const [checked, setChecked] = useState(false);
-    const [selectChange, setSelectChange] = useState(1);
     const [loading, setLoading] = useState(false);
     const [cascaderLoading, setCascaderLoading] = useState(false);
     const [attr, setAttr] = useState([]);
+    const [currency, setCurrency] = useState(1);
 
     const [fileRequired, setFileRequired] = useState("");
     const [fileValidate, setFileValidate] = useState("");
@@ -54,11 +56,10 @@ function AddNewsAd(props) {
         DistrictId: 1,
         Address: "",
         Longtitude: 69.279718,
-        Latitude: 41.311157
-    })
+        Latitude: 41.311157,
+    });
 
     const { category } = useContext(CategoryContext);
-
 
     const formItemLayout = {
         labelCol: {
@@ -83,31 +84,40 @@ function AddNewsAd(props) {
         },
     };
 
-
-
     const handleFinish = values => {
         setLoading(true);
-        console.log(values)
+        console.log(values);
         if (values.photos == undefined || values.photos.fileList.length == 0) {
-            if (values.photos == undefined || values.photos.fileList.length == 0) {
-                setFileValidate('error')
+            if (
+                values.photos == undefined ||
+                values.photos.fileList.length == 0
+            ) {
+                setFileValidate("error");
                 setFileRequired("Файл необходимо");
             }
             setLoading(false);
         } else {
-            console.log('called')
+            console.log("called");
             let images = [];
             values.photos.fileList.map(i => {
                 images.push(i.response.imageId);
-            })
+            });
             images = images.toString();
             // NewsAttribute: [{"AttributeId" : 123, "Value" : "adasdasd"}]
             const endpoint = "https://tt.delivera.uz/api/news/add";
-            console.log(values)
+            console.log(values);
             // return false;
             let newAttr = [];
             for (let i = 0; i < attr.length; i++) {
-                newAttr.push({ AttributeId: attr[i].id, Value: attr[i].name in values ? (typeof values[attr[i].name] == "object" ? values[attr[i].name].key : values[attr[i].name]) : false })
+                newAttr.push({
+                    AttributeId: attr[i].id,
+                    Value:
+                        attr[i].name in values
+                            ? typeof values[attr[i].name] == "object"
+                                ? values[attr[i].name].key
+                                : values[attr[i].name]
+                            : false,
+                });
             }
 
             const data = JSON.stringify({
@@ -116,10 +126,10 @@ function AddNewsAd(props) {
                 CategoryId: values.category[values.category.length - 1],
                 Price: {
                     Amount: values.price,
-                    Currency: +selectChange,
+                    Currency: +currency,
                     Exchange: false,
                     Free: false,
-                    Negotiatable: checked
+                    Negotiatable: checked,
                 },
                 Description: values.description,
                 Location: position,
@@ -127,120 +137,132 @@ function AddNewsAd(props) {
                     Name: values.contactperson,
                     IsIndividual: true,
                     Email: userData.email,
-                    Phone: userData.phone
+                    Phone: userData.phone,
                 },
                 Status: 1,
-                ImageIds: images
+                ImageIds: images,
             });
             console.log(data);
             axios({
-                method: 'post',
+                method: "post",
                 url: endpoint,
                 data: data,
                 headers: {
                     "content-type": "application/json",
-                    Authorization: `Bearer ${userData.token}`
-                }
-            }).then(response => {
-                console.log(response);
-                if (response.data.status) {
-                    setActiveKey('waiting');
-                    setMyAds([...myAds, response.data.data]);
-                    props.history.push('/myads');
-                }
-            }).catch(error => {
-                if (error.response.status == 401) {
-                    message.info('Сессия истекла', 2);
-                    dispatch({ type: 'SIGN_IN' })
-                }
-                console.log(error.response)
+                    Authorization: `Bearer ${userData.token}`,
+                },
             })
+                .then(response => {
+                    console.log(response);
+                    if (response.data.status) {
+                        setActiveKey("waiting");
+                        setMyAds([...myAds, response.data.data]);
+                        props.history.push("/myads");
+                    }
+                })
+                .catch(error => {
+                    if (error.response.status == 401) {
+                        message.info("Сессия истекла", 2);
+                        dispatch({ type: "SIGN_IN" });
+                    }
+                    console.log(error.response);
+                });
         }
     };
 
     const handleCheck = () => {
-        setChecked(!checked)
-    }
-    const handleSelectChange = (params) => {
-        console.log(params)
-    }
+        setChecked(!checked);
+    };
+    const handleSelectChange = params => {
+        console.log(params);
+        setCurrency(params);
+    };
 
-    const handleCascader = (value) => {
+    const handleCascader = value => {
         setCascaderLoading(true);
         const attr = value[value.length - 1];
         const endpoint = `https://tt.delivera.uz/api/category/get-category-attributes?Id=${attr}`;
         axios({
-            method: 'get',
+            method: "get",
             url: endpoint,
             headers: {
-                "content-type": "application/json"
-            }
-        }).then(response => {
-            setCascaderLoading(false)
-            setAttr(response.data);
-        }).catch(error => {
-            console.log(error)
+                "content-type": "application/json",
+            },
         })
-    }
+            .then(response => {
+                setCascaderLoading(false);
+                setAttr(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    };
 
-    const handleSoato = (value) => {
-        setPosition({ ...position, RegionId: value[0], DistrictId: value[1] })
-    }
-
+    const handleSoato = value => {
+        setPosition({ ...position, RegionId: value[0], DistrictId: value[1] });
+    };
+    const handleChange = params => {
+        console.log(params);
+        let found = businessInfo.find(item => item.id == params);
+        found = found == undefined ? {} : found;
+        setSelectedBusiness(found);
+    };
     function AttrSelect({ item }) {
         return (
-            <Form.Item name={item.name} label={item.title} rules={[
-                {
-                    required: item.required,
-                    message: `Где ${item.title}?`,
-                },
-            ]}>
+            <Form.Item
+                name={item.name}
+                label={item.title}
+                rules={[
+                    {
+                        required: item.required,
+                        message: `Где ${item.title}?`,
+                    },
+                ]}
+            >
                 <Select
                     labelInValue
                     placeholder="Выберите"
-                    onChange={handleSelectChange}>
-                    {
-                        item.attributeOptions.map((attritem, index) => {
-                            return (
-                                <Option key={attritem.id} value={attritem.value}>{attritem.value}</Option>
-                            )
-                        })
-                    }
+                    onChange={handleSelectChange}
+                >
+                    {item.attributeOptions.map((attritem, index) => {
+                        return (
+                            <Option key={attritem.id} value={attritem.value}>
+                                {attritem.value}
+                            </Option>
+                        );
+                    })}
                 </Select>
             </Form.Item>
-        )
+        );
     }
 
     function AttrInput({ item }) {
         return (
-            <Form.Item name={item.name} label={item.title} rules={[
-                {
-                    required: true,
-                    message: `Где ${item.title}?`,
-                },
-            ]}>
+            <Form.Item
+                name={item.name}
+                label={item.title}
+                rules={[
+                    {
+                        required: true,
+                        message: `Где ${item.title}?`,
+                    },
+                ]}
+            >
                 <Input />
             </Form.Item>
-        )
+        );
     }
 
     const Just = () => {
-        return (
-            attr.map((item, index) => {
-                if (item.attributeOptions.length > 0) {
-                    return (
-                        <AttrSelect item={item} key={item.name} />
-                    )
-                } else {
-                    return (
-                        <AttrInput item={item} key={item.name} />
-                    )
-                }
-            })
-        )
-    }
+        return attr.map((item, index) => {
+            if (item.attributeOptions.length > 0) {
+                return <AttrSelect item={item} key={item.name} />;
+            } else {
+                return <AttrInput item={item} key={item.name} />;
+            }
+        });
+    };
     const MemoizedValue = useMemo(() => Just, [attr]);
-    console.log(position)
     return (
         <div className="container">
             <div id="addnews">
@@ -248,48 +270,85 @@ function AddNewsAd(props) {
                 <h2 className="header-text">Добавить объявление</h2>
                 <Form {...formItemLayout} onFinish={handleFinish}>
                     <div className="makenarrow">
-                        <Form.Item name='title' label="Заголовок" rules={[
-                            {
-                                required: true,
-                                message: 'Где заголовок?',
-                            },
-                        ]}>
+                        <Form.Item
+                            name="title"
+                            label="Заголовок"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Где заголовок?",
+                                },
+                            ]}
+                        >
                             <Input />
                         </Form.Item>
-                        <Form.Item name="category" hasFeedback={cascaderLoading} validateStatus="validating" label="Категория" rules={[
-                            {
-                                required: true,
-                                message: 'Где категории?',
-                            },
-                        ]}>
-                            <Cascader onChange={handleCascader} options={category} placeholder="Выбрать категории" />
+                        <Form.Item
+                            name="category"
+                            hasFeedback={cascaderLoading}
+                            validateStatus="validating"
+                            label="Категория"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Где категории?",
+                                },
+                            ]}
+                        >
+                            <Cascader
+                                onChange={handleCascader}
+                                options={category}
+                                placeholder="Выбрать категории"
+                            />
                         </Form.Item>
                         <MemoizedValue />
                         <Form.Item label="Цена" style={{ marginBottom: 0 }}>
                             <Form.Item
                                 // help="Please select the correct date"
-                                style={{ display: 'inline-block', width: 'calc(37% - 16px)' }}
-                                name='price'
+                                style={{
+                                    display: "inline-block",
+                                    width: "calc(37% - 16px)",
+                                }}
+                                name="price"
                                 rules={[
                                     {
                                         required: true,
-                                        message: 'Где заголовок?',
+                                        message: "Где заголовок?",
                                     },
                                 ]}
                             >
                                 <InputNumber
-                                    style={{ width: '100%' }}
+                                    style={{ width: "100%" }}
                                     // defaultValue={1000}
-                                    formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                                    parser={value => value.replace(/\$\s?|(,*)/g, '')}
+                                    formatter={value =>
+                                        `${value}`.replace(
+                                            /\B(?=(\d{3})+(?!\d))/g,
+                                            ","
+                                        )
+                                    }
+                                    parser={value =>
+                                        value.replace(/\$\s?|(,*)/g, "")
+                                    }
                                     // onChange={onChange}
                                     placeholder="1000"
                                 />
                             </Form.Item>
-                            <span style={{ display: 'inline-block', width: '24px', textAlign: 'center' }}>-</span>
-                            <Form.Item style={{ display: 'inline-block', width: 'calc(37% - 16px)' }}>
+                            <span
+                                style={{
+                                    display: "inline-block",
+                                    width: "24px",
+                                    textAlign: "center",
+                                }}
+                            >
+                                -
+                            </span>
+                            <Form.Item
+                                style={{
+                                    display: "inline-block",
+                                    width: "calc(37% - 16px)",
+                                }}
+                            >
                                 <Select
-                                    defaultValue='1'
+                                    defaultValue="1"
                                     placeholder="Выберите"
                                     onChange={handleSelectChange}
                                 >
@@ -297,75 +356,152 @@ function AddNewsAd(props) {
                                     <Option value="2">uzs</Option>
                                 </Select>
                             </Form.Item>
-                            <span style={{ display: 'inline-block', width: '24px', textAlign: 'center' }}>-</span>
-                            <Form.Item style={{ display: 'inline-block', width: 'calc(26% - 16px)' }}>
-                                <Checkbox checked={checked} onChange={handleCheck}>
+                            <span
+                                style={{
+                                    display: "inline-block",
+                                    width: "24px",
+                                    textAlign: "center",
+                                }}
+                            >
+                                -
+                            </span>
+                            <Form.Item
+                                style={{
+                                    display: "inline-block",
+                                    width: "calc(26% - 16px)",
+                                }}
+                            >
+                                <Checkbox
+                                    checked={checked}
+                                    onChange={handleCheck}
+                                >
                                     Возможен торг
-                            </Checkbox>
+                                </Checkbox>
                             </Form.Item>
                         </Form.Item>
                     </div>
                     <Divider />
 
                     <div className="makenarrow">
-                        <Form.Item name='description' label="Описание" style={{ marginBottom: 0 }} rules={[
-                            {
-                                required: true,
-                                message: 'Где Описание?',
-                            },
-                        ]}>
+                        <Form.Item
+                            name="description"
+                            label="Описание"
+                            style={{ marginBottom: 0 }}
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Где Описание?",
+                                },
+                            ]}
+                        >
                             <TextArea rows={4} />
                         </Form.Item>
                         <PicturesWall
                             setFileValidate={setFileValidate}
                             fileValidate={fileValidate}
                             setFileRequired={setFileRequired}
-                            fileRequired={fileRequired} />
+                            fileRequired={fileRequired}
+                        />
                     </div>
                     <Divider />
 
                     <div className="makenarrow">
                         <h2>Местоположение</h2>
-                        <Form.Item name='address' label="Адрес" rules={[
-                            {
-                                required: true,
-                                message: 'Где адрес!',
-                            },
-                        ]}>
-                            <Cascader onChange={handleSoato} options={soato} placeholder="Выбрать адрес" />
+                        <Form.Item
+                            name="address"
+                            label="Адрес"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Где адрес!",
+                                },
+                            ]}
+                        >
+                            <Cascader
+                                onChange={handleSoato}
+                                options={soato}
+                                placeholder="Выбрать адрес"
+                            />
                         </Form.Item>
-                        <GoogleMapsApi defaultZoom={6} position={position} setPosition={setPosition} />
+                        <GoogleMapsApi
+                            defaultZoom={6}
+                            position={position}
+                            setPosition={setPosition}
+                        />
                         {/* <YandexMapsApi /> */}
                     </div>
                     <Divider />
 
                     <div className="makenarrow">
                         <h2>Ваши контактные данные</h2>
-                        <Form.Item name="contactperson" label="Контактное лицо" rules={[
-                            {
-                                required: true,
-                                message: 'Please input your E-mail!',
-                            },
-                        ]}>
+                        <Form.Item
+                            name="contactperson"
+                            label="Контактное лицо"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Please input your E-mail!",
+                                },
+                            ]}
+                        >
                             <Input />
                         </Form.Item>
-
+                        <Form.Item
+                            name="businessType"
+                            label="Тип бизнеса"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Где адрес!",
+                                },
+                            ]}
+                        >
+                            <Select
+                                defaultValue="new"
+                                style={{ width: 120 }}
+                                onChange={handleChange}
+                            >
+                                <Option value="new">Физ лицо</Option>
+                                {businessInfo &&
+                                    businessInfo.map((item, index) => (
+                                        <Option key={index} value={item.id}>
+                                            {item.name}
+                                        </Option>
+                                    ))}
+                            </Select>
+                        </Form.Item>
 
                         <Form.Item label="E-mail*">
-                            <Input value={userData.email} disabled={true} suffix={<MailOutlined />} />
+                            <Input
+                                value={userData.email}
+                                disabled={true}
+                                suffix={<MailOutlined />}
+                            />
                         </Form.Item>
 
                         <Form.Item label="Контакты">
-                            <Input value={userData.phone} disabled={true} placeholder="Номер телефона" suffix={<PhoneOutlined />} />
+                            <Input
+                                value={userData.phone}
+                                disabled={true}
+                                placeholder="Номер телефона"
+                                suffix={<PhoneOutlined />}
+                            />
                         </Form.Item>
 
-                        <Form.Item name="telegram" label="Телеграм" rules={[
-                            {
-                                required: true,
-                                message: 'Please input your E-mail!',
-                            },
-                        ]}>
-                            <Input placeholder="Telegram" suffix={<IconFont type="icon-telegram" />} />
+                        <Form.Item
+                            name="telegram"
+                            label="Телеграм"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Please input your E-mail!",
+                                },
+                            ]}
+                        >
+                            <Input
+                                placeholder="Telegram"
+                                suffix={<IconFont type="icon-telegram" />}
+                            />
                         </Form.Item>
                     </div>
 
@@ -379,14 +515,18 @@ function AddNewsAd(props) {
                         )}
                     </Form.Item> */}
                     <Form.Item {...tailFormItemLayout}>
-                        <Button loading={loading} type="primary" htmlType="submit">
+                        <Button
+                            loading={loading}
+                            type="primary"
+                            htmlType="submit"
+                        >
                             Добавить объявление
-                    </Button>
+                        </Button>
                     </Form.Item>
                 </Form>
             </div>
         </div>
-    )
+    );
 }
 
 export default withRouter(AddNewsAd);

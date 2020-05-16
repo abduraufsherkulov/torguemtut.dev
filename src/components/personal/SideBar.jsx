@@ -92,7 +92,7 @@ function SideBar({ location }) {
                                 onFinish={handleSubmit}
                                 // onFinishFailed={onFinishFailed}
                                 form={form}
-                                initialValues={{
+                                defaultValue={{
                                     firstName: userInfo.name,
                                     lastName: userInfo.surname,
                                 }}
@@ -196,7 +196,7 @@ function SideBar({ location }) {
                             <Menu.Item key="/wallet">
                                 <Link to="/wallet">
                                     <WalletOutlined />
-                                    <span className="nav-text">Кошелек</span>
+                                    <span className="nav-text">Баланс</span>
                                 </Link>
                             </Menu.Item>
                             <Menu.Item key="/settings">

@@ -97,6 +97,7 @@ function SubCategoriesList({
                     pagination={pagination}
                     catLoading={catLoading}
                     setListData={setListData}
+                    setCurrentPage={setCurrentPage}
                 />
             ) : (
                 <ListView
@@ -104,6 +105,7 @@ function SubCategoriesList({
                     pagination={pagination}
                     catLoading={catLoading}
                     setListData={setListData}
+                    setCurrentPage={setCurrentPage}
                 />
             )}
         </React.Fragment>

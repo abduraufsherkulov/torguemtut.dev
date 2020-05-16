@@ -106,6 +106,7 @@ function MainBusiness() {
         });
     }, [selectedBusiness.id]);
     const handleChange = (params) => {
+        console.log(params)
         let found = businessInfo.find((item) => item.id == params);
         found = found == undefined ? {} : found;
         setSelectedBusiness(found);

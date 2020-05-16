@@ -3,7 +3,10 @@ import { Row, Col, Divider, Button, Card, Skeleton, Pagination } from "antd";
 import { Link, withRouter } from "react-router-dom";
 import HeartIcons from "../../Icons/HeartIcons";
 
-function GalleryView({ pagination, listData, catLoading, setListData }) {
+function GalleryView({ pagination, listData, catLoading, setListData, setCurrentPage }) {
+    const handleChange = (page) => {
+        setCurrentPage(page)
+    }
     return (
         <div className="gallery-grid">
             <div className="container">

@@ -12,7 +12,7 @@ const breadcrumbNameMap = {
     '/myads': 'Мои Объявлении',
     '/settings': 'Настройки',
     '/business': 'Бизнес',
-    '/wallet': 'Кошелок',
+    '/wallet': 'Баланс',
     '/privacypolicy': 'Политика конфиденциальности',
     '/howpay': 'Как оплатить',
     '/vendorproducts': 'Автор'

@@ -4,13 +4,22 @@ import HeartIcons from "../../Icons/HeartIcons";
 import { momentize } from "../../../helpers/MomentHelper";
 import { Link, withRouter } from "react-router-dom";
 
-function ListView({ pagination, listData, catLoading, setListData }) {
+function ListView({
+    pagination,
+    listData,
+    catLoading,
+    setListData,
+    setCurrentPage,
+}) {
+    const handleChange = page => {
+        setCurrentPage(page);
+    };
     return (
         <List
             itemLayout="vertical"
             size="large"
             pagination={{
-                onChange: (page) => {
+                onChange: page => {
                     handleChange(page);
                 },
                 pageSize: 30,
@@ -18,15 +27,14 @@ function ListView({ pagination, listData, catLoading, setListData }) {
             }}
             dataSource={listData}
             footer={<div>{/* <b>ant design</b> footer part */}</div>}
-            renderItem={(item) => (
+            renderItem={item => (
                 <List.Item
                     className="ant-card-hoverable"
                     style={{
                         display: "flex",
                         padding: "16px",
                         border:
-                            item.tariffs &&
-                            item.tariffs.find((x) => x.type == 2)
+                            item.tariffs && item.tariffs.find(x => x.type == 2)
                                 ? "4px solid #543f92"
                                 : "none",
                     }}
@@ -46,7 +54,7 @@ function ListView({ pagination, listData, catLoading, setListData }) {
                         !catLoading && (
                             <div className="listExtra">
                                 {item.tariffs &&
-                                item.tariffs.find((x) => x.type == 1) ? (
+                                item.tariffs.find(x => x.type == 1) ? (
                                     <div className="vip-links">
                                         <i className="spanner">VIP</i>
                                     </div>
