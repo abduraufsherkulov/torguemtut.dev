@@ -18,8 +18,8 @@ jobs:
     steps:
       - run:
           name: Deploy Over SSH
-          command:
-            - scp -r torguemtut.dev/* ttuz@nl1-ls2.a2hosting.com:/tt.uz/
+          command: |
+            scp -r torguemtut.dev/* ttuz@nl1-ls2.a2hosting.com:/tt.uz/
 workflows:
    build-and-deploy:
      jobs:
