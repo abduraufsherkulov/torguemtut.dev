@@ -11,7 +11,8 @@ jobs:
           steps:
             - run: npm install
             - run: npm test
-            # - run: npm run build-ci
+            - run: npm run build-ci
+            - run: ls
   deploy:
     machine:
       enabled: true
@@ -19,7 +20,7 @@ jobs:
       - run:
           name: Deploy Over SSH
           command: |
-            ls
+            scp -P 7822 -r torguemtut.dev/* ttuz@nl1-ls2.a2hosting.com:
 workflows:
    build-and-deploy:
      jobs:
