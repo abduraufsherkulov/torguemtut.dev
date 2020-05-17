@@ -19,7 +19,7 @@ jobs:
       - run:
           name: Deploy Over SSH
           command: |
-            pwd
+            ls
 workflows:
    build-and-deploy:
      jobs:
