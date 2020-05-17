@@ -1,18 +1,32 @@
-version: 2.1
-orbs:
-  node: circleci/node@1.1.6
+    
+version: 2
 jobs:
-  build-and-test:
-    executor:
-      name: node/default
+  build:
+   executor:
+     name: node/default
+   steps:
+     - checkout
+     - node/with-cache:
+         steps:
+           - run: npm install
+           - run: npm test
+           - run: npm run build-ci
+  deploy:
+    machine:
+      enabled: true
     steps:
-      - checkout
-      - node/with-cache:
-          steps:
-            - run: npm install
-            - run: npm test
-            - run: npm run build-ci
+      - run:
+          name: Deploy Over SSH
+          command: |
+            ssh $SSH_USER@$SSH_HOST "scp -rp ~/clone/*"
 workflows:
-    build-and-test:
-      jobs:
-        - build-and-test
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build # only deploy once build job has completed
+          filters:
+            branches:
+              only: master # only deploy on the master branch
