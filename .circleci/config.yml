@@ -1,8 +1,8 @@
-version: 2.1
+version: 2
 orbs:
   node: circleci/node@1.1.6
 jobs:
-  build:
+  test-and-build:
     executor:
       name: node/default
     steps:
@@ -11,7 +11,6 @@ jobs:
         - run: npm install
         - run: npm test
         - run: npm run build-ci
-    
   deploy:
     machine:
       enabled: true
@@ -23,12 +22,13 @@ jobs:
 
 workflows:
   version: 2
-  build-and-deploy:
+  test-build-deploy:
     jobs:
-      - build
+      - test-and-build
       - deploy:
           requires:
-            - build # only deploy once build job has completed
+            - test-and-build # only deploy once build job has completed
           filters:
             branches:
               only: master # only deploy on the master branch
+
