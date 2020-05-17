@@ -1,16 +1,17 @@
-version: 2
+version: 2.1
 orbs:
   node: circleci/node@1.1.6
 jobs:
-  test-and-build:
+  build-and-test:
     executor:
       name: node/default
     steps:
       - checkout
       - node/with-cache:
-        - run: npm install
-        - run: npm test
-        - run: npm run build-ci
+          steps:
+            - run: npm install
+            - run: npm test
+            - run: npm run build-ci
   deploy:
     machine:
       enabled: true
@@ -19,16 +20,8 @@ jobs:
           name: Deploy Over SSH
           command: |
             ssh $SSH_USER@$SSH_HOST "<remote deploy command>"
-
 workflows:
-  version: 2
-  test-build-deploy:
-    jobs:
-      - test-and-build
-      - deploy:
-          requires:
-            - test-and-build # only deploy once build job has completed
-          filters:
-            branches:
-              only: master # only deploy on the master branch
-
+    build-and-test:
+      jobs:
+        - build-and-test
+        - deploy
