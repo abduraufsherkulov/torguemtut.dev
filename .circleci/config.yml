@@ -19,7 +19,7 @@ jobs:
       - run:
           name: Deploy Over SSH
           command: |
-            scp -P 7822 -r public/* ttuz@nl1-ls2.a2hosting.com:
+            pwd
 workflows:
    build-and-deploy:
      jobs:
