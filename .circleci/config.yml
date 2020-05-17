@@ -6,8 +6,11 @@ jobs:
     executor:
       name: node/default
     steps:
-      - run: npm install
-      - run: npm run build-ci
+      - checkout
+      - node/with-cache:
+        - run: npm install
+        - run: npm test
+        - run: npm run build-ci
     
   deploy:
     machine:
