@@ -1,6 +1,4 @@
 version: 2.1
-orbs:
-  node: circleci/node@1.1.6
 jobs:
   initial-step:
     machine:
@@ -11,15 +9,16 @@ jobs:
           command: |
             mkdir dist
   build-and-test:
-    executor:
-      name: node/default
+    working_directory: ~/torguemtut.dev
+    docker:
+      - image: circleci/node:12.16.1
     steps:
       - checkout
       - node/with-cache:
           steps:
             - run: npm install
             - run: npm test
-            # - run: npm run build
+            - run: npm run build
   deploy:
     machine:
       enabled: true
