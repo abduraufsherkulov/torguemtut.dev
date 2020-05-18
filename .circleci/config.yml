@@ -24,6 +24,10 @@ jobs:
       - run: 
           name: Deploy Over SSH
           command: |
+            pwd
+      - run: 
+          name: Deploy Over SSH
+          command: |
             ls
       - run: 
           name: Deploy Over SSH
