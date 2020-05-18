@@ -17,10 +17,6 @@ jobs:
     machine:
       enabled: true
     steps:
-      - run:
-          name: test
-          command: |
-            webpack --config webpack.prod.config.js
       - run: 
           name: Deploy Over SSH
           command: |
