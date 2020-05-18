@@ -1,7 +1,8 @@
 version: 2.1
 orbs:
-  node: circleci/node@12.16.1
+  node: circleci/node@1.1.6
 jobs:
+  working_directory: ~/repo
   build-and-test:
     executor:
       name: node/default
@@ -11,11 +12,15 @@ jobs:
           steps:
             - run: npm install
             - run: npm test
-            - run: npm run build-ci
+            # - run: npm run build-ci
   deploy:
     machine:
       enabled: true
     steps:
+      - run:
+          name: test
+          command: |
+            webpack --config webpack.prod.config.js
       - run: 
           name: Deploy Over SSH
           command: |
