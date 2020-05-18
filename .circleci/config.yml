@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   node: circleci/node@1.1.6
 jobs:
-  deploy:
+  initial-step:
     machine:
       enabled: true
     steps:
@@ -39,7 +39,10 @@ jobs:
 workflows:
    build-and-deploy:
      jobs:
-       - build-and-test
+       - initial-step
+       - build-and-test:
+           requires:
+             - initial-step # only deploy once build job has completed
        - deploy:
            requires:
              - build-and-test # only deploy once build job has completed
