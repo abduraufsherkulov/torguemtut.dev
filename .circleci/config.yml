@@ -20,6 +20,14 @@ jobs:
       - run: 
           name: Deploy Over SSH
           command: |
+            mkdir test
+      - run: 
+          name: Deploy Over SSH
+          command: |
+            ls
+      - run: 
+          name: Deploy Over SSH
+          command: |
             scp -P 7822 -r dist/* ttuz@nl1-ls2.a2hosting.com:/tt.uz/
 workflows:
    build-and-deploy:
