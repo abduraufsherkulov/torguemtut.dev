@@ -19,7 +19,7 @@ jobs:
           steps:
             - run: npm install
             - run: npm test
-            - run: npm run build-ci
+            - run: npm run build
   deploy:
     machine:
       enabled: true
