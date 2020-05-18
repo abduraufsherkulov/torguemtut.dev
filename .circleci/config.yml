@@ -2,7 +2,6 @@ version: 2.1
 orbs:
   node: circleci/node@12.16.1
 jobs:
-  # working_directory: ~/repo
   build-and-test:
     executor:
       name: node/default
