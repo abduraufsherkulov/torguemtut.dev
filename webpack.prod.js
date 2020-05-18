@@ -65,7 +65,6 @@ module.exports = merge(common, {
     },
     output: {
         path: path.resolve(__dirname, "dist/"),
-        publicPath: "./",
         filename: '[name].[contenthash].js',
     },
     plugins: [
