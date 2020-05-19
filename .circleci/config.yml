@@ -3,7 +3,9 @@ jobs:
   build-and-test:
     working_directory: ~/project
     docker:
-      - image: circleci/node:12.16.1
+      - image: circleci/node:12.16.1    
+    environment:
+      - NODE_ENV: development
     steps:
       - checkout
       - add_ssh_keys:
