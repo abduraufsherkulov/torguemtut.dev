@@ -1,58 +1,32 @@
 version: 2.1
 jobs:
-  initial-step:
-    machine:
-      enabled: true
-    steps:
-      - run: 
-          name: Create a folder
-          command: |
-            mkdir dist
   build-and-test:
-    working_directory: ~/torguemtut.dev
+    working_directory: ~/project
     docker:
       - image: circleci/node:12.16.1
     steps:
       - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "6d:5d:3b:88:05:6c:4c:bb:cd:58:3a:c2:25:57:ff:a7"
       - run:
           name: Install
           command: npm install
       - run:
-          name: Test
-          command: npm test
-      - run:
           name: Build
           command: npm run build
-  deploy:
-    machine:
-      enabled: true
-    steps:
       - run: 
           name: Deploy Over SSH
           command: |
-            npm run build
+            ssh -o StrictHostKeyChecking=no -p 7822 $SSH_USER@$SSH_HOST 'exit'
       - run: 
           name: Deploy Over SSH
           command: |
-            ls
-      - run: 
-          name: Deploy Over SSH
-          command: |
-            scp -P 7822 -r dist/* ttuz@nl1-ls2.a2hosting.com:/tt.uz/
+            scp -P 7822 -r ./dist/* ttuz@nl1-ls2.a2hosting.com:./test/
 workflows:
    build-and-deploy:
      jobs:
-       - initial-step
        - build-and-test:
-           requires:
-             - initial-step # only deploy once build job has completed
-       - deploy:
-           requires:
-             - build-and-test # only deploy once build job has completed
            filters:
              branches:
                only: master # only deploy on the master branch
-
-
-
-               
