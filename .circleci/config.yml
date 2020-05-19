@@ -5,7 +5,7 @@ jobs:
     docker:
       - image: circleci/node:12.16.1    
     environment:
-      - NODE_ENV: development
+      - NODE_ENV: test
     steps:
       - checkout
       - add_ssh_keys:
@@ -16,7 +16,7 @@ jobs:
           command: npm install
       - run:
           name: Build
-          command: npm run build
+          command: npm run build-ci
       - run: 
           name: Deploy Over SSH
           command: |
