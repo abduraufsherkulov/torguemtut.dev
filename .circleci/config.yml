@@ -15,16 +15,19 @@ jobs:
           name: Install
           command: npm install
       - run:
+          name: Test
+          command: npm test
+      - run:
           name: Build
           command: npm run build
       - run: 
-          name: Deploy Over SSH
+          name: Remove StrictHostKeyChecking
           command: |
             ssh -o StrictHostKeyChecking=no -p 7822 $SSH_USER@$SSH_HOST 'exit'
       - run: 
           name: Deploy Over SSH
           command: |
-            scp -P 7822 -r ./dist/* ttuz@nl1-ls2.a2hosting.com:./test/
+            scp -P 7822 -r ./dist/* $SSH_USER@$SSH_HOST:./public_html/tt.uz/
 workflows:
    build-and-deploy:
      jobs:
