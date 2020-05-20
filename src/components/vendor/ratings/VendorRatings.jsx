@@ -68,9 +68,9 @@ function VendorRatings({ id }) {
                 setComments(ratingArray);
             })
             .catch(error => {
-                if (error.response.status == 401) {
+                if (error.response.status == 401 && userData.session == true) {
                     message.info('Сессия истекла', 2);
-                    dispatch({ type: 'SIGN_IN' })
+                    dispatch({ type: 'SESSION_EXPIRED' })
                 }
                 console.log(error, "error in categories");
             });
@@ -117,9 +117,9 @@ function VendorRatings({ id }) {
                 ])
             })
             .catch(error => {
-                if (error.response.status == 401) {
+                if (error.response.status == 401 && userData.session == true) {
                     message.info('Сессия истекла', 2);
-                    dispatch({ type: 'SIGN_IN' })
+                    dispatch({ type: 'SESSION_EXPIRED' })
                 }
                 console.log(error, "error in categories");
             });

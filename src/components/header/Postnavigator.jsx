@@ -196,6 +196,7 @@ function Postnavigator() {
                     mode="horizontal"
                     style={{ lineHeight: '40px', float: "right" }}
                     inlineIndent={1}
+                    className="post-nav-li"
                 >
                     <Menu.Item key="1">
                         <Dropdown overlay={sellers}>

@@ -39,9 +39,9 @@ function VendorInfo({ id }) {
             })
             .catch(error => {
                 console.log(error);
-                if (error.response.status == 401) {
+                if (error.response.status == 401 && userData.session == true) {
                     message.info('Сессия истекла', 2);
-                    dispatch({ type: 'SIGN_IN' })
+                    dispatch({ type: 'SESSION_EXPIRED' })
                 }
                 console.log(error.response, "error in categories");
             });

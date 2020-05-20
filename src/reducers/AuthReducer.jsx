@@ -4,12 +4,14 @@ export const authReducer = (state, action) => {
         case 'SIGN_IN':
             if (localStorage.getItem('userData') !== null) {
                 localStorage.removeItem('userData');
-                return {token: null, status: null};
+                return {token: null, session: null};
             }
             localStorage.setItem('userData', action.userData);
             return JSON.parse(action.userData)
-        case 'SIGN_UP':
-            return
+        case 'SESSION_EXPIRED':
+            let data = JSON.stringify({token: null, session: false});
+            localStorage.setItem('userData', data);
+            return data;
         case 'FB_LOGIN':
             return
         default:

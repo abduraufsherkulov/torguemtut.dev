@@ -15,7 +15,7 @@ function Navigator() {
             <div className="container">
                 <Row type="flex" align="middle">
                     <Col span={5}>
-                        <Link to="/"><img style={logo} src={Logo} className="logo" alt="torguemtut.uz logo" /></Link>
+                        <Link to="/"><img style={logo} src={Logo} className="logo" alt="tt.uz logo" /></Link>
                     </Col>
                     <Col span={19}>
                         <TopSearch />

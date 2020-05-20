@@ -36,9 +36,9 @@ function WishlistContextProvider(props) {
             dispatch({ type: 'INIT_WISHLIST', wishlist: response.data });
         }).catch(error => {
             console.log(error.response.status);
-            if (error.response.status == 401) {
+            if (error.response.status == 401 && userData.session == true) {
                 message.info('Сессия истекла', 2);
-                dispatcher({ type: 'SIGN_IN' })
+                dispatcher({ type: 'SESSION_EXPIRED' })
             }
         })
     }, [userData.token, currentPage]);
@@ -67,9 +67,9 @@ function WishlistContextProvider(props) {
                 message.error({ content: 'Что то пошло не так', key, duration: 2 });
             }
         }).catch(error => {
-            if (error.response.status == 401) {
+            if (error.response.status == 401 && userData.session == true) {
                 message.info('Сессия истекла', 2);
-                dispatcher({ type: 'SIGN_IN' })
+                dispatcher({ type: 'SESSION_EXPIRED' })
             }
             listData[selectedWish].favourite = false;
             setListData([...listData]);
@@ -101,9 +101,9 @@ function WishlistContextProvider(props) {
                 message.error({ content: 'Что то пошло не так', key, duration: 2 });
             }
         }).catch(error => {
-            if (error.response.status == 401) {
+            if (error.response.status == 401 && userData.session == true) {
                 message.info('Сессия истекла', 2);
-                dispatcher({ type: 'SIGN_IN' })
+                dispatcher({ type: 'SESSION_EXPIRED' })
             }
             listData[selectedWish].favourite = true;
             setListData([...listData]);

@@ -35,9 +35,9 @@ function DetailsMain() {
                 setLoading(false);
             })
             .catch((error) => {
-                if (error.response.status == 401) {
+                if (error.response.status == 401 && userData.session == true) {
                     message.info("Сессия истекла", 2);
-                    dispatcher({ type: "SIGN_IN" });
+                    dispatcher({ type: "SESSION_EXPIRED" });
                 }
                 console.log(error.response, "error in categories");
             });

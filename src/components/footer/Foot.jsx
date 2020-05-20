@@ -12,7 +12,7 @@ function Foot() {
                 <Row justify="space-between" type="flex">
                     <Col>
                         <Link to="/"><img src={Logo} alt="" /></Link>
-                        <p>© {new Date().getFullYear()} torguemtut.uz.</p>
+                        <p>© {new Date().getFullYear()} tt.uz</p>
                         <p>Все права защищены.</p>
                     </Col>
                     <Col>
@@ -35,7 +35,7 @@ function Foot() {
                     <Col>
                         <h5>О нас</h5>
                         <ul>
-                            <li><a href="">О torguemtut.uz</a></li>
+                            <li><a href="">О tt.uz</a></li>
                             <li><a href="">Справка и FAQ</a></li>
                             <li><a href="">Администрация</a></li>
                         </ul>

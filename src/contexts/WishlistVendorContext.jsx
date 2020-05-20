@@ -34,9 +34,9 @@ function WishlistVendorContextProvider(props) {
             dispatch({ type: 'INIT_WISHLIST_VENDOR', wishlistvendor: response.data });
         }).catch(error => {
             console.log(error);
-            if (error.response.status == 401) {
+            if (error.response.status == 401 && userData.session == true) {
                 message.info('Сессия истекла', 2);
-                dispatcher({ type: 'SIGN_IN' })
+                dispatcher({ type: 'SESSION_EXPIRED' })
             }
         })
     }, [userData.token])
@@ -64,9 +64,9 @@ function WishlistVendorContextProvider(props) {
                     message.error({ content: 'Что то пошло не так', key, duration: 2 });
                 }
             }).catch(error => {
-                if (error.response.status == 401) {
+                if (error.response.status == 401 && userData.session == true) {
                     message.info('Сессия истекла', 2);
-                    dispatcher({ type: 'SIGN_IN' })
+                    dispatcher({ type: 'SESSION_EXPIRED' })
                 }
                 setListData({ ...wish, vendorFavourite: false });
                 message.error({ content: 'Что то пошло не так', key, duration: 2 });
@@ -95,9 +95,9 @@ function WishlistVendorContextProvider(props) {
                     message.error({ content: 'Что то пошло не так', key, duration: 2 });
                 }
             }).catch(error => {
-                if (error.response.status == 401) {
+                if (error.response.status == 401 && userData.session == true) {
                     message.info('Сессия истекла', 2);
-                    dispatcher({ type: 'SIGN_IN' })
+                    dispatcher({ type: 'SESSION_EXPIRED' })
                 }
                 listData[selectedWish].vendorFavourite = false;
                 setListData([...listData]);
@@ -129,9 +129,9 @@ function WishlistVendorContextProvider(props) {
                     message.error({ content: 'Что то пошло не так', key, duration: 2 });
                 }
             }).catch(error => {
-                if (error.response.status == 401) {
+                if (error.response.status == 401 && userData.session == true) {
                     message.info('Сессия истекла', 2);
-                    dispatcher({ type: 'SIGN_IN' })
+                    dispatcher({ type: 'SESSION_EXPIRED' })
                 }
                 setListData({ ...wish, vendorFavourite: true });
                 message.error({ content: 'Что то пошло не так', key, duration: 2 });
@@ -161,9 +161,9 @@ function WishlistVendorContextProvider(props) {
                     message.error({ content: 'Что то пошло не так', key, duration: 2 });
                 }
             }).catch(error => {
-                if (error.response.status == 401) {
+                if (error.response.status == 401 && userData.session == true) {
                     message.info('Сессия истекла', 2);
-                    dispatcher({ type: 'SIGN_IN' })
+                    dispatcher({ type: 'SESSION_EXPIRED' })
                 }
                 listData[selectedWish].vendorFavourite = true;
                 setListData([...listData]);

@@ -34,7 +34,7 @@ function VipPopular() {
                 setVip(response.data)
             })
             .catch(error => {
-                // if (error.response.status == 401) {
+                // if (error.response.status == 401 && userData.session == true) {
                 //     message.info('Сессия истекла', 2);
                 //     dispatch({ type: 'SIGN_IN' })
                 // }
@@ -96,7 +96,7 @@ function VipPopular() {
                             }
                         })}
 
-                        <Divider><Button>Посмотреть все</Button></Divider>
+                        {/* <Divider><Button>Посмотреть все</Button></Divider> */}
                     </Row>
                 </div>
             </div>
