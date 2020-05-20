@@ -1,6 +1,7 @@
 import React from 'react';
 import { Layout, Row, Col } from 'antd';
-import Logo from "../../images/mainlogo.png";
+// import Logo from "../../images/mainlogo.png";
+import Logo from "../../images/tt-old.png";
 import { Link } from "react-router-dom";
 
 const { Footer } = Layout;

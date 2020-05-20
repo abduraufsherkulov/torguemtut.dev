@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { Layout, Menu, Button, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
-import Logo from "../../images/mainlogo.png";
+// import Logo from "../../images/mainlogo.png";
+import Logo from "../../images/tt-old.png";
 import TopSearch from '../home/TopSearch';
 
 const { Header } = Layout;

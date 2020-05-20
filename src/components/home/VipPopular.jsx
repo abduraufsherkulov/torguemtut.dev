@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Logo from "../../images/mainlogo.png";
+// import Logo from "../../images/mainlogo.png";
+import Logo from "../../images/tt-old.png";
 import { Row, Col, Divider, Button, Card, Skeleton } from 'antd';
 import HeartIcons from '../Icons/HeartIcons';
 import axios from 'axios'
